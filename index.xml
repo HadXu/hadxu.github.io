@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>lay&#39;s 博客</title>
-    <link>https://www.flysnow.org/</link>
+    <link>https://hadxu.github.io/</link>
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 01 Mar 2020 21:00:00 +0800</lastBuildDate>
     
-	<atom:link href="https://www.flysnow.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>博客迁移</title>
-      <link>https://www.flysnow.org/post/2020-03-01-blog-change/</link>
+      <link>https://hadxu.github.io/post/2020-03-01-blog-change/</link>
       <pubDate>Sun, 01 Mar 2020 21:00:00 +0800</pubDate>
       
-      <guid>https://www.flysnow.org/post/2020-03-01-blog-change/</guid>
+      <guid>https://hadxu.github.io/post/2020-03-01-blog-change/</guid>
       <description>博客迁移 之前的博客由于无法支持搜索等功能，且扩展性差,于是在周末进行了迁移，非常感谢以下网络资源 hugo on github flysnow-org hugo</description>
     </item>
     
     <item>
       <title>书籍</title>
-      <link>https://www.flysnow.org/books/</link>
+      <link>https://hadxu.github.io/books/</link>
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.flysnow.org/books/</guid>
+      <guid>https://hadxu.github.io/books/</guid>
       <description>读过的图书 2020-01-26 《82年生的金智英》 2019-12-19 《明朝那些事儿》 2019-10-07 《非暴力沟通》 2019-10-03 《人月神话》 2019-10-02 《微积分读本》 2019-10-02 《乌合之众:大众心理学研究》 2019-09-28 《毛泽东选集》 2019-09-09 《少有人走的路》 2019-06-22 《平凡的世界》 2019-05-04 《人类群星闪耀时》 2019-02-01 《刻意练习:如何从新手到大师》 2018-12-26 《今日简史》 2018-12-16 《C语言陷阱》、《C和指针》、《C专</description>
     </item>
     
     <item>
       <title>关于我</title>
-      <link>https://www.flysnow.org/about/</link>
+      <link>https://hadxu.github.io/about/</link>
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.flysnow.org/about/</guid>
+      <guid>https://hadxu.github.io/about/</guid>
       <description>推荐课程 Computer Systems: A Programmer&amp;rsquo;s Perspective Parallel Computer Architecture and Programming Operating systems, MIT Operating systems Engineering, MIT CS140e: An Experimental Course on Operating Systems 6.824: Distributed Systems Algorithms in the Real World</description>
     </item>
     
     <item>
       <title>归档</title>
-      <link>https://www.flysnow.org/archives/</link>
+      <link>https://hadxu.github.io/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.flysnow.org/archives/</guid>
+      <guid>https://hadxu.github.io/archives/</guid>
       <description></description>
     </item>
     
     <item>
       <title>搜索</title>
-      <link>https://www.flysnow.org/search/</link>
+      <link>https://hadxu.github.io/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.flysnow.org/search/</guid>
+      <guid>https://hadxu.github.io/search/</guid>
       <description></description>
     </item>
     
