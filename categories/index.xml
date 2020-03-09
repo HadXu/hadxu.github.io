@@ -6,10 +6,19 @@
     <description>Recent content in Categories on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 01 Mar 2020 21:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 02 Mar 2020 21:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ss</title>
+      <link>https://hadxu.github.io/categories/ss/</link>
+      <pubDate>Mon, 02 Mar 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/categories/ss/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>日常</title>

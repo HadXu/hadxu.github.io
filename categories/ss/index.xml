@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on lay&#39;s 博客</title>
-    <link>https://hadxu.github.io/post/</link>
-    <description>Recent content in Posts on lay&#39;s 博客</description>
+    <title>ss on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/categories/ss/</link>
+    <description>Recent content in ss on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 02 Mar 2020 21:00:00 +0800</lastBuildDate>
     
-	<atom:link href="https://hadxu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hadxu.github.io/categories/ss/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://hadxu.github.io/post/2020-03-01-the-best-way-to-fq/</guid>
       <description>科学上网的正确打开方式 介绍 作为一个计算机从业者，无法获取最先进的、最前沿的信息是令人痛苦的，lay从读本科以来，一直寻找最好的方式去接触最外围的信息。中间经历了各种各样的苦难，皇天不负有心人，让我找到了相对比较靠谱的方案。 1. 自己选择服务器 具体选择哪一个服务器，只要是国外的都可以。</description>
-    </item>
-    
-    <item>
-      <title>博客迁移</title>
-      <link>https://hadxu.github.io/post/2020-03-01-blog-change/</link>
-      <pubDate>Sun, 01 Mar 2020 21:00:00 +0800</pubDate>
-      
-      <guid>https://hadxu.github.io/post/2020-03-01-blog-change/</guid>
-      <description>博客迁移 之前的博客由于无法支持搜索等功能，且扩展性差,于是在周末进行了迁移，非常感谢以下网络资源 hugo on github flysnow-org hugo</description>
     </item>
     
   </channel>
