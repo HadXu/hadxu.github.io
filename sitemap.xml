@@ -4,21 +4,41 @@
   
   <url>
     <loc>https://hadxu.github.io/categories/</loc>
-    <lastmod>2020-03-09T22:00:00+08:00</lastmod>
+    <lastmod>2020-03-10T10:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/</loc>
-    <lastmod>2020-03-09T22:00:00+08:00</lastmod>
+    <lastmod>2020-03-10T10:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/categories/linux/</loc>
+    <lastmod>2020-03-10T10:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/tags/linux/</loc>
+    <lastmod>2020-03-10T10:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/post/</loc>
-    <lastmod>2020-03-09T22:00:00+08:00</lastmod>
+    <lastmod>2020-03-10T10:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/tags/</loc>
+    <lastmod>2020-03-10T10:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/post/2020-03-10-wipe-hard-driver/</loc>
+    <lastmod>2020-03-10T10:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/categories/the-economist/</loc>
     <lastmod>2020-03-09T22:00:00+08:00</lastmod>
   </url>
   
@@ -28,22 +48,17 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/the-economist/</loc>
-    <lastmod>2020-03-09T22:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://hadxu.github.io/post/2020-03-10-the-right-medicine-for-the-world-economythe-Economist/</loc>
     <lastmod>2020-03-09T22:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/thunder/</loc>
+    <loc>https://hadxu.github.io/categories/thunder/</loc>
     <lastmod>2020-03-08T22:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/thunder/</loc>
+    <loc>https://hadxu.github.io/tags/thunder/</loc>
     <lastmod>2020-03-08T22:00:00+08:00</lastmod>
   </url>
   
@@ -68,12 +83,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/tour/</loc>
+    <loc>https://hadxu.github.io/tags/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/tour/</loc>
+    <loc>https://hadxu.github.io/categories/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
