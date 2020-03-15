@@ -6,10 +6,19 @@
     <description>Recent content in rust on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 13 Mar 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 15 Mar 2020 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rust by Example(chapter6)</title>
+      <link>https://hadxu.github.io/post/2020-03-15-rust-by-example-chapter6/</link>
+      <pubDate>Sun, 15 Mar 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-15-rust-by-example-chapter6/</guid>
+      <description>Conversion Rust的核心就是traits，可以重载。 From and To 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 usestd::convert::From;#[derive(Debug)]struct Number{value: i32,}implFrom&amp;lt;i32&amp;gt;forNumber{fn from(item: i32)-&amp;gt; Self{Number{value: item}}}fn main(){letnum=Number::from(123);println!(&amp;#34;{:#?}&amp;#34;,num);letx=5;letnum: Number=x.into();println!(&amp;#34;{:#?}&amp;#34;,num);} 实现了From这个traits,就能够同时使用from以及into，用来从类型之间的转换。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 usestd::fmt;struct Circle{radius: i32 }implfmt::DisplayforCircle{fn fmt(&amp;amp;self,f: &amp;amp;mutfmt::Formatter)-&amp;gt; fmt::Result{write!(f,&amp;#34;Circle of radius {}&amp;#34;,self.radius)}}fn main(){letcircle=Circle{radius: 6};println!(&amp;#34;{}&amp;#34;,circle.to_string());} 从String转变 1 2 3</description>
+    </item>
     
     <item>
       <title>Rust by Example(chapter4-5)</title>
