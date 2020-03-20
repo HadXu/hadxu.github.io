@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>CASPP 第二章课后习题解答 | lay&#39;s 博客</title>
-    <meta property="og:title" content="CASPP 第二章课后习题解答 - lay&#39;s 博客">
+    <title>Rust by Example(chapter9-13) | lay&#39;s 博客</title>
+    <meta property="og:title" content="Rust by Example(chapter9-13) - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-03-10T11:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2020-03-18T09:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-03-10T11:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2020-03-18T09:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="CASPP 第二章课后习题解答">
+    <meta name="description" content="Rust by Example(chapter9-13)">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/post/2020-03-10-solution-of-CASPP-chapter2/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2020-03-18-rust-by-example-chapter9-13/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -147,25 +147,11 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#准备">准备</a></li>
-    <li><a href="#255">2.55</a></li>
-    <li><a href="#256">2.56</a></li>
-    <li><a href="#257">2.57</a></li>
-    <li><a href="#258">2.58</a></li>
-    <li><a href="#259">2.59</a></li>
-    <li><a href="#260">2.60</a></li>
-    <li><a href="#261">2.61</a></li>
-    <li><a href="#262">2.62</a></li>
-    <li><a href="#263">2.63</a></li>
-    <li><a href="#264">2.64</a></li>
-    <li><a href="#265">2.65</a></li>
-    <li><a href="#266">2.66</a></li>
-    <li><a href="#267">2.67</a></li>
-    <li><a href="#268">2.68</a></li>
-    <li><a href="#269">2.69</a></li>
-    <li><a href="#270">2.70</a></li>
-    <li><a href="#271">2.71</a></li>
-    <li><a href="#272">2.72</a></li>
+    <li><a href="#可见性">可见性</a></li>
+    <li><a href="#crates">Crates</a></li>
+    <li><a href="#cargo">Cargo</a></li>
+    <li><a href="#attributes">Attributes</a></li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
     </div>
@@ -199,16 +185,16 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">CASPP 第二章课后习题解答</h1>
+            <h1 class="post-title">Rust by Example(chapter9-13)</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月10日
+            2020年3月18日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/CSAPP'>CSAPP</a></span>
+            <span class="meta-category"><a href='https://hadxu.github.io/categories/rust'>rust</a></span>
             
         </div>
         
@@ -226,58 +212,8 @@
         </div>
         
         <div class="post-content">
-            <h1 id="caspp-第二章课后习题解答">CASPP 第二章课后习题解答</h1>
-<p><img src="/post/imgs/csapp3e-cover.jpg" alt=""></p>
-<h2 id="准备">准备</h2>
-<p>在实现CSAPP的习题之前，首先需要配置环境。去买一个机器明显不现实，于是我们可以使用docker来搭建我们的学习环境，而且docker非常轻量级，有各种各样的环境可以配置。在接下来的工作中，我们使用vscode+docker进行。推荐<a href="https://hub.qiniu.com/store?origin=docker">七牛云docker镜像</a></p>
-<ul>
-<li>docker ubuntu16.04</li>
-<li>vscode + ssh插件</li>
-</ul>
-<p>附带几个常见命令</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker run -it -p 8022:22 --ipc<span style="color:#000;font-weight:bold">=</span>host --name<span style="color:#000;font-weight:bold">=</span>ubuntu:16.04 ubuntu /bin/bash 
-<span style="color:#998;font-style:italic"># 使用清华源</span>
-apt update
-apt install -y openssh-server
-
-mkdir /var/run/sshd
-<span style="color:#0086b3">echo</span> <span style="color:#d14">&#39;root:password&#39;</span> | chpasswd
-sed -i <span style="color:#d14">&#39;s/PermitRootLogin prohibit-password/PermitRootLogin yes/&#39;</span> /etc/ssh/sshd_config
-sed <span style="color:#d14">&#39;s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g&#39;</span> -i /etc/pam.d/sshd
-<span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;export VISIBLE=now&#34;</span> &gt;&gt; /etc/profile
-
-service ssh restart
-
-ssh root@localhost -p <span style="color:#099">8022</span>
-
-docker ps -a
-docker commit 容器id csapp
-</code></pre></td></tr></table>
-</div>
-</div><p>到这里就可以开启vscode进行远程连接docker容器，从而进行代码的编写(<strong>记得安装gcc</strong>)。</p>
-<h2 id="255">2.55</h2>
-<p>在你能够访问的不同机器上，使用<code>show_bytes.c</code>来编译并运行示例代码，并确定这些机器的字节顺序。</p>
+            <h1 id="模块--crate--cargo--attributes">模块 &amp; crate &amp; Cargo &amp; Attributes</h1>
+<h2 id="可见性">可见性</h2>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -300,36 +236,88 @@ docker commit 容器id csapp
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#000;font-weight:bold">typedef</span> <span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>byte_pointer;
-
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">show_bytes</span>(byte_pointer start, size_t len) {
-    size_t i;
-    <span style="color:#000;font-weight:bold">for</span> (i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> len; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>)
-	    printf(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14"> %.2x</span><span style="color:#d14">&#34;</span>, start[i]);    <span style="color:#998;font-style:italic">//line:data:show_bytes_printf
-</span><span style="color:#998;font-style:italic"></span>    printf(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
-}
-
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">show_int</span>(<span style="color:#458;font-weight:bold">int</span> x) {
-    show_bytes((byte_pointer) <span style="color:#000;font-weight:bold">&amp;</span>x, <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">int</span>));
-}
-
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">show_float</span>(<span style="color:#458;font-weight:bold">float</span> x) {
-    show_bytes((byte_pointer) <span style="color:#000;font-weight:bold">&amp;</span>x, <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">float</span>)); 
-}
-
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">show_pointer</span>(<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>x) {
-    show_bytes((byte_pointer) <span style="color:#000;font-weight:bold">&amp;</span>x, <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>)); 
-}
-</code></pre></td></tr></table>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">mod</span> <span style="color:#555">my_mod</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 不可见
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">private_function</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;called `my_mod::private_function()`&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 可见
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">function</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;called `my_mod::function()`&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 可以嵌套
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mod</span> <span style="color:#555">nested</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">function</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">            </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;called `my_mod::nested::function()`&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">mod</span> <span style="color:#555">my</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// struct默认是私有的
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">OpenBox</span><span style="color:#000;font-weight:bold">&lt;</span>T<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span>contents: <span style="color:#458;font-weight:bold">T</span>,<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">allow(dead_code)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">ClosedBox</span><span style="color:#000;font-weight:bold">&lt;</span>T<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>contents: <span style="color:#458;font-weight:bold">T</span>,<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">impl</span><span style="color:#000;font-weight:bold">&lt;</span>T<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>ClosedBox<span style="color:#000;font-weight:bold">&lt;</span>T<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">new</span>(contents: <span style="color:#458;font-weight:bold">T</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">ClosedBox</span><span style="color:#000;font-weight:bold">&lt;</span>T<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">            </span>ClosedBox<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">                </span>contents: <span style="color:#458;font-weight:bold">contents</span>,<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">            </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
 </div>
-</div><p>解答: 略。</p>
-<h2 id="256">2.56</h2>
-<p>试着用不同的示例值来运行<code>show_bytes.c</code>的代码</p>
-<p>解答: 略。</p>
-<h2 id="257">2.57</h2>
-<p>编写程序<code>show_short</code>,<code>show_long</code>,<code>show_double</code>，分别打印为short、long以及double的C语言对象的字节表示。</p>
+</div><p><a href="https://doc.rust-lang.org/rust-by-example/mod/split.html">包可见性</a></p>
+<h2 id="crates">Crates</h2>
+<p>在Rust中，crates是一个compilation unit，默认是编译成可执行文件，如果是库文件，可以使用，然后在编译可执行文件中使用。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs">rustc<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">crate</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">type</span><span style="color:#000;font-weight:bold">=</span>lib<span style="color:#bbb"> </span>rary.rs<span style="color:#bbb">
+</span><span style="color:#bbb"></span>rustc<span style="color:#bbb"> </span>executable.rs<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">extern</span><span style="color:#bbb"> </span>rary<span style="color:#000;font-weight:bold">=</span>library.rlib<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#bbb"> </span>.<span style="color:#000;font-weight:bold">/</span>executable<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="cargo">Cargo</h2>
+<p>Cargo是一个Rust源代码管理工具，可以构建各种各样的工具。具体详见<a href="https://doc.rust-lang.org/cargo/">cargo</a>
+Cargo.toml</p>
+<pre><code>[package]
+name = &quot;foo&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;mark&quot;]
+
+[dependencies]
+clap = &quot;2.27.1&quot; # from crates.io
+rand = { git = &quot;https://github.com/rust-lang-nursery/rand&quot; } # from online repo
+bar = { path = &quot;../bar&quot; } # from a path in the local filesystem
+</code></pre><h2 id="attributes">Attributes</h2>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -343,84 +331,23 @@ docker commit 容器id csapp
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">show_short</span>(<span style="color:#458;font-weight:bold">short</span> x) {
-    show_bytes((byte_pointer) <span style="color:#000;font-weight:bold">&amp;</span>x, <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">short</span>)); <span style="color:#998;font-style:italic">//line:data:show_bytes_amp1
-</span><span style="color:#998;font-style:italic"></span>}
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">show_long</span>(<span style="color:#458;font-weight:bold">long</span> x) {
-    show_bytes((byte_pointer) <span style="color:#000;font-weight:bold">&amp;</span>x, <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">long</span>)); <span style="color:#998;font-style:italic">//line:data:show_bytes_amp1
-</span><span style="color:#998;font-style:italic"></span>}
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">show_double</span>(<span style="color:#458;font-weight:bold">double</span> x) {
-    show_bytes((byte_pointer) <span style="color:#000;font-weight:bold">&amp;</span>x, <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">double</span>));
-}
-</code></pre></td></tr></table>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#998;font-style:italic">// 如果没有使用，不报警告
+</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">allow(dead_code)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">unused_function</span>()<span style="color:#bbb"> </span>{}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">cfg(target_os = </span><span style="color:#d14">&#34;</span><span style="color:#d14">linux</span><span style="color:#d14">&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">are_you_on_linux</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;You are running linux!&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
 </div>
-</div><h2 id="258">2.58</h2>
-<p>编写过程<code>is-little_endian</code>当在小端机器上运行的时候是1，在大端机器上运行是0.
-<strong>最低有效字节放在前面为小端</strong></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">is_little_end</span>() {
-    <span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0x01</span>;
-    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">*</span>((byte_pointer)<span style="color:#000;font-weight:bold">&amp;</span>x) <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0x01</span>;
-}
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="259">2.59</h2>
-<p>编写一个C表达式，它生成一个字，由x的最低有效字节和y中剩下的字节组成，对于运算数x=0x89ABCDEF和y=0x765432,就得到0x765432EF.</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">fun</span>(<span style="color:#458;font-weight:bold">int</span> x,<span style="color:#458;font-weight:bold">int</span> y){
-    x <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xff</span>;
-    y <span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">&amp;</span> (<span style="color:#000;font-weight:bold">~</span><span style="color:#099">0xff</span>);
-    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">|</span> y;
-}
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="260">2.60</h2>
-<p>假设我们将一个w位的字中从0(最低位)到最高位编号，写出下面的函数，会将指定的字节i换成字节b。</p>
-<p>replace(0x12345678, 2, 0xAB) &ndash;&gt; 0x12AB5678</p>
-<p>replace(0X12345678, 0, 0XAB) &ndash;&gt; 0x123456AB</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">replace_byte</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> i, <span style="color:#458;font-weight:bold">int</span> v){
-    <span style="color:#458;font-weight:bold">int</span> mask <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xff</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>(i<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">3</span>);
-    v <span style="color:#000;font-weight:bold">=</span> v <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> (i<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">3</span>);
-    <span style="color:#000;font-weight:bold">return</span> (x <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">~</span>mask) <span style="color:#000;font-weight:bold">|</span> v;
-}
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="261">2.61</h2>
-<h2 id="262">2.62</h2>
-<h2 id="263">2.63</h2>
-<h2 id="264">2.64</h2>
-<h2 id="265">2.65</h2>
-<h2 id="266">2.66</h2>
-<h2 id="267">2.67</h2>
-<h2 id="268">2.68</h2>
-<h2 id="269">2.69</h2>
-<h2 id="270">2.70</h2>
-<h2 id="271">2.71</h2>
-<h2 id="272">2.72</h2>
+</div><h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/rust-by-example/mod/split.html">包可见性</a></li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/attribute.html">Attributes</a></li>
+<li><a href="https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute">cfg attributes</a></li>
+</ul>
 
         </div>
 
@@ -433,15 +360,15 @@ docker commit 容器id csapp
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/post/2020-03-10-wipe-hard-driver/">命令用的好,监狱进的早</a></li>
+        <li><a href="/post/2020-03-17-rust-by-example-chapter8/">Rust by Example(chapter8)</a></li>
         
-        <li><a href="/post/2020-03-10-the-right-medicine-for-the-world-economythe-Economist/">The right medicine for the world economy</a></li>
+        <li><a href="/post/2020-03-16-rust-by-example-chapter7/">Rust by Example(chapter7)</a></li>
         
-        <li><a href="/post/2020-03-09-thunderday4/">从零实现深度学习框架(day4)</a></li>
+        <li><a href="/post/2020-03-15-rust-by-example-chapter6/">Rust by Example(chapter6)</a></li>
         
-        <li><a href="/post/2020-03-08-thunderday3/">从零实现深度学习框架(day3)</a></li>
+        <li><a href="/post/2020-03-13-rust-by-example-chapter4-5/">Rust by Example(chapter4-5)</a></li>
         
-        <li><a href="/post/2020-03-07-thunderday2/">从零实现深度学习框架(day2)</a></li>
+        <li><a href="/post/2020-03-12-rust-by-example-chapter3/">Rust by Example(chapter3)</a></li>
         
     </ul>
 </div>
@@ -451,7 +378,7 @@ docker commit 容器id csapp
             
             <ul class="clearfix">
                 
-                <li><a href='https://hadxu.github.io/tags/CSAPP'>CSAPP</a></li>
+                <li><a href='https://hadxu.github.io/tags/rust'>rust</a></li>
                 
             </ul>
             
