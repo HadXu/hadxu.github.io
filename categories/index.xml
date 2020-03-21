@@ -6,26 +6,26 @@
     <description>Recent content in Categories on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 20 Mar 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Mar 2020 11:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>rust</title>
-      <link>https://hadxu.github.io/categories/rust/</link>
-      <pubDate>Fri, 20 Mar 2020 09:00:00 +0800</pubDate>
+      <title>the economist</title>
+      <link>https://hadxu.github.io/categories/the-economist/</link>
+      <pubDate>Sat, 21 Mar 2020 11:00:00 +0800</pubDate>
       
-      <guid>https://hadxu.github.io/categories/rust/</guid>
+      <guid>https://hadxu.github.io/categories/the-economist/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>the economist</title>
-      <link>https://hadxu.github.io/categories/the-economist/</link>
-      <pubDate>Sat, 14 Mar 2020 09:00:00 +0800</pubDate>
+      <title>rust</title>
+      <link>https://hadxu.github.io/categories/rust/</link>
+      <pubDate>Sat, 21 Mar 2020 09:00:00 +0800</pubDate>
       
-      <guid>https://hadxu.github.io/categories/the-economist/</guid>
+      <guid>https://hadxu.github.io/categories/rust/</guid>
       <description></description>
     </item>
     
