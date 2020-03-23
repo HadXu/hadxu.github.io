@@ -6,10 +6,19 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 21 Mar 2020 11:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 22 Mar 2020 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rust by Example(chapter17)</title>
+      <link>https://hadxu.github.io/post/2020-03-22-rust-by-example-chapter17/</link>
+      <pubDate>Sun, 22 Mar 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-22-rust-by-example-chapter17/</guid>
+      <description>标准库 这一章主要介绍标准库，Rust中提供了各种各样的标准库供我们使用。 String vectors Option Result Box Box Box是一个智能指针，在计算机程序中，所有的值都是在栈中分配的，同时是固定大小的。但是可以使用Box来向堆中分配空间，同时返回一个指针，如果指针不在上下文中，那么分配的区域就会被回收。 1 2 3 4 5 6</description>
+    </item>
     
     <item>
       <title>Paying to stop the pandemic</title>
@@ -27,15 +36,6 @@
       
       <guid>https://hadxu.github.io/post/2020-03-21-rust-by-example-chapter16/</guid>
       <description>macro_rules! 在Rust中，宏非常之强大，宏就像一个函数一样，但是接着!。However, unlike macros in C and other languages, Rust macros are expanded into abstract syntax trees, rather than string preprocessing, so you don&amp;rsquo;t get unexpected precedence bugs. 1 2 3 4 5 6 7 8 9 10 // 将() 展开为打印字符 macro_rules!say_hello{()=&amp;gt;{println!(&amp;#34;Hello!&amp;#34;);};}fn main(){say_hello!()} Designators 通过一种宏来创建函数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 macro_rules!create_function{($func_name:ident)=&amp;gt;{fn $func_name(){println!(&amp;#34;You called {:?}()&amp;#34;,stringify!($func_name));}};}create_function!(foo);fn main(){foo()} Repeat 可以使用宏来进行递归 1 2 3 4 5 6 7 8 9 10 11</description>
-    </item>
-    
-    <item>
-      <title>Rust by Example(chapter17)</title>
-      <link>https://hadxu.github.io/post/2020-03-22-rust-by-example-chapter17/</link>
-      <pubDate>Sat, 21 Mar 2020 09:00:00 +0800</pubDate>
-      
-      <guid>https://hadxu.github.io/post/2020-03-22-rust-by-example-chapter17/</guid>
-      <description>标准库 这一章主要介绍标准库，Rust中提供了各种各样的标准库供我们使用。 String vectors Option Result Box Box Box是一个智能指针，在计算机程序中，所有的值都是在栈中分配的，同时是固定大小的。但是可以使用Box来向堆中分配空间，同时返回一个指针，如果指针不在上下文中，那么分配的区域就会被回收。 1 2 3 4 5 6</description>
     </item>
     
     <item>
