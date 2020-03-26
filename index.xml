@@ -6,10 +6,19 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 24 Mar 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 25 Mar 2020 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>linux shell脚本监控进程崩溃自动重启</title>
+      <link>https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/</link>
+      <pubDate>Wed, 25 Mar 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/</guid>
+      <description>linux shell脚本监控进程崩溃自动重启 在工作的时候，有时候会碰到程序非常慢，但是又容易崩溃的程序，这时候可以考虑使用一个进程来时刻监督进程执行，如果崩溃就重启。 1 2 3 4 5 6 7 8 9 10 11 # ! /bin/sh while true do procnum=`ps -ef|grep 进程名称|wc -l` if [ $procnum -eq 0 ] then echo &amp;#34;start service....................&amp;#34; ${START_CMD} fi sleep 1 done</description>
+    </item>
     
     <item>
       <title>大疆在线直播</title>
