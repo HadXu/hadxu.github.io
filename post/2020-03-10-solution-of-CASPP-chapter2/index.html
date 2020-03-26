@@ -410,8 +410,34 @@ docker commit 容器id csapp
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="261">2.61</h2>
+<p>写一个C表达式，在下列描述的条件下产生1，而在其他情况下得到0，假设x是int类型。</p>
+<ul>
+<li>x的任何位都等于1。<code>!~x</code></li>
+<li>x的任何位都等于0。<code>!x</code></li>
+<li>x的最低有效字节中的位都等于1。 <code>!~(x | ~0xff)</code>(最低有效字节就是低8位)</li>
+<li>x的最高有效字节中的位都等于0。 <code>!(x&gt;&gt;((sizeof(int)-1)&lt;&lt;3) &amp;0xff)</code></li>
+</ul>
 <h2 id="262">2.62</h2>
-<h2 id="263">2.63</h2>
+<p>编写一个函数int_shifts_are_arithmetic(),在对int类型的数使用算数右移的机器上运行这个函数生成1，而在其他情况生成0。<strong>注意这样的事实，-1表达为全1，如果是算数右移，那么不管怎么移，都是-1。</strong></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">int_shifts_are_arithmetic</span>()
+{
+    <span style="color:#458;font-weight:bold">int</span> num <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>;
+
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">!</span>(num <span style="color:#000;font-weight:bold">^</span> (num <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>));
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="263">2.63</h2>
 <h2 id="264">2.64</h2>
 <h2 id="265">2.65</h2>
 <h2 id="266">2.66</h2>
