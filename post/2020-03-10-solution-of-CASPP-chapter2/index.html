@@ -166,6 +166,7 @@
     <li><a href="#270">2.70</a></li>
     <li><a href="#271">2.71</a></li>
     <li><a href="#272">2.72</a></li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
     </div>
@@ -438,15 +439,219 @@ docker commit 容器id csapp
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="263">2.63</h2>
-<h2 id="264">2.64</h2>
-<h2 id="265">2.65</h2>
-<h2 id="266">2.66</h2>
-<h2 id="267">2.67</h2>
-<h2 id="268">2.68</h2>
-<h2 id="269">2.69</h2>
+<p>将下面的C函数补充完成。函数srl用算数右移(由值xsra给出)来完成逻辑右移。函数sra用逻辑右移(由值xsrl给出)来完成算数右移。可以通过计算<code>8*sizeof(int)</code>来确定数据类型int中的位数w。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#900;font-weight:bold">srl</span>(<span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> k)
+{
+    <span style="color:#458;font-weight:bold">unsigned</span> xrsa <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">int</span>)x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> k;
+
+    <span style="color:#458;font-weight:bold">int</span> w <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">int</span>) <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">3</span>;
+    <span style="color:#458;font-weight:bold">int</span> mask <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">int</span>)<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>(w<span style="color:#000;font-weight:bold">-</span>k);
+    <span style="color:#000;font-weight:bold">return</span> xrsa <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">~</span>mask;
+}
+
+<span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">sra</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> k) {
+  <span style="color:#458;font-weight:bold">int</span> xsrl <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">unsigned</span>) x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> k;
+  <span style="color:#458;font-weight:bold">int</span> w <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">int</span>) <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">3</span>;
+  <span style="color:#458;font-weight:bold">int</span> mask <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">int</span>) <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> (w <span style="color:#000;font-weight:bold">-</span> k);
+  <span style="color:#998;font-style:italic">// 当第一个为1时候，保持mask不变
+</span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">int</span> m <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> (w <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>);
+  mask <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">!</span> (x <span style="color:#000;font-weight:bold">&amp;</span> m) <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>;
+
+  <span style="color:#000;font-weight:bold">return</span> xsrl <span style="color:#000;font-weight:bold">|</span> mask;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="264">2.64</h2>
+<p>写出代码实现如下函数</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">any_odd_one</span>(<span style="color:#458;font-weight:bold">unsigned</span> x)
+{
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">!</span>(<span style="color:#099">0xAAAAAAAA</span> <span style="color:#000;font-weight:bold">&amp;</span> x);
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="265">2.65</h2>
+<p>写出代码实现函数
+<strong>使用二分法进行对1的处理</strong></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">odd_ones</span>(<span style="color:#458;font-weight:bold">unsigned</span> x)
+{
+    x <span style="color:#000;font-weight:bold">^</span><span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#099">16</span>;
+    x <span style="color:#000;font-weight:bold">^</span><span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#099">8</span>;
+    x <span style="color:#000;font-weight:bold">^</span><span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#099">4</span>;
+    x <span style="color:#000;font-weight:bold">^</span><span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#099">2</span>;
+    x <span style="color:#000;font-weight:bold">^</span><span style="color:#000;font-weight:bold">=</span> x<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#099">1</span>;
+    <span style="color:#000;font-weight:bold">return</span> x<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#099">0x1</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="266">2.66</h2>
+<p>写出代码实现函数</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">leftmost_one</span>(<span style="color:#458;font-weight:bold">unsigned</span> x)
+{
+    <span style="color:#998;font-style:italic">/*
+</span><span style="color:#998;font-style:italic">    * first, generate a mask that all bits after leftmost one are one
+</span><span style="color:#998;font-style:italic">    * e.g. 0xFF00 -&gt; 0xFFFF, and 0x6000 -&gt; 0x7FFF
+</span><span style="color:#998;font-style:italic">    * If x = 0, get 0
+</span><span style="color:#998;font-style:italic">    */</span>
+    x <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">1</span>;
+    x <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">2</span>;
+    x <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">4</span>;
+    x <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">8</span>;
+    x <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">16</span>;
+
+    <span style="color:#000;font-weight:bold">return</span> (x<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">+</span> (x <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">1</span>);
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="267">2.67</h2>
+<p>给你一个任务，编写一个过程int_size_is_32()，当在一个int是32位机器上运行的时候产生1，而在其他情况下产生0。不允许用sizeof运算符。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">bad_int_size_is_32</span>()
+{
+    <span style="color:#458;font-weight:bold">int</span> set_msb <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">31</span>;
+    <span style="color:#458;font-weight:bold">int</span> beyond_msb <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">32</span>;
+
+    <span style="color:#000;font-weight:bold">return</span> set_msb <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">!</span>beyond_msb;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>A. <strong>If the value of the right operand is negative or is greater than or equal to the width of the promoted left operand, the behavior it undefined.</strong></p>
+<p>B. 修改代码，使得它在至少为32位机器上能够运行</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">int_size_is_32</span>()
+{
+    <span style="color:#458;font-weight:bold">int</span> set_msb <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">31</span>;
+    <span style="color:#458;font-weight:bold">int</span> beyond_msb <span style="color:#000;font-weight:bold">=</span> set_msb<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">1</span>;
+    <span style="color:#000;font-weight:bold">return</span> set_msb <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">!</span>beyond_msb;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>C. 修改代码，使得它在至少为16位机器上能够运行</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">int_size_is_32</span>()
+{
+    <span style="color:#458;font-weight:bold">int</span> set_msb <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">15</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">15</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">1</span>;
+    <span style="color:#458;font-weight:bold">int</span> beyond_msb <span style="color:#000;font-weight:bold">=</span> set_msb<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">1</span>;
+    <span style="color:#000;font-weight:bold">return</span> set_msb <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">!</span>beyond_msb;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="268">2.68</h2>
+<p>写出代码实现函数</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">lower_one_mask</span>(<span style="color:#458;font-weight:bold">int</span> n)
+{
+    <span style="color:#458;font-weight:bold">int</span> w <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">int</span>) <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">3</span>;
+    <span style="color:#000;font-weight:bold">return</span> (<span style="color:#458;font-weight:bold">unsigned</span>)<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> (w<span style="color:#000;font-weight:bold">-</span>n);
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="269">2.69</h2>
 <h2 id="270">2.70</h2>
 <h2 id="271">2.71</h2>
 <h2 id="272">2.72</h2>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">Programming languages — C</a></li>
+</ul>
 
         </div>
 
