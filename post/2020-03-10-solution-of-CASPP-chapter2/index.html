@@ -166,6 +166,18 @@
     <li><a href="#270">2.70</a></li>
     <li><a href="#271">2.71</a></li>
     <li><a href="#272">2.72</a></li>
+    <li><a href="#272-1">2.72</a></li>
+    <li><a href="#273">2.73</a></li>
+    <li><a href="#274">2.74</a></li>
+    <li><a href="#275">2.75</a></li>
+    <li><a href="#276">2.76</a></li>
+    <li><a href="#277">2.77</a></li>
+    <li><a href="#278">2.78</a></li>
+    <li><a href="#279">2.79</a></li>
+    <li><a href="#280">2.80</a></li>
+    <li><a href="#281">2.81</a></li>
+    <li><a href="#282">2.82</a></li>
+    <li><a href="#283">2.83</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -645,9 +657,131 @@ docker commit 容器id csapp
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="269">2.69</h2>
-<h2 id="270">2.70</h2>
+<p>写出具有如下原型的函数代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#900;font-weight:bold">rotate_left</span>(<span style="color:#458;font-weight:bold">unsigned</span> x, <span style="color:#458;font-weight:bold">int</span> n)
+{
+    <span style="color:#458;font-weight:bold">int</span> w <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">32</span>;
+    <span style="color:#000;font-weight:bold">return</span> (x<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>n) <span style="color:#000;font-weight:bold">+</span> (x<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span>(w<span style="color:#000;font-weight:bold">-</span>n));
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="270">2.70</h2>
+<p>写出具有如下原型的函数代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">fits_bits</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> n)
+{
+    <span style="color:#458;font-weight:bold">int</span> pos_max <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">1</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>(n<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)) <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>;
+    <span style="color:#458;font-weight:bold">int</span> neg_max <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span>(<span style="color:#099">1</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>(n<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>));
+
+    printf(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">%d %d</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>, pos_max, neg_max);
+
+    <span style="color:#000;font-weight:bold">return</span> x<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">=</span>pos_max <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> x<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span>neg_max;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>在这里，书上第二章45页说到，当有w位补码(<strong>最高位表示为符号位</strong>)所能表示的范围是
+$$
+TMin_w=-2^{w-1},TMax=2^{w-1}-1
+$$</p>
 <h2 id="271">2.71</h2>
-<h2 id="272">2.72</h2>
+<p>实现一组过程来实现操作一个数据结构，要将4个有符号字节封装成一个32位unsigned。一个字中字节从0编号到3.分配给你的任务是：为一个使用补码运算和算术右移的机器编写下面的代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">xbyte</span>(packet_t word, <span style="color:#458;font-weight:bold">int</span> bytenum) {
+  <span style="color:#998;font-style:italic">/*
+</span><span style="color:#998;font-style:italic">   * pay attention when byte we want is negetive
+</span><span style="color:#998;font-style:italic">   *
+</span><span style="color:#998;font-style:italic">   * Assume sizeof(unsigned) is 4
+</span><span style="color:#998;font-style:italic">   * first shift left 8 * (4 - 1 - bytenum)
+</span><span style="color:#998;font-style:italic">   * then arthemetic shift right 8 * (4 - 1) reserve signficant bit
+</span><span style="color:#998;font-style:italic">   */</span>
+  <span style="color:#458;font-weight:bold">int</span> size <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">unsigned</span>);
+  <span style="color:#458;font-weight:bold">int</span> shift_left_val <span style="color:#000;font-weight:bold">=</span> (size <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> bytenum) <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">3</span>;
+  <span style="color:#458;font-weight:bold">int</span> shift_right_val <span style="color:#000;font-weight:bold">=</span> (size <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">3</span>;
+  <span style="color:#000;font-weight:bold">return</span> (<span style="color:#458;font-weight:bold">int</span>) word <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> shift_left_val <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> shift_right_val;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="272">2.72</h2>
+<p>给你一个任务写出一个函数，将整数val复制到缓冲区buf中，但是只有当缓冲区中有足够的可用空间时，才执行复制。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">copy_int</span>(<span style="color:#458;font-weight:bold">int</span> val, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>buf, <span style="color:#458;font-weight:bold">int</span> maxbytes)
+{
+    <span style="color:#998;font-style:italic">/* compare two signed number, avoid someone set maxbytes a negetive value */</span>
+    <span style="color:#000;font-weight:bold">if</span>(maxbytes<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span>(<span style="color:#458;font-weight:bold">int</span>)<span style="color:#000;font-weight:bold">sizeof</span>(val)){
+        memcpy(buf, (<span style="color:#458;font-weight:bold">void</span><span style="color:#000;font-weight:bold">*</span>)<span style="color:#000;font-weight:bold">&amp;</span>val, <span style="color:#000;font-weight:bold">sizeof</span>(val));
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>A. 由于sizeof是size_t类型，那么相减以后仍然是该类型&gt;0永远是存在的，因此使用直接比较的方法更好</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">printf(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">%zu</span><span style="color:#d14">&#34;</span>, <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">-</span> <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">int</span>)); <span style="color:#998;font-style:italic">// 4294967292
+</span></code></pre></td></tr></table>
+</div>
+</div><p>B. 如上</p>
+<h2 id="272-1">2.72</h2>
+<h2 id="273">2.73</h2>
+<h2 id="274">2.74</h2>
+<h2 id="275">2.75</h2>
+<h2 id="276">2.76</h2>
+<h2 id="277">2.77</h2>
+<h2 id="278">2.78</h2>
+<h2 id="279">2.79</h2>
+<h2 id="280">2.80</h2>
+<h2 id="281">2.81</h2>
+<h2 id="282">2.82</h2>
+<h2 id="283">2.83</h2>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">Programming languages — C</a></li>

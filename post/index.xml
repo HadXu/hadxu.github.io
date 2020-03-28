@@ -251,7 +251,7 @@
       <pubDate>Sun, 01 Mar 2020 21:00:00 +0800</pubDate>
       
       <guid>https://hadxu.github.io/post/2020-03-01-blog-change/</guid>
-      <description>博客迁移 之前的博客由于无法支持搜索等功能，且扩展性差,于是在周末进行了迁移，非常感谢以下网络资源 hugo on github flysnow-org hugo</description>
+      <description>博客迁移 2020-03-28更新 使用hogo发现了新大陆，可以在markdown中嵌入各种我们需要的资源。比如官方的youtube，同时我们还可以自定义自己的shortcodes。比如我每一周都看经济学人，想将音频放上来，找了很多的资料，终于完成这个。非常感谢这个官方youtub</description>
     </item>
     
   </channel>
