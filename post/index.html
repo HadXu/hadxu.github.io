@@ -83,31 +83,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-28-interesting-video/" title="interesting video">interesting video</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/video'>video</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            有意思的视频(博君一笑) 狗叫……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-28-interesting-video/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://hadxu.github.io/post/2020-03-28-The-state-in-the-time-of-covid-19the-Economist/" title="The state in the time of covid-19">The state in the time of covid-19</a>
             </h1>
         </header>
@@ -330,6 +305,31 @@
     
     
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-17-rust-by-example-chapter8/" title="Rust by Example(chapter8)">Rust by Example(chapter8)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月17日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://hadxu.github.io/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            函数 函数定义 1 2 3 fn fun(v:i32)-&gt; i32{v+3} 定义类型以及返回类型，同时在Rust函数是一个表达式，也就是不需要return。 方法 1 2 3 4 5 6 7 struct Pair(Box&lt;i32&gt;,Box&lt;i32&gt;);implPair{fn destory(self){letPair(x,y)=self;println!(&#34;Destroying Pair({}, {})&#34;,x,y);}} 闭包(也称之为lambda表达式) 1 2 3 fn function(i: i32)-&gt; i32 {i+1}letclosure_annotated=|i: i32|-&gt; i32 {i+1};letone=||1; 下面看一下指针借用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 fn main(){lethaystack=vec![1,2,3];letcontains=move|needle|haystack.contains(needle);println!(&#34;{}&#34;,contains(&amp;1));println!(&#34;{}&#34;,contains(&amp;4));println!(&#34;There&#39;re {} elements in vec&#34;,haystack.len());// ^ Uncommenting above line will result in compile-time error // because borrow checker doesn&#39;t……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-17-rust-by-example-chapter8/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
 
 
@@ -378,10 +378,6 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-03-28-interesting-video/" title="interesting video">interesting video</a>
-    </li>
-    
-    <li>
         <a href="https://hadxu.github.io/post/2020-03-28-The-state-in-the-time-of-covid-19the-Economist/" title="The state in the time of covid-19">The state in the time of covid-19</a>
     </li>
     
@@ -417,6 +413,10 @@
         <a href="https://hadxu.github.io/post/2020-03-18-rust-by-example-chapter9-13/" title="Rust by Example(chapter9-13)">Rust by Example(chapter9-13)</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-03-17-rust-by-example-chapter8/" title="Rust by Example(chapter8)">Rust by Example(chapter8)</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -439,8 +439,6 @@
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
-    
-    <li><a href="https://hadxu.github.io/categories/video/">video (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -466,8 +464,6 @@
     <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
     
     <a href="https://hadxu.github.io/tags/tour/">tour</a>
-    
-    <a href="https://hadxu.github.io/tags/video/">video</a>
     
     <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
     
