@@ -166,7 +166,6 @@
     <li><a href="#270">2.70</a></li>
     <li><a href="#271">2.71</a></li>
     <li><a href="#272">2.72</a></li>
-    <li><a href="#272-1">2.72</a></li>
     <li><a href="#273">2.73</a></li>
     <li><a href="#274">2.74</a></li>
     <li><a href="#275">2.75</a></li>
@@ -770,17 +769,238 @@ $$</p>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>B. 如上</p>
-<h2 id="272-1">2.72</h2>
 <h2 id="273">2.73</h2>
-<h2 id="274">2.74</h2>
-<h2 id="275">2.75</h2>
-<h2 id="276">2.76</h2>
-<h2 id="277">2.77</h2>
+<p>写出具有如下原型的函数代码
+<strong>与传统的溢出相反。</strong></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">saturating_add</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> y)
+{
+    <span style="color:#458;font-weight:bold">int</span> sum <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">+</span> y;
+    <span style="color:#458;font-weight:bold">int</span> sig_mask <span style="color:#000;font-weight:bold">=</span> INT_MIN;
+    <span style="color:#998;font-style:italic">/* x&gt;0, y&gt;0, sum&lt;0 pos_overflow
+</span><span style="color:#998;font-style:italic">    *  x&lt;0, y&lt;0, sum&gt;0 neg_overflow
+</span><span style="color:#998;font-style:italic">    */</span> 
+    <span style="color:#458;font-weight:bold">int</span> pos_over <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">!</span>(x <span style="color:#000;font-weight:bold">&amp;</span> sig_mask) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">!</span>(y <span style="color:#000;font-weight:bold">&amp;</span> sig_mask) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (sum <span style="color:#000;font-weight:bold">&amp;</span> sig_mask);
+    <span style="color:#458;font-weight:bold">int</span> neg_over <span style="color:#000;font-weight:bold">=</span> (x <span style="color:#000;font-weight:bold">&amp;</span> sig_mask) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (y <span style="color:#000;font-weight:bold">&amp;</span> sig_mask) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">!</span>(sum <span style="color:#000;font-weight:bold">&amp;</span> sig_mask);
+
+    (pos_over <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (sum<span style="color:#000;font-weight:bold">=</span>INT_MAX)) <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">|</span> (neg_over <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (sum<span style="color:#000;font-weight:bold">=</span>INT_MIN));
+
+    <span style="color:#000;font-weight:bold">return</span> sum;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="274">2.74</h2>
+<p>写出具有如下原型的函数代码(如果计算x-y不溢出，这个函数就返回1)</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">tsub_ok</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> y)
+{   
+    <span style="color:#458;font-weight:bold">int</span> sub <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">-</span> y;
+    <span style="color:#458;font-weight:bold">int</span> pos_over <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> y <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> sub <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">0</span>;
+    <span style="color:#458;font-weight:bold">int</span> neg_over <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> y <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> sub <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">0</span>;
+
+    <span style="color:#458;font-weight:bold">int</span> res <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">!</span>(pos_over <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">|</span> neg_over);
+
+    <span style="color:#000;font-weight:bold">return</span> res;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="275">2.75</h2>
+<p>计算x*y的完整2w位表示</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">signed_high_prod</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> y) {
+  <span style="color:#458;font-weight:bold">int64_t</span> mul <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">int64_t</span>) x <span style="color:#000;font-weight:bold">*</span> y;
+  <span style="color:#000;font-weight:bold">return</span> mul <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">32</span>;
+}
+
+<span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#900;font-weight:bold">unsigned_high_prod</span>(<span style="color:#458;font-weight:bold">unsigned</span> x, <span style="color:#458;font-weight:bold">unsigned</span> y) {
+  <span style="color:#458;font-weight:bold">int</span> sig_x <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">31</span>;
+  <span style="color:#458;font-weight:bold">int</span> sig_y <span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">31</span>;
+  <span style="color:#458;font-weight:bold">int</span> signed_prod <span style="color:#000;font-weight:bold">=</span> signed_high_prod(x, y);
+  <span style="color:#000;font-weight:bold">return</span> signed_prod <span style="color:#000;font-weight:bold">+</span> x <span style="color:#000;font-weight:bold">*</span> sig_y <span style="color:#000;font-weight:bold">+</span> y <span style="color:#000;font-weight:bold">*</span> sig_x;
+}
+
+<span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#900;font-weight:bold">another_unsigned_high_prod</span>(<span style="color:#458;font-weight:bold">unsigned</span> x, <span style="color:#458;font-weight:bold">unsigned</span> y) {
+  <span style="color:#458;font-weight:bold">uint64_t</span> mul <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">uint64_t</span>) x <span style="color:#000;font-weight:bold">*</span> y;
+  <span style="color:#000;font-weight:bold">return</span> mul <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">32</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="276">2.76</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">another_calloc</span>(size_t nmemb, size_t size)
+{
+    <span style="color:#000;font-weight:bold">if</span> (nmemb <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">|</span> size <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>) { <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">NULL</span>;}
+    size_t buf_size <span style="color:#000;font-weight:bold">=</span> nmemb <span style="color:#000;font-weight:bold">*</span> size;
+    <span style="color:#000;font-weight:bold">if</span> (nmemb <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> buf_size <span style="color:#000;font-weight:bold">/</span> size) {
+        <span style="color:#458;font-weight:bold">void</span><span style="color:#000;font-weight:bold">*</span> ptr <span style="color:#000;font-weight:bold">=</span> malloc(buf_size);
+        <span style="color:#000;font-weight:bold">if</span>(ptr <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">NULL</span>){ memset(ptr, <span style="color:#099">0</span>, buf_size); }
+        <span style="color:#000;font-weight:bold">return</span> ptr;
+    }
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">NULL</span>; 
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="277">2.77</h2>
+<p>为了提高计算效率，乘以不同的因子K，使用<code>+</code>、<code>-</code>和<code>&lt;&lt;</code>来实现。</p>
+<ul>
+<li>K=17  <code>(x&lt;&lt;3)+x</code></li>
+<li>K=-7  <code>(x-(x&lt;&lt;3))</code></li>
+<li>K=60 <code>(x&lt;&lt;6)-(x&lt;&lt;2)</code></li>
+<li>K=-112 <code>(x&lt;&lt;4)-(x&lt;&lt;7)</code></li>
+</ul>
 <h2 id="278">2.78</h2>
-<h2 id="279">2.79</h2>
-<h2 id="280">2.80</h2>
-<h2 id="281">2.81</h2>
-<h2 id="282">2.82</h2>
+<p>写出具有如下原型的函数代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">divide_power2</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> k)
+{
+    <span style="color:#458;font-weight:bold">int</span> is_neg <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&amp;</span> INT_MIN;
+    <span style="color:#998;font-style:italic">//加上偏量 CSAPP73页
+</span><span style="color:#998;font-style:italic"></span>    (is_neg <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (x<span style="color:#000;font-weight:bold">=</span>x <span style="color:#000;font-weight:bold">+</span> (<span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> k) <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>));   
+    printf(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">%d</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>, x);
+    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> k;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="279">2.79</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">mul3div4</span>(<span style="color:#458;font-weight:bold">int</span> x)
+{
+    <span style="color:#000;font-weight:bold">return</span> x <span style="color:#000;font-weight:bold">-</span> ((x<span style="color:#000;font-weight:bold">+</span>(<span style="color:#099">1</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">2</span>)<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#099">2</span>);
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="280">2.80</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">threeforths</span>(<span style="color:#458;font-weight:bold">int</span> x)
+{
+    <span style="color:#458;font-weight:bold">int</span> f <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">~</span><span style="color:#099">0x3</span>;
+    <span style="color:#458;font-weight:bold">int</span> l <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x3</span>;
+
+    f <span style="color:#000;font-weight:bold">=</span> ((f<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">+</span>f)<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#099">2</span>; <span style="color:#998;font-style:italic">// 3f/4
+</span><span style="color:#998;font-style:italic"></span>
+    <span style="color:#458;font-weight:bold">int</span> lm3 <span style="color:#000;font-weight:bold">=</span> (l<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">+</span>l;
+    <span style="color:#458;font-weight:bold">int</span> bias <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">2</span>) <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>;
+
+    <span style="color:#458;font-weight:bold">int</span> is_neg <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&amp;</span> INT_MIN;
+
+    (is_neg <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (lm3 <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> bias));
+
+    <span style="color:#458;font-weight:bold">int</span> lm3d4 <span style="color:#000;font-weight:bold">=</span> lm3 <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">2</span>;
+
+    <span style="color:#000;font-weight:bold">return</span> f <span style="color:#000;font-weight:bold">+</span> lm3d4;
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="281">2.81</h2>
+<p>A. $1^{w-k}0^k$</p>
+<pre><code>-1 &lt;&lt; k
+</code></pre><p>B. $0^{w-k-j}1^k0^j$</p>
+<pre><code>~(-1&lt;&lt;k)&lt;&lt;j;
+</code></pre><h2 id="282">2.82</h2>
 <h2 id="283">2.83</h2>
 <h2 id="参考">参考</h2>
 <ul>
