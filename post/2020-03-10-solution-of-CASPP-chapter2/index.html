@@ -148,6 +148,7 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#准备">准备</a></li>
+    <li><a href="#使用docker-file进行构建docker镜像">使用Docker File进行构建Docker镜像</a></li>
     <li><a href="#255">2.55</a></li>
     <li><a href="#256">2.56</a></li>
     <li><a href="#257">2.57</a></li>
@@ -175,7 +176,7 @@
     <li><a href="#279">2.79</a></li>
     <li><a href="#280">2.80</a></li>
     <li><a href="#281">2.81</a></li>
-    <li><a href="#282">2.82</a></li>
+    <li><a href="#282s">2.82s</a></li>
     <li><a href="#283">2.83</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -288,7 +289,96 @@ docker commit 容器id csapp
 </code></pre></td></tr></table>
 </div>
 </div><p>到这里就可以开启vscode进行远程连接docker容器，从而进行代码的编写(<strong>记得安装gcc</strong>)。</p>
-<h2 id="255">2.55</h2>
+<h2 id="使用docker-file进行构建docker镜像">使用Docker File进行构建Docker镜像</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># 基础镜像</span>
+FROM nvidia/cuda:9.0-cudnn7-runtime-ubuntu16.04
+
+<span style="color:#998;font-style:italic"># 指定devnet的网络代理才可以访问外网</span>
+ENV http_proxy  <span style="color:#d14">&#39;http://devnet-proxy.oa.com:8080/&#39;</span>
+ENV https_proxy <span style="color:#d14">&#39;http://devnet-proxy.oa.com:8080/&#39;</span>
+
+<span style="color:#998;font-style:italic"># 加速ubuntu的软件下载速度</span>
+RUN <span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse&#34;</span> &gt; /etc/apt/source.list <span style="color:#d14">\
+</span><span style="color:#d14"></span>    <span style="color:#000;font-weight:bold">&amp;&amp;</span> <span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse&#34;</span> &gt;&gt; /etc/apt/source.list <span style="color:#d14">\
+</span><span style="color:#d14"></span>    <span style="color:#000;font-weight:bold">&amp;&amp;</span> <span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse&#34;</span> &gt;&gt; /etc/apt/source.list <span style="color:#d14">\
+</span><span style="color:#d14"></span>    <span style="color:#000;font-weight:bold">&amp;&amp;</span> <span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse&#34;</span> &gt;&gt; /etc/apt/source.list
+
+RUN apt-get update --fix-missing <span style="color:#000;font-weight:bold">&amp;&amp;</span> apt-get install -y curl wget vim net-tools bzip2 git<span style="color:#d14">\
+</span><span style="color:#d14"></span>  <span style="color:#000;font-weight:bold">&amp;&amp;</span> rm -rf /var/lib/apt/lists/* <span style="color:#000;font-weight:bold">&amp;&amp;</span> mkdir -p /software
+
+WORKDIR /software
+
+RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-4.2.0-Linux-x86_64.sh -O ~/anaconda.sh <span style="color:#000;font-weight:bold">&amp;&amp;</span> <span style="color:#d14">\
+</span><span style="color:#d14"></span>    /bin/bash ~/anaconda.sh -b -p /software/conda <span style="color:#000;font-weight:bold">&amp;&amp;</span> <span style="color:#d14">\
+</span><span style="color:#d14"></span>    rm ~/anaconda.sh <span style="color:#000;font-weight:bold">&amp;&amp;</span> <span style="color:#d14">\
+</span><span style="color:#d14"></span>    <span style="color:#998;font-style:italic"># ln -s /software/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh &amp;&amp; \</span>
+    <span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;</span><span style="color:#d14">export PATH=/software/conda/bin:</span><span style="color:#008080">$PATH</span><span style="color:#d14">&#34;</span> &gt;&gt; ~/.bashrc 
+    <span style="color:#998;font-style:italic"># &amp;&amp; \</span>
+    <span style="color:#998;font-style:italic"># echo &#34;conda activate base&#34; &gt;&gt; ~/.bashrc</span>
+
+<span style="color:#998;font-style:italic"># RUN /software/conda/bin/conda create -n python3.5 python=3.5 pytorch torchvision -c pytorch\</span>
+<span style="color:#998;font-style:italic">#  &amp;&amp; apt clean \</span>
+<span style="color:#998;font-style:italic">#  &amp;&amp; apt autoremove -y</span>
+
+RUN /software/conda/bin/pip install PyHamcrest <span style="color:#d14">\
+</span><span style="color:#d14"></span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> /software/conda/bin/pip install --upgrade pip <span style="color:#d14">\
+</span><span style="color:#d14"></span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> /software/conda/bin/pip install msgpack <span style="color:#d14">\
+</span><span style="color:#d14"></span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> /software/conda/bin/pip3 install torch torchvision <span style="color:#d14">\
+</span><span style="color:#d14"></span><span style="color:#998;font-style:italic"># &amp;&amp; /software/conda/bin/conda install pytorch torchvision -c pytorch \</span>
+ <span style="color:#000;font-weight:bold">&amp;&amp;</span> /software/conda/bin/pip install opencv-python <span style="color:#d14">\
+</span><span style="color:#d14"></span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> apt clean <span style="color:#d14">\
+</span><span style="color:#d14"></span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> apt autoremove -y
+
+
+CMD <span style="color:#000;font-weight:bold">[</span> <span style="color:#d14">&#34;/bin/bash&#34;</span> <span style="color:#000;font-weight:bold">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="255">2.55</h2>
 <p>在你能够访问的不同机器上，使用<code>show_bytes.c</code>来编译并运行示例代码，并确定这些机器的字节顺序。</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1000,7 +1090,7 @@ $$</p>
 <pre><code>-1 &lt;&lt; k
 </code></pre><p>B. $0^{w-k-j}1^k0^j$</p>
 <pre><code>~(-1&lt;&lt;k)&lt;&lt;j;
-</code></pre><h2 id="282">2.82</h2>
+</code></pre><h2 id="282s">2.82s</h2>
 <h2 id="283">2.83</h2>
 <h2 id="参考">参考</h2>
 <ul>
