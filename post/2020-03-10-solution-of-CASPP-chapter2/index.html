@@ -176,7 +176,7 @@
     <li><a href="#279">2.79</a></li>
     <li><a href="#280">2.80</a></li>
     <li><a href="#281">2.81</a></li>
-    <li><a href="#282s">2.82s</a></li>
+    <li><a href="#282">2.82</a></li>
     <li><a href="#283">2.83</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -1090,8 +1090,88 @@ $$</p>
 <pre><code>-1 &lt;&lt; k
 </code></pre><p>B. $0^{w-k-j}1^k0^j$</p>
 <pre><code>~(-1&lt;&lt;k)&lt;&lt;j;
-</code></pre><h2 id="282s">2.82s</h2>
+</code></pre><h2 id="282">2.82</h2>
+<p>我们在一个int类型值为32的机器上运行程序，这些值以补码形式表示，而且他们都是算数右移的。unsigned类型也是32位的。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">x <span style="color:#000;font-weight:bold">=</span> random()
+y <span style="color:#000;font-weight:bold">=</span> random()
+
+ux <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">unsigned</span>)x
+uy <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">unsigned</span>)y
+</code></pre></td></tr></table>
+</div>
+</div><p>对于下列的每一个C表达式，你要指出是否为1</p>
+<p>A. <code>(x&lt;y)==(-x&gt;-y)</code>
+false(当x为INT_MIN时候， -x==x)</p>
+<p>B. <code>((x+y)&lt;&lt;4)+y-x==17*y+15x</code>
+true</p>
+<p>C. <code>~x+~y+1==~(x+y)</code></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#0086b3">true</span>
+<span style="color:#998;font-style:italic">/*
+</span><span style="color:#998;font-style:italic"> * right
+</span><span style="color:#998;font-style:italic"> *
+</span><span style="color:#998;font-style:italic"> * ~x + ~y + 1
+</span><span style="color:#998;font-style:italic"> *   =&gt;
+</span><span style="color:#998;font-style:italic"> * ~x + 1 + ~y + 1 - 1
+</span><span style="color:#998;font-style:italic"> *   =&gt;
+</span><span style="color:#998;font-style:italic"> * -x + -y - 1
+</span><span style="color:#998;font-style:italic"> *   =&gt;
+</span><span style="color:#998;font-style:italic"> * -(x + y) - 1
+</span><span style="color:#998;font-style:italic"> *   =&gt;
+</span><span style="color:#998;font-style:italic"> * ~(x + y) + 1 - 1
+</span><span style="color:#998;font-style:italic"> *   =&gt;
+</span><span style="color:#998;font-style:italic"> * ~(x + y)
+</span><span style="color:#998;font-style:italic"> */</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>D. <code>(ux-uy)==-(unsigned)(y-x)</code>
+true</p>
+<p>E. <code>((x&gt;&gt;2)&lt;&lt;2)&lt;=x</code>
+false</p>
 <h2 id="283">2.83</h2>
+<p>一些数字的二进制表示由形如<code>0.yyyyyyyy</code>无穷串组成，其中y是一个k位的序列。</p>
+<p>A.</p>
+<pre><code>n = 0.yyyyy...
+
+n &lt;&lt; k = y.yyyyy... = Y + n
+
+n &lt;&lt; k - n = Y
+
+n = Y/(2^k - 1)
+</code></pre><p>B.</p>
+<ul>
+<li>$\frac{5}{7}$</li>
+<li>$\frac{2}{5}$</li>
+<li>$\frac{19}{63}$</li>
+</ul>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">Programming languages — C</a></li>
