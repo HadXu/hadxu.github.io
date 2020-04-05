@@ -185,6 +185,12 @@
     <li><a href="#288">2.88</a></li>
     <li><a href="#289">2.89</a></li>
     <li><a href="#290">2.90</a></li>
+    <li><a href="#291">2.91</a></li>
+    <li><a href="#292">2.92</a></li>
+    <li><a href="#293">2.93</a></li>
+    <li><a href="#294">2.94</a></li>
+    <li><a href="#295">2.95</a></li>
+    <li><a href="#296">2.96</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -1465,6 +1471,270 @@ n = Y/(2^k - 1)
 </div>
 </div><h2 id="290">2.90</h2>
 <p>分配给你一个任务，编写一个C函数来计算$2^x$的浮点数表示。假设u2f返回的是浮点数值与它的无符号参数有相同的位表示。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">float</span> <span style="color:#900;font-weight:bold">fpwr2</span>(<span style="color:#458;font-weight:bold">int</span> x)
+{
+    <span style="color:#458;font-weight:bold">unsigned</span> exp, frac;
+    <span style="color:#458;font-weight:bold">unsigned</span> u;
+    <span style="color:#000;font-weight:bold">if</span>(x <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">2</span><span style="color:#000;font-weight:bold">-</span>pow(<span style="color:#099">2</span>,<span style="color:#099">7</span>)<span style="color:#000;font-weight:bold">-</span><span style="color:#099">23</span>)
+    {
+        <span style="color:#998;font-style:italic">// to small
+</span><span style="color:#998;font-style:italic"></span>        exp <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+        frac <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    }<span style="color:#000;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">if</span> (x <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">2</span><span style="color:#000;font-weight:bold">-</span>pow(<span style="color:#099">2</span>,<span style="color:#099">7</span>))
+    {
+        exp <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+        frac <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> (<span style="color:#458;font-weight:bold">unsigned</span>)(x <span style="color:#000;font-weight:bold">-</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">-</span>pow(<span style="color:#099">2</span>,<span style="color:#099">7</span>)<span style="color:#000;font-weight:bold">-</span><span style="color:#099">23</span>));
+    }<span style="color:#000;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">if</span> (x <span style="color:#000;font-weight:bold">&lt;</span> pow(<span style="color:#099">2</span>,<span style="color:#099">7</span>)<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)
+    {
+        exp <span style="color:#000;font-weight:bold">=</span> pow(<span style="color:#099">2</span>,<span style="color:#099">7</span>)<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">+</span>x;
+        frac <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    }
+
+    <span style="color:#000;font-weight:bold">else</span>
+    {
+        <span style="color:#998;font-style:italic">/* too big*/</span>
+        exp <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xff</span>;
+        frac <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    }
+    
+    u <span style="color:#000;font-weight:bold">=</span> exp<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">*</span>(<span style="color:#458;font-weight:bold">float</span><span style="color:#000;font-weight:bold">*</span>)<span style="color:#000;font-weight:bold">&amp;</span>u;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="291">2.91</h2>
+<p>大约公元前250年，希腊数学家阿基米德证明了$\frac{233}{71} &lt; \pi &lt; \frac{22}{7}$,$\pi$的十六进制表示为<code>0x40490fdb</code></p>
+<p>A. 这个浮点数二进制为多少? <code>0 10000000 10010010000111111011011</code></p>
+<p>B. $\frac{22}{7}$ 二进制小数是什么? <code>1.001001(001)...</code></p>
+<p>C. 从第9位开始不同</p>
+<h2 id="292">2.92</h2>
+<p>对于浮点数f计算-f，只允许用位级浮点编码规则。</p>
+<p><strong>将exp以及frac以及sign提取出来，然后对sign进行操作即可。</strong></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#000;font-weight:bold">typedef</span> <span style="color:#458;font-weight:bold">unsigned</span> float_bits;
+
+<span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#900;font-weight:bold">f2u</span>(<span style="color:#458;font-weight:bold">float</span> f) {
+  <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">*</span>(<span style="color:#458;font-weight:bold">unsigned</span><span style="color:#000;font-weight:bold">*</span>) <span style="color:#000;font-weight:bold">&amp;</span>f;
+}
+
+<span style="color:#458;font-weight:bold">float</span> <span style="color:#900;font-weight:bold">u2f</span>(<span style="color:#458;font-weight:bold">unsigned</span> u) {
+  <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">*</span>(<span style="color:#458;font-weight:bold">float</span><span style="color:#000;font-weight:bold">*</span>) <span style="color:#000;font-weight:bold">&amp;</span>u;
+}
+
+float_bits <span style="color:#900;font-weight:bold">float_negate</span>(float_bits f) 
+{
+    <span style="color:#458;font-weight:bold">unsigned</span> sig <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">31</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> exp <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xFF</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> frac <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x7FFFFF</span>;
+    <span style="color:#458;font-weight:bold">int</span> is_NAN <span style="color:#000;font-weight:bold">=</span> (exp <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xFF</span>) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (frac <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>);
+
+    <span style="color:#000;font-weight:bold">if</span>(is_NAN) <span style="color:#000;font-weight:bold">return</span> f;
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">~</span>sig <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">31</span> <span style="color:#000;font-weight:bold">|</span> exp<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac; 
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="293">2.93</h2>
+<p>对于浮点数f，计算f的绝对值</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">float_bits <span style="color:#900;font-weight:bold">float_absval</span>(float_bits f)
+{
+    <span style="color:#458;font-weight:bold">unsigned</span> sig <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">31</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> exp <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xFF</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> frac <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x7FFFFF</span>;
+    <span style="color:#458;font-weight:bold">int</span> is_NAN <span style="color:#000;font-weight:bold">=</span> (exp <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xFF</span>) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (frac <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>);
+    <span style="color:#000;font-weight:bold">if</span>(is_NAN) <span style="color:#000;font-weight:bold">return</span> f;
+
+    <span style="color:#000;font-weight:bold">if</span> (sig <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x1</span>)
+        <span style="color:#000;font-weight:bold">return</span>  <span style="color:#000;font-weight:bold">~</span>sig <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">31</span> <span style="color:#000;font-weight:bold">|</span> exp<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+    <span style="color:#000;font-weight:bold">else</span>
+    {
+        <span style="color:#000;font-weight:bold">return</span>  sig <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">31</span> <span style="color:#000;font-weight:bold">|</span> exp<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="294">2.94</h2>
+<p>计算2*f。（对指数进行+1即可）</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">float_bits <span style="color:#900;font-weight:bold">float_twice</span>(float_bits f)
+{
+    <span style="color:#458;font-weight:bold">unsigned</span> sig <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">31</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> exp <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xFF</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> frac <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x7FFFFF</span>;
+    <span style="color:#458;font-weight:bold">int</span> is_NAN <span style="color:#000;font-weight:bold">=</span> (exp <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xFF</span>) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (frac <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>);
+    <span style="color:#000;font-weight:bold">if</span>(is_NAN) <span style="color:#000;font-weight:bold">return</span> f;
+
+    <span style="color:#000;font-weight:bold">if</span>(exp<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>)
+    {
+        frac <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
+    }<span style="color:#000;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">if</span> (exp <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xFF</span> <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+    {
+        exp <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xFF</span>;
+        frac <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    }
+    <span style="color:#000;font-weight:bold">else</span>
+    {
+        exp <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
+    }
+
+    <span style="color:#000;font-weight:bold">return</span> sig <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">31</span> <span style="color:#000;font-weight:bold">|</span> exp<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="295">2.95</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">float_bits <span style="color:#900;font-weight:bold">float_half</span>(float_bits f)
+{
+    <span style="color:#458;font-weight:bold">unsigned</span> sig <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">31</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> exp <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xFF</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> frac <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x7FFFFF</span>;
+    <span style="color:#458;font-weight:bold">int</span> is_NAN <span style="color:#000;font-weight:bold">=</span> (exp <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xFF</span>) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (frac <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>);
+    <span style="color:#000;font-weight:bold">if</span>(is_NAN) <span style="color:#000;font-weight:bold">return</span> f;
+
+    <span style="color:#000;font-weight:bold">if</span>(exp<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>)
+    {
+        frac <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
+    }<span style="color:#000;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">if</span> (exp <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xFF</span> <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+    {
+        exp <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0xFF</span>;
+        frac <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    }
+    <span style="color:#000;font-weight:bold">else</span>
+    {
+        exp <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
+    }
+
+    <span style="color:#000;font-weight:bold">return</span> sig <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">31</span> <span style="color:#000;font-weight:bold">|</span> exp<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="296">2.96</h2>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
