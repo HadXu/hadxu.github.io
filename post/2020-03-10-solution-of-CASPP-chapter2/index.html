@@ -191,6 +191,7 @@
     <li><a href="#294">2.94</a></li>
     <li><a href="#295">2.95</a></li>
     <li><a href="#296">2.96</a></li>
+    <li><a href="#297">2.97</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -1737,10 +1738,251 @@ float_bits <span style="color:#900;font-weight:bold">float_negate</span>(float_b
 </div><h2 id="296">2.96</h2>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">float_f2i</span>(float_bits f)
+{
+    <span style="color:#458;font-weight:bold">unsigned</span> sig <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">31</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> exp <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xff</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> frac <span style="color:#000;font-weight:bold">=</span> f <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x7FFFFF</span>;
+    <span style="color:#458;font-weight:bold">unsigned</span> bias <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0x7F</span>;
+
+    <span style="color:#458;font-weight:bold">int</span> num;
+    <span style="color:#458;font-weight:bold">unsigned</span> E;
+    <span style="color:#458;font-weight:bold">unsigned</span> M;
+
+    <span style="color:#000;font-weight:bold">if</span> (exp <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> exp <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">+</span> bias) 
+    {
+        num <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    }
+    <span style="color:#000;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">if</span> (exp <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">31</span> <span style="color:#000;font-weight:bold">+</span> bias) 
+    {
+        num <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0x80000000</span>;
+    }
+    <span style="color:#000;font-weight:bold">else</span> 
+    {
+        E <span style="color:#000;font-weight:bold">=</span> exp <span style="color:#000;font-weight:bold">-</span> bias;
+        M <span style="color:#000;font-weight:bold">=</span> frac <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">0x800000</span>;
+        <span style="color:#000;font-weight:bold">if</span> (E <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#099">23</span>) 
+        {
+            num <span style="color:#000;font-weight:bold">=</span> M <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> (E <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">23</span>);
+        }
+        <span style="color:#000;font-weight:bold">else</span>
+        {
+            num <span style="color:#000;font-weight:bold">=</span> M <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> (<span style="color:#099">23</span> <span style="color:#000;font-weight:bold">-</span> E);
+        }
+        
+    }
+
+    <span style="color:#000;font-weight:bold">return</span> sig<span style="color:#000;font-weight:bold">?</span><span style="color:#000;font-weight:bold">-</span><span style="color:#900;font-weight:bold">num</span>:num;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="297">2.97</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">bits_length</span>(<span style="color:#458;font-weight:bold">int</span> i) {
+  <span style="color:#000;font-weight:bold">if</span> ((i <span style="color:#000;font-weight:bold">&amp;</span> INT_MIN) <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>) {
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">32</span>;
+  }
+
+  <span style="color:#458;font-weight:bold">unsigned</span> u <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">unsigned</span>)i;
+  <span style="color:#458;font-weight:bold">int</span> length <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">while</span> (u <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">1</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>length)) {
+    length<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>;
+  }
+  <span style="color:#000;font-weight:bold">return</span> length;
+}
+
+<span style="color:#998;font-style:italic">/*
+</span><span style="color:#998;font-style:italic"> * generate mask
+</span><span style="color:#998;font-style:italic"> * 00000...(32-l) 11111....(l)
+</span><span style="color:#998;font-style:italic"> *
+</span><span style="color:#998;font-style:italic"> * e.g.
+</span><span style="color:#998;font-style:italic"> * 3  =&gt; 0x00000007
+</span><span style="color:#998;font-style:italic"> * 16 =&gt; 0x0000FFFF
+</span><span style="color:#998;font-style:italic"> */</span>
+<span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#900;font-weight:bold">bits_mask</span>(<span style="color:#458;font-weight:bold">int</span> l) {
+  <span style="color:#000;font-weight:bold">return</span> (<span style="color:#458;font-weight:bold">unsigned</span>) <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> (<span style="color:#099">32</span><span style="color:#000;font-weight:bold">-</span>l);
+}
+
+float_bits <span style="color:#900;font-weight:bold">float_i2f</span>(<span style="color:#458;font-weight:bold">int</span> i) {
+  <span style="color:#458;font-weight:bold">unsigned</span> sig, exp, frac, rest, exp_sig <span style="color:#998;font-style:italic">/* except sig */</span>, round_part;
+  <span style="color:#458;font-weight:bold">unsigned</span> bits, fbits;
+  <span style="color:#458;font-weight:bold">unsigned</span> bias <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0x7F</span>;
+
+  <span style="color:#000;font-weight:bold">if</span> (i <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>) {
+    sig <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    exp <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    frac <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    <span style="color:#000;font-weight:bold">return</span> sig <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">31</span> <span style="color:#000;font-weight:bold">|</span> exp <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+  }
+  <span style="color:#000;font-weight:bold">if</span> (i <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> INT_MIN) {
+    sig <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
+    exp <span style="color:#000;font-weight:bold">=</span> bias <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">31</span>;
+    frac <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    <span style="color:#000;font-weight:bold">return</span> sig <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">31</span> <span style="color:#000;font-weight:bold">|</span> exp <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+  }
+
+  sig <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+  <span style="color:#998;font-style:italic">/* 2&#39;s complatation */</span>
+  <span style="color:#000;font-weight:bold">if</span> (i <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">0</span>) {
+    sig <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
+    i <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span>i;
+  }
+
+  bits <span style="color:#000;font-weight:bold">=</span> bits_length(i);
+  fbits <span style="color:#000;font-weight:bold">=</span> bits <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>;
+  exp <span style="color:#000;font-weight:bold">=</span> bias <span style="color:#000;font-weight:bold">+</span> fbits;
+
+  rest <span style="color:#000;font-weight:bold">=</span> i <span style="color:#000;font-weight:bold">&amp;</span> bits_mask(fbits);
+  <span style="color:#000;font-weight:bold">if</span> (fbits <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">23</span>) {
+    frac <span style="color:#000;font-weight:bold">=</span> rest <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> (<span style="color:#099">23</span> <span style="color:#000;font-weight:bold">-</span> fbits);
+    exp_sig <span style="color:#000;font-weight:bold">=</span> exp <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+  } <span style="color:#000;font-weight:bold">else</span> {
+    <span style="color:#458;font-weight:bold">int</span> offset <span style="color:#000;font-weight:bold">=</span> fbits <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">23</span>;
+    <span style="color:#458;font-weight:bold">int</span> round_mid <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> (offset <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>);
+
+    round_part <span style="color:#000;font-weight:bold">=</span> rest <span style="color:#000;font-weight:bold">&amp;</span> bits_mask(offset);
+    frac <span style="color:#000;font-weight:bold">=</span> rest <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> offset;
+    exp_sig <span style="color:#000;font-weight:bold">=</span> exp <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">23</span> <span style="color:#000;font-weight:bold">|</span> frac;
+
+    <span style="color:#998;font-style:italic">/* round to even */</span>
+    <span style="color:#000;font-weight:bold">if</span> (round_part <span style="color:#000;font-weight:bold">&lt;</span> round_mid) {
+      <span style="color:#998;font-style:italic">/* nothing */</span>
+    } <span style="color:#000;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">if</span> (round_part <span style="color:#000;font-weight:bold">&gt;</span> round_mid) {
+      exp_sig <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
+    } <span style="color:#000;font-weight:bold">else</span> {
+      <span style="color:#998;font-style:italic">/* round_part == round_mid */</span>
+      <span style="color:#000;font-weight:bold">if</span> ((frac <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x1</span>) <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>) {
+        <span style="color:#998;font-style:italic">/* round to even */</span>
+        exp_sig <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
+      }
+    }
+  }
+
+  <span style="color:#000;font-weight:bold">return</span> sig <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">31</span> <span style="color:#000;font-weight:bold">|</span> exp_sig;
+}
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="参考">参考</h2>
