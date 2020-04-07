@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>FQ(科学上网)的正确打开方式 | lay&#39;s 博客</title>
-    <meta property="og:title" content="FQ(科学上网)的正确打开方式 - lay&#39;s 博客">
+    <title>CASPP 第三章课后习题解答 | lay&#39;s 博客</title>
+    <meta property="og:title" content="CASPP 第三章课后习题解答 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-03-02T21:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2020-04-07T11:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-03-02T21:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2020-04-07T11:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="FQ(科学上网)的正确打开方式">
+    <meta name="description" content="CASPP 第三章课后习题解答">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/post/2020-03-01-the-best-way-to-fq/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2020-04-08-solution-of-CASPP-chapter3/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -147,10 +147,8 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#介绍">介绍</a></li>
-    <li><a href="#1-自己选择服务器">1. 自己选择服务器</a></li>
-    <li><a href="#2-买">2. 买</a></li>
-    <li><a href="#参考">参考</a></li>
+    <li><a href="#358">3.58</a></li>
+    <li><a href="#359">3.59</a></li>
   </ul>
 </nav>
     </div>
@@ -184,16 +182,16 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">FQ(科学上网)的正确打开方式</h1>
+            <h1 class="post-title">CASPP 第三章课后习题解答</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月2日
+            2020年4月7日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/ss'>ss</a></span>
+            <span class="meta-category"><a href='https://hadxu.github.io/categories/CSAPP'>CSAPP</a></span>
             
         </div>
         
@@ -211,35 +209,73 @@
         </div>
         
         <div class="post-content">
-            <h1 id="科学上网的正确打开方式">科学上网的正确打开方式</h1>
-<h2 id="介绍">介绍</h2>
-<p>作为一个计算机从业者，无法获取最先进的、最前沿的信息是令人痛苦的，lay从读本科以来，一直寻找最好的方式去接触最外围的信息。中间经历了各种各样的苦难，皇天不负有心人，让我找到了相对比较靠谱的方案。</p>
-<h2 id="1-自己选择服务器">1. 自己选择服务器</h2>
-<p>具体选择哪一个服务器，只要是国外的都可以。</p>
-<p>然后</p>
+            <h1 id="caspp-第三章课后习题解答">CASPP 第三章课后习题解答</h1>
+<h2 id="358">3.58</h2>
+<p>一个函数的原型为</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">decode2</span>(<span style="color:#458;font-weight:bold">long</span> x, <span style="color:#458;font-weight:bold">long</span> y, <span style="color:#458;font-weight:bold">long</span> z);
+</code></pre></td></tr></table>
+</div>
+</div><p>GCC产生的汇编代码为</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
-chmod +x shadowsocks.sh
-./shadowsocks.sh 2&gt;&amp;<span style="color:#099">1</span> | tee shadowsocks.log
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#900;font-weight:bold">decode2:</span>
+<span style="color:#900;font-weight:bold">subq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%rsi</span>
+<span style="color:#900;font-weight:bold">imulq</span> <span style="color:#008080">%rsi</span>, <span style="color:#008080">%rdi</span>
+<span style="color:#900;font-weight:bold">movq</span> <span style="color:#008080">%rsi</span>, <span style="color:#008080">%rax</span>
+<span style="color:#900;font-weight:bold">salq</span> <span style="color:#008080">$63</span>, <span style="color:#008080">%rax</span>
+<span style="color:#900;font-weight:bold">sarq</span> <span style="color:#008080">$63</span>, <span style="color:#008080">%rax</span>
+<span style="color:#900;font-weight:bold">xorq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%rax</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>推荐<a href="https://github.com/haoel/haoel.github.io">haoel</a></p>
-<h2 id="2-买">2. 买</h2>
-<p>这里可以买国内的，也可以买国外的。如果自己搭建，会出现自己的服务器频繁被<strong>ban</strong>,于是最终我选择了买<a href="https://justmysocks2.net/members/index.php">Just My Socks</a></p>
-<p><img src="/post/imgs/ss.png" alt=""></p>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://kiwivm.64clouds.com/main-exec.php?mode=blacklistcheck">搬瓦工 blacklistcheck</a></li>
-<li><a href="https://justmysocks1.net/members/index.php">Just My Socks</a></li>
-<li><a href="https://linuxscriptshub.com/how-to-install-v2ray-on-ubuntu-16-04/">V2ray</a></li>
-<li><a href="https://github.com/teddysun/shadowsocks_install/tree/master">Shadowsocks</a></li>
-</ul>
+</div><p>参数x、y、z通过寄存器%rdi、%rsi和%rdx传递。代码将返回值存放在寄存器%rax中。写出等价于上述汇编代码的C代码。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">decode</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> y, <span style="color:#458;font-weight:bold">int</span> z)
+{
+    y <span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">-</span> z;
+    x <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">*</span> y;
+    <span style="color:#458;font-weight:bold">int</span> res <span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">63</span>;
+    res <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">63</span>;
+    <span style="color:#000;font-weight:bold">return</span> res <span style="color:#000;font-weight:bold">^</span> x;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这里可以使用将汇编代码进行编译连接，产生方法嵌入到可执行文件中。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcc -c -m64 decode2.s -o decode2.o
+gcc -m64 main.c decode.c decode2.o -o main
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="359">3.59</h2>
 
         </div>
 
@@ -252,15 +288,15 @@ chmod +x shadowsocks.sh
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/post/2020-03-01-blog-change/">博客迁移</a></li>
+        <li><a href="/post/2020-03-10-solution-of-CASPP-chapter2/">CASPP 第二章课后习题解答</a></li>
         
-        <li><a href="/books/">书籍</a></li>
+        <li><a href="/post/2020-04-04-Covid-19-presents-stark-choices-between-life-death-and-the-economythe-Economist/">Covid-19 presents stark choices between life, death and the economy</a></li>
         
-        <li><a href="/about/">关于我</a></li>
+        <li><a href="/post/2020-04-04-2020-qingming/">2020年的清明</a></li>
         
-        <li><a href="/archives/">归档</a></li>
+        <li><a href="/post/2020-04-03-2020-wuhan/">2020年的武汉新年</a></li>
         
-        <li><a href="/search/">搜索</a></li>
+        <li><a href="/post/2020-03-28-The-state-in-the-time-of-covid-19the-Economist/">The state in the time of covid-19</a></li>
         
     </ul>
 </div>
@@ -270,7 +306,7 @@ chmod +x shadowsocks.sh
             
             <ul class="clearfix">
                 
-                <li><a href='https://hadxu.github.io/tags/ss'>ss</a></li>
+                <li><a href='https://hadxu.github.io/tags/CSAPP'>CSAPP</a></li>
                 
             </ul>
             

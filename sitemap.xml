@@ -3,32 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hadxu.github.io/categories/</loc>
-    <lastmod>2020-04-04T15:00:00+08:00</lastmod>
+    <loc>https://hadxu.github.io/post/2020-04-08-solution-of-CASPP-chapter3/</loc>
+    <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/post/2020-04-04-Covid-19-presents-stark-choices-between-life-death-and-the-economythe-Economist/</loc>
-    <lastmod>2020-04-04T15:00:00+08:00</lastmod>
+    <loc>https://hadxu.github.io/categories/</loc>
+    <lastmod>2020-04-07T11:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/categories/CSAPP/</loc>
+    <lastmod>2020-04-07T11:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/tags/CSAPP/</loc>
+    <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/</loc>
-    <lastmod>2020-04-04T15:00:00+08:00</lastmod>
+    <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/post/</loc>
-    <lastmod>2020-04-04T15:00:00+08:00</lastmod>
+    <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/tags/</loc>
-    <lastmod>2020-04-04T15:00:00+08:00</lastmod>
+    <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/the-economist/</loc>
+    <loc>https://hadxu.github.io/post/2020-04-04-Covid-19-presents-stark-choices-between-life-death-and-the-economythe-Economist/</loc>
     <lastmod>2020-04-04T15:00:00+08:00</lastmod>
   </url>
   
@@ -38,17 +48,22 @@
   </url>
   
   <url>
+    <loc>https://hadxu.github.io/tags/the-economist/</loc>
+    <lastmod>2020-04-04T15:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://hadxu.github.io/post/2020-04-04-2020-qingming/</loc>
     <lastmod>2020-04-04T09:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2020-04-04T09:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2020-04-04T09:00:00+08:00</lastmod>
   </url>
   
@@ -178,16 +193,6 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/CSAPP/</loc>
-    <lastmod>2020-03-10T11:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/tags/CSAPP/</loc>
-    <lastmod>2020-03-10T11:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://hadxu.github.io/post/2020-03-10-wipe-hard-driver/</loc>
     <lastmod>2020-03-10T10:00:00+08:00</lastmod>
   </url>
@@ -228,12 +233,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/tour/</loc>
+    <loc>https://hadxu.github.io/tags/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/tour/</loc>
+    <loc>https://hadxu.github.io/categories/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
