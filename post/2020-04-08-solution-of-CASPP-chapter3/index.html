@@ -148,7 +148,7 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#358">3.58</a></li>
-    <li><a href="#359">3.59</a></li>
+    <li><a href="#360">3.60</a></li>
   </ul>
 </nav>
     </div>
@@ -275,8 +275,78 @@
 gcc -m64 main.c decode.c decode2.o -o main
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="359">3.59</h2>
-
+</div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="360">3.60</h2>
+<p>请解释下面汇编代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#900;font-weight:bold">loop:</span>
+  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">%esi</span>, <span style="color:#008080">%ecx</span>
+  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$1</span>, <span style="color:#008080">%edx</span>
+  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$0</span>, <span style="color:#008080">%eax</span>
+  <span style="color:#900;font-weight:bold">jmp</span> <span style="color:#008080">.L2</span>
+<span style="color:#900;font-weight:bold">.L3:</span>
+  <span style="color:#900;font-weight:bold">movq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%r8</span>
+  <span style="color:#900;font-weight:bold">andq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%r8</span>
+  <span style="color:#900;font-weight:bold">orq</span> <span style="color:#008080">%r8</span>, <span style="color:#008080">%rax</span>
+  <span style="color:#900;font-weight:bold">salq</span> <span style="color:#008080">%cl</span>, <span style="color:#008080">%rdx</span>
+<span style="color:#900;font-weight:bold">.L2:</span>
+  <span style="color:#900;font-weight:bold">testq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%rdx</span>
+  <span style="color:#900;font-weight:bold">jne</span> <span style="color:#008080">.L3</span>
+  <span style="color:#008080">rep</span>
+  <span style="color:#900;font-weight:bold">ret</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>将其转换为C语言(涉及的知识有)</p>
+<ul>
+<li>寄存器的类型 p120</li>
+<li>test用法 p136</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">loop2</span>(<span style="color:#458;font-weight:bold">long</span> x, <span style="color:#458;font-weight:bold">int</span> n)
+{
+    <span style="color:#458;font-weight:bold">long</span> res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    <span style="color:#458;font-weight:bold">long</span> mask;
+    <span style="color:#000;font-weight:bold">for</span> (mask <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; mask <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span> ; mask<span style="color:#000;font-weight:bold">=</span>mask<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>n)
+    {
+        res <span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">&amp;</span> mask;
+    }
+    <span style="color:#000;font-weight:bold">return</span> res;   
+}
+</code></pre></td></tr></table>
+</div>
+</div>
         </div>
 
         
