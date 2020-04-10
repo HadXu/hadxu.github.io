@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Pytorch Distributed Training | lay&#39;s 博客</title>
+    <meta property="og:title" content="Pytorch Distributed Training - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-04-10T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-04-10T11:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="Pytorch Distributed Training">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/2020-04-10-Pytorch-distributed-training/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4031353640611810",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents"></nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Pytorch Distributed Training</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://hadxu.github.io/categories/pytorch'>pytorch</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h1 id="pytorch-distributed-training">Pytorch Distributed Training</h1>
+<p><a href="https://yangkky.github.io/2019/07/08/distributed-pytorch-tutorial.html">Distributed data parallel training in Pytorch</a></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">os</span>
+<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">datetime</span> <span style="color:#000;font-weight:bold">import</span> datetime
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">argparse</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.multiprocessing</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">mp</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torchvision</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torchvision.transforms</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">transforms</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.nn</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">nn</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.distributed</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">dist</span>
+<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">apex.parallel</span> <span style="color:#000;font-weight:bold">import</span> DistributedDataParallel <span style="color:#000;font-weight:bold">as</span> DDP
+<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">apex</span> <span style="color:#000;font-weight:bold">import</span> amp
+
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">main</span>():
+    parser <span style="color:#000;font-weight:bold">=</span> argparse<span style="color:#000;font-weight:bold">.</span>ArgumentParser()
+    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">-n</span><span style="color:#d14">&#39;</span>, <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">--nodes</span><span style="color:#d14">&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">N</span><span style="color:#d14">&#39;</span>,
+                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">number of data loading workers (default: 4)</span><span style="color:#d14">&#39;</span>)
+    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">-g</span><span style="color:#d14">&#39;</span>, <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">--gpus</span><span style="color:#d14">&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
+                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">number of gpus per node</span><span style="color:#d14">&#39;</span>)
+    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">-nr</span><span style="color:#d14">&#39;</span>, <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">--nr</span><span style="color:#d14">&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
+                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">ranking within the nodes</span><span style="color:#d14">&#39;</span>)
+    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">--epochs</span><span style="color:#d14">&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">N</span><span style="color:#d14">&#39;</span>,
+                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">number of total epochs to run</span><span style="color:#d14">&#39;</span>)
+    args <span style="color:#000;font-weight:bold">=</span> parser<span style="color:#000;font-weight:bold">.</span>parse_args()
+    args<span style="color:#000;font-weight:bold">.</span>world_size <span style="color:#000;font-weight:bold">=</span> args<span style="color:#000;font-weight:bold">.</span>gpus <span style="color:#000;font-weight:bold">*</span> args<span style="color:#000;font-weight:bold">.</span>nodes
+    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">MASTER_ADDR</span><span style="color:#d14">&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">localhost</span><span style="color:#d14">&#39;</span>
+    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">MASTER_PORT</span><span style="color:#d14">&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">8888</span><span style="color:#d14">&#39;</span>
+    mp<span style="color:#000;font-weight:bold">.</span>spawn(train, nprocs<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>gpus, args<span style="color:#000;font-weight:bold">=</span>(args,))
+
+
+<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ConvNet</span>(nn<span style="color:#000;font-weight:bold">.</span>Module):
+    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>, num_classes<span style="color:#000;font-weight:bold">=</span><span style="color:#099">10</span>):
+        <span style="color:#0086b3">super</span>(ConvNet, <span style="color:#999">self</span>)<span style="color:#000;font-weight:bold">.</span>__init__()
+        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer1 <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Sequential(
+            nn<span style="color:#000;font-weight:bold">.</span>Conv2d(<span style="color:#099">1</span>, <span style="color:#099">16</span>, kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">5</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, padding<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>),
+            nn<span style="color:#000;font-weight:bold">.</span>BatchNorm2d(<span style="color:#099">16</span>),
+            nn<span style="color:#000;font-weight:bold">.</span>ReLU(),
+            nn<span style="color:#000;font-weight:bold">.</span>MaxPool2d(kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>))
+        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer2 <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Sequential(
+            nn<span style="color:#000;font-weight:bold">.</span>Conv2d(<span style="color:#099">16</span>, <span style="color:#099">32</span>, kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">5</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, padding<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>),
+            nn<span style="color:#000;font-weight:bold">.</span>BatchNorm2d(<span style="color:#099">32</span>),
+            nn<span style="color:#000;font-weight:bold">.</span>ReLU(),
+            nn<span style="color:#000;font-weight:bold">.</span>MaxPool2d(kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>))
+        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>fc <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Linear(<span style="color:#099">7</span><span style="color:#000;font-weight:bold">*</span><span style="color:#099">7</span><span style="color:#000;font-weight:bold">*</span><span style="color:#099">32</span>, num_classes)
+
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">forward</span>(<span style="color:#999">self</span>, x):
+        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer1(x)
+        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer2(out)
+        out <span style="color:#000;font-weight:bold">=</span> out<span style="color:#000;font-weight:bold">.</span>reshape(out<span style="color:#000;font-weight:bold">.</span>size(<span style="color:#099">0</span>), <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)
+        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>fc(out)
+        <span style="color:#000;font-weight:bold">return</span> out
+
+
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">train</span>(gpu, args):
+    rank <span style="color:#000;font-weight:bold">=</span> args<span style="color:#000;font-weight:bold">.</span>nr <span style="color:#000;font-weight:bold">*</span> args<span style="color:#000;font-weight:bold">.</span>gpus <span style="color:#000;font-weight:bold">+</span> gpu
+    dist<span style="color:#000;font-weight:bold">.</span>init_process_group(
+        backend<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">nccl</span><span style="color:#d14">&#39;</span>,
+        init_method<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">env://</span><span style="color:#d14">&#39;</span>,
+        world_size<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>world_size,
+        rank<span style="color:#000;font-weight:bold">=</span>rank)
+    torch<span style="color:#000;font-weight:bold">.</span>manual_seed(<span style="color:#099">0</span>)
+    model <span style="color:#000;font-weight:bold">=</span> ConvNet()
+    torch<span style="color:#000;font-weight:bold">.</span>cuda<span style="color:#000;font-weight:bold">.</span>set_device(gpu)
+    model<span style="color:#000;font-weight:bold">.</span>cuda(gpu)
+    batch_size <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">100</span>
+    <span style="color:#998;font-style:italic"># define loss function (criterion) and optimizer</span>
+    criterion <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>CrossEntropyLoss()<span style="color:#000;font-weight:bold">.</span>cuda(gpu)
+    optimizer <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>optim<span style="color:#000;font-weight:bold">.</span>SGD(model<span style="color:#000;font-weight:bold">.</span>parameters(), <span style="color:#099">1e-4</span>)
+    <span style="color:#998;font-style:italic"># Wrap the model</span>
+    model, optimizer <span style="color:#000;font-weight:bold">=</span> amp<span style="color:#000;font-weight:bold">.</span>initialize(model, optimizer, opt_level<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">O2</span><span style="color:#d14">&#39;</span>)
+    model <span style="color:#000;font-weight:bold">=</span> DDP(model)
+    <span style="color:#998;font-style:italic"># Data loading code</span>
+    train_dataset <span style="color:#000;font-weight:bold">=</span> torchvision<span style="color:#000;font-weight:bold">.</span>datasets<span style="color:#000;font-weight:bold">.</span>MNIST(
+        root<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">./data</span><span style="color:#d14">&#39;</span>,
+        train<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>,
+        transform<span style="color:#000;font-weight:bold">=</span>transforms<span style="color:#000;font-weight:bold">.</span>ToTensor(),
+        download<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>
+    )
+    train_sampler <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>utils<span style="color:#000;font-weight:bold">.</span>data<span style="color:#000;font-weight:bold">.</span>distributed<span style="color:#000;font-weight:bold">.</span>DistributedSampler(
+        train_dataset,
+        num_replicas<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>world_size,
+        rank<span style="color:#000;font-weight:bold">=</span>rank)
+    train_loader <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>utils<span style="color:#000;font-weight:bold">.</span>data<span style="color:#000;font-weight:bold">.</span>DataLoader(
+        dataset<span style="color:#000;font-weight:bold">=</span>train_dataset,
+        batch_size<span style="color:#000;font-weight:bold">=</span>batch_size,
+        shuffle<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>,
+        num_workers<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>,
+        pin_memory<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>,
+        sampler<span style="color:#000;font-weight:bold">=</span>train_sampler
+    )
+
+    start <span style="color:#000;font-weight:bold">=</span> datetime<span style="color:#000;font-weight:bold">.</span>now()
+    total_step <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(train_loader)
+    <span style="color:#000;font-weight:bold">for</span> epoch <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(args<span style="color:#000;font-weight:bold">.</span>epochs):
+        <span style="color:#000;font-weight:bold">for</span> i, (images, labels) <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(train_loader):
+            images <span style="color:#000;font-weight:bold">=</span> images<span style="color:#000;font-weight:bold">.</span>cuda(non_blocking<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>)
+            labels <span style="color:#000;font-weight:bold">=</span> labels<span style="color:#000;font-weight:bold">.</span>cuda(non_blocking<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>)
+            <span style="color:#998;font-style:italic"># Forward pass</span>
+            outputs <span style="color:#000;font-weight:bold">=</span> model(images)
+            loss <span style="color:#000;font-weight:bold">=</span> criterion(outputs, labels)
+
+            <span style="color:#998;font-style:italic"># Backward and optimize</span>
+            optimizer<span style="color:#000;font-weight:bold">.</span>zero_grad()
+            <span style="color:#000;font-weight:bold">with</span> amp<span style="color:#000;font-weight:bold">.</span>scale_loss(loss, optimizer) <span style="color:#000;font-weight:bold">as</span> scaled_loss:
+                scaled_loss<span style="color:#000;font-weight:bold">.</span>backward()
+            optimizer<span style="color:#000;font-weight:bold">.</span>step()
+            <span style="color:#000;font-weight:bold">if</span> (i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">%</span> <span style="color:#099">100</span> <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">and</span> gpu <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
+                <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(
+                    epoch <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>,
+                    args<span style="color:#000;font-weight:bold">.</span>epochs,
+                    i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>,
+                    total_step,
+                    loss<span style="color:#000;font-weight:bold">.</span>item())
+                )
+    <span style="color:#000;font-weight:bold">if</span> gpu <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
+        <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">Training complete in: </span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#0086b3">str</span>(datetime<span style="color:#000;font-weight:bold">.</span>now() <span style="color:#000;font-weight:bold">-</span> start))
+
+
+<span style="color:#000;font-weight:bold">if</span> __name__ <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">__main__</span><span style="color:#d14">&#39;</span>:
+    main()
+</code></pre></td></tr></table>
+</div>
+</div>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2020-04-08-solution-of-CASPP-chapter3/">CASPP 第三章课后习题解答</a></li>
+        
+        <li><a href="/post/2020-04-04-Covid-19-presents-stark-choices-between-life-death-and-the-economythe-Economist/">Covid-19 presents stark choices between life, death and the economy</a></li>
+        
+        <li><a href="/post/2020-04-04-2020-qingming/">2020年的清明</a></li>
+        
+        <li><a href="/post/2020-04-03-2020-wuhan/">2020年的武汉新年</a></li>
+        
+        <li><a href="/post/2020-03-28-The-state-in-the-time-of-covid-19the-Economist/">The state in the time of covid-19</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='https://hadxu.github.io/tags/pytorch'>pytorch</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-10-Pytorch-distributed-training/" title="Pytorch Distributed Training">Pytorch Distributed Training</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-08-solution-of-CASPP-chapter3/" title="CASPP 第三章课后习题解答">CASPP 第三章课后习题解答</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-04-Covid-19-presents-stark-choices-between-life-death-and-the-economythe-Economist/" title="Covid-19 presents stark choices between life, death and the economy">Covid-19 presents stark choices between life, death and the economy</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-04-2020-qingming/" title="2020年的清明">2020年的清明</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-03-2020-wuhan/" title="2020年的武汉新年">2020年的武汉新年</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-03-28-The-state-in-the-time-of-covid-19the-Economist/" title="The state in the time of covid-19">The state in the time of covid-19</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/" title="linux shell脚本监控进程崩溃自动重启">linux shell脚本监控进程崩溃自动重启</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-03-24-live-with-dji/" title="大疆在线直播">大疆在线直播</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-03-22-rust-by-example-chapter17/" title="Rust by Example(chapter17)">Rust by Example(chapter17)</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-03-21-Paying-to-stop-the-pandemic/" title="Paying to stop the pandemic">Paying to stop the pandemic</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (12)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (5)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://hadxu.github.io" title="lay&#39;s 博客">lay&#39;s 博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://getmyte.com" title="The Economist">The Economist</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/%e6%8c%af%e9%9b%b7-%e8%ae%b8-22aa5b133/" title="lay&#39;s Linkin">Linkin</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/flysnow-org/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+</body>
+
+</html>

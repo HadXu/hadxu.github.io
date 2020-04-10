@@ -351,7 +351,45 @@ gcc -m64 main.c decode.c decode2.o -o main
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="361">3.61</h2>
-<h2 id="362">3.62</h2>
+<p>查看代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#998;font-style:italic">// 试图读取空地址的值
+</span><span style="color:#998;font-style:italic"></span><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">cread</span>(<span style="color:#458;font-weight:bold">long</span> <span style="color:#000;font-weight:bold">*</span>xp) {
+  <span style="color:#000;font-weight:bold">return</span> (xp <span style="color:#000;font-weight:bold">?</span> <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">xp</span> : <span style="color:#099">0</span>);
+}
+
+<span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">cread_alt</span>(<span style="color:#458;font-weight:bold">long</span> <span style="color:#000;font-weight:bold">*</span>xp) {
+  <span style="color:#000;font-weight:bold">return</span> (<span style="color:#000;font-weight:bold">!</span>xp <span style="color:#000;font-weight:bold">?</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">*</span>xp);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>使用条件传送指令(CSAPP 147页)</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#900;font-weight:bold">cread_alt:</span>
+  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$0</span>, <span style="color:#008080">%eax</span>
+  <span style="color:#900;font-weight:bold">testq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%rdi</span>
+  <span style="color:#900;font-weight:bold">cmovne</span> (<span style="color:#008080">%rdi</span>), <span style="color:#008080">%rax</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="362">3.62</h2>
 <h2 id="363">3.63</h2>
 <h2 id="364">3.64</h2>
 
@@ -443,6 +481,10 @@ gcc -m64 main.c decode.c decode2.o -o main
 <ul class="widget-list">
     
     <li>
+        <a href="https://hadxu.github.io/post/2020-04-10-Pytorch-distributed-training/" title="Pytorch Distributed Training">Pytorch Distributed Training</a>
+    </li>
+    
+    <li>
         <a href="https://hadxu.github.io/post/2020-04-08-solution-of-CASPP-chapter3/" title="CASPP 第三章课后习题解答">CASPP 第三章课后习题解答</a>
     </li>
     
@@ -478,10 +520,6 @@ gcc -m64 main.c decode.c decode2.o -o main
         <a href="https://hadxu.github.io/post/2020-03-21-Paying-to-stop-the-pandemic/" title="Paying to stop the pandemic">Paying to stop the pandemic</a>
     </li>
     
-    <li>
-        <a href="https://hadxu.github.io/post/2020-03-21-rust-by-example-chapter16/" title="Rust by Example(chapter16)">Rust by Example(chapter16)</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -494,6 +532,8 @@ gcc -m64 main.c decode.c decode2.o -o main
     <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/rust/">rust (12)</a></li>
     
@@ -521,6 +561,8 @@ gcc -m64 main.c decode.c decode2.o -o main
     <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
     
     <a href="https://hadxu.github.io/tags/rust/">rust</a>
     

@@ -81,6 +81,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-21-rust-by-example-chapter16/" title="Rust by Example(chapter16)">Rust by Example(chapter16)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://hadxu.github.io/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            macro_rules! 在Rust中，宏非常之强大，宏就像一个函数一样，但是接着!。However, unlike macros in C and other languages, Rust macros are expanded into abstract syntax trees, rather than string preprocessing, so you don&rsquo;t get unexpected precedence bugs. 1 2 3 4 5 6 7 8 9 10 // 将() 展开为打印字符 macro_rules!say_hello{()=&gt;{println!(&#34;Hello!&#34;);};}fn main(){say_hello!()} Designators 通过一种宏来创建函数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 macro_rules!create_function{($func_name:ident)=&gt;{fn $func_name(){println!(&#34;You called {:?}()&#34;,stringify!($func_name));}};}create_function!(foo);fn main(){foo()} Repeat 可以使用宏来进行递归 1 2 3 4 5 6 7 8 9 10 11……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-21-rust-by-example-chapter16/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://hadxu.github.io/post/2020-03-20-rust-by-example-chapter15/" title="Rust by Example(chapter15)">Rust by Example(chapter15)</a>
             </h1>
         </header>
@@ -285,29 +308,6 @@
         <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-12-rust-by-example-chapter3/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-10-rust-by-example-chapter1/" title="Rust by Example(chapter1)">Rust by Example(chapter1)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月11日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/rust'>rust</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Rust是一个现代的系统级编程语言，侧重于安全、速度和并发。 安装 1 curl--proto&#39;=https&#39;--tlsv1.2-sSfhttps://sh.rustup.rs | sh hello world 1 2 3 fn main(){println!(&#34;Hello World!&#34;);} 其中，println!是一个宏，功能是将字符串打印到终端。 编译方式如下 1 2 rustc hello.rs ./hello 或者使用 1 cargo run cargo是一个rust生态管理工具，我们在接下来的各种实例中都采用这种方式来运行我们的程序。 注释……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-10-rust-by-example-chapter1/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -365,6 +365,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hadxu.github.io/post/2020-04-10-Pytorch-distributed-training/" title="Pytorch Distributed Training">Pytorch Distributed Training</a>
+    </li>
+    
+    <li>
         <a href="https://hadxu.github.io/post/2020-04-08-solution-of-CASPP-chapter3/" title="CASPP 第三章课后习题解答">CASPP 第三章课后习题解答</a>
     </li>
     
@@ -400,10 +404,6 @@
         <a href="https://hadxu.github.io/post/2020-03-21-Paying-to-stop-the-pandemic/" title="Paying to stop the pandemic">Paying to stop the pandemic</a>
     </li>
     
-    <li>
-        <a href="https://hadxu.github.io/post/2020-03-21-rust-by-example-chapter16/" title="Rust by Example(chapter16)">Rust by Example(chapter16)</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -416,6 +416,8 @@
     <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/rust/">rust (12)</a></li>
     
@@ -443,6 +445,8 @@
     <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
     
     <a href="https://hadxu.github.io/tags/rust/">rust</a>
     
