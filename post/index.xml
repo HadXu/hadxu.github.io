@@ -6,10 +6,19 @@
     <description>Recent content in Posts on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 10 Apr 2020 11:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2020 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The coronavirus crisis will change the world of commerce</title>
+      <link>https://hadxu.github.io/post/2020-04-11-The-coronavirus-crisis-will-change-the-world-of-commercethe-Economist/</link>
+      <pubDate>Sat, 11 Apr 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-04-11-The-coronavirus-crisis-will-change-the-world-of-commercethe-Economist/</guid>
+      <description>The coronavirus crisis will change the world of commerce  </description>
+    </item>
     
     <item>
       <title>Pytorch Distributed Training</title>
@@ -55,15 +64,6 @@
       
       <guid>https://hadxu.github.io/post/2020-04-03-2020-wuhan/</guid>
       <description>手机里的2020武汉新年(来源微博-清影Tsingying) 在这一场无硝烟的战争中，武汉人们付出了太多，我们全国乃至全球都不能忘记这个历史。人类在这次战争中完败，目前全球已经有超过100w人感染。中国上半场，外国下半场。 向在这次疫情中去世的人们致最崇高的敬意!</description>
-    </item>
-    
-    <item>
-      <title>The coronavirus crisis will change the world of commerce</title>
-      <link>https://hadxu.github.io/post/2020-04-11-The-coronavirus-crisis-will-change-the-world-of-commercethe-Economist/</link>
-      <pubDate>Sat, 28 Mar 2020 09:00:00 +0800</pubDate>
-      
-      <guid>https://hadxu.github.io/post/2020-04-11-The-coronavirus-crisis-will-change-the-world-of-commercethe-Economist/</guid>
-      <description>The coronavirus crisis will change the world of commerce  </description>
     </item>
     
     <item>
