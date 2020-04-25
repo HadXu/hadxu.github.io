@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>大疆在线直播 | lay&#39;s 博客</title>
-    <meta property="og:title" content="大疆在线直播 - lay&#39;s 博客">
+    <title>再次思考深度学习框架的自动求导 | lay&#39;s 博客</title>
+    <meta property="og:title" content="再次思考深度学习框架的自动求导 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-03-24T09:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2020-04-24T09:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-03-24T09:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2020-04-24T09:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="大疆在线直播">
+    <meta name="description" content="再次思考深度学习框架的自动求导">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/post/2020-03-24-live-with-dji/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -147,10 +147,11 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#2020-04-10更新">2020-04-10更新</a></li>
-    <li><a href="#正文开始">正文开始</a></li>
-    <li><a href="#直播方式">直播方式</a></li>
-    <li><a href="#环境">环境</a></li>
+    <li><a href="#什么是自动求导">什么是自动求导</a></li>
+    <li><a href="#如何进行自动求导">如何进行自动求导</a></li>
+    <li><a href="#自动求导的例子">自动求导的例子</a></li>
+    <li><a href="#构造自动求导-microgradhttpsgithubcomhadxumicrograd">构造自动求导 micrograd</a></li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
     </div>
@@ -184,16 +185,16 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">大疆在线直播</h1>
+            <h1 class="post-title">再次思考深度学习框架的自动求导</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月24日
+            2020年4月24日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA'>无人机</a></span>
+            <span class="meta-category"><a href='https://hadxu.github.io/categories/pytorch'>pytorch</a></span>
             
         </div>
         
@@ -211,32 +212,26 @@
         </div>
         
         <div class="post-content">
-            <h1 id="大疆在线直播">大疆在线直播</h1>
-<h2 id="2020-04-10更新">2020-04-10更新</h2>
-<p>突然发现新大陆，可以使用各种平台来直播<a href="https://restream.io/channel">restream</a></p>
-<p>直接将直播地址以及密码添加进来就ok</p>
-<p><code>rtmp://live.restream.io/live/re_2162584xxxxxxx</code></p>
-<h2 id="正文开始">正文开始</h2>
-<p>很久之前买了一个大疆无人机，它长这样
-<img src="/post/imgs/drone.png" alt=""></p>
-<p>这款无人机能够飞行15min，高度500m，长度2km，能够满足我们一般人的需求。</p>
-<p>开始玩这个无人机的时候，并没有发现有直播功能，后来发现能够连接手机进行直播，于是尝试了一下，很不错。</p>
-<h2 id="直播方式">直播方式</h2>
-<p>无人机里提供了以下几种直播功能</p>
-<ul>
-<li>qq空间</li>
-<li>微博</li>
-<li>油管</li>
-<li>脸书</li>
-<li>自定义</li>
-</ul>
-<p><strong>经测试发现，微博是鸡肋，需要大V才能够直播，放弃！qq空间好像也不行，放弃！至于另外两个，在天朝，你懂得，放弃！于是就只有一条路，自定义直播！</strong></p>
-<p>于是开始了自定义直播搭建，大疆使用的为<code>RTMP</code>协议。</p>
-<p><strong>RTMP是Real Time Messaging Protocol（实时消息传输协议）的首字母缩写。该协议基于TCP，是一个协议族，包括RTMP基本协议及RTMPT/RTMPS/RTMPE等多种变种。RTMP是一种设计用来进行实时数据通信的网络协议，主要用来在Flash/AIR平台和支持RTMP协议的流媒体/交互服务器之间进行音视频和数据通信。支持该协议的软件包括Adobe Media Server/Ultrant Media Server/red5等。</strong></p>
-<h2 id="环境">环境</h2>
-<ol>
-<li>由于从头搭建环境非常麻烦，于是采用<code>docker</code></li>
-</ol>
+            <h1 id="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</h1>
+<p>刚开始读研的时候，对Pytorch以及Tensorflow的反向求导机制非常感兴趣，于是寻找了大量的资料去了解反向求导的机制。2017年华盛顿大学有一门课程非常棒<a href="http://dlsys.cs.washington.edu/materials">dlsys</a>,第一个实验关于自动求导，第二个实验关于将自动求导的矩阵计算使用GPU来操作。这个课程让我受益匪浅，然后自己写了一个框架<a href="https://github.com/HadXu/Thunder">thunder</a>,今天看了karpathy的<a href="https://github.com/karpathy/micrograd">micrograd</a>，觉得非常有意思，于是再次复习一下反向求导的机制。</p>
+<h2 id="什么是自动求导">什么是自动求导</h2>
+<p><strong>在数学和计算机代数中，自动微分有时称作演算式微分，是一种可以借由计算机程序计算一个函数导数的方法</strong>
+这个方法广泛应用于各种深度学习框架中，通过自动求导能够得到反向求导的梯度，从而更新权重。</p>
+<h2 id="如何进行自动求导">如何进行自动求导</h2>
+<p><img src="/post/imgs/AD1.png" alt=""></p>
+<h2 id="自动求导的例子">自动求导的例子</h2>
+<blockquote>
+<p>如下一个简单的数学公式$x=-4, z=2x+2+x$,那么$\frac{\partial z}{\partial x}=?$,在这里需要求$x$的梯度为多少。</p>
+</blockquote>
+<p>首先画一张图
+<img src="/post/imgs/AD2.png" alt=""></p>
+<p>无论是Pytorch或者Tensorflow都是图节点来进行操作。Pytorch是动态图，而Tensorflow静态图（一旦定义就无法修改），从习惯性上来说，Pytorch的动态图更加人性化一点。根据上面的图，可以简单将$\frac{\partial z}{\partial x}$看做是连续求导。如下所示
+$$
+\frac{\partial z}{\partial x} = \frac{\partial z}{\partial x} + \frac{\partial z}{\partial b} * \frac{\partial b}{\partial a} * \frac{\partial a}{\partial x} = 3
+$$
+，其中由于$z$有两个输入，因此需要对$x$进行两次求导，而求导的路径是不同的。经过这个简单的例子，很容易手动算出来，但是如何让计算机进行计算成为重点，因为一旦操作数多，手动算非常耗时且容易出错。</p>
+<h2 id="构造自动求导-microgradhttpsgithubcomhadxumicrograd">构造自动求导 <a href="https://github.com/HadXu/micrograd">micrograd</a></h2>
+<p>在手动计算中，我们发现了当计算一个节点的时候，我们需要知道它的输入，也就是前驱节点，比如$x$的前驱节点是没有的，因此需要数据结构来保存前驱节点的信息。所以第一步是找出所有的无前驱节点的节点，由于依赖的关系，才能继续求导,那么使用topo排序来得到所有的前驱节点。</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -245,73 +240,88 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo apt-get update
-$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-$ sudo add-apt-repository <span style="color:#d14">&#34;</span><span style="color:#d14">deb [arch=amd64] https://download.docker.com/linux/ubuntu </span><span style="color:#000;font-weight:bold">$(</span>lsb_release -cs<span style="color:#000;font-weight:bold">)</span><span style="color:#d14"> stable</span><span style="color:#d14">&#34;</span>
-$ sudo apt-get update
-$ sudo apt-get install docker-ce
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">topo <span style="color:#000;font-weight:bold">=</span> []
+visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">set</span>()
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">build_topo</span>(v):
+    <span style="color:#000;font-weight:bold">if</span> v <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> visited:
+        visited<span style="color:#000;font-weight:bold">.</span>add(v)
+        <span style="color:#000;font-weight:bold">for</span> child <span style="color:#000;font-weight:bold">in</span> v<span style="color:#000;font-weight:bold">.</span>_prev:
+            build_topo(child)
+        topo<span style="color:#000;font-weight:bold">.</span>append(v)
 </code></pre></td></tr></table>
 </div>
-</div><ol start="2">
-<li>软件安装<code>RTMP</code></li>
-</ol>
+</div><p>由于<code>topo</code>是从无节点开始push的，因此计算梯度的时候需要反向</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker pull alfg/nginx-rtmp
-docker run -it -p 1935:1935 -p 8080:80 --rm alfg/nginx-rtmp
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">for</span> v <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">reversed</span>(topo):
+    v<span style="color:#000;font-weight:bold">.</span>_backward()
 </code></pre></td></tr></table>
 </div>
-</div><ol start="3">
-<li>测试
-使用<code>FFmpeg</code></li>
-</ol>
+</div><p>而每一个操作的反向传播是这样的</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> __mul__(<span style="color:#999">self</span>, other):
+    other <span style="color:#000;font-weight:bold">=</span> other <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Value) <span style="color:#000;font-weight:bold">else</span> Value(other)
+    out <span style="color:#000;font-weight:bold">=</span> Value(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> other<span style="color:#000;font-weight:bold">.</span>data, (<span style="color:#999">self</span>, other), <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">*</span><span style="color:#d14">&#39;</span>)
+
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_backward</span>():
+        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> other<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
+        other<span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
+
+    out<span style="color:#000;font-weight:bold">.</span>_backward <span style="color:#000;font-weight:bold">=</span> _backward
+    <span style="color:#000;font-weight:bold">return</span> out
+</code></pre></td></tr></table>
+</div>
+</div><p>对<code>topo</code>中每一个节点进行反向求导，就能够得到每一个变量的梯度。</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ffmpeg -f avfoundation -pixel_format uyvy422 -i <span style="color:#d14">&#34;1&#34;</span> -f flv rtmp://&lt;ip&gt;:1935/stream/example
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">test_sanity_check</span>():
+    x <span style="color:#000;font-weight:bold">=</span> Value(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">4.0</span>)
+    z <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> x <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> x
+
+    z<span style="color:#000;font-weight:bold">.</span>backward()
+
+    <span style="color:#000;font-weight:bold">assert</span> z<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#099">10.0</span>
+    <span style="color:#000;font-weight:bold">assert</span> x<span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">3.0</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>接下来打开</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">http://&lt;ip&gt;:8080/live/example.m3u8
-</code></pre></td></tr></table>
-</div>
-</div><ol start="4">
-<li>在DJI Go 4(软件) 中设置播放地址</li>
-</ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rtmp://&lt;ip&gt;:1935/stream/example
-</code></pre></td></tr></table>
-</div>
-</div><ol start="5">
-<li>让亲朋好友打开浏览器</li>
-</ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">http://&lt;ip&gt;:8080/live/example.m3u8
-</code></pre></td></tr></table>
-</div>
-</div><p>就可以看直播啦~</p>
+</div><h2 id="参考">参考</h2>
+<ul>
+<li><a href="http://dlsys.cs.washington.edu/materials">dlsys</a></li>
+<li><a href="https://arxiv.org/pdf/1502.05767v4.pdf">Automatic Differentiationin Machine Learning: a Survey</a></li>
+<li><a href="https://www.zhihu.com/question/54554389">自动求导</a></li>
+<li><a href="https://harvard-iacs.github.io/2019-CS207/">CS207: Systems Development for Computational Science</a></li>
+</ul>
 
         </div>
 
@@ -324,15 +334,15 @@ docker run -it -p 1935:1935 -p 8080:80 --rm alfg/nginx-rtmp
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/post/2020-03-22-rust-by-example-chapter17/">Rust by Example(chapter17)</a></li>
+        <li><a href="/post/2020-04-10-Pytorch-distributed-training/">Pytorch Distributed Training</a></li>
         
-        <li><a href="/post/2020-03-21-Paying-to-stop-the-pandemic/">Paying to stop the pandemic</a></li>
+        <li><a href="/post/2020-04-24-After-the-disease-the-debtthe-Economist/">After the disease, the debt</a></li>
         
-        <li><a href="/post/2020-03-21-rust-by-example-chapter16/">Rust by Example(chapter16)</a></li>
+        <li><a href="/post/2020-04-18-Is-China-winningthe-Economist/">Is China winning?</a></li>
         
-        <li><a href="/post/2020-03-20-rust-by-example-chapter15/">Rust by Example(chapter15)</a></li>
+        <li><a href="/post/2020-04-11-The-coronavirus-crisis-will-change-the-world-of-commercethe-Economist/">The coronavirus crisis will change the world of commerce</a></li>
         
-        <li><a href="/post/2020-03-19-rust-by-example-chapter14/">Rust by Example(chapter14)</a></li>
+        <li><a href="/post/2020-04-08-solution-of-CASPP-chapter3/">CASPP 第三章课后习题解答</a></li>
         
     </ul>
 </div>
@@ -342,7 +352,7 @@ docker run -it -p 1935:1935 -p 8080:80 --rm alfg/nginx-rtmp
             
             <ul class="clearfix">
                 
-                <li><a href='https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86'>大疆</a></li>
+                <li><a href='https://hadxu.github.io/tags/pytorch'>pytorch</a></li>
                 
             </ul>
             
