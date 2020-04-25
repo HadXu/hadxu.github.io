@@ -81,6 +81,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-15-rust-by-example-chapter6/" title="Rust by Example(chapter6)">Rust by Example(chapter6)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://hadxu.github.io/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Conversion Rust的核心就是traits，可以重载。 From and To 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 usestd::convert::From;#[derive(Debug)]struct Number{value: i32,}implFrom&lt;i32&gt;forNumber{fn from(item: i32)-&gt; Self{Number{value: item}}}fn main(){letnum=Number::from(123);println!(&#34;{:#?}&#34;,num);letx=5;letnum: Number=x.into();println!(&#34;{:#?}&#34;,num);} 实现了From这个traits,就能够同时使用from以及into，用来从类型之间的转换。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 usestd::fmt;struct Circle{radius: i32 }implfmt::DisplayforCircle{fn fmt(&amp;self,f: &amp;mutfmt::Formatter)-&gt; fmt::Result{write!(f,&#34;Circle of radius {}&#34;,self.radius)}}fn main(){letcircle=Circle{radius: 6};println!(&#34;{}&#34;,circle.to_string());} 从String转变 1 2 3……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-15-rust-by-example-chapter6/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://hadxu.github.io/post/2020-03-14-the-politics-of-pandemicsthe-Economist/" title="The Politics of pandemics">The Politics of pandemics</a>
             </h1>
         </header>
@@ -285,29 +308,6 @@
         <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-09-thunderday4/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-08-thunderday3/" title="从零实现深度学习框架(day3)">从零实现深度学习框架(day3)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月8日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/thunder'>thunder</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            到目前为止，已经实现了GPU与CPU无缝切换的数据结构，但是我们需要在Python语言中使用，今天我们来实现Python调用。 第三天 实现Python调用动态链接库 今天的目标是实现Python来调用已经编译好的动态链接库来进行GPU与CPU的无缝切换。 首先，将编译好的libc_……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-08-thunderday3/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -365,7 +365,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-04-24-the-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
     </li>
     
     <li>
@@ -400,10 +404,6 @@
         <a href="https://hadxu.github.io/post/2020-03-28-The-state-in-the-time-of-covid-19the-Economist/" title="The state in the time of covid-19">The state in the time of covid-19</a>
     </li>
     
-    <li>
-        <a href="https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/" title="linux shell脚本监控进程崩溃自动重启">linux shell脚本监控进程崩溃自动重启</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -417,7 +417,7 @@
     
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (1)</a></li>
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/rust/">rust (12)</a></li>
     

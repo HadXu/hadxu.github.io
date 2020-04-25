@@ -6,10 +6,19 @@
     <description>Recent content in pytorch on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 10 Apr 2020 11:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2020 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>再次思考深度学习框架的自动求导</title>
+      <link>https://hadxu.github.io/post/2020-04-24-re-thinking-deep-learning-framework/</link>
+      <pubDate>Fri, 24 Apr 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-04-24-re-thinking-deep-learning-framework/</guid>
+      <description>再次思考深度学习框架的自动求导 刚开始读研的时候，对Pytorch以及Tensorflow的反向求导机制非常感兴趣，于是寻找了大量的资料去了解反向求导的机制。2017年华盛顿大学有一门课程非常棒dlsys,第一个实验关于自动求导，第二个实验关于将自动求导的矩阵计算使用GPU来操作。</description>
+    </item>
     
     <item>
       <title>Pytorch Distributed Training</title>
