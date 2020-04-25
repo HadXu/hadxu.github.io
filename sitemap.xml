@@ -3,37 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/</loc>
-    <lastmod>2020-04-24T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://hadxu.github.io/categories/</loc>
-    <lastmod>2020-04-24T09:00:00+08:00</lastmod>
+    <lastmod>2020-04-25T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/</loc>
-    <lastmod>2020-04-24T09:00:00+08:00</lastmod>
+    <lastmod>2020-04-25T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/post/</loc>
-    <lastmod>2020-04-24T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/categories/pytorch/</loc>
-    <lastmod>2020-04-24T09:00:00+08:00</lastmod>
+    <lastmod>2020-04-25T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/tags/pytorch/</loc>
-    <lastmod>2020-04-24T09:00:00+08:00</lastmod>
+    <lastmod>2020-04-25T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/categories/pytorch/</loc>
+    <lastmod>2020-04-25T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/tags/</loc>
+    <lastmod>2020-04-25T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/</loc>
+    <lastmod>2020-04-25T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/</loc>
     <lastmod>2020-04-24T09:00:00+08:00</lastmod>
   </url>
   
@@ -44,11 +49,6 @@
   
   <url>
     <loc>https://hadxu.github.io/categories/the-economist/</loc>
-    <lastmod>2020-04-24T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/</loc>
     <lastmod>2020-04-24T09:00:00+08:00</lastmod>
   </url>
   
@@ -268,12 +268,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/tour/</loc>
+    <loc>https://hadxu.github.io/tags/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/tour/</loc>
+    <loc>https://hadxu.github.io/categories/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
@@ -288,12 +288,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/ss/</loc>
+    <loc>https://hadxu.github.io/categories/ss/</loc>
     <lastmod>2020-03-02T21:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/ss/</loc>
+    <loc>https://hadxu.github.io/tags/ss/</loc>
     <lastmod>2020-03-02T21:00:00+08:00</lastmod>
   </url>
   
