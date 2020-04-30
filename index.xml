@@ -6,10 +6,19 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 25 Apr 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 11:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bash一些操作</title>
+      <link>https://hadxu.github.io/post/2020-04-30-Bash/</link>
+      <pubDate>Thu, 30 Apr 2020 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-04-30-Bash/</guid>
+      <description>字符串操作 1. 字符串的长度 1 ${#varname} 2. 子字符串 1 ${varname:offset:length} 3. 搜索和替换</description>
+    </item>
     
     <item>
       <title>再次思考深度学习框架的自动求导</title>

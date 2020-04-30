@@ -6,10 +6,19 @@
     <description>Recent content in Categories on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 25 Apr 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 11:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>bash</title>
+      <link>https://hadxu.github.io/categories/bash/</link>
+      <pubDate>Thu, 30 Apr 2020 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/categories/bash/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>pytorch</title>
