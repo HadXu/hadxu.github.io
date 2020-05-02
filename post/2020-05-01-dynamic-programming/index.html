@@ -148,7 +148,10 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#1-最长上升子序列httpsleetcode-cncomproblemslongest-increasing-subsequence">1. 最长上升子序列</a></li>
-    <li><a href="#heading"></a></li>
+    <li><a href="#2-最长公共子序列httpsleetcode-cncomproblemslongest-common-subsequence">2. 最长公共子序列</a></li>
+    <li><a href="#3-三角形最小路径和httpsleetcode-cncomproblemstriangle">3. 三角形最小路径和</a></li>
+    <li><a href="#4-最大子序和httpsleetcode-cncomproblemsmaximum-subarray">4. 最大子序和</a></li>
+    <li><a href="#5">5.</a></li>
   </ul>
 </nav>
     </div>
@@ -241,7 +244,88 @@
         <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="heading"></h2>
+</div><h2 id="2-最长公共子序列httpsleetcode-cncomproblemslongest-common-subsequence">2. <a href="https://leetcode-cn.com/problems/longest-common-subsequence/">最长公共子序列</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">longestCommonSubsequence</span>(<span style="color:#999">self</span>, text1: <span style="color:#0086b3">str</span>, text2: <span style="color:#0086b3">str</span>) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">int</span>:
+        L1, L2 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(text1), <span style="color:#0086b3">len</span>(text2)
+        dp <span style="color:#000;font-weight:bold">=</span> [[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> (L1<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(L2<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)]
+
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, L2<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, L1<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+                <span style="color:#000;font-weight:bold">if</span> text2[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> text1[j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]:
+                    dp[i][j] <span style="color:#000;font-weight:bold">=</span> dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+                <span style="color:#000;font-weight:bold">else</span>:
+                    dp[i][j] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j], dp[i][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>])
+
+        <span style="color:#000;font-weight:bold">return</span> dp[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3-三角形最小路径和httpsleetcode-cncomproblemstriangle">3. <a href="https://leetcode-cn.com/problems/triangle/">三角形最小路径和</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">minimumTotal</span>(<span style="color:#999">self</span>, triangle: List[List[<span style="color:#0086b3">int</span>]]) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">int</span>:
+        n <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(triangle)
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>):
+            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(triangle[i])):
+                triangle[i][j] <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(triangle[i<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>], triangle[i<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>][j])
+        <span style="color:#000;font-weight:bold">return</span> triangle[<span style="color:#099">0</span>][<span style="color:#099">0</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-最大子序和httpsleetcode-cncomproblemsmaximum-subarray">4. <a href="https://leetcode-cn.com/problems/maximum-subarray/">最大子序和</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxSubArray</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">int</span>:
+        N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+        dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
+        dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, N):
+
+            dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">+</span>nums[i], nums[i])
+
+        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="5">5.</h2>
 
         </div>
 
