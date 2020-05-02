@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/tags/algorithm/</link>
+    <description>Recent content in algorithm on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 01 May 2020 11:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://hadxu.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dynamic Programming</title>
+      <link>https://hadxu.github.io/post/2020-05-01-dynamic-programming/</link>
+      <pubDate>Fri, 01 May 2020 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-05-01-dynamic-programming/</guid>
+      <description>Dynamic Programming 1. 最长上升子序列 1 2 3 4 5 6 7 8 9 10 11 12 class Solution: def lengthOfLIS(self, nums: List[int]) -&amp;gt; int: if len(nums) == 0: return 0 dp = [1] * len(nums) L = len(nums) for i in range(L): for j in range(i): if nums[i] &amp;gt; nums[j]: dp[i] = max(dp[i], dp[j]+1) return max(dp)</description>
+    </item>
+    
+  </channel>
+</rss>
