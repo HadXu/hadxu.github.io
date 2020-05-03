@@ -3,32 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://hadxu.github.io/categories/algorithm/</loc>
+    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/tags/algorithm/</loc>
+    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://hadxu.github.io/categories/</loc>
-    <lastmod>2020-05-02T09:00:00+08:00</lastmod>
+    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/</loc>
-    <lastmod>2020-05-02T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/post/2020-05-02-Open-schools-firstthe-Economist/</loc>
-    <lastmod>2020-05-02T09:00:00+08:00</lastmod>
+    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/post/2020-05-03-md5-algorithm/</loc>
-    <lastmod>2020-05-02T09:00:00+08:00</lastmod>
+    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/post/</loc>
-    <lastmod>2020-05-02T09:00:00+08:00</lastmod>
+    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/tags/</loc>
+    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/post/2020-05-02-Open-schools-firstthe-Economist/</loc>
     <lastmod>2020-05-02T09:00:00+08:00</lastmod>
   </url>
   
@@ -43,27 +53,17 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/algorithm/</loc>
-    <lastmod>2020-05-01T11:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/tags/algorithm/</loc>
-    <lastmod>2020-05-01T11:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://hadxu.github.io/post/2020-05-01-dynamic-programming/</loc>
     <lastmod>2020-05-01T11:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/bash/</loc>
+    <loc>https://hadxu.github.io/tags/bash/</loc>
     <lastmod>2020-04-30T11:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/bash/</loc>
+    <loc>https://hadxu.github.io/categories/bash/</loc>
     <lastmod>2020-04-30T11:00:00+08:00</lastmod>
   </url>
   
@@ -113,12 +113,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/CSAPP/</loc>
+    <loc>https://hadxu.github.io/categories/CSAPP/</loc>
     <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/CSAPP/</loc>
+    <loc>https://hadxu.github.io/tags/CSAPP/</loc>
     <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
@@ -133,12 +133,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2020-04-04T09:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2020-04-04T09:00:00+08:00</lastmod>
   </url>
   
@@ -183,12 +183,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/rust/</loc>
+    <loc>https://hadxu.github.io/tags/rust/</loc>
     <lastmod>2020-03-22T09:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/rust/</loc>
+    <loc>https://hadxu.github.io/categories/rust/</loc>
     <lastmod>2020-03-22T09:00:00+08:00</lastmod>
   </url>
   
@@ -278,12 +278,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/thunder/</loc>
+    <loc>https://hadxu.github.io/tags/thunder/</loc>
     <lastmod>2020-03-08T22:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/thunder/</loc>
+    <loc>https://hadxu.github.io/categories/thunder/</loc>
     <lastmod>2020-03-08T22:00:00+08:00</lastmod>
   </url>
   
@@ -328,12 +328,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/ss/</loc>
+    <loc>https://hadxu.github.io/tags/ss/</loc>
     <lastmod>2020-03-02T21:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/ss/</loc>
+    <loc>https://hadxu.github.io/categories/ss/</loc>
     <lastmod>2020-03-02T21:00:00+08:00</lastmod>
   </url>
   
