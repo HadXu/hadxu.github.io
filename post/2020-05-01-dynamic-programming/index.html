@@ -153,7 +153,7 @@
     <li><a href="#4-最大子序和httpsleetcode-cncomproblemsmaximum-subarray">4. 最大子序和</a></li>
     <li><a href="#5-乘积最大子数组httpsleetcode-cncomproblemsmaximum-product-subarray">5. 乘积最大子数组</a></li>
     <li><a href="#6-鸡蛋掉落httpsleetcode-cncomproblemssuper-egg-drop">6. 鸡蛋掉落</a></li>
-    <li><a href="#heading"></a></li>
+    <li><a href="#7-俄罗斯套娃信封问题httpsleetcode-cncomproblemsrussian-doll-envelopes">7. 俄罗斯套娃信封问题</a></li>
   </ul>
 </nav>
     </div>
@@ -453,8 +453,62 @@
 <li><a href="https://leetcode-cn.com/problems/super-egg-drop/solution/ji-ben-dong-tai-gui-hua-jie-fa-by-labuladong/">887. 鸡蛋掉落</a></li>
 <li><a href="https://www.youtube.com/watch?v=mLV_vOet0ss">先来看看这道面试题：双蛋问题</a></li>
 </ul>
-<h2 id="heading"></h2>
+<h2 id="7-俄罗斯套娃信封问题httpsleetcode-cncomproblemsrussian-doll-envelopes">7. <a href="https://leetcode-cn.com/problems/russian-doll-envelopes/">俄罗斯套娃信封问题</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxEnvelopes</span>(<span style="color:#999">self</span>, envelopes: List[List[<span style="color:#0086b3">int</span>]]) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> envelopes:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
 
+		<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">functools</span> <span style="color:#000;font-weight:bold">import</span> cmp_to_key
+		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">cmp</span>(a, b):
+			<span style="color:#000;font-weight:bold">if</span> a[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">==</span> b[<span style="color:#099">0</span>]:
+				<span style="color:#000;font-weight:bold">return</span> b[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">-</span> a[<span style="color:#099">1</span>]
+			<span style="color:#000;font-weight:bold">else</span>:
+				<span style="color:#000;font-weight:bold">return</span> a[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> b[<span style="color:#099">0</span>]
+
+		tmp <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">sorted</span>(envelopes, key<span style="color:#000;font-weight:bold">=</span>cmp_to_key(<span style="color:#0086b3">cmp</span>))
+
+		ll <span style="color:#000;font-weight:bold">=</span> [x[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">for</span> x <span style="color:#000;font-weight:bold">in</span> tmp]
+
+		dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(ll)
+
+		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(ll)):
+			<span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(i):
+				<span style="color:#000;font-weight:bold">if</span> ll[i] <span style="color:#000;font-weight:bold">&gt;</span> ll[j]:
+					dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i], dp[j]<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)
+
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</code></pre></td></tr></table>
+</div>
+</div>
         </div>
 
         
