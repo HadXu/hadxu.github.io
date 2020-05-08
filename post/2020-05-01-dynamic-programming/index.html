@@ -159,7 +159,7 @@
     <li><a href="#10-买卖股票的最佳时机httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock">10. 买卖股票的最佳时机</a></li>
     <li><a href="#11-买卖股票的最佳时机-iihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-ii">11. 买卖股票的最佳时机 II</a></li>
     <li><a href="#12-最佳买卖股票时机含冷冻期httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-cooldown">12. 最佳买卖股票时机含冷冻期</a></li>
-    <li><a href="#13">13.</a></li>
+    <li><a href="#13-买卖股票的最佳时机-iiihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iii">13. 买卖股票的最佳时机 III</a></li>
   </ul>
 </nav>
     </div>
@@ -735,8 +735,36 @@
         <span style="color:#000;font-weight:bold">return</span> dp_0
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="13">13.</h2>
+</div><h2 id="13-买卖股票的最佳时机-iiihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iii">13. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">买卖股票的最佳时机 III</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">int</span>:
+        dp_i10, dp_i20 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span> ,<span style="color:#099">0</span>
+        dp_i11, dp_i21 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">inf</span><span style="color:#d14">&#39;</span>), <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">inf</span><span style="color:#d14">&#39;</span>)
+        <span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+            dp_i20 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i20, dp_i21 <span style="color:#000;font-weight:bold">+</span> p)
+            dp_i21 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i21, dp_i10 <span style="color:#000;font-weight:bold">-</span> p)
 
+            dp_i10 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i10, dp_i11 <span style="color:#000;font-weight:bold">+</span> p)
+            dp_i11 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i11, <span style="color:#000;font-weight:bold">-</span>p);  <span style="color:#998;font-style:italic"># 第一次买</span>
+        <span style="color:#000;font-weight:bold">return</span> dp_i20
+</code></pre></td></tr></table>
+</div>
+</div>
         </div>
 
         
