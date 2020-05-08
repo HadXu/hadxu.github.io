@@ -157,6 +157,9 @@
     <li><a href="#8-打家劫舍httpsleetcode-cncomproblemshouse-robber">8. 打家劫舍</a></li>
     <li><a href="#9-打家劫舍2httpsleetcode-cncomproblemshouse-robber-ii">9. 打家劫舍2</a></li>
     <li><a href="#10-买卖股票的最佳时机httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock">10. 买卖股票的最佳时机</a></li>
+    <li><a href="#11-买卖股票的最佳时机-iihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-ii">11. 买卖股票的最佳时机 II</a></li>
+    <li><a href="#12-最佳买卖股票时机含冷冻期httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-cooldown">12. 最佳买卖股票时机含冷冻期</a></li>
+    <li><a href="#13">13.</a></li>
   </ul>
 </nav>
     </div>
@@ -664,7 +667,76 @@
 		<span style="color:#000;font-weight:bold">return</span> dp_0
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="11-买卖股票的最佳时机-iihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-ii">11. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">买卖股票的最佳时机 II</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">inf</span><span style="color:#d14">&#39;</span>)
+
+		res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+
+		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+			tmp <span style="color:#000;font-weight:bold">=</span> dp_0
+			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
+			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, tmp <span style="color:#000;font-weight:bold">-</span> p)
+		<span style="color:#000;font-weight:bold">return</span> dp_0
+</code></pre></td></tr></table>
 </div>
+</div><h2 id="12-最佳买卖股票时机含冷冻期httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-cooldown">12. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">最佳买卖股票时机含冷冻期</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">int</span>:
+        <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+            <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+        
+        dp_0, dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">inf</span><span style="color:#d14">&#39;</span>)
+        pre_dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+        <span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+            tmp <span style="color:#000;font-weight:bold">=</span> dp_0
+            dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
+            dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, pre_dp_0 <span style="color:#000;font-weight:bold">-</span> p)
+            pre_dp_0 <span style="color:#000;font-weight:bold">=</span> tmp
+        <span style="color:#000;font-weight:bold">return</span> dp_0
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="13">13.</h2>
+
         </div>
 
         
