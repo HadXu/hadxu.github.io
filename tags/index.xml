@@ -6,10 +6,19 @@
     <description>Recent content in Tags on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 03 May 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 10 May 2020 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>the economist</title>
+      <link>https://hadxu.github.io/tags/the-economist/</link>
+      <pubDate>Sun, 10 May 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/tags/the-economist/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>algorithm</title>
@@ -17,15 +26,6 @@
       <pubDate>Sun, 03 May 2020 09:00:00 +0800</pubDate>
       
       <guid>https://hadxu.github.io/tags/algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>the economist</title>
-      <link>https://hadxu.github.io/tags/the-economist/</link>
-      <pubDate>Sat, 02 May 2020 09:00:00 +0800</pubDate>
-      
-      <guid>https://hadxu.github.io/tags/the-economist/</guid>
       <description></description>
     </item>
     
