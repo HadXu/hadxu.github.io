@@ -163,6 +163,8 @@
     <li><a href="#14-买卖股票的最佳时机-ivhttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iv">14. 买卖股票的最佳时机 IV</a></li>
     <li><a href="#15-买卖股票的最佳时机含手续费httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-transaction-fee">15. 买卖股票的最佳时机含手续费</a></li>
     <li><a href="#16-编辑距离httpsleetcode-cncomproblemsedit-distance">16. 编辑距离</a></li>
+    <li><a href="#17-通配符匹配httpsleetcode-cncomproblemswildcard-matching">17. 通配符匹配</a></li>
+    <li><a href="#18">18.</a></li>
   </ul>
 </nav>
     </div>
@@ -906,7 +908,51 @@
         <span style="color:#000;font-weight:bold">return</span> dp[l1][l2] 
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="17-通配符匹配httpsleetcode-cncomproblemswildcard-matching">17. <a href="https://leetcode-cn.com/problems/wildcard-matching/">通配符匹配</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">isMatch</span>(<span style="color:#999">self</span>, s: <span style="color:#0086b3">str</span>, p: <span style="color:#0086b3">str</span>) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">bool</span>:
+		
+		dp <span style="color:#000;font-weight:bold">=</span> [[<span style="color:#999">None</span> <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(p) <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>)] <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(s) <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>)]
+
+		dp[<span style="color:#099">0</span>][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">True</span>
+
+		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, <span style="color:#0086b3">len</span>(p)<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+			dp[<span style="color:#099">0</span>][i] <span style="color:#000;font-weight:bold">=</span> dp[<span style="color:#099">0</span>][i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">and</span> p[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">==</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">*</span><span style="color:#d14">&#39;</span>
+
+		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, <span style="color:#0086b3">len</span>(s)<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+			<span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, <span style="color:#0086b3">len</span>(p)<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+				<span style="color:#000;font-weight:bold">if</span> s[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">==</span>p[j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">or</span> p[j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">==</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">?</span><span style="color:#d14">&#39;</span>:
+					dp[i][j] <span style="color:#000;font-weight:bold">=</span> dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
+				<span style="color:#000;font-weight:bold">elif</span> p[j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">*</span><span style="color:#d14">&#39;</span>:
+					dp[i][j] <span style="color:#000;font-weight:bold">=</span> dp[i][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">or</span> dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j]
+		<span style="color:#000;font-weight:bold">print</span>(dp)
+		<span style="color:#000;font-weight:bold">return</span> dp[<span style="color:#0086b3">len</span>(s)][<span style="color:#0086b3">len</span>(p)]
+</code></pre></td></tr></table>
 </div>
+</div><h2 id="18">18.</h2>
+
         </div>
 
         
