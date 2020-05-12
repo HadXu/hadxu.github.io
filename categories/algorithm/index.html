@@ -90,6 +90,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-05-12-union-find/">并查集</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月12日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='https://hadxu.github.io/categories/algorithm'>algorithm</a>
+            
+        </div>
+        
+        <div class="post-content">
+            并查集 用来处理连通分量的一种算法。 框架如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 class UF: def __init__(self, N): self.N = N self._id = [i for i in range(N)] def find(self, p): while p != self._id[p]: p = self._id[p] return p def union(self, p, q): p = self.find(p) q = self.find(q) if p==q: return self._id[p] = q……
+            <p class="readmore"><a href="https://hadxu.github.io/post/2020-05-12-union-find/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://hadxu.github.io/post/2020-05-03-md5-algorithm/">MD5 algorithm</a>
             </h1>
         </header>
@@ -159,6 +182,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+    </li>
+    
+    <li>
         <a href="https://hadxu.github.io/post/2020-05-10-The-new-scold-warthe-Economist/" title="The new scold war">The new scold war</a>
     </li>
     
@@ -194,10 +221,6 @@
         <a href="https://hadxu.github.io/post/2020-04-11-The-coronavirus-crisis-will-change-the-world-of-commercethe-Economist/" title="The coronavirus crisis will change the world of commerce">The coronavirus crisis will change the world of commerce</a>
     </li>
     
-    <li>
-        <a href="https://hadxu.github.io/post/2020-04-10-Pytorch-distributed-training/" title="Pytorch Distributed Training">Pytorch Distributed Training</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -209,7 +232,7 @@
     
     <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     

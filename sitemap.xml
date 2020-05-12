@@ -3,22 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://hadxu.github.io/tags/algorithm/</loc>
+    <lastmod>2020-05-12T11:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/categories/algorithm/</loc>
+    <lastmod>2020-05-12T11:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://hadxu.github.io/categories/</loc>
-    <lastmod>2020-05-10T09:00:00+08:00</lastmod>
+    <lastmod>2020-05-12T11:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/</loc>
-    <lastmod>2020-05-10T09:00:00+08:00</lastmod>
+    <lastmod>2020-05-12T11:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/post/</loc>
-    <lastmod>2020-05-10T09:00:00+08:00</lastmod>
+    <lastmod>2020-05-12T11:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/tags/</loc>
+    <lastmod>2020-05-12T11:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/post/2020-05-12-union-find/</loc>
+    <lastmod>2020-05-12T11:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/tags/the-economist/</loc>
     <lastmod>2020-05-10T09:00:00+08:00</lastmod>
   </url>
   
@@ -28,23 +48,8 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/the-economist/</loc>
-    <lastmod>2020-05-10T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://hadxu.github.io/post/2020-05-10-The-new-scold-warthe-Economist/</loc>
     <lastmod>2020-05-10T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/tags/algorithm/</loc>
-    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/categories/algorithm/</loc>
-    <lastmod>2020-05-03T09:00:00+08:00</lastmod>
   </url>
   
   <url>
@@ -63,12 +68,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/bash/</loc>
+    <loc>https://hadxu.github.io/categories/bash/</loc>
     <lastmod>2020-04-30T11:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/bash/</loc>
+    <loc>https://hadxu.github.io/tags/bash/</loc>
     <lastmod>2020-04-30T11:00:00+08:00</lastmod>
   </url>
   
@@ -188,12 +193,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/rust/</loc>
+    <loc>https://hadxu.github.io/categories/rust/</loc>
     <lastmod>2020-03-22T09:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/rust/</loc>
+    <loc>https://hadxu.github.io/tags/rust/</loc>
     <lastmod>2020-03-22T09:00:00+08:00</lastmod>
   </url>
   
@@ -283,12 +288,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/thunder/</loc>
+    <loc>https://hadxu.github.io/categories/thunder/</loc>
     <lastmod>2020-03-08T22:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/thunder/</loc>
+    <loc>https://hadxu.github.io/tags/thunder/</loc>
     <lastmod>2020-03-08T22:00:00+08:00</lastmod>
   </url>
   
@@ -313,12 +318,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/tour/</loc>
+    <loc>https://hadxu.github.io/categories/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/tour/</loc>
+    <loc>https://hadxu.github.io/tags/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   

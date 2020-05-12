@@ -6,10 +6,19 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 10 May 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 12 May 2020 11:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>并查集</title>
+      <link>https://hadxu.github.io/post/2020-05-12-union-find/</link>
+      <pubDate>Tue, 12 May 2020 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-05-12-union-find/</guid>
+      <description>并查集 用来处理连通分量的一种算法。 框架如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 class UF: def __init__(self, N): self.N = N self._id = [i for i in range(N)] def find(self, p): while p != self._id[p]: p = self._id[p] return p def union(self, p, q): p = self.find(p) q = self.find(q) if p==q: return self._id[p] = q</description>
+    </item>
     
     <item>
       <title>The new scold war</title>
