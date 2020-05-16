@@ -168,6 +168,7 @@
     <li><a href="#19-最长回文子序列httpsleetcode-cncomproblemslongest-palindromic-subsequence">19. 最长回文子序列</a></li>
     <li><a href="#20-分割等和子集httpsleetcode-cncomproblemspartition-equal-subset-sum">20. 分割等和子集</a></li>
     <li><a href="#21-目标和httpsleetcode-cncomproblemstarget-sumsubmissions">21. 目标和</a></li>
+    <li><a href="#22-零钱兑换httpsleetcode-cncomproblemscoin-change">22. 零钱兑换</a></li>
   </ul>
 </nav>
     </div>
@@ -1132,6 +1133,35 @@
                 dp[i][j] <span style="color:#000;font-weight:bold">=</span> dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][l]<span style="color:#000;font-weight:bold">+</span>dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][r]
 
         <span style="color:#000;font-weight:bold">return</span> dp[<span style="color:#0086b3">len</span>(nums)<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][S<span style="color:#000;font-weight:bold">+</span>s]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="22-零钱兑换httpsleetcode-cncomproblemscoin-change">22. <a href="https://leetcode-cn.com/problems/coin-change/">零钱兑换</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">coinChange</span>(<span style="color:#999">self</span>, coins: List[<span style="color:#0086b3">int</span>], amount: <span style="color:#0086b3">int</span>) <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">int</span>:
+        dp <span style="color:#000;font-weight:bold">=</span> [amount<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(amount<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)]
+        dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, amount<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+            <span style="color:#000;font-weight:bold">for</span> c <span style="color:#000;font-weight:bold">in</span> coins:
+                <span style="color:#000;font-weight:bold">if</span> i <span style="color:#000;font-weight:bold">&lt;</span> c:
+                    <span style="color:#000;font-weight:bold">continue</span>
+                dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(dp[i], <span style="color:#099">1</span><span style="color:#000;font-weight:bold">+</span>dp[i<span style="color:#000;font-weight:bold">-</span>c])
+
+        <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">if</span> dp[amount] <span style="color:#000;font-weight:bold">==</span> amount<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span> <span style="color:#000;font-weight:bold">else</span> dp[amount]
 </code></pre></td></tr></table>
 </div>
 </div>
