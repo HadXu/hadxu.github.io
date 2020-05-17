@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>COS &amp; CVM</title>
+      <link>https://hadxu.github.io/post/2020-05-17-COS-and-CVM/</link>
+      <pubDate>Sat, 16 May 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-05-17-COS-and-CVM/</guid>
+      <description>文件下载以及保存分发的最优方式 今天帮同学下载一个训练数据集，想让我直接给他链接下载，问题是 他没有VPN 训练数据集在外网 如何快速地将数据传到他的手里，我初期有以下几种方法。 开google colab下载（他没有VPN放弃） 腾讯微云(讲道理是很好的一个，但是没法下载) 我下载，用百度云。</description>
+    </item>
+    
+    <item>
       <title>Goodbye globalisation</title>
       <link>https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/</link>
       <pubDate>Sat, 16 May 2020 09:00:00 +0800</pubDate>
