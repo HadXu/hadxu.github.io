@@ -4,7 +4,37 @@
   
   <url>
     <loc>https://hadxu.github.io/categories/</loc>
-    <lastmod>2020-05-16T09:00:00+08:00</lastmod>
+    <lastmod>2020-06-06T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/</loc>
+    <lastmod>2020-06-06T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/post/</loc>
+    <lastmod>2020-06-06T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/tags/</loc>
+    <lastmod>2020-06-06T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/</loc>
+    <lastmod>2020-06-06T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/</loc>
+    <lastmod>2020-06-06T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/post/2020-06-06-graduation/</loc>
+    <lastmod>2020-06-06T09:00:00+08:00</lastmod>
   </url>
   
   <url>
@@ -13,12 +43,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/cos/</loc>
+    <loc>https://hadxu.github.io/categories/cos/</loc>
     <lastmod>2020-05-16T09:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/cos/</loc>
+    <loc>https://hadxu.github.io/tags/cos/</loc>
     <lastmod>2020-05-16T09:00:00+08:00</lastmod>
   </url>
   
@@ -29,21 +59,6 @@
   
   <url>
     <loc>https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/</loc>
-    <lastmod>2020-05-16T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/</loc>
-    <lastmod>2020-05-16T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/post/</loc>
-    <lastmod>2020-05-16T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/tags/</loc>
     <lastmod>2020-05-16T09:00:00+08:00</lastmod>
   </url>
   
@@ -93,12 +108,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/bash/</loc>
+    <loc>https://hadxu.github.io/categories/bash/</loc>
     <lastmod>2020-04-30T11:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/bash/</loc>
+    <loc>https://hadxu.github.io/tags/bash/</loc>
     <lastmod>2020-04-30T11:00:00+08:00</lastmod>
   </url>
   
@@ -148,12 +163,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/CSAPP/</loc>
+    <loc>https://hadxu.github.io/categories/CSAPP/</loc>
     <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/CSAPP/</loc>
+    <loc>https://hadxu.github.io/tags/CSAPP/</loc>
     <lastmod>2020-04-07T11:00:00+08:00</lastmod>
   </url>
   
@@ -168,12 +183,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2020-04-04T09:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2020-04-04T09:00:00+08:00</lastmod>
   </url>
   
@@ -188,12 +203,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/linux/</loc>
+    <loc>https://hadxu.github.io/tags/linux/</loc>
     <lastmod>2020-03-25T09:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/linux/</loc>
+    <loc>https://hadxu.github.io/categories/linux/</loc>
     <lastmod>2020-03-25T09:00:00+08:00</lastmod>
   </url>
   
@@ -343,12 +358,12 @@
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/tags/tour/</loc>
+    <loc>https://hadxu.github.io/categories/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hadxu.github.io/categories/tour/</loc>
+    <loc>https://hadxu.github.io/tags/tour/</loc>
     <lastmod>2020-03-03T21:00:00+08:00</lastmod>
   </url>
   
