@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>命令用的好,监狱进的早 | lay&#39;s 博客</title>
-    <meta property="og:title" content="命令用的好,监狱进的早 - lay&#39;s 博客">
+    <title>毕业 | lay&#39;s 博客</title>
+    <meta property="og:title" content="毕业 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-03-10T10:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2020-06-13T09:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-03-10T10:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2020-06-13T09:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="命令用的好,监狱进的早">
+    <meta name="description" content="毕业">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/post/2020-03-10-wipe-hard-driver/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2020-06-13-graduation-over/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -147,10 +147,9 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#dd操作">dd操作</a></li>
-    <li><a href="#shred操作">shred操作</a></li>
-    <li><a href="#scrub操作">scrub操作</a></li>
-    <li><a href="#参考">参考</a></li>
+    <li><a href="#专科">专科</a></li>
+    <li><a href="#本科">本科</a></li>
+    <li><a href="#研究生">研究生</a></li>
   </ul>
 </nav>
     </div>
@@ -184,16 +183,16 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">命令用的好,监狱进的早</h1>
+            <h1 class="post-title">毕业</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月10日
+            2020年6月13日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/linux'>linux</a></span>
+            <span class="meta-category"><a href='https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6'>大学</a></span>
             
         </div>
         
@@ -211,61 +210,24 @@
         </div>
         
         <div class="post-content">
-            <h1 id="命令用的好监狱进的早">命令用的好,监狱进的早</h1>
-<p><strong>2月23日19点，微盟服务器出现大规模宕机，大面积服务集群无法响应，生产环境及数据遭受严重破坏，致使无法向客户提供服务，涉及百万商家，2月24日，进一步查明是公司研发中心运维部核心运维人员贺某“通过个人VPN登入公司内网跳板机破坏所为，犯罪嫌疑人已经被宝山区公安局刑事拘留，并表示28日完全恢复。</strong></p>
-<p>该案例发生在2020年2月23日，“删库跑路”这个梗没有想到真实地发生了在某一家中型上市公司上。后来在腾讯云团队的帮助下，完成了数据恢复的过程，数据是可以恢复的，说明数据并没有被删除地很透底。常见了类似<code>rm -fr *</code>并不是很透底地删除磁盘上的数据，仅仅是将链接断掉，但是数据还是在磁盘上，只要这个时候不向磁盘写入任何数据，这些数据都是可以通过数据恢复技术来找回的。</p>
-<p><strong>Nowhere, gone, vanished. Well, more specifically, the file gets unlinked. The data is still sitting there on disk, but the link to it is removed. It used to be possible to retrieve the data, but nowadays the metadata is cleared and nothing&rsquo;s recoverable.</strong></p>
-<p>这里,推荐几个让数据永远无法找回来的办法。</p>
-<h2 id="dd操作">dd操作</h2>
-<p>dd是磁盘的拷贝工具，<code>dd if=xxx of=xxx</code>这里的if为input file，一般采用<code>/dev/zero /dev/random/</code>,of为output file，就是磁盘的路径。另外这个操作很慢，可能会对监控进行报警，从而无法安全删库跑路。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;font-weight:bold">=</span>/dev/zero <span style="color:#008080">of</span><span style="color:#000;font-weight:bold">=</span>/dev/hda
-dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;font-weight:bold">=</span>/dev/urandom <span style="color:#008080">of</span><span style="color:#000;font-weight:bold">=</span>/dev/hda
-</code></pre></td></tr></table>
-</div>
-</div><p>更狠的是，来回多覆盖几次，那么恢复数据基本无望了。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#999;font-weight:bold;font-style:italic">#!/bin/bash 
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#000;font-weight:bold">for</span> n in <span style="color:#d14">`</span>seq 7<span style="color:#d14">`</span>; <span style="color:#000;font-weight:bold">do</span> dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;font-weight:bold">=</span>/dev/urandom <span style="color:#008080">of</span><span style="color:#000;font-weight:bold">=</span>/dev/sda <span style="color:#008080">bs</span><span style="color:#000;font-weight:bold">=</span>8b <span style="color:#008080">conv</span><span style="color:#000;font-weight:bold">=</span>notrunc; <span style="color:#000;font-weight:bold">done</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="shred操作">shred操作</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">shred -n <span style="color:#099">5</span> -vz /dev/sdb
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="scrub操作">scrub操作</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">scrub -p dod /dev/sdb
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="参考">参考</h2>
+            <h1 id="毕业">毕业</h1>
+<p>今天是2020年6月13日，作为研究生的我，本来是不太很伤感的，但是看到身边的人一个一个地离开校园，不知道是不是最后一次见面，莫名感觉鼻子有点酸酸的。回想我读大学8年，每次毕业都有不同的感觉，同时走了很多歪路，以此文章记录我8年来的路以及感想。</p>
+<p>我的路分为3个部分</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki//dev/zero">/dev/zero</a></li>
-<li><a href="https://en.wikipedia.org/wiki//dev/random">/dev/random</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Securely_wipe_disk">Securely_wipe_disk</a></li>
-<li><a href="https://linoxide.com/linux-command/commands-wipe-disk-linux/">commands-wipe-disk-linux</a></li>
-<li><a href="https://www.marksanborn.net/howto/wiping-a-hard-drive-with-dd/">wiping-a-hard-drive-with-dd</a></li>
-<li><a href="https://how-to.fandom.com/wiki/How_to_wipe_a_hard_drive_clean_in_Linux">How_to_wipe_a_hard_drive_clean_in_Linux</a></li>
+<li>专科 2012.9-2015.6</li>
+<li>本科 2015.9-2017.6</li>
+<li>研究生 2017.9-2020.6</li>
 </ul>
+<h2 id="专科">专科</h2>
+<p>我的路从8年前的专科开始。2012年高考，从农村出来的我，还在为没有考上本科而苦恼，每天麻痹自己，玩游戏，还是玩游戏，当时玩的一款游戏是DNF，为了玩狂战士以及女大枪，我花费了人生中第一笔100元，买了游戏币。2012年暑假，不甘于现状的我和我哥一起去打工，去工地搬砖，打下水道，磨钢管，每天早晨7点走，晚上6点回，大夏天一直在打工，晚上玩游戏。那个时候我一直在看嵌入式软件，觉得51单片机很有意思，于是学习了大量的资料，但是感觉还是很难，没有坚持下去。8月我去了我爸的工厂里住了一段时间，9月去无锡职院报道。
+我在无锡职院，刚开始认识了几个宿舍的小伙伴，3个专科3个本科，当时看到本科就感觉很厉害的样子，所以一直向他们学习各种各样的课程。从C语言到大学物理，我浅尝辄止。大一学的课程是<code>C#</code>,这门语言我没有听说过，但是学起来还是挺有难度的，当时对编程一点不懂，不知道从哪里开始，也不知道能够用来干什么，每天上课，晚上玩游戏，就这样将大一的一整年度过。2012年的冬天，我向我爸拿了5000元买了联想笔记本电脑Z580，心疼啊。由于我的大学数学还行，被选入数学建模竞赛。2013年的暑假特别特别热，但是曲老师仍然带着我们一起搞数学建模。坚持到7月中旬实在受不了，宿舍也没有空调就撤，回去继续看数学建模比赛。那个放假我去了无锡小天鹅打工，做流水线，早上8点到下午3点，干了一个多月3000元，感觉已经很多很多了。大二开学的第一天被拉去搞数学竞赛，干三天，吃泡面，那个时候是我大学以来第一次熬夜，最后仅仅是参与奖，很是可惜。
+大二开始，学校的课程是<code>Java</code>以及<code>.net</code>编程。这两门课程不是很难，我学有余力去和沈欢学习了C语言，那个时候第一次接触windows编程，通过编程实现鼠标的控制。我用自己的电脑装了虚拟机，在虚拟机里面运行鼠标操作程序却不能运行，困恼了我很长很长一段时间。和沈欢将C语言的链表、指针掌握，同时看网上的课程<strong>郝斌C语言与数据结构</strong>，这个课程让我打开了C语言编程的大门。在大二的春季，我参加了江苏省二级C语言考试，成绩优秀。在大二下学期我认识了宋昕以及陈涛，搞大学生创新项目，可喜的是，我们获得了很多很多奖项，包括TI杯一等奖，江苏省软件竞赛二等奖，外包服务大赛二等奖。
+大三开始认识了史荧中老师，开始搞算法比赛，这个比赛对于我非常非常难，每天刷题，看解题思路，获得了江苏省一等奖。大三课程学习了<code>asp.net</code>编程，同时我准备专转本，自己一个人看书，认识了刘汉勇，毛卫卫。专转本是我最艰难的时刻，看不到前面的路，不知道考不上会怎么样，也不知道未来怎么说。很是难受。每天坚持一个人做题目，看英语，背单词以及做计算机方向的题目。2015年过年后3月份考试，考完的那一天到5月出成绩这两个月是我最艰难的时间。感冒、发烧、上火、下雨，宿舍网又慢，真的对世界失去了希望。5月结果出来，感觉结果不错，投的常熟理工学院录取了，非常非常开心。在5月初，我用我领取的各种奖状在学校那边领了3000多元，然后买了iphone5s，真的非常非常好用，顿时变成苹果的粉丝。带着这个iphone，我5月参加了全国蓝桥杯编程大赛，最终获得了全国二等奖。
+大三的暑假我没有出去，一直留在无锡职院里面，呆在我当时做实验的实验室，看<strong>叶丙成</strong>老师的概率论以及张宇的考研数学。买了本科一套数学书看，复习概率论以及微积分。同时接触了shadowsocks，能够用来看第一手资料，自从接触了google，开始看机器学习，那个时候真正打开了知识的大门，接触的第一个语言是<strong>Python</strong>，然后第一个库是<strong>numpy</strong>以及<strong>pandas</strong>，第一个机器学习库是<strong>scikit-learn</strong>，同时接触了第一个深度学习库<strong>keras</strong>，那个时候keras的后端还是<code>theano</code>，这个库安装挺麻烦的。接触了Ng的机器学习课程，用Octave来进行深度神经网络的搭建。大三毕业的那两个月是我最充实的两个月。</p>
+<h2 id="本科">本科</h2>
+<p>2015年的9月我坐着我哥的车来到了常熟理工学院，见到了新的同学。当时在别的宿舍看到了有一个同学桌子上满满的都是书，关于编程的，当时给我留下了很深的印象。后来知道他叫花晋，以前开发前端的，非常之厉害。在本科，需要重新学习很多很多课程，包括Java、计算机原理，离散数学以及数据库。在本科遇到了应文豪老师，对我非常好，提供资金给我买书以及做项目，并发表了一篇文章。常熟理工学院特别喜欢放假，刚过去没有多久放国庆，别的学校还有调休，而常熟理工学院没有调休。这让我有大量的时间去研究一本书<strong>Machine Learning With Python</strong>。这本书真的是神书，讲解了如何用Python构建机器学习项目，在这本书中，我学会了Flask以及scikit-learn，以及神经网络的搭建。2016年冬天，Tensorflow出来，让我看到了机器学习的方向，立马赶紧学习Tensorflow，做的第一个项目就是keras+Tensorflow的。捣鼓各种各样的服务器以及树莓派，学会了如何使用Linux编程。大四开始，我认识了张衡，他没有什么课，于是帮我找各种考研复习资料，帮我省下了很多很多事情，每天看英语，做数学，背单词，将何凯文的一本单词书吃透，来回复习，不会的文章抄写，直到抄写能够看懂为止。期间，我感觉自己每天晚上睡不着觉，心砰砰的跳，感觉自己快要废了。我回到我哥家，去医院看了病，量了血压，高压160，我的天。没有看书，休息了一个多月。暑假快结束我回到了学校，感觉每天还是睡得不踏实，于是去医院看了病，以为自己身体有状况，后来医生说我压力太大，不要太累，那段时间真的让我崩溃。我记得有篇文章关于美国的大法官制度，我抄写了9次，终于将每一个单词，每一个词组搞明白。大四上学期快要结束的时候，我的班主任还在让我们上课，马上都考研了，我也是醉了。2016年的圣诞节前后，我在苏州一个中专院校里面考试。第一门是政治，感觉一般般。第二门是英语，我考的感觉不错，每一个单词都是认识的，觉得英语的阅读理解可能错一个。第二天第一门考数学，考完感觉不错。下午考专业课，专业课感觉有点难度。四门考下来感觉还行，但是不确定自己能够上。考研结束我就去无锡打工了，入职的一家公司是做人脸的，本来想做算法，但是被安排去搞开发了。
+2017年年后，当我坐在无锡的公司进行工作的时候，张衡发来了一个消息，我考研考了336，当时我赶紧看了下历年的考研分数，276，我超了60分!当时激动坏了，过了一周辞职去准备复试。看408的课程很累，很多不懂但是只能硬着头皮学下去。来到江大复试，没有想到还有英语听力，我当时就懵逼了，英语听力我很差的啊，然后下午的考试。当时感觉自己凉透了，第三天看到了结果，我被录取了。但是看到很多很多考研分数比我少60分，虽然考上了，但是并没有很开心。考完，回到常熟理工学院，我治疗脚上的跖疣，尝试了冷冻电镜，快一个多月了，还是么有好，算了，不治疗了。毕业我就去南京玩了，在一家公司实习，搞量化交易，但是感觉没有什么前途，赚了7000多元就回去读书了。</p>
+<h2 id="研究生">研究生</h2>
 
         </div>
 
@@ -278,15 +240,15 @@ dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;fo
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/post/2020-03-10-the-right-medicine-for-the-world-economythe-Economist/">The right medicine for the world economy</a></li>
+        <li><a href="/post/2020-06-06-graduation/">答辩结束</a></li>
         
-        <li><a href="/post/2020-03-09-thunderday4/">从零实现深度学习框架(day4)</a></li>
+        <li><a href="/post/2020-05-17-COS-and-CVM/">COS &amp; CVM</a></li>
         
-        <li><a href="/post/2020-03-08-thunderday3/">从零实现深度学习框架(day3)</a></li>
+        <li><a href="/post/2020-05-23-Chip-warsthe-Economist/">Chip wars</a></li>
         
-        <li><a href="/post/2020-03-07-thunderday2/">从零实现深度学习框架(day2)</a></li>
+        <li><a href="/post/2020-05-16-Goodbye-globalisationthe-Economist/">Goodbye globalisation</a></li>
         
-        <li><a href="/post/2020-03-06-thunderday1/">从零实现深度学习框架(day1)</a></li>
+        <li><a href="/post/2020-05-12-union-find/">并查集</a></li>
         
     </ul>
 </div>
@@ -296,7 +258,7 @@ dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;fo
             
             <ul class="clearfix">
                 
-                <li><a href='https://hadxu.github.io/tags/linux'>linux</a></li>
+                <li><a href='https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6'>大学</a></li>
                 
             </ul>
             
