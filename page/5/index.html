@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.63.1" />
+	<meta name="generator" content="Hugo 0.73.0" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -77,98 +77,6 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-09-thunderday4/" title="从零实现深度学习框架(day4)">从零实现深度学习框架(day4)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月8日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/thunder'>thunder</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            第四天 实现自动求导机制 前3天，我们已经实现了基本的数据结构无缝切换与CPU与GPU，现在实现自动求导机制。 第一步 建立计算节点。 1 2 3 4 5 6 class Node(object): def __init__(self): self.inputs = [] self.op = None self.const_attr = None self.name = &#34;&#34; 每个节点有输入 操作符 常量值 以及 名称 定义操作运算符 1 2 3 4 5 6 7 8 9 10 11 12 13 14 class Op(object): def __call__(self): new_node = Node() new_node.op = self……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-09-thunderday4/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-08-thunderday3/" title="从零实现深度学习框架(day3)">从零实现深度学习框架(day3)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月8日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/thunder'>thunder</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            到目前为止，已经实现了GPU与CPU无缝切换的数据结构，但是我们需要在Python语言中使用，今天我们来实现Python调用。 第三天 实现Python调用动态链接库 今天的目标是实现Python来调用已经编译好的动态链接库来进行GPU与CPU的无缝切换。 首先，将编译好的libc_……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-08-thunderday3/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-07-thunderday2/" title="从零实现深度学习框架(day2)">从零实现深度学习框架(day2)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/thunder'>thunder</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            前一天我们实现了CPU数据结构的操作，今天我们实现GPU的操作。 CUDA是NVIDIA提出的并行计算框架，结合了CPU与GPU的优点，主要用来处理密集型并行计算。GPU用来提高计算密集型应用程序中并行程序段的执行速度。CUDA是非常重要的计算加速平台。 需要注意的是，网上并没有……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-07-thunderday2/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-06-thunderday1/" title="从零实现深度学习框架(day1)">从零实现深度学习框架(day1)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='https://hadxu.github.io/categories/thunder'>thunder</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            第一天(构建数据结构，无缝切换GPU与CPU) 深度学习框架层出不穷，作为学生，需要学习的东西特别多，常见的深度学习框架有Tensorflow,Caffe,Theano,Pytorch,Mxnet,Keras等，这些深度学习被广泛应用于计算机视觉、语音识别、自然语言处理等领域，并……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-06-thunderday1/">阅读全文</a></p>
-    </article>
     
     <article class="post">
         <header>
@@ -296,27 +204,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -335,6 +227,22 @@
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -350,8 +258,6 @@
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -360,13 +266,13 @@
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -386,8 +292,6 @@
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

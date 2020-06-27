@@ -150,7 +150,7 @@
     <li><a href="#什么是自动求导">什么是自动求导</a></li>
     <li><a href="#如何进行自动求导">如何进行自动求导</a></li>
     <li><a href="#自动求导的例子">自动求导的例子</a></li>
-    <li><a href="#构造自动求导-microgradhttpsgithubcomhadxumicrograd">构造自动求导 micrograd</a></li>
+    <li><a href="#构造自动求导-microgradhttpsgithubcomhadxumicrograd">构造自动求导 <a href="https://github.com/HadXu/micrograd">micrograd</a></a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -282,11 +282,11 @@ visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> __mul__(<span style="color:#999">self</span>, other):
     other <span style="color:#000;font-weight:bold">=</span> other <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Value) <span style="color:#000;font-weight:bold">else</span> Value(other)
-    out <span style="color:#000;font-weight:bold">=</span> Value(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> other<span style="color:#000;font-weight:bold">.</span>data, (<span style="color:#999">self</span>, other), <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">*</span><span style="color:#d14">&#39;</span>)
+    out <span style="color:#000;font-weight:bold">=</span> Value(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> other<span style="color:#000;font-weight:bold">.</span>data, (<span style="color:#999">self</span>, other), <span style="color:#d14">&#39;*&#39;</span>)
 
     <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_backward</span>():
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> other<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
-        other<span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
+        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+=</span> other<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
+        other<span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
 
     out<span style="color:#000;font-weight:bold">.</span>_backward <span style="color:#000;font-weight:bold">=</span> _backward
     <span style="color:#000;font-weight:bold">return</span> out
@@ -411,27 +411,11 @@ visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -450,6 +434,22 @@ visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -465,8 +465,6 @@ visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -475,13 +473,13 @@ visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -501,8 +499,6 @@ visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

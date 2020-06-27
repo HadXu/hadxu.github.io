@@ -238,7 +238,7 @@
         <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> []
         <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>op <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">None</span>
         <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>const_attr <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">None</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">&#34;</span>
+        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -321,7 +321,7 @@
     <span style="color:#000;font-weight:bold">def</span> __call__(<span style="color:#999">self</span>, node_A, node_B):
         new_node <span style="color:#000;font-weight:bold">=</span> Op<span style="color:#000;font-weight:bold">.</span>__call__(<span style="color:#999">self</span>)
         new_node<span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> [node_A, node_B]
-        new_node<span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">(</span><span style="color:#d14">%s</span><span style="color:#d14">+</span><span style="color:#d14">%s</span><span style="color:#d14">)</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> (node_A<span style="color:#000;font-weight:bold">.</span>name, node_B<span style="color:#000;font-weight:bold">.</span>name)
+        new_node<span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;(</span><span style="color:#d14">%s</span><span style="color:#d14">+</span><span style="color:#d14">%s</span><span style="color:#d14">)&#34;</span> <span style="color:#000;font-weight:bold">%</span> (node_A<span style="color:#000;font-weight:bold">.</span>name, node_B<span style="color:#000;font-weight:bold">.</span>name)
         <span style="color:#000;font-weight:bold">return</span> new_node
 
     <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">compute</span>(<span style="color:#999">self</span>, node, input_vals, output_val, use_numpy<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>):
@@ -389,7 +389,7 @@
         <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> []
         <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>op <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">None</span>
         <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>const_attr <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">None</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">&#34;</span>
+        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;&#34;</span>
 
     <span style="color:#000;font-weight:bold">def</span> __add__(<span style="color:#999">self</span>, other):
         <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Node):
@@ -427,9 +427,9 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Variable</span>(name):
-    <span style="color:#d14"></span><span style="color:#d14">&#34;&#34;&#34;</span><span style="color:#d14">
-</span><span style="color:#d14"></span><span style="color:#d14">        x = Variable(name = </span><span style="color:#d14">&#34;</span><span style="color:#d14">x</span><span style="color:#d14">&#34;</span><span style="color:#d14">)</span><span style="color:#d14">
-</span><span style="color:#d14"></span><span style="color:#d14">    </span><span style="color:#d14">&#34;&#34;&#34;</span>
+    <span style="color:#d14">&#34;&#34;&#34;
+</span><span style="color:#d14">        x = Variable(name = &#34;x&#34;)
+</span><span style="color:#d14">    &#34;&#34;&#34;</span>
     placeholder_node <span style="color:#000;font-weight:bold">=</span> placeholder_op()
     placeholder_node<span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> name
     <span style="color:#000;font-weight:bold">return</span> placeholder_node
@@ -459,13 +459,13 @@
         <span style="color:#000;font-weight:bold">return</span> new_node
 
     <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">compute</span>(<span style="color:#999">self</span>, node, input_vals, output_val, use_numpy<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>):
-        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#999">False</span>, <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">placeholder </span><span style="color:#d14">%s</span><span style="color:#d14"> values provided by feed_dict</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> node<span style="color:#000;font-weight:bold">.</span>name
+        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#999">False</span>, <span style="color:#d14">&#34;placeholder </span><span style="color:#d14">%s</span><span style="color:#d14"> values provided by feed_dict&#34;</span> <span style="color:#000;font-weight:bold">%</span> node<span style="color:#000;font-weight:bold">.</span>name
 
     <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradient</span>(<span style="color:#999">self</span>, node, output_grad):
         <span style="color:#000;font-weight:bold">return</span> <span style="color:#999">None</span>
 
     <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">infer_shape</span>(<span style="color:#999">self</span>, node, input_shapes):
-        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#999">False</span>, <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">placeholder </span><span style="color:#d14">%s</span><span style="color:#d14"> shape provided by feed_shape</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> node<span style="color:#000;font-weight:bold">.</span>name
+        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#999">False</span>, <span style="color:#d14">&#34;placeholder </span><span style="color:#d14">%s</span><span style="color:#d14"> shape provided by feed_shape&#34;</span> <span style="color:#000;font-weight:bold">%</span> node<span style="color:#000;font-weight:bold">.</span>name
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="自动求导机制">自动求导机制</h3>
@@ -723,14 +723,14 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">mnist_mlp</span>(executor_ctx<span style="color:#000;font-weight:bold">=</span><span style="color:#999">None</span>, num_epochs<span style="color:#000;font-weight:bold">=</span><span style="color:#099">10</span>, print_loss_val_each_epoch<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>):
-    W1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">W1</span><span style="color:#d14">&#34;</span>)
-    W2 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">W2</span><span style="color:#d14">&#34;</span>)
-    W3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">W3</span><span style="color:#d14">&#34;</span>)
-    b1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">b1</span><span style="color:#d14">&#34;</span>)
-    b2 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">b2</span><span style="color:#d14">&#34;</span>)
-    b3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">b3</span><span style="color:#d14">&#34;</span>)
-    X <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">X</span><span style="color:#d14">&#34;</span>)
-    y_ <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">y_</span><span style="color:#d14">&#34;</span>)
+    W1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W1&#34;</span>)
+    W2 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W2&#34;</span>)
+    W3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W3&#34;</span>)
+    b1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b1&#34;</span>)
+    b2 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b2&#34;</span>)
+    b3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b3&#34;</span>)
+    X <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;X&#34;</span>)
+    y_ <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;y_&#34;</span>)
 
     <span style="color:#998;font-style:italic"># relu(X W1+b1)</span>
     z1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>matmul_op(X, W1)
@@ -754,15 +754,15 @@
         [loss, grad_W1, grad_W2, grad_W3, grad_b1, grad_b2, grad_b3, y],
         ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
 
-    datasets <span style="color:#000;font-weight:bold">=</span> load_mnist_data(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">mnist.pkl.gz</span><span style="color:#d14">&#34;</span>)
+    datasets <span style="color:#000;font-weight:bold">=</span> load_mnist_data(<span style="color:#d14">&#34;mnist.pkl.gz&#34;</span>)
     train_set_x, train_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">0</span>]
     valid_set_x, valid_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">1</span>]
     test_set_x, test_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">2</span>]
     batch_size <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1000</span>
-    n_train_batches <span style="color:#000;font-weight:bold">=</span> train_set_x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">/</span><span style="color:#000;font-weight:bold">/</span> batch_size
-    n_valid_batches <span style="color:#000;font-weight:bold">=</span> valid_set_x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">/</span><span style="color:#000;font-weight:bold">/</span> batch_size
+    n_train_batches <span style="color:#000;font-weight:bold">=</span> train_set_x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">//</span> batch_size
+    n_valid_batches <span style="color:#000;font-weight:bold">=</span> valid_set_x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">//</span> batch_size
 
-    <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">Start training loop...</span><span style="color:#d14">&#34;</span>)
+    <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#34;Start training loop...&#34;</span>)
 
     W2_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">256</span>, <span style="color:#099">100</span>))
     W3_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">100</span>, <span style="color:#099">10</span>))
@@ -785,7 +785,7 @@
 
     lr <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1.0e-3</span>
     <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(num_epochs):
-        <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">epoch </span><span style="color:#d14">%d</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> i)
+        <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#34;epoch </span><span style="color:#d14">%d</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> i)
         <span style="color:#000;font-weight:bold">for</span> minibatch_index <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_train_batches):
             minibatch_start <span style="color:#000;font-weight:bold">=</span> minibatch_index <span style="color:#000;font-weight:bold">*</span> batch_size
             minibatch_end <span style="color:#000;font-weight:bold">=</span> (minibatch_index <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">*</span> batch_size
@@ -847,7 +847,7 @@
             np<span style="color:#000;font-weight:bold">.</span>argmax(valid_y_predicted, <span style="color:#099">1</span>))<span style="color:#000;font-weight:bold">.</span>astype(np<span style="color:#000;font-weight:bold">.</span>float)
         correct_predictions<span style="color:#000;font-weight:bold">.</span>extend(correct_prediction)
     accuracy <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>mean(correct_predictions)
-    <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">validation set accuracy=</span><span style="color:#d14">%f</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> accuracy)
+    <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#34;validation set accuracy=</span><span style="color:#d14">%f</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> accuracy)
 </code></pre></td></tr></table>
 </div>
 </div><p>最后的效果在 97%。</p>
@@ -956,27 +956,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -995,6 +979,22 @@
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -1010,8 +1010,6 @@
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -1020,13 +1018,13 @@
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -1046,8 +1044,6 @@
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

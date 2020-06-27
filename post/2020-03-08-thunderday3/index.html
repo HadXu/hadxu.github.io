@@ -248,8 +248,8 @@
 
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_load_lib</span>():
     curr_path <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>dirname(os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>abspath(os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>expanduser(__file__)))
-    lib_path <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>join(curr_path, <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">../../build/lib/</span><span style="color:#d14">&#39;</span>)
-    path_to_so_file <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>join(lib_path, <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">libc_runtime_api.so</span><span style="color:#d14">&#34;</span>)
+    lib_path <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>join(curr_path, <span style="color:#d14">&#39;../../build/lib/&#39;</span>)
+    path_to_so_file <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>join(lib_path, <span style="color:#d14">&#34;libc_runtime_api.so&#34;</span>)
     lib <span style="color:#000;font-weight:bold">=</span> ctypes<span style="color:#000;font-weight:bold">.</span>CDLL(path_to_so_file, ctypes<span style="color:#000;font-weight:bold">.</span>RTLD_GLOBAL)
     <span style="color:#000;font-weight:bold">return</span> lib
 
@@ -293,7 +293,7 @@ _LIB <span style="color:#000;font-weight:bold">=</span> _load_lib()
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">__author__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">haxu</span><span style="color:#d14">&#39;</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">__author__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;haxu&#39;</span>
 
 <span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
 <span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ctypes</span>
@@ -301,12 +301,12 @@ _LIB <span style="color:#000;font-weight:bold">=</span> _load_lib()
 
 
 <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">DLContext</span>(ctypes<span style="color:#000;font-weight:bold">.</span>Structure):
-    _fields_ <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">device_id</span><span style="color:#d14">&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int),
-                (<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">device_type</span><span style="color:#d14">&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int)]
+    _fields_ <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#d14">&#39;device_id&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int),
+                (<span style="color:#d14">&#39;device_type&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int)]
 
     MASK2STR <span style="color:#000;font-weight:bold">=</span> {
-        <span style="color:#099">1</span>: <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">cpu</span><span style="color:#d14">&#39;</span>,
-        <span style="color:#099">2</span>: <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">gpu</span><span style="color:#d14">&#39;</span>,
+        <span style="color:#099">1</span>: <span style="color:#d14">&#39;cpu&#39;</span>,
+        <span style="color:#099">2</span>: <span style="color:#d14">&#39;gpu&#39;</span>,
     }
 
     <span style="color:#000;font-weight:bold">def</span> __int__(<span style="color:#999">self</span>, device_id, device_type):
@@ -315,7 +315,7 @@ _LIB <span style="color:#000;font-weight:bold">=</span> _load_lib()
         <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_type <span style="color:#000;font-weight:bold">=</span> device_type
 
     <span style="color:#000;font-weight:bold">def</span> __repr__(<span style="color:#999">self</span>):
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">%s</span><span style="color:#d14">(</span><span style="color:#d14">%d</span><span style="color:#d14">)</span><span style="color:#d14">&#39;</span> <span style="color:#000;font-weight:bold">%</span> (DLContext<span style="color:#000;font-weight:bold">.</span>MASK2STR[<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_type], <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_id)
+        <span style="color:#000;font-weight:bold">return</span> <span style="color:#d14">&#39;</span><span style="color:#d14">%s</span><span style="color:#d14">(</span><span style="color:#d14">%d</span><span style="color:#d14">)&#39;</span> <span style="color:#000;font-weight:bold">%</span> (DLContext<span style="color:#000;font-weight:bold">.</span>MASK2STR[<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_type], <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_id)
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来是无缝切换的数据结构</p>
@@ -331,10 +331,10 @@ _LIB <span style="color:#000;font-weight:bold">=</span> _load_lib()
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">DLArray</span>(ctypes<span style="color:#000;font-weight:bold">.</span>Structure):
-    _fields_ <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">data</span><span style="color:#d14">&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_void_p),
-                (<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">ctx</span><span style="color:#d14">&#39;</span>, DLContext),
-                (<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">ndim</span><span style="color:#d14">&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int),
-                (<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">shape</span><span style="color:#d14">&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>POINTER(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64))]
+    _fields_ <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#d14">&#39;data&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_void_p),
+                (<span style="color:#d14">&#39;ctx&#39;</span>, DLContext),
+                (<span style="color:#d14">&#39;ndim&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int),
+                (<span style="color:#d14">&#39;shape&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>POINTER(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64))]
 
 DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span style="color:#000;font-weight:bold">.</span>POINTER(DLArray)
 </code></pre></td></tr></table>
@@ -465,7 +465,7 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">NDArray</span>(<span style="color:#0086b3">object</span>):
-    __slots__ <span style="color:#000;font-weight:bold">=</span> [<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">handle</span><span style="color:#d14">&#34;</span>]
+    __slots__ <span style="color:#000;font-weight:bold">=</span> [<span style="color:#d14">&#34;handle&#34;</span>]
 
     <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>, handle):
         <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle <span style="color:#000;font-weight:bold">=</span> handle
@@ -486,26 +486,26 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
         <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">not</span> <span style="color:#0086b3">isinstance</span>(in_slice, <span style="color:#0086b3">slice</span>) <span style="color:#000;font-weight:bold">or</span>
                 in_slice<span style="color:#000;font-weight:bold">.</span>start <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#999">None</span>
                 <span style="color:#000;font-weight:bold">or</span> in_slice<span style="color:#000;font-weight:bold">.</span>stop <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#999">None</span>):
-            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">Array only support set from numpy array</span><span style="color:#d14">&#39;</span>)
+            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;Array only support set from numpy array&#39;</span>)
         <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(value, NDArray):
             <span style="color:#000;font-weight:bold">if</span> value<span style="color:#000;font-weight:bold">.</span>handle <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle:
                 value<span style="color:#000;font-weight:bold">.</span>copyto(<span style="color:#999">self</span>)
         <span style="color:#000;font-weight:bold">elif</span> <span style="color:#0086b3">isinstance</span>(value, (np<span style="color:#000;font-weight:bold">.</span>ndarray, np<span style="color:#000;font-weight:bold">.</span>generic)):
             <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>_sync_copyfrom(value)
         <span style="color:#000;font-weight:bold">else</span>:
-            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">TypeError</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">type </span><span style="color:#d14">%s</span><span style="color:#d14"> not supported</span><span style="color:#d14">&#39;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(value)))
+            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">TypeError</span>(<span style="color:#d14">&#39;type </span><span style="color:#d14">%s</span><span style="color:#d14"> not supported&#39;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(value)))
 
     <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_sync_copyfrom</span>(<span style="color:#999">self</span>, source_array):
         <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#0086b3">isinstance</span>(source_array, np<span style="color:#000;font-weight:bold">.</span>ndarray):
             <span style="color:#000;font-weight:bold">try</span>:
                 source_array <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array(source_array, dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
             <span style="color:#000;font-weight:bold">except</span>:
-                <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">TypeError</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">array must be an array_like data,</span><span style="color:#d14">&#39;</span> <span style="color:#000;font-weight:bold">+</span>
-                                <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">type </span><span style="color:#d14">%s</span><span style="color:#d14"> is not supported</span><span style="color:#d14">&#39;</span>
+                <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">TypeError</span>(<span style="color:#d14">&#39;array must be an array_like data,&#39;</span> <span style="color:#000;font-weight:bold">+</span>
+                                <span style="color:#d14">&#39;type </span><span style="color:#d14">%s</span><span style="color:#d14"> is not supported&#39;</span>
                                 <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(source_array)))
         source_array <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>ascontiguousarray(source_array, dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
         <span style="color:#000;font-weight:bold">if</span> source_array<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">!=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>shape:
-            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">array shape do not match the shape of NDArray</span><span style="color:#d14">&#39;</span>)
+            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;array shape do not match the shape of NDArray&#39;</span>)
         source_arr, shape <span style="color:#000;font-weight:bold">=</span> NDArray<span style="color:#000;font-weight:bold">.</span>_numpyasarray(source_array)
         check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayCopyFromTo(
             ctypes<span style="color:#000;font-weight:bold">.</span>byref(source_arr), <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle, <span style="color:#999">None</span>))
@@ -514,7 +514,7 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
     <span style="color:#3c5d5d;font-weight:bold">@staticmethod</span>
     <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_numpyasarray</span>(np_data):
         data <span style="color:#000;font-weight:bold">=</span> np_data
-        <span style="color:#000;font-weight:bold">assert</span> data<span style="color:#000;font-weight:bold">.</span>flags[<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">C_CONTIGUOUS</span><span style="color:#d14">&#39;</span>]
+        <span style="color:#000;font-weight:bold">assert</span> data<span style="color:#000;font-weight:bold">.</span>flags[<span style="color:#d14">&#39;C_CONTIGUOUS&#39;</span>]
         arr <span style="color:#000;font-weight:bold">=</span> DLArray()
         shape <span style="color:#000;font-weight:bold">=</span> c_array(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64, data<span style="color:#000;font-weight:bold">.</span>shape)
         arr<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">=</span> data<span style="color:#000;font-weight:bold">.</span>ctypes<span style="color:#000;font-weight:bold">.</span>data_as(ctypes<span style="color:#000;font-weight:bold">.</span>c_void_p)
@@ -539,7 +539,7 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
             check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayCopyFromTo(
                 <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle, target<span style="color:#000;font-weight:bold">.</span>handle, <span style="color:#999">None</span>))
         <span style="color:#000;font-weight:bold">else</span>:
-            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">Unsupported target type </span><span style="color:#d14">%s</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(target)))
+            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#34;Unsupported target type </span><span style="color:#d14">%s</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(target)))
         <span style="color:#000;font-weight:bold">return</span> target
 
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">array</span>(arr, ctx<span style="color:#000;font-weight:bold">=</span>cpu(<span style="color:#099">0</span>)):
@@ -881,27 +881,11 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -920,6 +904,22 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -935,8 +935,6 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -945,13 +943,13 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -971,8 +969,6 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

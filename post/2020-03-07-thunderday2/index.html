@@ -246,15 +246,15 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">ifndef DLSYS_RUNTIME_CUDA_DEVICE_API_H_</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_RUNTIME_CUDA_DEVICE_API_H_</span><span style="color:#999;font-weight:bold;font-style:italic">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#999;font-weight:bold;font-style:italic">#ifndef DLSYS_RUNTIME_CUDA_DEVICE_API_H_
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_RUNTIME_CUDA_DEVICE_API_H_
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cuda_runtime.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cuda_runtime.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;assert.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;string&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;assert.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;string&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">CUDADeviceAPI</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">public</span> DeviceAPI {
 <span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
@@ -343,67 +343,67 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;./cuda_device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cassert&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cuda_runtime.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;./cuda_device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cassert&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cuda_runtime.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#998;font-style:italic">// 定义CUDA报错宏
-</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define CUDA_CALL(func)                                                        \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">  {                                                                            \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">    cudaError_t e = (func);                                                    \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">    assert((e == cudaSuccess) || (e == cudaErrorCudartUnloading));             \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">  }</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#define CUDA_CALL(func)                                                        \
+</span><span style="color:#999;font-weight:bold;font-style:italic">  {                                                                            \
+</span><span style="color:#999;font-weight:bold;font-style:italic">    cudaError_t e = (func);                                                    \
+</span><span style="color:#999;font-weight:bold;font-style:italic">    assert((e == cudaSuccess) || (e == cudaErrorCudartUnloading));             \
+</span><span style="color:#999;font-weight:bold;font-style:italic">  }
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">GPUCopy</span>(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>from, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>to, size_t size,
                     cudaMemcpyKind kind, cudaStream_t stream) {
-  <span style="color:#000;font-weight:bold">if</span> (stream <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>) {
+  <span style="color:#000;font-weight:bold">if</span> (stream <span style="color:#000;font-weight:bold">!=</span> <span style="color:#099">0</span>) {
     CUDA_CALL(cudaMemcpyAsync(to, from, size, kind, stream));
   } <span style="color:#000;font-weight:bold">else</span> {
     CUDA_CALL(cudaMemcpy(to, from, size, kind));
   }
 }
 
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>CUDADeviceAPI<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>AllocDataSpace(DLContext ctx, size_t size,
+<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>CUDADeviceAPI<span style="color:#000;font-weight:bold">::</span>AllocDataSpace(DLContext ctx, size_t size,
                                     size_t alignment) {
   <span style="color:#998;font-style:italic">// std::cout &lt;&lt; &#34;allocating cuda data&#34; &lt;&lt; std::endl;
 </span><span style="color:#998;font-style:italic"></span>  CUDA_CALL(cudaSetDevice(ctx.device_id));
-  assert((<span style="color:#099">256</span> <span style="color:#000;font-weight:bold">%</span> alignment) <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span>); <span style="color:#998;font-style:italic">// &lt;&lt; &#34;CUDA space is aligned at 256 bytes&#34;;
+  assert((<span style="color:#099">256</span> <span style="color:#000;font-weight:bold">%</span> alignment) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0U</span>); <span style="color:#998;font-style:italic">// &lt;&lt; &#34;CUDA space is aligned at 256 bytes&#34;;
 </span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>ret;
   CUDA_CALL(cudaMalloc(<span style="color:#000;font-weight:bold">&amp;</span>ret, size));
   <span style="color:#000;font-weight:bold">return</span> ret;
 }
 
-<span style="color:#458;font-weight:bold">void</span> CUDADeviceAPI<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>FreeDataSpace(DLContext ctx, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>ptr) {
+<span style="color:#458;font-weight:bold">void</span> CUDADeviceAPI<span style="color:#000;font-weight:bold">::</span>FreeDataSpace(DLContext ctx, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>ptr) {
   CUDA_CALL(cudaSetDevice(ctx.device_id));
   CUDA_CALL(cudaFree(ptr));
 }
 
-<span style="color:#458;font-weight:bold">void</span> CUDADeviceAPI<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>CopyDataFromTo(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>from, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>to, size_t size,
+<span style="color:#458;font-weight:bold">void</span> CUDADeviceAPI<span style="color:#000;font-weight:bold">::</span>CopyDataFromTo(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>from, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>to, size_t size,
                                    DLContext ctx_from, DLContext ctx_to,
                                    DLStreamHandle stream) {
   <span style="color:#998;font-style:italic">// std::cout &lt;&lt; &#34;copying cuda data&#34; &lt;&lt; std::endl;
 </span><span style="color:#998;font-style:italic"></span>  cudaStream_t cu_stream <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>cudaStream_t<span style="color:#000;font-weight:bold">&gt;</span>(stream);
-  <span style="color:#000;font-weight:bold">if</span> (ctx_from.device_type <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> kGPU <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> ctx_to.device_type <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> kGPU) {
+  <span style="color:#000;font-weight:bold">if</span> (ctx_from.device_type <span style="color:#000;font-weight:bold">==</span> kGPU <span style="color:#000;font-weight:bold">&amp;&amp;</span> ctx_to.device_type <span style="color:#000;font-weight:bold">==</span> kGPU) {
     CUDA_CALL(cudaSetDevice(ctx_from.device_id));
-    <span style="color:#000;font-weight:bold">if</span> (ctx_from.device_id <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> ctx_to.device_id) {
+    <span style="color:#000;font-weight:bold">if</span> (ctx_from.device_id <span style="color:#000;font-weight:bold">==</span> ctx_to.device_id) {
       GPUCopy(from, to, size, cudaMemcpyDeviceToDevice, cu_stream);
     } <span style="color:#000;font-weight:bold">else</span> {
       cudaMemcpyPeerAsync(to, ctx_to.device_id, from, ctx_from.device_id, size,
                           cu_stream);
     }
-  } <span style="color:#000;font-weight:bold">else</span> <span style="color:#900;font-weight:bold">if</span> (ctx_from.device_type <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> kGPU <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> ctx_to.device_type <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> kCPU) {
+  } <span style="color:#000;font-weight:bold">else</span> <span style="color:#900;font-weight:bold">if</span> (ctx_from.device_type <span style="color:#000;font-weight:bold">==</span> kGPU <span style="color:#000;font-weight:bold">&amp;&amp;</span> ctx_to.device_type <span style="color:#000;font-weight:bold">==</span> kCPU) {
     CUDA_CALL(cudaSetDevice(ctx_from.device_id));
     GPUCopy(from, to, size, cudaMemcpyDeviceToHost, cu_stream);
-  } <span style="color:#000;font-weight:bold">else</span> <span style="color:#900;font-weight:bold">if</span> (ctx_from.device_type <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> kCPU <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> ctx_to.device_type <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> kGPU) {
+  } <span style="color:#000;font-weight:bold">else</span> <span style="color:#900;font-weight:bold">if</span> (ctx_from.device_type <span style="color:#000;font-weight:bold">==</span> kCPU <span style="color:#000;font-weight:bold">&amp;&amp;</span> ctx_to.device_type <span style="color:#000;font-weight:bold">==</span> kGPU) {
     CUDA_CALL(cudaSetDevice(ctx_to.device_id));
     GPUCopy(from, to, size, cudaMemcpyHostToDevice, cu_stream);
   } <span style="color:#000;font-weight:bold">else</span> {
-    std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>cerr <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">expect copy from/to GPU or between GPU</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>endl;
+    std<span style="color:#000;font-weight:bold">::</span>cerr <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#d14">&#34;expect copy from/to GPU or between GPU&#34;</span> <span style="color:#000;font-weight:bold">&lt;&lt;</span> std<span style="color:#000;font-weight:bold">::</span>endl;
   }
 }
 
-<span style="color:#458;font-weight:bold">void</span> CUDADeviceAPI<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>StreamSync(DLContext ctx, DLStreamHandle stream) {
+<span style="color:#458;font-weight:bold">void</span> CUDADeviceAPI<span style="color:#000;font-weight:bold">::</span>StreamSync(DLContext ctx, DLStreamHandle stream) {
   CUDA_CALL(cudaSetDevice(ctx.device_id));
   CUDA_CALL(cudaStreamSynchronize(<span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>cudaStream_t<span style="color:#000;font-weight:bold">&gt;</span>(stream)));
 }
@@ -425,11 +425,11 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  DeviceAPIManager() {
-    std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>fill(api_.begin(), api_.end(), <span style="color:#000;font-weight:bold">nullptr</span>);
+    std<span style="color:#000;font-weight:bold">::</span>fill(api_.begin(), api_.end(), <span style="color:#000;font-weight:bold">nullptr</span>);
     <span style="color:#000;font-weight:bold">static</span> CPUDeviceAPI cpu_device_api_inst;
     <span style="color:#000;font-weight:bold">static</span> CUDADeviceAPI gpu_device_api_inst;
-    api_[kCPU] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>cpu_device_api_inst);
-    api_[kGPU] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>gpu_device_api_inst);
+    api_[kCPU] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>cpu_device_api_inst);
+    api_[kGPU] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>gpu_device_api_inst);
   }
 </code></pre></td></tr></table>
 </div>
@@ -540,16 +540,16 @@
 
 <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLGpuArraySet</span>(DLArrayHandle arr, <span style="color:#458;font-weight:bold">float</span> value) { <span style="color:#998;font-style:italic">/* TODO: Your code here */</span>
     <span style="color:#458;font-weight:bold">int</span> n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>) {
-        n <span style="color:#000;font-weight:bold">=</span> n <span style="color:#000;font-weight:bold">*</span> arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> arr<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>) {
+        n <span style="color:#000;font-weight:bold">=</span> n <span style="color:#000;font-weight:bold">*</span> arr<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
     }
 
-    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>array_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
+    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>array_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) arr<span style="color:#000;font-weight:bold">-&gt;</span>data;
 
     <span style="color:#458;font-weight:bold">int</span> threads_per_block <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span>;
     <span style="color:#458;font-weight:bold">int</span> num_blocks <span style="color:#000;font-weight:bold">=</span> (n <span style="color:#000;font-weight:bold">+</span> threads_per_block <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">/</span> threads_per_block;
 
-    array_set_kernel <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> num_blocks, threads_per_block <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (array_data, value, n);
+    array_set_kernel <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> num_blocks, threads_per_block <span style="color:#000;font-weight:bold">&gt;&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (array_data, value, n);
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
 </code></pre></td></tr></table>
@@ -603,19 +603,19 @@
 
 <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLGpuBroadcastTo</span>(<span style="color:#000;font-weight:bold">const</span> DLArrayHandle input, DLArrayHandle output) {
     index_t input_n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>)
-        input_n <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>)
+        input_n <span style="color:#000;font-weight:bold">*=</span> input<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
 
     index_t output_n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>)
-        output_n <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> output<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>)
+        output_n <span style="color:#000;font-weight:bold">*=</span> output<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
 
-    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
+    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-&gt;</span>data;
+    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-&gt;</span>data;
 
     <span style="color:#458;font-weight:bold">int</span> thread_per_block <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">512</span>;
     <span style="color:#458;font-weight:bold">int</span> n_blocks <span style="color:#000;font-weight:bold">=</span> (output_n <span style="color:#000;font-weight:bold">+</span> thread_per_block <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">/</span> thread_per_block;
-    broadcast_to_kernel <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> n_blocks, thread_per_block <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data, output_data,
+    broadcast_to_kernel <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> n_blocks, thread_per_block <span style="color:#000;font-weight:bold">&gt;&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data, output_data,
             input_n, output_n);
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
@@ -662,30 +662,30 @@
     <span style="color:#458;font-weight:bold">int</span> idx <span style="color:#000;font-weight:bold">=</span> blockDim.x <span style="color:#000;font-weight:bold">*</span> blockIdx.x <span style="color:#000;font-weight:bold">+</span> threadIdx.x;
     <span style="color:#000;font-weight:bold">if</span> (idx <span style="color:#000;font-weight:bold">&lt;</span> output_n) {
         output_data[idx] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.0</span>;
-        <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input_n <span style="color:#000;font-weight:bold">/</span> output_n; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>) {
-            output_data[idx] <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> input_data[i <span style="color:#000;font-weight:bold">*</span> output_n <span style="color:#000;font-weight:bold">+</span> idx];
+        <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input_n <span style="color:#000;font-weight:bold">/</span> output_n; i<span style="color:#000;font-weight:bold">++</span>) {
+            output_data[idx] <span style="color:#000;font-weight:bold">+=</span> input_data[i <span style="color:#000;font-weight:bold">*</span> output_n <span style="color:#000;font-weight:bold">+</span> idx];
         }
     }
 }
 
 <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLGpuReduceSumAxisZero</span>(<span style="color:#000;font-weight:bold">const</span> DLArrayHandle input, DLArrayHandle output) {
     <span style="color:#458;font-weight:bold">int</span> input_n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>) {
-        input_n <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>) {
+        input_n <span style="color:#000;font-weight:bold">*=</span> input<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
     }
 
     <span style="color:#458;font-weight:bold">int</span> output_n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>) {
-        output_n <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> output<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>) {
+        output_n <span style="color:#000;font-weight:bold">*=</span> output<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
     }
 
-    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
+    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-&gt;</span>data;
+    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-&gt;</span>data;
 
     <span style="color:#458;font-weight:bold">int</span> thread_per_block <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span>;
     <span style="color:#458;font-weight:bold">int</span> n_blocks <span style="color:#000;font-weight:bold">=</span> (output_n <span style="color:#000;font-weight:bold">+</span> thread_per_block <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">/</span> thread_per_block;
 
-    reduced_sum_axis_zero <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> n_blocks, thread_per_block <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data, output_data, input_n, output_n);
+    reduced_sum_axis_zero <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> n_blocks, thread_per_block <span style="color:#000;font-weight:bold">&gt;&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data, output_data, input_n, output_n);
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
 </code></pre></td></tr></table>
@@ -759,15 +759,15 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
 <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLGpuMatrixMultiplyByConst</span>(<span style="color:#000;font-weight:bold">const</span> DLArrayHandle input, <span style="color:#458;font-weight:bold">float</span> val,
                                DLArrayHandle output) {
     <span style="color:#458;font-weight:bold">int</span> n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>) {
-        n <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>) {
+        n <span style="color:#000;font-weight:bold">*=</span> input<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
     }
 
-    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
+    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-&gt;</span>data;
+    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-&gt;</span>data;
     <span style="color:#458;font-weight:bold">int</span> threads_per_block <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span>;
     <span style="color:#458;font-weight:bold">int</span> num_blocks <span style="color:#000;font-weight:bold">=</span> (n <span style="color:#000;font-weight:bold">+</span> threads_per_block <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">/</span> threads_per_block;
-    marix_multiply_by_const <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> num_blocks, threads_per_block <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data,
+    marix_multiply_by_const <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> num_blocks, threads_per_block <span style="color:#000;font-weight:bold">&gt;&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data,
             output_data, val, n);
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
@@ -817,7 +817,7 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
     <span style="color:#458;font-weight:bold">int</span> index <span style="color:#000;font-weight:bold">=</span> blockDim.x <span style="color:#000;font-weight:bold">*</span> blockIdx.x <span style="color:#000;font-weight:bold">+</span> threadIdx.x;
     <span style="color:#000;font-weight:bold">if</span> (index <span style="color:#000;font-weight:bold">&lt;</span> n) {
         <span style="color:#458;font-weight:bold">float</span> element <span style="color:#000;font-weight:bold">=</span> input[index];
-        <span style="color:#000;font-weight:bold">if</span> (element <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>) {
+        <span style="color:#000;font-weight:bold">if</span> (element <span style="color:#000;font-weight:bold">&lt;=</span> <span style="color:#099">0</span>) {
             output[index] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
         } <span style="color:#000;font-weight:bold">else</span> {
             output[index] <span style="color:#000;font-weight:bold">=</span> element;
@@ -827,15 +827,15 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
 
 <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLGpuRelu</span>(<span style="color:#000;font-weight:bold">const</span> DLArrayHandle input, DLArrayHandle output) {
     <span style="color:#458;font-weight:bold">int</span> n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>) {
-        n <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>) {
+        n <span style="color:#000;font-weight:bold">*=</span> input<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
     }
 
-    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
+    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-&gt;</span>data;
+    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-&gt;</span>data;
     <span style="color:#458;font-weight:bold">int</span> threads_per_block <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span>;
     <span style="color:#458;font-weight:bold">int</span> num_blocks <span style="color:#000;font-weight:bold">=</span> (n <span style="color:#000;font-weight:bold">+</span> threads_per_block <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">/</span> threads_per_block;
-    relu_kernel <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> num_blocks, threads_per_block <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data, output_data, n);
+    relu_kernel <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> num_blocks, threads_per_block <span style="color:#000;font-weight:bold">&gt;&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data, output_data, n);
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
 </code></pre></td></tr></table>
@@ -882,7 +882,7 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
     <span style="color:#458;font-weight:bold">int</span> index <span style="color:#000;font-weight:bold">=</span> blockDim.x <span style="color:#000;font-weight:bold">*</span> blockIdx.x <span style="color:#000;font-weight:bold">+</span> threadIdx.x;
     <span style="color:#000;font-weight:bold">if</span> (index <span style="color:#000;font-weight:bold">&lt;</span> n) {
         <span style="color:#458;font-weight:bold">float</span> element <span style="color:#000;font-weight:bold">=</span> input[index];
-        <span style="color:#000;font-weight:bold">if</span> (element <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>) {
+        <span style="color:#000;font-weight:bold">if</span> (element <span style="color:#000;font-weight:bold">&lt;=</span> <span style="color:#099">0</span>) {
             output[index] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
         } <span style="color:#000;font-weight:bold">else</span> {
             output[index] <span style="color:#000;font-weight:bold">=</span> in_grad[index];
@@ -893,17 +893,17 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
 <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLGpuReluGradient</span>(<span style="color:#000;font-weight:bold">const</span> DLArrayHandle input, <span style="color:#000;font-weight:bold">const</span> DLArrayHandle in_grad,
                       DLArrayHandle output) {
     <span style="color:#458;font-weight:bold">int</span> n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>) {
-        n <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>) {
+        n <span style="color:#000;font-weight:bold">*=</span> input<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
     }
 
-    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>in_grad_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) in_grad<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
+    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-&gt;</span>data;
+    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-&gt;</span>data;
+    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>in_grad_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) in_grad<span style="color:#000;font-weight:bold">-&gt;</span>data;
     <span style="color:#458;font-weight:bold">int</span> threads_per_block <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span>;
     <span style="color:#458;font-weight:bold">int</span> num_blocks <span style="color:#000;font-weight:bold">=</span> (n <span style="color:#000;font-weight:bold">+</span> threads_per_block <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">/</span> threads_per_block;
 
-    relu_gradient_kernel <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> num_blocks, threads_per_block <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data,
+    relu_gradient_kernel <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> num_blocks, threads_per_block <span style="color:#000;font-weight:bold">&gt;&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (input_data,
             output_data, in_grad_data, n);
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
@@ -963,33 +963,33 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
                                <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data) {
 
     <span style="color:#458;font-weight:bold">int</span> y <span style="color:#000;font-weight:bold">=</span> blockIdx.x <span style="color:#000;font-weight:bold">*</span> blockDim.x <span style="color:#000;font-weight:bold">*</span> blockDim.y <span style="color:#000;font-weight:bold">+</span> threadIdx.y <span style="color:#000;font-weight:bold">*</span> blockDim.x <span style="color:#000;font-weight:bold">+</span> threadIdx.x;
-    <span style="color:#000;font-weight:bold">if</span> (y <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> nrow) {
+    <span style="color:#000;font-weight:bold">if</span> (y <span style="color:#000;font-weight:bold">&gt;=</span> nrow) {
         <span style="color:#000;font-weight:bold">return</span>;
     }
-    input_data <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">*</span> ncol;
-    output_data <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">*</span> ncol;
+    input_data <span style="color:#000;font-weight:bold">+=</span> y <span style="color:#000;font-weight:bold">*</span> ncol;
+    output_data <span style="color:#000;font-weight:bold">+=</span> y <span style="color:#000;font-weight:bold">*</span> ncol;
     <span style="color:#998;font-style:italic">// 找一行的最大值
 </span><span style="color:#998;font-style:italic"></span>    <span style="color:#458;font-weight:bold">float</span> maxval <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">*</span>input_data;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>x) {
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">++</span>x) {
         maxval <span style="color:#000;font-weight:bold">=</span> max(maxval, input_data[x]);
     }
     <span style="color:#458;font-weight:bold">float</span> sum <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>x) {
-        sum <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> exp(input_data[x] <span style="color:#000;font-weight:bold">-</span> maxval);
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">++</span>x) {
+        sum <span style="color:#000;font-weight:bold">+=</span> exp(input_data[x] <span style="color:#000;font-weight:bold">-</span> maxval);
     }
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>x) {
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">++</span>x) {
         output_data[x] <span style="color:#000;font-weight:bold">=</span> exp(input_data[x] <span style="color:#000;font-weight:bold">-</span> maxval) <span style="color:#000;font-weight:bold">/</span> sum;
     }
 }
 
 
 <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLGpuSoftmax</span>(<span style="color:#000;font-weight:bold">const</span> DLArrayHandle input, DLArrayHandle output) {
-    assert(input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>);
-    assert(output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>);
-    <span style="color:#458;font-weight:bold">int64_t</span> nrow <span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">0</span>];
-    <span style="color:#458;font-weight:bold">int64_t</span> ncol <span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">1</span>];
-    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
+    assert(input<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>);
+    assert(output<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>);
+    <span style="color:#458;font-weight:bold">int64_t</span> nrow <span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">0</span>];
+    <span style="color:#458;font-weight:bold">int64_t</span> ncol <span style="color:#000;font-weight:bold">=</span> input<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">1</span>];
+    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input<span style="color:#000;font-weight:bold">-&gt;</span>data;
+    <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-&gt;</span>data;
     dim3 threads;
     <span style="color:#000;font-weight:bold">if</span> (nrow <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">1024</span>) {
         threads.x <span style="color:#000;font-weight:bold">=</span> nrow;
@@ -997,7 +997,7 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
         threads.x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span>;
         threads.y <span style="color:#000;font-weight:bold">=</span> (nrow <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1023</span>) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">1024</span>;
     }
-    softmax_kernel <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">1</span>, threads <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (nrow, ncol, input_data, output_data);
+    softmax_kernel <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">1</span>, threads <span style="color:#000;font-weight:bold">&gt;&gt;</span> <span style="color:#000;font-weight:bold">&gt;</span> (nrow, ncol, input_data, output_data);
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
 </code></pre></td></tr></table>
@@ -1081,7 +1081,7 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">
 <span style="color:#998;font-style:italic">// 求交叉熵
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// np.mean(-np.sum(y_ * np.log(softmax(y)), axis=1), keepdims=True)
+</span><span style="color:#998;font-style:italic">// np.mean(-np.sum(y_ * np.log(softmax(y)), axis=1), keepdims=True)
 </span><span style="color:#998;font-style:italic"></span>__global__ <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">matrix_softmax_cross_entropy_kernel</span>(<span style="color:#458;font-weight:bold">int</span> nrow, <span style="color:#458;font-weight:bold">int</span> ncol,
                                                     <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_a,
                                                     <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_b,
@@ -1091,61 +1091,61 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
   <span style="color:#998;font-style:italic">// Two dimensional thread blocks.
 </span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">int</span> y <span style="color:#000;font-weight:bold">=</span> blockIdx.x <span style="color:#000;font-weight:bold">*</span> blockDim.x <span style="color:#000;font-weight:bold">*</span> blockDim.y <span style="color:#000;font-weight:bold">+</span> threadIdx.y <span style="color:#000;font-weight:bold">*</span> blockDim.x <span style="color:#000;font-weight:bold">+</span>
           threadIdx.x;
-  <span style="color:#000;font-weight:bold">if</span> (y <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> nrow) {
+  <span style="color:#000;font-weight:bold">if</span> (y <span style="color:#000;font-weight:bold">&gt;=</span> nrow) {
     <span style="color:#000;font-weight:bold">return</span>;
   }
-  input_a <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">*</span> ncol;
-  input_b <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">*</span> ncol;
+  input_a <span style="color:#000;font-weight:bold">+=</span> y <span style="color:#000;font-weight:bold">*</span> ncol;
+  input_b <span style="color:#000;font-weight:bold">+=</span> y <span style="color:#000;font-weight:bold">*</span> ncol;
   <span style="color:#458;font-weight:bold">float</span> maxval <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">*</span>input_a;
   <span style="color:#998;font-style:italic">// Find max for a row.
-</span><span style="color:#998;font-style:italic"></span>  <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>x) {
+</span><span style="color:#998;font-style:italic"></span>  <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">++</span>x) {
     maxval <span style="color:#000;font-weight:bold">=</span> max(maxval, input_a[x]);
   }
   <span style="color:#998;font-style:italic">// Deduct by max for a row, and raise to exp.
 </span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">float</span> sum <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
-  <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>x) {
-    sum <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> exp(input_a[x] <span style="color:#000;font-weight:bold">-</span> maxval);
+  <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">++</span>x) {
+    sum <span style="color:#000;font-weight:bold">+=</span> exp(input_a[x] <span style="color:#000;font-weight:bold">-</span> maxval);
   }
   <span style="color:#998;font-style:italic">// Compute per-row loss.
 </span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">float</span> loss <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
-  <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>x) {
-    loss <span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">=</span> input_b[x] <span style="color:#000;font-weight:bold">*</span> log(exp(input_a[x] <span style="color:#000;font-weight:bold">-</span> maxval) <span style="color:#000;font-weight:bold">/</span> sum);
+  <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; x <span style="color:#000;font-weight:bold">&lt;</span> ncol; <span style="color:#000;font-weight:bold">++</span>x) {
+    loss <span style="color:#000;font-weight:bold">-=</span> input_b[x] <span style="color:#000;font-weight:bold">*</span> log(exp(input_a[x] <span style="color:#000;font-weight:bold">-</span> maxval) <span style="color:#000;font-weight:bold">/</span> sum);
   }
   loss_per_row[y] <span style="color:#000;font-weight:bold">=</span> loss;
   __syncthreads();
   <span style="color:#998;font-style:italic">// Compute reduce_mean across rows.
 </span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">float</span> mean_loss <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
   <span style="color:#998;font-style:italic">// Use a single thread to reduce mean across rows.
-</span><span style="color:#998;font-style:italic"></span>  <span style="color:#000;font-weight:bold">if</span> ((threadIdx.x <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>) <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> (threadIdx.y <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>)) {
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> nrow; <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>i) {
-      mean_loss <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> loss_per_row[i];
+</span><span style="color:#998;font-style:italic"></span>  <span style="color:#000;font-weight:bold">if</span> ((threadIdx.x <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>) <span style="color:#000;font-weight:bold">&amp;&amp;</span> (threadIdx.y <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)) {
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> nrow; <span style="color:#000;font-weight:bold">++</span>i) {
+      mean_loss <span style="color:#000;font-weight:bold">+=</span> loss_per_row[i];
     }
-    mean_loss <span style="color:#000;font-weight:bold">/</span><span style="color:#000;font-weight:bold">=</span> nrow;
+    mean_loss <span style="color:#000;font-weight:bold">/=</span> nrow;
     output[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> mean_loss;
   }
 }
 <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLGpuSoftmaxCrossEntropy</span>(<span style="color:#000;font-weight:bold">const</span> DLArrayHandle input_a,
 		<span style="color:#000;font-weight:bold">const</span> DLArrayHandle input_b, DLArrayHandle output) {
-	assert(input_a<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>);
-	assert(input_b<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>);
-	assert(output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>);
+	assert(input_a<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>);
+	assert(input_b<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>);
+	assert(output<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>);
 	assert(
-			input_a<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> input_b<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">0</span>]
-					<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span> input_a<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> input_b<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">1</span>]);
-	<span style="color:#458;font-weight:bold">int</span> nrow <span style="color:#000;font-weight:bold">=</span> input_a<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">0</span>];
-	assert(nrow <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#099">4</span>);
-	<span style="color:#458;font-weight:bold">int</span> ncol <span style="color:#000;font-weight:bold">=</span> input_a<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">1</span>];
-	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data_a <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input_a<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data_b <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input_b<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
-	<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data;
+			input_a<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">==</span> input_b<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">0</span>]
+					<span style="color:#000;font-weight:bold">&amp;&amp;</span> input_a<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> input_b<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">1</span>]);
+	<span style="color:#458;font-weight:bold">int</span> nrow <span style="color:#000;font-weight:bold">=</span> input_a<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">0</span>];
+	assert(nrow <span style="color:#000;font-weight:bold">&lt;=</span> <span style="color:#099">1024</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#099">4</span>);
+	<span style="color:#458;font-weight:bold">int</span> ncol <span style="color:#000;font-weight:bold">=</span> input_a<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">1</span>];
+	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data_a <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input_a<span style="color:#000;font-weight:bold">-&gt;</span>data;
+	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>input_data_b <span style="color:#000;font-weight:bold">=</span> (<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) input_b<span style="color:#000;font-weight:bold">-&gt;</span>data;
+	<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>output_data <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">float</span> <span style="color:#000;font-weight:bold">*</span>) output<span style="color:#000;font-weight:bold">-&gt;</span>data;
 	dim3 threads;
-	<span style="color:#000;font-weight:bold">if</span> (nrow <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span>) {
+	<span style="color:#000;font-weight:bold">if</span> (nrow <span style="color:#000;font-weight:bold">&lt;=</span> <span style="color:#099">1024</span>) {
 		threads.x <span style="color:#000;font-weight:bold">=</span> nrow;
 	} <span style="color:#000;font-weight:bold">else</span> {
 		threads.x <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1024</span>;
 		threads.y <span style="color:#000;font-weight:bold">=</span> (nrow <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1023</span>) <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">1024</span>;
 	}
-	matrix_softmax_cross_entropy_kernel<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">1</span>, threads, nrow <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">float</span>)<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span>(
+	matrix_softmax_cross_entropy_kernel<span style="color:#000;font-weight:bold">&lt;&lt;&lt;</span><span style="color:#099">1</span>, threads, nrow <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">float</span>)<span style="color:#000;font-weight:bold">&gt;&gt;&gt;</span>(
 			nrow, ncol, input_data_a, input_data_b, output_data);
 	<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
@@ -1212,8 +1212,8 @@ int DLGpuMatrixElementwiseAdd(const DLArrayHandle matA,
 <span style="color:#008080">NVCC_FLAGS</span> <span style="color:#000;font-weight:bold">=</span> -std<span style="color:#000;font-weight:bold">=</span>c++11 --compiler-options <span style="color:#d14">&#39;-fPIC&#39;</span>
 <span style="color:#008080">ARCH</span> <span style="color:#000;font-weight:bold">=</span> -gencode <span style="color:#008080">arch</span><span style="color:#000;font-weight:bold">=</span>compute_30,code<span style="color:#000;font-weight:bold">=</span>sm_30 <span style="color:#d14">\
 </span><span style="color:#d14"></span>       -gencode <span style="color:#008080">arch</span><span style="color:#000;font-weight:bold">=</span>compute_35,code<span style="color:#000;font-weight:bold">=</span>sm_35 <span style="color:#d14">\
-</span><span style="color:#d14"></span>       -gencode <span style="color:#008080">arch</span><span style="color:#000;font-weight:bold">=</span>compute_50,code<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">[</span>sm_50,compute_50<span style="color:#000;font-weight:bold">]</span> <span style="color:#d14">\
-</span><span style="color:#d14"></span>       -gencode <span style="color:#008080">arch</span><span style="color:#000;font-weight:bold">=</span>compute_52,code<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">[</span>sm_52,compute_52<span style="color:#000;font-weight:bold">]</span>
+</span><span style="color:#d14"></span>       -gencode <span style="color:#008080">arch</span><span style="color:#000;font-weight:bold">=</span>compute_50,code<span style="color:#000;font-weight:bold">=[</span>sm_50,compute_50<span style="color:#000;font-weight:bold">]</span> <span style="color:#d14">\
+</span><span style="color:#d14"></span>       -gencode <span style="color:#008080">arch</span><span style="color:#000;font-weight:bold">=</span>compute_52,code<span style="color:#000;font-weight:bold">=[</span>sm_52,compute_52<span style="color:#000;font-weight:bold">]</span>
 
 <span style="color:#900;font-weight:bold">all</span><span style="color:#000;font-weight:bold">:</span> build/lib/libc_runtime_api.so
 
@@ -1330,27 +1330,11 @@ How to implement a neural network Intermezzo</a>.</p>
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -1369,6 +1353,22 @@ How to implement a neural network Intermezzo</a>.</p>
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -1384,8 +1384,6 @@ How to implement a neural network Intermezzo</a>.</p>
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -1394,13 +1392,13 @@ How to implement a neural network Intermezzo</a>.</p>
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -1420,8 +1418,6 @@ How to implement a neural network Intermezzo</a>.</p>
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

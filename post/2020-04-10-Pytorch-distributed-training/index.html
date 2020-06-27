@@ -345,18 +345,18 @@
 
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">main</span>():
     parser <span style="color:#000;font-weight:bold">=</span> argparse<span style="color:#000;font-weight:bold">.</span>ArgumentParser()
-    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">-n</span><span style="color:#d14">&#39;</span>, <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">--nodes</span><span style="color:#d14">&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">N</span><span style="color:#d14">&#39;</span>,
-                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">number of data loading workers (default: 4)</span><span style="color:#d14">&#39;</span>)
-    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">-g</span><span style="color:#d14">&#39;</span>, <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">--gpus</span><span style="color:#d14">&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
-                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">number of gpus per node</span><span style="color:#d14">&#39;</span>)
-    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">-nr</span><span style="color:#d14">&#39;</span>, <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">--nr</span><span style="color:#d14">&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
-                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">ranking within the nodes</span><span style="color:#d14">&#39;</span>)
-    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">--epochs</span><span style="color:#d14">&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">N</span><span style="color:#d14">&#39;</span>,
-                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">number of total epochs to run</span><span style="color:#d14">&#39;</span>)
+    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-n&#39;</span>, <span style="color:#d14">&#39;--nodes&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;N&#39;</span>,
+                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of data loading workers (default: 4)&#39;</span>)
+    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-g&#39;</span>, <span style="color:#d14">&#39;--gpus&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
+                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of gpus per node&#39;</span>)
+    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-nr&#39;</span>, <span style="color:#d14">&#39;--nr&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
+                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;ranking within the nodes&#39;</span>)
+    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;--epochs&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;N&#39;</span>,
+                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of total epochs to run&#39;</span>)
     args <span style="color:#000;font-weight:bold">=</span> parser<span style="color:#000;font-weight:bold">.</span>parse_args()
     args<span style="color:#000;font-weight:bold">.</span>world_size <span style="color:#000;font-weight:bold">=</span> args<span style="color:#000;font-weight:bold">.</span>gpus <span style="color:#000;font-weight:bold">*</span> args<span style="color:#000;font-weight:bold">.</span>nodes
-    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">MASTER_ADDR</span><span style="color:#d14">&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">localhost</span><span style="color:#d14">&#39;</span>
-    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">MASTER_PORT</span><span style="color:#d14">&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">8888</span><span style="color:#d14">&#39;</span>
+    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14">&#39;MASTER_ADDR&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;localhost&#39;</span>
+    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14">&#39;MASTER_PORT&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;8888&#39;</span>
     mp<span style="color:#000;font-weight:bold">.</span>spawn(train, nprocs<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>gpus, args<span style="color:#000;font-weight:bold">=</span>(args,))
 
 
@@ -386,8 +386,8 @@
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">train</span>(gpu, args):
     rank <span style="color:#000;font-weight:bold">=</span> args<span style="color:#000;font-weight:bold">.</span>nr <span style="color:#000;font-weight:bold">*</span> args<span style="color:#000;font-weight:bold">.</span>gpus <span style="color:#000;font-weight:bold">+</span> gpu
     dist<span style="color:#000;font-weight:bold">.</span>init_process_group(
-        backend<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">nccl</span><span style="color:#d14">&#39;</span>,
-        init_method<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">env://</span><span style="color:#d14">&#39;</span>,
+        backend<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;nccl&#39;</span>,
+        init_method<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;env://&#39;</span>,
         world_size<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>world_size,
         rank<span style="color:#000;font-weight:bold">=</span>rank)
     torch<span style="color:#000;font-weight:bold">.</span>manual_seed(<span style="color:#099">0</span>)
@@ -399,11 +399,11 @@
     criterion <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>CrossEntropyLoss()<span style="color:#000;font-weight:bold">.</span>cuda(gpu)
     optimizer <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>optim<span style="color:#000;font-weight:bold">.</span>SGD(model<span style="color:#000;font-weight:bold">.</span>parameters(), <span style="color:#099">1e-4</span>)
     <span style="color:#998;font-style:italic"># Wrap the model</span>
-    model, optimizer <span style="color:#000;font-weight:bold">=</span> amp<span style="color:#000;font-weight:bold">.</span>initialize(model, optimizer, opt_level<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">O2</span><span style="color:#d14">&#39;</span>)
+    model, optimizer <span style="color:#000;font-weight:bold">=</span> amp<span style="color:#000;font-weight:bold">.</span>initialize(model, optimizer, opt_level<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;O2&#39;</span>)
     model <span style="color:#000;font-weight:bold">=</span> DDP(model)
     <span style="color:#998;font-style:italic"># Data loading code</span>
     train_dataset <span style="color:#000;font-weight:bold">=</span> torchvision<span style="color:#000;font-weight:bold">.</span>datasets<span style="color:#000;font-weight:bold">.</span>MNIST(
-        root<span style="color:#000;font-weight:bold">=</span><span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">./data</span><span style="color:#d14">&#39;</span>,
+        root<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;./data&#39;</span>,
         train<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>,
         transform<span style="color:#000;font-weight:bold">=</span>transforms<span style="color:#000;font-weight:bold">.</span>ToTensor(),
         download<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>
@@ -437,7 +437,7 @@
                 scaled_loss<span style="color:#000;font-weight:bold">.</span>backward()
             optimizer<span style="color:#000;font-weight:bold">.</span>step()
             <span style="color:#000;font-weight:bold">if</span> (i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">%</span> <span style="color:#099">100</span> <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">and</span> gpu <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
-                <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(
+                <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#39;Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}&#39;</span><span style="color:#000;font-weight:bold">.</span>format(
                     epoch <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>,
                     args<span style="color:#000;font-weight:bold">.</span>epochs,
                     i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>,
@@ -445,10 +445,10 @@
                     loss<span style="color:#000;font-weight:bold">.</span>item())
                 )
     <span style="color:#000;font-weight:bold">if</span> gpu <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
-        <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">Training complete in: </span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#0086b3">str</span>(datetime<span style="color:#000;font-weight:bold">.</span>now() <span style="color:#000;font-weight:bold">-</span> start))
+        <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#34;Training complete in: &#34;</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#0086b3">str</span>(datetime<span style="color:#000;font-weight:bold">.</span>now() <span style="color:#000;font-weight:bold">-</span> start))
 
 
-<span style="color:#000;font-weight:bold">if</span> __name__ <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14"></span><span style="color:#d14">&#39;</span><span style="color:#d14">__main__</span><span style="color:#d14">&#39;</span>:
+<span style="color:#000;font-weight:bold">if</span> __name__ <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#39;__main__&#39;</span>:
     main()
 </code></pre></td></tr></table>
 </div>
@@ -541,27 +541,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -580,6 +564,22 @@
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -595,8 +595,6 @@
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -605,13 +603,13 @@
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -631,8 +629,6 @@
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

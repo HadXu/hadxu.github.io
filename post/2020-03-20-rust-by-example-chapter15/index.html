@@ -247,35 +247,35 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">derive(PartialOrd, PartialEq)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[derive(PartialOrd, PartialEq)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Centimeters</span>(<span style="color:#458;font-weight:bold">f64</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Inches</span>(<span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>Inches<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">to_centimeters</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">Centimeters</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span>Inches(inches)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>Centimeters(inches<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">f64</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span><span style="color:#099">2.54</span>)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">to_centimeters</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">Centimeters</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span>Inches(inches)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>Centimeters(inches<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">f64</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span><span style="color:#099">2.54</span>)<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>foot<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Inches(<span style="color:#099">12</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>meter<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Centimeters(<span style="color:#099">100.0</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>cmp<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>foot.to_centimeters()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span>meter<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">            </span><span style="color:#d14">&#34;smaller&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">            </span><span style="color:#d14">&#34;bigger&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>cmp);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>foot<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Inches(<span style="color:#099">12</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>meter<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Centimeters(<span style="color:#099">100.0</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>cmp<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>foot.to_centimeters()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span>meter<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span><span style="color:#d14">&#34;smaller&#34;</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span><span style="color:#d14">&#34;bigger&#34;</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>cmp);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -322,39 +322,39 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Sheep</span><span style="color:#bbb"> </span>{}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Cow</span><span style="color:#bbb"> </span>{}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">//定义一个接口
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">trait</span><span style="color:#bbb"> </span>Animal<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">noise</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">noise</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span>;<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>Animal<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>Sheep<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">noise</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#d14">&#34;baaaaah!&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">noise</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#d14">&#34;baaaaah!&#34;</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>Animal<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>Cow<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">noise</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#d14">&#34;moooooo!&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">noise</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#d14">&#34;moooooo!&#34;</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">//返回自定义类型
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">random_animal</span>(random_number: <span style="color:#458;font-weight:bold">f64</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Box</span><span style="color:#000;font-weight:bold">&lt;</span>dyn<span style="color:#bbb"> </span>Animal<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>random_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span><span style="color:#099">0.5</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#0086b3">Box</span>::new(Sheep<span style="color:#bbb"> </span>{})<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#0086b3">Box</span>::new(Cow<span style="color:#bbb"> </span>{})<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>random_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span><span style="color:#099">0.5</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#0086b3">Box</span>::new(Sheep<span style="color:#bbb"> </span>{})<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#0086b3">Box</span>::new(Cow<span style="color:#bbb"> </span>{})<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>random_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0.6</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>animal<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>random_animal(random_number);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;You&#39;ve randomly chosen an animal, and it says {}&#34;</span>,<span style="color:#bbb"> </span>animal.noise());<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>random_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0.6</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>animal<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>random_animal(random_number);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;You&#39;ve randomly chosen an animal, and it says {}&#34;</span>,<span style="color:#bbb"> </span>animal.noise());<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -405,45 +405,45 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">use</span><span style="color:#bbb"> </span>std::ops;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Foo</span>;<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Bar</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">derive(Debug)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Debug)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">FooBar</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">derive(Debug)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Debug)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">BarFoo</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">// The `std::ops::Add` trait is used to specify the functionality of `+`.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// Here, we make `Add&lt;Bar&gt;` - the trait for addition with a RHS of type `Bar`.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// The following block implements the operation: Foo + Bar = FooBar
+</span><span style="color:#998;font-style:italic">// Here, we make `Add&lt;Bar&gt;` - the trait for addition with a RHS of type `Bar`.
+</span><span style="color:#998;font-style:italic">// The following block implements the operation: Foo + Bar = FooBar
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>ops::Add<span style="color:#000;font-weight:bold">&lt;</span>Bar<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>Foo<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Output</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>FooBar;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">add</span>(<span style="color:#999">self</span>,<span style="color:#bbb"> </span>_rhs: <span style="color:#458;font-weight:bold">Bar</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">FooBar</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; Foo.add(Bar) was called&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>FooBar<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Output</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>FooBar;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">add</span>(<span style="color:#999">self</span>,<span style="color:#bbb"> </span>_rhs: <span style="color:#458;font-weight:bold">Bar</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">FooBar</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; Foo.add(Bar) was called&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>FooBar<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">// By reversing the types, we end up implementing non-commutative addition.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// Here, we make `Add&lt;Foo&gt;` - the trait for addition with a RHS of type `Foo`.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// This block implements the operation: Bar + Foo = BarFoo
+</span><span style="color:#998;font-style:italic">// Here, we make `Add&lt;Foo&gt;` - the trait for addition with a RHS of type `Foo`.
+</span><span style="color:#998;font-style:italic">// This block implements the operation: Bar + Foo = BarFoo
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>ops::Add<span style="color:#000;font-weight:bold">&lt;</span>Foo<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>Bar<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Output</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>BarFoo;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">add</span>(<span style="color:#999">self</span>,<span style="color:#bbb"> </span>_rhs: <span style="color:#458;font-weight:bold">Foo</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">BarFoo</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; Bar.add(Foo) was called&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>BarFoo<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Output</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>BarFoo;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">add</span>(<span style="color:#999">self</span>,<span style="color:#bbb"> </span>_rhs: <span style="color:#458;font-weight:bold">Foo</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">BarFoo</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; Bar.add(Foo) was called&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>BarFoo<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Foo + Bar = {:?}&#34;</span>,<span style="color:#bbb"> </span>Foo<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>Bar);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Bar + Foo = {:?}&#34;</span>,<span style="color:#bbb"> </span>Bar<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>Foo);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Foo + Bar = {:?}&#34;</span>,<span style="color:#bbb"> </span>Foo<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>Bar);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Bar + Foo = {:?}&#34;</span>,<span style="color:#bbb"> </span>Bar<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>Foo);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -521,72 +521,72 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Fibonacci</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>curr: <span style="color:#458;font-weight:bold">u32</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>next: <span style="color:#458;font-weight:bold">u32</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>curr: <span style="color:#458;font-weight:bold">u32</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>next: <span style="color:#458;font-weight:bold">u32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">// Implement `Iterator` for `Fibonacci`.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// The `Iterator` trait only requires a method to be defined for the `next` element.
+</span><span style="color:#998;font-style:italic">// The `Iterator` trait only requires a method to be defined for the `next` element.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span><span style="color:#0086b3">Iterator</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>Fibonacci<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Item</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u32</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Item</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u32</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    
 </span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Here, we define the sequence using `.curr` and `.next`.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// The return type is `Option&lt;T&gt;`:
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">//     * When the `Iterator` is finished, `None` is returned.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">//     * Otherwise, the next value is wrapped in `Some` and returned.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">next</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">u32</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>new_next<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.curr<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.next;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#999">self</span>.curr<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.next;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#999">self</span>.next<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>new_next;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Since there&#39;s no endpoint to a Fibonacci sequence, the `Iterator` 
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>new_next<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.curr<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.next;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#999">self</span>.curr<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.next;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#999">self</span>.next<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>new_next;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Since there&#39;s no endpoint to a Fibonacci sequence, the `Iterator` 
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// will never return `None`, and `Some` is always returned.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span><span style="color:#0086b3">Some</span>(<span style="color:#999">self</span>.curr)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">// Returns a Fibonacci sequence generator
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">fibonacci</span>()<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">Fibonacci</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Fibonacci<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>curr: <span style="color:#099">0</span>,<span style="color:#bbb"> </span>next: <span style="color:#099">1</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>Fibonacci<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>curr: <span style="color:#099">0</span>,<span style="color:#bbb"> </span>next: <span style="color:#099">1</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `0..3` is an `Iterator` that generates: 0, 1, and 2.
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `0..3` is an `Iterator` that generates: 0, 1, and 2.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>sequence<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0</span>..<span style="color:#099">3</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Four consecutive `next` calls on 0..3&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {:?}&#34;</span>,<span style="color:#bbb"> </span>sequence.next());<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {:?}&#34;</span>,<span style="color:#bbb"> </span>sequence.next());<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {:?}&#34;</span>,<span style="color:#bbb"> </span>sequence.next());<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {:?}&#34;</span>,<span style="color:#bbb"> </span>sequence.next());<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `for` works through an `Iterator` until it returns `None`.
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Four consecutive `next` calls on 0..3&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {:?}&#34;</span>,<span style="color:#bbb"> </span>sequence.next());<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {:?}&#34;</span>,<span style="color:#bbb"> </span>sequence.next());<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {:?}&#34;</span>,<span style="color:#bbb"> </span>sequence.next());<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {:?}&#34;</span>,<span style="color:#bbb"> </span>sequence.next());<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `for` works through an `Iterator` until it returns `None`.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Each `Some` value is unwrapped and bound to a variable (here, `i`).
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Iterate through 0..3 using `for`&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span><span style="color:#099">0</span>..<span style="color:#099">3</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {}&#34;</span>,<span style="color:#bbb"> </span>i);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// The `take(n)` method reduces an `Iterator` to its first `n` terms.
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span><span style="color:#099">0</span>..<span style="color:#099">3</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {}&#34;</span>,<span style="color:#bbb"> </span>i);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// The `take(n)` method reduces an `Iterator` to its first `n` terms.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;The first four terms of the Fibonacci sequence are: &#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>fibonacci().take(<span style="color:#099">4</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {}&#34;</span>,<span style="color:#bbb"> </span>i);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// The `skip(n)` method shortens an `Iterator` by dropping its first `n` terms.
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>fibonacci().take(<span style="color:#099">4</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {}&#34;</span>,<span style="color:#bbb"> </span>i);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// The `skip(n)` method shortens an `Iterator` by dropping its first `n` terms.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;The next four terms of the Fibonacci sequence are: &#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>fibonacci().skip(<span style="color:#099">4</span>).take(<span style="color:#099">4</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {}&#34;</span>,<span style="color:#bbb"> </span>i);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>array<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>[<span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>,<span style="color:#bbb"> </span><span style="color:#099">7</span>];<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// The `iter` method produces an `Iterator` over an array/slice.
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>fibonacci().skip(<span style="color:#099">4</span>).take(<span style="color:#099">4</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {}&#34;</span>,<span style="color:#bbb"> </span>i);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>array<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>[<span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>,<span style="color:#bbb"> </span><span style="color:#099">7</span>];<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// The `iter` method produces an `Iterator` over an array/slice.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Iterate the following array {:?}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span>array);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>array.iter()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {}&#34;</span>,<span style="color:#bbb"> </span>i);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>array.iter()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;&gt; {}&#34;</span>,<span style="color:#bbb"> </span>i);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -683,27 +683,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -722,6 +706,22 @@
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -737,8 +737,6 @@
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -747,13 +745,13 @@
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -773,8 +771,6 @@
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

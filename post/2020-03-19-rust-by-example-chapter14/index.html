@@ -232,16 +232,16 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Val</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>val: <span style="color:#458;font-weight:bold">f64</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>val: <span style="color:#458;font-weight:bold">f64</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>Val<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">value</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">f64</span> {<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>.val<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">value</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">f64</span> {<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>.val<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Val<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>val: <span style="color:#099">3.</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>y<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>x.value();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Val<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>val: <span style="color:#099">3.</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>y<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>x.value();<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -274,25 +274,25 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#998;font-style:italic">//定义接口
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">trait</span><span style="color:#bbb"> </span>HasArea<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">area</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">f64</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">area</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">f64</span>;<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Rectangle</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>length: <span style="color:#458;font-weight:bold">f64</span>,<span style="color:#bbb"> </span>height: <span style="color:#458;font-weight:bold">f64</span> }<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">// 实现接口
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>HasArea<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>Rectangle<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">area</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">f64</span> {<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#999">self</span>.length<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.height<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">area</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">f64</span> {<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#999">self</span>.length<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.height<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">//方法
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">area</span><span style="color:#000;font-weight:bold">&lt;</span>T: <span style="color:#458;font-weight:bold">HasArea</span><span style="color:#000;font-weight:bold">&gt;</span>(t: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">T</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">f64</span> {<span style="color:#bbb"> </span>t.area()<span style="color:#bbb"> </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>r<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Rectangle<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>length: <span style="color:#099">5.</span>,<span style="color:#bbb"> </span>height: <span style="color:#099">4.</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>r.area();<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>x);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>r<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Rectangle<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>length: <span style="color:#099">5.</span>,<span style="color:#bbb"> </span>height: <span style="color:#099">4.</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>r.area();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>x);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -313,13 +313,13 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">use</span><span style="color:#bbb"> </span>std::fmt::{Debug,<span style="color:#bbb"> </span>Display,<span style="color:#bbb"> </span>Formatter,<span style="color:#bbb"> </span>Error,<span style="color:#bbb"> </span><span style="color:#0086b3">Result</span>};<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">compare_prints</span><span style="color:#000;font-weight:bold">&lt;</span>T: <span style="color:#458;font-weight:bold">Debug</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>Display<span style="color:#000;font-weight:bold">&gt;</span>(t: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">T</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Debug: `{:?}`&#34;</span>,<span style="color:#bbb"> </span>t);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Display: `{}`&#34;</span>,<span style="color:#bbb"> </span>t);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Debug: `{:?}`&#34;</span>,<span style="color:#bbb"> </span>t);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Display: `{}`&#34;</span>,<span style="color:#bbb"> </span>t);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>string<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;words&#34;</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>array<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>[<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">2</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>];<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>compare_prints(<span style="color:#000;font-weight:bold">&amp;</span>string);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>string<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;words&#34;</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>array<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>[<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">2</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>];<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>compare_prints(<span style="color:#000;font-weight:bold">&amp;</span>string);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -351,26 +351,26 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">use</span><span style="color:#bbb"> </span>std::fmt::Debug;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">trait</span><span style="color:#bbb"> </span>PrintInOption<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">print_in_option</span>(<span style="color:#999">self</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">print_in_option</span>(<span style="color:#999">self</span>);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">// Because we would otherwise have to express this as `T: Debug` or 
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// use another method of indirect approach, this requires a `where` clause:
+</span><span style="color:#998;font-style:italic">// use another method of indirect approach, this requires a `where` clause:
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#000;font-weight:bold">&lt;</span>T<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>PrintInOption<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>T<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">where</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span>T<span style="color:#000;font-weight:bold">&gt;</span>: <span style="color:#458;font-weight:bold">Debug</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// We want `Option&lt;T&gt;: Debug` as our bound because that is what&#39;s
+</span><span style="color:#bbb">    </span><span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span>T<span style="color:#000;font-weight:bold">&gt;</span>: <span style="color:#458;font-weight:bold">Debug</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// We want `Option&lt;T&gt;: Debug` as our bound because that is what&#39;s
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// being printed. Doing otherwise would be using the wrong bound.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">print_in_option</span>(<span style="color:#999">self</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{:?}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#0086b3">Some</span>(<span style="color:#999">self</span>));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{:?}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#0086b3">Some</span>(<span style="color:#999">self</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>vec<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>vec<span style="color:#000;font-weight:bold">!</span>[<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">2</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>];<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>vec.print_in_option();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>vec<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>vec<span style="color:#000;font-weight:bold">!</span>[<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">2</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span>];<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>vec.print_in_option();<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -416,20 +416,20 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">eat_box_i32</span>(boxed_i32: <span style="color:#0086b3">Box</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span><span style="color:#000;font-weight:bold">&gt;</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Destroying box that contains {}&#34;</span>,<span style="color:#bbb"> </span>boxed_i32);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Destroying box that contains {}&#34;</span>,<span style="color:#bbb"> </span>boxed_i32);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">borrow_i32</span>(borrowed_i32: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">i32</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;This int is: {}&#34;</span>,<span style="color:#bbb"> </span>borrowed_i32);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;This int is: {}&#34;</span>,<span style="color:#bbb"> </span>borrowed_i32);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>boxed_i32<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#0086b3">Box</span>::new(<span style="color:#099">5_</span><span style="color:#000;font-weight:bold">i32</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>stacked_i32<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">6_</span><span style="color:#000;font-weight:bold">i32</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>borrow_i32(<span style="color:#000;font-weight:bold">&amp;</span>boxed_i32);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>boxed_i32);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>boxed_i32<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#0086b3">Box</span>::new(<span style="color:#099">5_</span><span style="color:#000;font-weight:bold">i32</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>stacked_i32<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">6_</span><span style="color:#000;font-weight:bold">i32</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>borrow_i32(<span style="color:#000;font-weight:bold">&amp;</span>boxed_i32);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>boxed_i32);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">//下面两个是一样的
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">ref</span><span style="color:#bbb"> </span>ref_c1<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>c;<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>ref_c2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span>c;<span style="color:#bbb">
@@ -452,12 +452,12 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Object</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>number: <span style="color:#458;font-weight:bold">u32</span>
+</span><span style="color:#bbb">    </span>number: <span style="color:#458;font-weight:bold">u32</span>
 }<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Multiplier</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>object: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">Object</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>mult: <span style="color:#458;font-weight:bold">u32</span>
+</span><span style="color:#bbb">    </span>object: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">Object</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>mult: <span style="color:#458;font-weight:bold">u32</span>
 }<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -476,8 +476,8 @@ Rust是这样定义生命周期</li>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Multiplier</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#008080">&#39;a</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>object: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#008080">&#39;a</span><span style="color:#bbb"> </span>Object,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>mult: <span style="color:#458;font-weight:bold">u32</span>
+</span><span style="color:#bbb">    </span>object: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#008080">&#39;a</span><span style="color:#bbb"> </span>Object,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>mult: <span style="color:#458;font-weight:bold">u32</span>
 }<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -504,20 +504,20 @@ Rust是这样定义生命周期</li>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Object</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>number: <span style="color:#458;font-weight:bold">i32</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>number: <span style="color:#458;font-weight:bold">i32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">object_combinator</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#008080">&#39;a</span>,<span style="color:#bbb"> </span><span style="color:#008080">&#39;b</span><span style="color:#000;font-weight:bold">&gt;</span>(a: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#008080">&#39;a</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>Object,<span style="color:#bbb"> </span>b: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#008080">&#39;b</span><span style="color:#bbb"> </span>Object)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#008080">&#39;a</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>Object<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>a.number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>a.number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>b.number;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>a<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>a.number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>a.number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>b.number;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>a<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Object<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>number: <span style="color:#099">3</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Object<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>number: <span style="color:#099">4</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Result: {}&#34;</span>,<span style="color:#bbb"> </span>object_combinator(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>a,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span>b).number);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Object<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>number: <span style="color:#099">3</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Object<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>number: <span style="color:#099">4</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Result: {}&#34;</span>,<span style="color:#bbb"> </span>object_combinator(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>a,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span>b).number);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">//意味着该变量存在与整个程序
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>string: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;I&#39;m a string! Yay!&#34;</span>;<span style="color:#bbb">
 </span></code></pre></td></tr></table>
@@ -620,27 +620,11 @@ Rust是这样定义生命周期</li>
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -659,6 +643,22 @@ Rust是这样定义生命周期</li>
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -674,8 +674,6 @@ Rust是这样定义生命周期</li>
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -684,13 +682,13 @@ Rust是这样定义生命周期</li>
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -710,8 +708,6 @@ Rust是这样定义生命周期</li>
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

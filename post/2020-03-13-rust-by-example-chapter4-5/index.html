@@ -254,12 +254,12 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">3</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">4</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>a);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>a);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">3</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">4</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>a);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>a);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -317,51 +317,51 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#998;font-style:italic">// Suppress all warnings from casts which overflow.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#![</span><span style="color:#999;font-weight:bold;font-style:italic">allow(overflowing_literals)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#![allow(overflowing_literals)]</span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>decimal<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">65.4321_</span><span style="color:#000;font-weight:bold">f32</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Error! No implicit conversion
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>decimal<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">65.4321_</span><span style="color:#000;font-weight:bold">f32</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Error! No implicit conversion
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>integer: <span style="color:#458;font-weight:bold">u8</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>decimal;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// FIXME ^ Comment out this line
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// FIXME ^ Comment out this line
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Explicit conversion
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Explicit conversion
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>integer<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>decimal<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u8</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>character<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>integer<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span>char;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Casting: {} -&gt; {} -&gt; {}&#34;</span>,<span style="color:#bbb"> </span>decimal,<span style="color:#bbb"> </span>integer,<span style="color:#bbb"> </span>character);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// when casting any value to an unsigned type, T,
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>character<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>integer<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span>char;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Casting: {} -&gt; {} -&gt; {}&#34;</span>,<span style="color:#bbb"> </span>decimal,<span style="color:#bbb"> </span>integer,<span style="color:#bbb"> </span>character);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// when casting any value to an unsigned type, T,
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// std::T::MAX + 1 is added or subtracted until the value
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// fits into the new type
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 1000 already fits in a u16
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 1000 already fits in a u16
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1000 as a u16 is: {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1000</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u16</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 1000 - 256 - 256 - 256 = 232
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 1000 - 256 - 256 - 256 = 232
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Under the hood, the first 8 least significant bits (LSB) are kept,
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// while the rest towards the most significant bit (MSB) get truncated.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1000 as a u8 is : {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1000</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u8</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// -1 + 256 = 255
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// -1 + 256 = 255
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;  -1 as a u8 is : {}&#34;</span>,<span style="color:#bbb"> </span>(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">i8</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u8</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// For positive numbers, this is the same as the modulus
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// For positive numbers, this is the same as the modulus
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1000 mod 256 is : {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1000</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">%</span><span style="color:#bbb"> </span><span style="color:#099">256</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// When casting to a signed type, the (bitwise) result is the same as
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// When casting to a signed type, the (bitwise) result is the same as
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// first casting to the corresponding unsigned type. If the most significant
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// bit of that value is 1, then the value is negative.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Unless it already fits, of course.
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Unless it already fits, of course.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34; 128 as a i16 is: {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">128</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i16</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 128 as u8 -&gt; 128, whose two&#39;s complement in eight bits is:
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 128 as u8 -&gt; 128, whose two&#39;s complement in eight bits is:
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34; 128 as a i8 is : {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">128</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i8</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// repeating the example above
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// repeating the example above
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 1000 as u8 -&gt; 232
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1000 as a u8 is : {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1000</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u8</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// and the two&#39;s complement of 232 is -24
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// and the two&#39;s complement of 232 is -24
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34; 232 as a i8 is : {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">232</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i8</span>);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
@@ -389,21 +389,21 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Suffixed literals, their types are known at initialization
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Suffixed literals, their types are known at initialization
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">u8</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>y<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">2</span><span style="color:#000;font-weight:bold">u32</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>z<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">3</span><span style="color:#000;font-weight:bold">f32</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Unsuffixed literal, their types depend on how they are used
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>y<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">2</span><span style="color:#000;font-weight:bold">u32</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>z<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">3</span><span style="color:#000;font-weight:bold">f32</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Unsuffixed literal, their types depend on how they are used
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">1</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>f<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">1.0</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `size_of_val` returns the size of a variable in bytes
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>f<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">1.0</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `size_of_val` returns the size of a variable in bytes
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `x` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>x));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `y` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>y));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `z` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>z));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `i` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>i));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `f` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>f));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `y` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>y));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `z` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>z));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `i` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>i));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;size of `f` in bytes: {}&#34;</span>,<span style="color:#bbb"> </span>std::mem::size_of_val(<span style="color:#000;font-weight:bold">&amp;</span>f));<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -510,27 +510,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -549,6 +533,22 @@
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -564,8 +564,6 @@
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -574,13 +572,13 @@
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -600,8 +598,6 @@
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

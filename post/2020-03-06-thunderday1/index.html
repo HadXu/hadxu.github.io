@@ -383,18 +383,18 @@ optimizer <span style="color:#000;font-weight:bold">=</span> torch<span style="c
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">ifndef DLSYS_DLARRAY_H</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_DLARRAY_H</span><span style="color:#999;font-weight:bold;font-style:italic">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#999;font-weight:bold;font-style:italic">#ifndef DLSYS_DLARRAY_H
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_DLARRAY_H
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">ifdef __cplusplus</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_EXTERN_C extern &#34;C&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">else</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_EXTERN_C</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">endif</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#ifdef __cplusplus
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_EXTERN_C extern &#34;C&#34;
+</span><span style="color:#999;font-weight:bold;font-style:italic">#else
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_EXTERN_C
+</span><span style="color:#999;font-weight:bold;font-style:italic">#endif
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstddef&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdint&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstddef&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdint&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 DLSYS_EXTERN_C {
     <span style="color:#000;font-weight:bold">typedef</span> <span style="color:#000;font-weight:bold">enum</span> {
@@ -415,7 +415,7 @@ DLSYS_EXTERN_C {
 </span><span style="color:#998;font-style:italic"></span>        <span style="color:#458;font-weight:bold">int64_t</span> <span style="color:#000;font-weight:bold">*</span>shape;  <span style="color:#998;font-style:italic">// 每一个维度的大小
 </span><span style="color:#998;font-style:italic"></span>    }DLArray;
 }
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">endif </span><span style="color:#998;font-style:italic">//DLSYS_DLARRAY_H
+<span style="color:#999;font-weight:bold;font-style:italic">#endif </span><span style="color:#998;font-style:italic">//DLSYS_DLARRAY_H
 </span></code></pre></td></tr></table>
 </div>
 </div><p>那么，下面就需要对该数据结构进行操作，同时分为CPU操作和GPU操作。为了使对设备操作统一起来，我们定义抽象类进行对各种设备的操作</p>
@@ -452,14 +452,14 @@ DLSYS_EXTERN_C {
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#998;font-style:italic">//
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">//
+</span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
+</span><span style="color:#998;font-style:italic">//
 </span><span style="color:#998;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">ifndef DLSYS_DEVICE_API_H</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_DEVICE_API_H</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#ifndef DLSYS_DEVICE_API_H
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_DEVICE_API_H
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cassert&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstring&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cassert&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstring&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">DeviceAPI</span> {
 <span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
     <span style="color:#000;font-weight:bold">virtual</span> <span style="color:#000;font-weight:bold">~</span>DeviceAPI() <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">default</span>;
@@ -477,7 +477,7 @@ DLSYS_EXTERN_C {
 
 };
 
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">endif </span><span style="color:#998;font-style:italic">//DLSYS_DEVICE_API_H
+<span style="color:#999;font-weight:bold;font-style:italic">#endif </span><span style="color:#998;font-style:italic">//DLSYS_DEVICE_API_H
 </span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -522,21 +522,21 @@ DLSYS_EXTERN_C {
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#998;font-style:italic">//
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">//
-</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">ifndef DLSYS_C_RUNTIME_API_H</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_C_RUNTIME_API_H</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
+</span><span style="color:#998;font-style:italic">//
+</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#ifndef DLSYS_C_RUNTIME_API_H
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_C_RUNTIME_API_H
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">ifdef __cplusplus</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_EXTERN_C extern &#34;C&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">else</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_EXTERN_C</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">endif</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#ifdef __cplusplus
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_EXTERN_C extern &#34;C&#34;
+</span><span style="color:#999;font-weight:bold;font-style:italic">#else
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_EXTERN_C
+</span><span style="color:#999;font-weight:bold;font-style:italic">#endif
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdint&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstddef&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdint&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstddef&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;dlarray.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;dlarray.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 DLSYS_EXTERN_C{
     <span style="color:#000;font-weight:bold">typedef</span> <span style="color:#458;font-weight:bold">int64_t</span> index_t;
@@ -552,7 +552,7 @@ DLSYS_EXTERN_C{
     <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLArrayCopyFromTo</span>(DLArrayHandle from, DLArrayHandle to, DLStreamHandle stream);
 
 }
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">endif </span><span style="color:#998;font-style:italic">//DLSYS_C_RUNTIME_API_H
+<span style="color:#999;font-weight:bold;font-style:italic">#endif </span><span style="color:#998;font-style:italic">//DLSYS_C_RUNTIME_API_H
 </span></code></pre></td></tr></table>
 </div>
 </div><p>对CPU进行操作</p>
@@ -590,17 +590,17 @@ DLSYS_EXTERN_C{
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#998;font-style:italic">//
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">//
+</span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
+</span><span style="color:#998;font-style:italic">//
 </span><span style="color:#998;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">ifndef DLSYS_CPU_DEVICE_API_H</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_CPU_DEVICE_API_H</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#ifndef DLSYS_CPU_DEVICE_API_H
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_CPU_DEVICE_API_H
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cassert&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstring&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cassert&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstring&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 
 <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">CPUDeviceAPI</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">public</span> DeviceAPI {
@@ -616,7 +616,7 @@ DLSYS_EXTERN_C{
     <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">StreamSync</span>(DLContext ctx, DLStreamHandle stream) <span style="color:#000;font-weight:bold">final</span>;
 };
 
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">endif </span><span style="color:#998;font-style:italic">//DLSYS_CPU_DEVICE_API_H
+<span style="color:#999;font-weight:bold;font-style:italic">#endif </span><span style="color:#998;font-style:italic">//DLSYS_CPU_DEVICE_API_H
 </span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -659,34 +659,34 @@ DLSYS_EXTERN_C{
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">//
+</span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
+</span><span style="color:#998;font-style:italic">//
 </span><span style="color:#998;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;cpu_device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;cpu_device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdlib&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdlib&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>CPUDeviceAPI<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>AllocDataSpace(DLContext ctx, size_t size, size_t algment) {
+<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>CPUDeviceAPI<span style="color:#000;font-weight:bold">::</span>AllocDataSpace(DLContext ctx, size_t size, size_t algment) {
 
     <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>ptr;
     <span style="color:#458;font-weight:bold">int</span> ret <span style="color:#000;font-weight:bold">=</span> posix_memalign(<span style="color:#000;font-weight:bold">&amp;</span>ptr, algment, size);
-    <span style="color:#000;font-weight:bold">if</span> (ret <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>)
-        <span style="color:#000;font-weight:bold">throw</span> std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>bad_alloc();
+    <span style="color:#000;font-weight:bold">if</span> (ret <span style="color:#000;font-weight:bold">!=</span> <span style="color:#099">0</span>)
+        <span style="color:#000;font-weight:bold">throw</span> std<span style="color:#000;font-weight:bold">::</span>bad_alloc();
     <span style="color:#000;font-weight:bold">return</span> ptr;
 }
 
-<span style="color:#458;font-weight:bold">void</span> CPUDeviceAPI<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>FreeDataSpace(DLContext ctx, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>ptr) {
+<span style="color:#458;font-weight:bold">void</span> CPUDeviceAPI<span style="color:#000;font-weight:bold">::</span>FreeDataSpace(DLContext ctx, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>ptr) {
     free(ptr);
 }
 
-<span style="color:#458;font-weight:bold">void</span> CPUDeviceAPI<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>CopyDataFromTo(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>from, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>to, size_t size, DLContext ctx_from, DLContext ctx_to,
+<span style="color:#458;font-weight:bold">void</span> CPUDeviceAPI<span style="color:#000;font-weight:bold">::</span>CopyDataFromTo(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>from, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>to, size_t size, DLContext ctx_from, DLContext ctx_to,
                                   DLStreamHandle stream) {
     memcpy(to, from, size);
 }
 
-<span style="color:#458;font-weight:bold">void</span> CPUDeviceAPI<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>StreamSync(DLContext ctx, DLStreamHandle stream) {
+<span style="color:#458;font-weight:bold">void</span> CPUDeviceAPI<span style="color:#000;font-weight:bold">::</span>StreamSync(DLContext ctx, DLStreamHandle stream) {
 
 }
 </code></pre></td></tr></table>
@@ -826,15 +826,15 @@ DLSYS_EXTERN_C{
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#998;font-style:italic">//
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
-</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">//
+</span><span style="color:#998;font-style:italic">// Created by hadxu on 2018/3/9.
+</span><span style="color:#998;font-style:italic">//
 </span><span style="color:#998;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;cpu_device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;runtime_base.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;cpu_device_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;runtime_base.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;array&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;thread&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;array&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;thread&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#000;font-weight:bold">using</span> <span style="color:#000;font-weight:bold">namespace</span> std;
 
@@ -844,16 +844,16 @@ DLSYS_EXTERN_C{
     <span style="color:#000;font-weight:bold">static</span> <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> kMaxDeviceAPI <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">8</span>;
 
     <span style="color:#000;font-weight:bold">static</span> DeviceAPI <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">Get</span>(DLContext ctx) {
-        <span style="color:#000;font-weight:bold">return</span> Global()<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>GetAPI(ctx.device_type);
+        <span style="color:#000;font-weight:bold">return</span> Global()<span style="color:#000;font-weight:bold">-&gt;</span>GetAPI(ctx.device_type);
     }
 
 <span style="color:#000;font-weight:bold">private</span><span style="color:#000;font-weight:bold">:</span>
-    std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>array<span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*</span>, kMaxDeviceAPI<span style="color:#000;font-weight:bold">&gt;</span> api_;
+    std<span style="color:#000;font-weight:bold">::</span>array<span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*</span>, kMaxDeviceAPI<span style="color:#000;font-weight:bold">&gt;</span> api_;
 
     DeviceAPIManager() {
-        std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>fill(api_.begin(), api_.end(), <span style="color:#000;font-weight:bold">nullptr</span>);
+        std<span style="color:#000;font-weight:bold">::</span>fill(api_.begin(), api_.end(), <span style="color:#000;font-weight:bold">nullptr</span>);
         <span style="color:#000;font-weight:bold">static</span> CPUDeviceAPI cpu_device_api_inst;
-        api_[kCPU] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>cpu_device_api_inst);
+        api_[kCPU] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>cpu_device_api_inst);
     }
 
     <span style="color:#000;font-weight:bold">static</span> DeviceAPIManager <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">Global</span>() {
@@ -862,8 +862,8 @@ DLSYS_EXTERN_C{
     }
 
     DeviceAPI <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">GetAPI</span>(DLDeviceType type) {
-        <span style="color:#000;font-weight:bold">if</span> (api_[type] <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
-            std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>cerr <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">Device API not supported</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>endl;
+        <span style="color:#000;font-weight:bold">if</span> (api_[type] <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
+            std<span style="color:#000;font-weight:bold">::</span>cerr <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#d14">&#34;Device API not supported&#34;</span> <span style="color:#000;font-weight:bold">&lt;&lt;</span> std<span style="color:#000;font-weight:bold">::</span>endl;
             exit(EXIT_FAILURE);
         }
         <span style="color:#000;font-weight:bold">return</span> api_[type];
@@ -873,17 +873,17 @@ DLSYS_EXTERN_C{
 };
 <span style="color:#000;font-weight:bold">inline</span> DLArray <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">DLArrayCreate_</span>() {
     <span style="color:#000;font-weight:bold">auto</span> <span style="color:#000;font-weight:bold">*</span>arr <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> DLArray();
-    arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
-    arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
-    arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+    arr<span style="color:#000;font-weight:bold">-&gt;</span>shape <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+    arr<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    arr<span style="color:#000;font-weight:bold">-&gt;</span>data <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
     <span style="color:#000;font-weight:bold">return</span> arr;
 }
 
 <span style="color:#000;font-weight:bold">inline</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">DLArrayFree_</span>(DLArray <span style="color:#000;font-weight:bold">*</span>arr) {
-    <span style="color:#000;font-weight:bold">if</span> (arr <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
-        <span style="color:#000;font-weight:bold">delete</span>[] arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape;
-        <span style="color:#000;font-weight:bold">if</span> (arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
-            DeviceAPIManager<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>Get(arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx)<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>FreeDataSpace(arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx, arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data);
+    <span style="color:#000;font-weight:bold">if</span> (arr <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
+        <span style="color:#000;font-weight:bold">delete</span>[] arr<span style="color:#000;font-weight:bold">-&gt;</span>shape;
+        <span style="color:#000;font-weight:bold">if</span> (arr<span style="color:#000;font-weight:bold">-&gt;</span>data <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
+            DeviceAPIManager<span style="color:#000;font-weight:bold">::</span>Get(arr<span style="color:#000;font-weight:bold">-&gt;</span>ctx)<span style="color:#000;font-weight:bold">-&gt;</span>FreeDataSpace(arr<span style="color:#000;font-weight:bold">-&gt;</span>ctx, arr<span style="color:#000;font-weight:bold">-&gt;</span>data);
         }
     }
     <span style="color:#000;font-weight:bold">delete</span> arr;
@@ -891,9 +891,9 @@ DLSYS_EXTERN_C{
 
 <span style="color:#000;font-weight:bold">inline</span> size_t <span style="color:#900;font-weight:bold">GetDataSize</span>(DLArray <span style="color:#000;font-weight:bold">*</span>arr) {
     size_t size <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (index_t i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>)
-        size <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
-    size <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">4</span>;
+    <span style="color:#000;font-weight:bold">for</span> (index_t i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> arr<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>)
+        size <span style="color:#000;font-weight:bold">*=</span> arr<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
+    size <span style="color:#000;font-weight:bold">*=</span> <span style="color:#099">4</span>;
     <span style="color:#000;font-weight:bold">return</span> size;
 }
 
@@ -908,18 +908,18 @@ DLSYS_EXTERN_C{
     API_BEGIN() ;
         arr <span style="color:#000;font-weight:bold">=</span> DLArrayCreate_();
 
-        arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span> ndim;
+        arr<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span> ndim;
 
         <span style="color:#000;font-weight:bold">auto</span> <span style="color:#000;font-weight:bold">*</span>shape_copy <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> index_t[ndim];
-        std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>copy(shape, shape <span style="color:#000;font-weight:bold">+</span> ndim, shape_copy);
-        arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape <span style="color:#000;font-weight:bold">=</span> shape_copy;
+        std<span style="color:#000;font-weight:bold">::</span>copy(shape, shape <span style="color:#000;font-weight:bold">+</span> ndim, shape_copy);
+        arr<span style="color:#000;font-weight:bold">-&gt;</span>shape <span style="color:#000;font-weight:bold">=</span> shape_copy;
 
-        arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx <span style="color:#000;font-weight:bold">=</span> ctx;
+        arr<span style="color:#000;font-weight:bold">-&gt;</span>ctx <span style="color:#000;font-weight:bold">=</span> ctx;
 
         size_t size <span style="color:#000;font-weight:bold">=</span> GetDataSize(arr);
         size_t alignment <span style="color:#000;font-weight:bold">=</span> GetDataAlignment(arr);
 
-        arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data <span style="color:#000;font-weight:bold">=</span> DeviceAPIManager<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>Get(ctx)<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>AllocDataSpace(ctx, size, alignment);
+        arr<span style="color:#000;font-weight:bold">-&gt;</span>data <span style="color:#000;font-weight:bold">=</span> DeviceAPIManager<span style="color:#000;font-weight:bold">::</span>Get(ctx)<span style="color:#000;font-weight:bold">-&gt;</span>AllocDataSpace(ctx, size, alignment);
 
         <span style="color:#000;font-weight:bold">*</span>out <span style="color:#000;font-weight:bold">=</span> arr;
 
@@ -940,14 +940,14 @@ DLSYS_EXTERN_C{
         size_t from_size <span style="color:#000;font-weight:bold">=</span> GetDataSize(from);
         size_t to_size <span style="color:#000;font-weight:bold">=</span> GetDataSize(to);
 
-        assert(from_size <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> to_size);
+        assert(from_size <span style="color:#000;font-weight:bold">==</span> to_size);
 
-        DLContext ctx <span style="color:#000;font-weight:bold">=</span> from<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx;
+        DLContext ctx <span style="color:#000;font-weight:bold">=</span> from<span style="color:#000;font-weight:bold">-&gt;</span>ctx;
 
-        <span style="color:#000;font-weight:bold">if</span> (ctx.device_type <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> kCPU) {
-            ctx <span style="color:#000;font-weight:bold">=</span> to<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx;
+        <span style="color:#000;font-weight:bold">if</span> (ctx.device_type <span style="color:#000;font-weight:bold">==</span> kCPU) {
+            ctx <span style="color:#000;font-weight:bold">=</span> to<span style="color:#000;font-weight:bold">-&gt;</span>ctx;
         }
-        DeviceAPIManager<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>Get(ctx)<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>CopyDataFromTo(from<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data, to<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data, from_size, from<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx, to<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx, stream);
+        DeviceAPIManager<span style="color:#000;font-weight:bold">::</span>Get(ctx)<span style="color:#000;font-weight:bold">-&gt;</span>CopyDataFromTo(from<span style="color:#000;font-weight:bold">-&gt;</span>data, to<span style="color:#000;font-weight:bold">-&gt;</span>data, from_size, from<span style="color:#000;font-weight:bold">-&gt;</span>ctx, to<span style="color:#000;font-weight:bold">-&gt;</span>ctx, stream);
 
     API_END();
 }
@@ -1000,16 +1000,16 @@ DLSYS_EXTERN_C{
     <span style="color:#000;font-weight:bold">static</span> <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> kMaxDeviceAPI <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">8</span>;
 
     <span style="color:#000;font-weight:bold">static</span> DeviceAPI <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">Get</span>(DLContext ctx) {
-        <span style="color:#000;font-weight:bold">return</span> Global()<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>GetAPI(ctx.device_type);
+        <span style="color:#000;font-weight:bold">return</span> Global()<span style="color:#000;font-weight:bold">-&gt;</span>GetAPI(ctx.device_type);
     }
 
 <span style="color:#000;font-weight:bold">private</span><span style="color:#000;font-weight:bold">:</span>
-    std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>array<span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*</span>, kMaxDeviceAPI<span style="color:#000;font-weight:bold">&gt;</span> api_;
+    std<span style="color:#000;font-weight:bold">::</span>array<span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*</span>, kMaxDeviceAPI<span style="color:#000;font-weight:bold">&gt;</span> api_;
 
     DeviceAPIManager() {
-        std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>fill(api_.begin(), api_.end(), <span style="color:#000;font-weight:bold">nullptr</span>);
+        std<span style="color:#000;font-weight:bold">::</span>fill(api_.begin(), api_.end(), <span style="color:#000;font-weight:bold">nullptr</span>);
         <span style="color:#000;font-weight:bold">static</span> CPUDeviceAPI cpu_device_api_inst;
-        api_[kCPU] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>cpu_device_api_inst);
+        api_[kCPU] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>DeviceAPI <span style="color:#000;font-weight:bold">*&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>cpu_device_api_inst);
     }
 
     <span style="color:#000;font-weight:bold">static</span> DeviceAPIManager <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">Global</span>() {
@@ -1018,8 +1018,8 @@ DLSYS_EXTERN_C{
     }
 
     DeviceAPI <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">GetAPI</span>(DLDeviceType type) {
-        <span style="color:#000;font-weight:bold">if</span> (api_[type] <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
-            std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>cerr <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">Device API not supported</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>endl;
+        <span style="color:#000;font-weight:bold">if</span> (api_[type] <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
+            std<span style="color:#000;font-weight:bold">::</span>cerr <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#d14">&#34;Device API not supported&#34;</span> <span style="color:#000;font-weight:bold">&lt;&lt;</span> std<span style="color:#000;font-weight:bold">::</span>endl;
             exit(EXIT_FAILURE);
         }
         <span style="color:#000;font-weight:bold">return</span> api_[type];
@@ -1120,17 +1120,17 @@ DLSYS_EXTERN_C{
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#000;font-weight:bold">inline</span> DLArray <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">DLArrayCreate_</span>() {
     <span style="color:#000;font-weight:bold">auto</span> <span style="color:#000;font-weight:bold">*</span>arr <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> DLArray();
-    arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
-    arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
-    arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+    arr<span style="color:#000;font-weight:bold">-&gt;</span>shape <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+    arr<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+    arr<span style="color:#000;font-weight:bold">-&gt;</span>data <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
     <span style="color:#000;font-weight:bold">return</span> arr;
 }
 
 <span style="color:#000;font-weight:bold">inline</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">DLArrayFree_</span>(DLArray <span style="color:#000;font-weight:bold">*</span>arr) {
-    <span style="color:#000;font-weight:bold">if</span> (arr <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
-        <span style="color:#000;font-weight:bold">delete</span>[] arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape;
-        <span style="color:#000;font-weight:bold">if</span> (arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data <span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
-            DeviceAPIManager<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>Get(arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx)<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>FreeDataSpace(arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx, arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data);
+    <span style="color:#000;font-weight:bold">if</span> (arr <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
+        <span style="color:#000;font-weight:bold">delete</span>[] arr<span style="color:#000;font-weight:bold">-&gt;</span>shape;
+        <span style="color:#000;font-weight:bold">if</span> (arr<span style="color:#000;font-weight:bold">-&gt;</span>data <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nullptr</span>) {
+            DeviceAPIManager<span style="color:#000;font-weight:bold">::</span>Get(arr<span style="color:#000;font-weight:bold">-&gt;</span>ctx)<span style="color:#000;font-weight:bold">-&gt;</span>FreeDataSpace(arr<span style="color:#000;font-weight:bold">-&gt;</span>ctx, arr<span style="color:#000;font-weight:bold">-&gt;</span>data);
         }
     }
     <span style="color:#000;font-weight:bold">delete</span> arr;
@@ -1138,9 +1138,9 @@ DLSYS_EXTERN_C{
 
 <span style="color:#000;font-weight:bold">inline</span> size_t <span style="color:#900;font-weight:bold">GetDataSize</span>(DLArray <span style="color:#000;font-weight:bold">*</span>arr) {
     size_t size <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>;
-    <span style="color:#000;font-weight:bold">for</span> (index_t i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>)
-        size <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[i];
-    size <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">4</span>;
+    <span style="color:#000;font-weight:bold">for</span> (index_t i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> arr<span style="color:#000;font-weight:bold">-&gt;</span>ndim; i<span style="color:#000;font-weight:bold">++</span>)
+        size <span style="color:#000;font-weight:bold">*=</span> arr<span style="color:#000;font-weight:bold">-&gt;</span>shape[i];
+    size <span style="color:#000;font-weight:bold">*=</span> <span style="color:#099">4</span>;
     <span style="color:#000;font-weight:bold">return</span> size;
 }
 
@@ -1155,18 +1155,18 @@ DLSYS_EXTERN_C{
     API_BEGIN() ;
         arr <span style="color:#000;font-weight:bold">=</span> DLArrayCreate_();
 
-        arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span> ndim;
+        arr<span style="color:#000;font-weight:bold">-&gt;</span>ndim <span style="color:#000;font-weight:bold">=</span> ndim;
 
         <span style="color:#000;font-weight:bold">auto</span> <span style="color:#000;font-weight:bold">*</span>shape_copy <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> index_t[ndim];
-        std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>copy(shape, shape <span style="color:#000;font-weight:bold">+</span> ndim, shape_copy);
-        arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape <span style="color:#000;font-weight:bold">=</span> shape_copy;
+        std<span style="color:#000;font-weight:bold">::</span>copy(shape, shape <span style="color:#000;font-weight:bold">+</span> ndim, shape_copy);
+        arr<span style="color:#000;font-weight:bold">-&gt;</span>shape <span style="color:#000;font-weight:bold">=</span> shape_copy;
 
-        arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx <span style="color:#000;font-weight:bold">=</span> ctx;
+        arr<span style="color:#000;font-weight:bold">-&gt;</span>ctx <span style="color:#000;font-weight:bold">=</span> ctx;
 
         size_t size <span style="color:#000;font-weight:bold">=</span> GetDataSize(arr);
         size_t alignment <span style="color:#000;font-weight:bold">=</span> GetDataAlignment(arr);
 
-        arr<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data <span style="color:#000;font-weight:bold">=</span> DeviceAPIManager<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>Get(ctx)<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>AllocDataSpace(ctx, size, alignment);
+        arr<span style="color:#000;font-weight:bold">-&gt;</span>data <span style="color:#000;font-weight:bold">=</span> DeviceAPIManager<span style="color:#000;font-weight:bold">::</span>Get(ctx)<span style="color:#000;font-weight:bold">-&gt;</span>AllocDataSpace(ctx, size, alignment);
 
         <span style="color:#000;font-weight:bold">*</span>out <span style="color:#000;font-weight:bold">=</span> arr;
 
@@ -1187,14 +1187,14 @@ DLSYS_EXTERN_C{
         size_t from_size <span style="color:#000;font-weight:bold">=</span> GetDataSize(from);
         size_t to_size <span style="color:#000;font-weight:bold">=</span> GetDataSize(to);
 
-        assert(from_size <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> to_size);
+        assert(from_size <span style="color:#000;font-weight:bold">==</span> to_size);
 
-        DLContext ctx <span style="color:#000;font-weight:bold">=</span> from<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx;
+        DLContext ctx <span style="color:#000;font-weight:bold">=</span> from<span style="color:#000;font-weight:bold">-&gt;</span>ctx;
 
-        <span style="color:#000;font-weight:bold">if</span> (ctx.device_type <span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span> kCPU) {
-            ctx <span style="color:#000;font-weight:bold">=</span> to<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx;
+        <span style="color:#000;font-weight:bold">if</span> (ctx.device_type <span style="color:#000;font-weight:bold">==</span> kCPU) {
+            ctx <span style="color:#000;font-weight:bold">=</span> to<span style="color:#000;font-weight:bold">-&gt;</span>ctx;
         }
-        DeviceAPIManager<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>Get(ctx)<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>CopyDataFromTo(from<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data, to<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>data, from_size, from<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx, to<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>ctx, stream);
+        DeviceAPIManager<span style="color:#000;font-weight:bold">::</span>Get(ctx)<span style="color:#000;font-weight:bold">-&gt;</span>CopyDataFromTo(from<span style="color:#000;font-weight:bold">-&gt;</span>data, to<span style="color:#000;font-weight:bold">-&gt;</span>data, from_size, from<span style="color:#000;font-weight:bold">-&gt;</span>ctx, to<span style="color:#000;font-weight:bold">-&gt;</span>ctx, stream);
 
     API_END();
 }
@@ -1263,51 +1263,51 @@ DLSYS_EXTERN_C{
 </span><span style="color:#998;font-style:italic"> * \file runtime_base.h
 </span><span style="color:#998;font-style:italic"> * \brief Base of all C APIs
 </span><span style="color:#998;font-style:italic"> */</span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">ifndef DLSYS_RUNTIME_RUNTIME_BASE_H_</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define DLSYS_RUNTIME_RUNTIME_BASE_H_</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#ifndef DLSYS_RUNTIME_RUNTIME_BASE_H_
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define DLSYS_RUNTIME_RUNTIME_BASE_H_
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdexcept&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdexcept&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#998;font-style:italic">/*! \brief  macro to guard beginning and end section of all functions */</span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define API_BEGIN() try {</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#define API_BEGIN() try {
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#998;font-style:italic">/*!
 </span><span style="color:#998;font-style:italic"> * \brief every function starts with API_BEGIN(), and finishes with API_END()
 </span><span style="color:#998;font-style:italic"> *  or API_END_HANDLE_ERROR
 </span><span style="color:#998;font-style:italic"> */</span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define API_END()                                                              \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">}                                                                            \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">catch (std::runtime_error &amp; _except_) {                                      \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">return DLSYSAPIHandleException(_except_);                                  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">}                                                                            \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">return 0;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#define API_END()                                                              \
+</span><span style="color:#999;font-weight:bold;font-style:italic">}                                                                            \
+</span><span style="color:#999;font-weight:bold;font-style:italic">catch (std::runtime_error &amp; _except_) {                                      \
+</span><span style="color:#999;font-weight:bold;font-style:italic">return DLSYSAPIHandleException(_except_);                                  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">}                                                                            \
+</span><span style="color:#999;font-weight:bold;font-style:italic">return 0;
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#998;font-style:italic">/*!
 </span><span style="color:#998;font-style:italic"> * \brief every function starts with API_BEGIN() and finishes with API_END() or
 </span><span style="color:#998;font-style:italic"> * API_END_HANDLE_ERROR. The finally clause contains procedure to cleanup states
 </span><span style="color:#998;font-style:italic"> * when an error happens.
 </span><span style="color:#998;font-style:italic"> */</span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define API_END_HANDLE_ERROR(Finalize)                                         \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">}                                                                            \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">catch (std::runtime_error &amp; _except_) {  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">Finalize;                                                                  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">return DLSYSAPIHandleException(_except_);                                  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">}                                                                            \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">return 0;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<span style="color:#999;font-weight:bold;font-style:italic">#define API_END_HANDLE_ERROR(Finalize)                                         \
+</span><span style="color:#999;font-weight:bold;font-style:italic">}                                                                            \
+</span><span style="color:#999;font-weight:bold;font-style:italic">catch (std::runtime_error &amp; _except_) {  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">Finalize;                                                                  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">return DLSYSAPIHandleException(_except_);                                  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">}                                                                            \
+</span><span style="color:#999;font-weight:bold;font-style:italic">return 0;
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#998;font-style:italic">/*!
 </span><span style="color:#998;font-style:italic"> * \brief handle exception throwed out
 </span><span style="color:#998;font-style:italic"> * \param e the exception
 </span><span style="color:#998;font-style:italic"> * \return the return value of API after exception is handled
 </span><span style="color:#998;font-style:italic"> */</span>
-<span style="color:#000;font-weight:bold">inline</span> <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLSYSAPIHandleException</span>(<span style="color:#000;font-weight:bold">const</span> std<span style="color:#000;font-weight:bold">:</span><span style="color:#000;font-weight:bold">:</span>runtime_error <span style="color:#000;font-weight:bold">&amp;</span>e) {
+<span style="color:#000;font-weight:bold">inline</span> <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">DLSYSAPIHandleException</span>(<span style="color:#000;font-weight:bold">const</span> std<span style="color:#000;font-weight:bold">::</span>runtime_error <span style="color:#000;font-weight:bold">&amp;</span>e) {
     <span style="color:#998;font-style:italic">// TODO
 </span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// TVMAPISetLastError(e.what());
 </span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>;
 }
 
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">endif </span><span style="color:#998;font-style:italic">// DLSYS_RUNTIME_RUNTIME_BASE_H_
+<span style="color:#999;font-weight:bold;font-style:italic">#endif </span><span style="color:#998;font-style:italic">// DLSYS_RUNTIME_RUNTIME_BASE_H_
 </span></code></pre></td></tr></table>
 </div>
 </div><p>到目前为止，我们的文件应该是这样的</p>
@@ -1349,10 +1349,10 @@ DLSYS_EXTERN_C{
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdio&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;src/c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;src/dlarray.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdio&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;src/c_runtime_api.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;src/dlarray.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#000;font-weight:bold">using</span> <span style="color:#000;font-weight:bold">namespace</span> std;
 
@@ -1370,7 +1370,7 @@ DLSYS_EXTERN_C{
 
     DLArrayAlloc(shape,ndim,ctx, out);
 
-    cout<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>(<span style="color:#000;font-weight:bold">*</span>out)<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14"> </span><span style="color:#d14">&#34;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>(<span style="color:#000;font-weight:bold">*</span>out)<span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">&gt;</span>shape[<span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span>endl;
+    cout<span style="color:#000;font-weight:bold">&lt;&lt;</span>(<span style="color:#000;font-weight:bold">*</span>out)<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">&lt;&lt;</span><span style="color:#d14">&#34; &#34;</span><span style="color:#000;font-weight:bold">&lt;&lt;</span>(<span style="color:#000;font-weight:bold">*</span>out)<span style="color:#000;font-weight:bold">-&gt;</span>shape[<span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">&lt;&lt;</span>endl;
     
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
 }
@@ -1469,27 +1469,11 @@ DLSYS_EXTERN_C{
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -1508,6 +1492,22 @@ DLSYS_EXTERN_C{
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -1523,8 +1523,6 @@ DLSYS_EXTERN_C{
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -1533,13 +1531,13 @@ DLSYS_EXTERN_C{
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -1559,8 +1557,6 @@ DLSYS_EXTERN_C{
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

@@ -253,27 +253,27 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Variables can be type annotated.
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Variables can be type annotated.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>logical: <span style="color:#458;font-weight:bold">bool</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">true</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a_float: <span style="color:#458;font-weight:bold">f64</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">1.0</span>;<span style="color:#bbb">  </span><span style="color:#998;font-style:italic">// Regular annotation
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>a_float: <span style="color:#458;font-weight:bold">f64</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">1.0</span>;<span style="color:#bbb">  </span><span style="color:#998;font-style:italic">// Regular annotation
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>an_integer<span style="color:#bbb">   </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">5</span><span style="color:#000;font-weight:bold">i32</span>;<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// Suffix annotation
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Or a default will be used.
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Or a default will be used.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>default_float<span style="color:#bbb">   </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">3.0</span>;<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// `f64`
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>default_integer<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">7</span>;<span style="color:#bbb">   </span><span style="color:#998;font-style:italic">// `i32`
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    
 </span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// A type can also be inferred from context 
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>inferred_type<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">12</span>;<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// Type i64 is inferred from another line
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>inferred_type<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">4294967296</span><span style="color:#000;font-weight:bold">i64</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    
+</span><span style="color:#bbb">    
 </span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// A mutable variable&#39;s value can be changed.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>mutable<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">12</span>;<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// Mutable `i32`
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>mutable<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">21</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    
+</span><span style="color:#bbb">    
 </span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Error! The type of a variable can&#39;t be changed.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>mutable<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">true</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    
+</span><span style="color:#bbb">    
 </span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Variables can be overwritten with shadowing.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>mutable<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">true</span>;<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
@@ -312,19 +312,19 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1 + 2 = {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span><span style="color:#099">2</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1 - 2 = {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">i32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span><span style="color:#099">2</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;true AND false is {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">true</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">false</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;true OR false is {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">true</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">false</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;NOT true is {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">true</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;0011 AND 0101 is {:04b}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">0b0011</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#bbb"> </span><span style="color:#099">0b0101</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;0011 OR 0101 is {:04b}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">0b0011</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span><span style="color:#099">0b0101</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;0011 XOR 0101 is {:04b}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">0b0011</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">^</span><span style="color:#bbb"> </span><span style="color:#099">0b0101</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1 &lt;&lt; 5 is {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span><span style="color:#099">5</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;0x80 &gt;&gt; 2 is 0x{:x}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">0x80</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#099">2</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;One million is written as {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1_000_000</span><span style="color:#000;font-weight:bold">u32</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1 + 2 = {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span><span style="color:#099">2</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1 - 2 = {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">i32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span><span style="color:#099">2</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;true AND false is {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">true</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;&amp;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">false</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;true OR false is {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">true</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">||</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">false</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;NOT true is {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">!</span><span style="color:#000;font-weight:bold">true</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;0011 AND 0101 is {:04b}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">0b0011</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#bbb"> </span><span style="color:#099">0b0101</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;0011 OR 0101 is {:04b}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">0b0011</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span><span style="color:#099">0b0101</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;0011 XOR 0101 is {:04b}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">0b0011</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">^</span><span style="color:#bbb"> </span><span style="color:#099">0b0101</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;1 &lt;&lt; 5 is {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;&lt;</span><span style="color:#bbb"> </span><span style="color:#099">5</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;0x80 &gt;&gt; 2 is 0x{:x}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">0x80</span><span style="color:#000;font-weight:bold">u32</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;&gt;</span><span style="color:#bbb"> </span><span style="color:#099">2</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;One million is written as {}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">1_000_000</span><span style="color:#000;font-weight:bold">u32</span>);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -449,27 +449,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -488,6 +472,22 @@
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -503,8 +503,6 @@
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -513,13 +511,13 @@
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -539,8 +537,6 @@
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

@@ -223,7 +223,7 @@
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs">curl<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">-</span>proto<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">&#39;</span><span style="color:#000;font-weight:bold">=</span>https<span style="color:#a61717;background-color:#e3d2d2">&#39;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">-</span>tlsv1.<span style="color:#099">2</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span>sSf<span style="color:#bbb"> </span>https:<span style="color:#998;font-style:italic">//sh.rustup.rs | sh
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs">curl<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">--</span>proto<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">&#39;</span><span style="color:#000;font-weight:bold">=</span>https<span style="color:#a61717;background-color:#e3d2d2">&#39;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">--</span>tlsv1.<span style="color:#099">2</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span>sSf<span style="color:#bbb"> </span>https:<span style="color:#998;font-style:italic">//sh.rustup.rs | sh
 </span></code></pre></td></tr></table>
 </div>
 </div><h2 id="hello-world">hello world</h2>
@@ -235,7 +235,7 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Hello World!&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Hello World!&#34;</span>);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -272,7 +272,7 @@
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs">println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#099">5</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span><span style="color:#998;font-style:italic">/*</span><span style="color:#998;font-style:italic">plus</span><span style="color:#998;font-style:italic">*/</span><span style="color:#bbb"> </span><span style="color:#099">4</span>);<span style="color:#bbb">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs">println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#099">5</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span><span style="color:#998;font-style:italic">/*plus*/</span><span style="color:#bbb"> </span><span style="color:#099">4</span>);<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
 </div><h2 id="格式化输出">格式化输出</h2>
@@ -305,7 +305,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">derive(Debug)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Debug)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">DebugPrintable</span>(<span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -321,12 +321,12 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">derive(Debug)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Debug)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Structure</span>(<span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{:?} months in a year.&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">12</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Now {:?} will print!&#34;</span>,<span style="color:#bbb"> </span>Structure(<span style="color:#099">3</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{:?} months in a year.&#34;</span>,<span style="color:#bbb"> </span><span style="color:#099">12</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Now {:?} will print!&#34;</span>,<span style="color:#bbb"> </span>Structure(<span style="color:#099">3</span>));<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -358,15 +358,15 @@ Now Structure<span style="color:#000;font-weight:bold">(</span>3<span style="col
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">derive(Debug)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Debug)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Structure</span>(<span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>Display<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>Structure<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">fmt</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>,<span style="color:#bbb"> </span>f: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">mut</span><span style="color:#bbb"> </span>Formatter<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#008080">&#39;_</span><span style="color:#000;font-weight:bold">&gt;</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">fmt</span>::<span style="color:#0086b3">Result</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>write<span style="color:#000;font-weight:bold">!</span>(f,<span style="color:#bbb"> </span><span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#999">self</span>.<span style="color:#099">0</span>)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">fmt</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>,<span style="color:#bbb"> </span>f: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">mut</span><span style="color:#bbb"> </span>Formatter<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#008080">&#39;_</span><span style="color:#000;font-weight:bold">&gt;</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">fmt</span>::<span style="color:#0086b3">Result</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>write<span style="color:#000;font-weight:bold">!</span>(f,<span style="color:#bbb"> </span><span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#999">self</span>.<span style="color:#099">0</span>)<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>Structure(<span style="color:#099">4</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>Structure(<span style="color:#099">4</span>));<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -446,63 +446,63 @@ Now Structure<span style="color:#000;font-weight:bold">(</span>3<span style="col
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">use</span><span style="color:#bbb"> </span>std::fmt::{<span style="color:#999">self</span>,<span style="color:#bbb"> </span>Formatter,<span style="color:#bbb"> </span>Display};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">City</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>name: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Latitude
+</span><span style="color:#bbb">    </span>name: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#0086b3">&#39;static</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Latitude
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>lat: <span style="color:#458;font-weight:bold">f32</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Longitude
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Longitude
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>lon: <span style="color:#458;font-weight:bold">f32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>Display<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>City<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `f` is a buffer, and this method must write the formatted string into it
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `f` is a buffer, and this method must write the formatted string into it
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">fmt</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>,<span style="color:#bbb"> </span>f: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">mut</span><span style="color:#bbb"> </span>Formatter)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">fmt</span>::<span style="color:#0086b3">Result</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>lat_c<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.lat<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0.0</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#d14">&#39;N&#39;</span><span style="color:#bbb"> </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#d14">&#39;S&#39;</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>lon_c<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.lon<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0.0</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#d14">&#39;E&#39;</span><span style="color:#bbb"> </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#d14">&#39;W&#39;</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// `write!` is like `format!`, but it will write the formatted string
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>lat_c<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.lat<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;=</span><span style="color:#bbb"> </span><span style="color:#099">0.0</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#d14">&#39;N&#39;</span><span style="color:#bbb"> </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#d14">&#39;S&#39;</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>lon_c<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.lon<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;=</span><span style="color:#bbb"> </span><span style="color:#099">0.0</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#d14">&#39;E&#39;</span><span style="color:#bbb"> </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#d14">&#39;W&#39;</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// `write!` is like `format!`, but it will write the formatted string
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// into a buffer (the first argument)
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>write<span style="color:#000;font-weight:bold">!</span>(f,<span style="color:#bbb"> </span><span style="color:#d14">&#34;{}: {:.3}°{} {:.3}°{}&#34;</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">               </span><span style="color:#999">self</span>.name,<span style="color:#bbb"> </span><span style="color:#999">self</span>.lat.abs(),<span style="color:#bbb"> </span>lat_c,<span style="color:#bbb"> </span><span style="color:#999">self</span>.lon.abs(),<span style="color:#bbb"> </span>lon_c)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">               </span><span style="color:#999">self</span>.name,<span style="color:#bbb"> </span><span style="color:#999">self</span>.lat.abs(),<span style="color:#bbb"> </span>lat_c,<span style="color:#bbb"> </span><span style="color:#999">self</span>.lon.abs(),<span style="color:#bbb"> </span>lon_c)<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>Display<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>Color<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `f` is a buffer, and this method must write the formatted string into it
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `f` is a buffer, and this method must write the formatted string into it
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">fmt</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>,<span style="color:#bbb"> </span>f: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">mut</span><span style="color:#bbb"> </span>Formatter)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">fmt</span>::<span style="color:#0086b3">Result</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// write!(f, &#34;{}: {:.3}°{} {:.3}°{}&#34;,
+</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// write!(f, &#34;{}: {:.3}°{} {:.3}°{}&#34;,
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">//        self.name, self.lat.abs(), lat_c, self.lon.abs(), lon_c)
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>write<span style="color:#000;font-weight:bold">!</span>(f,<span style="color:#bbb"> </span><span style="color:#d14">&#34;RGB ({0}, {1}, {2}) 0x{0:02X}{1:02X}{2:02X}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#999">self</span>.red,<span style="color:#bbb"> </span><span style="color:#999">self</span>.green,<span style="color:#bbb"> </span><span style="color:#999">self</span>.blue)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">derive(Debug)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Debug)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Color</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>red: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>green: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>blue: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>red: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>green: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>blue: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>city<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>[<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>City<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>name: <span style="color:#d14">&#34;Dublin&#34;</span>,<span style="color:#bbb"> </span>lat: <span style="color:#099">53.347778</span>,<span style="color:#bbb"> </span>lon: <span style="color:#000;font-weight:bold">-</span><span style="color:#099">6.259722</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>City<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>name: <span style="color:#d14">&#34;Oslo&#34;</span>,<span style="color:#bbb"> </span>lat: <span style="color:#099">59.95</span>,<span style="color:#bbb"> </span>lon: <span style="color:#099">10.75</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>City<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>name: <span style="color:#d14">&#34;Vancouver&#34;</span>,<span style="color:#bbb"> </span>lat: <span style="color:#099">49.25</span>,<span style="color:#bbb"> </span>lon: <span style="color:#000;font-weight:bold">-</span><span style="color:#099">123.1</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>].iter()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span>city);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>color<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>[<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>Color<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>red: <span style="color:#099">128</span>,<span style="color:#bbb"> </span>green: <span style="color:#099">255</span>,<span style="color:#bbb"> </span>blue: <span style="color:#099">90</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>Color<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>red: <span style="color:#099">0</span>,<span style="color:#bbb"> </span>green: <span style="color:#099">3</span>,<span style="color:#bbb"> </span>blue: <span style="color:#099">254</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>Color<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>red: <span style="color:#099">0</span>,<span style="color:#bbb"> </span>green: <span style="color:#099">0</span>,<span style="color:#bbb"> </span>blue: <span style="color:#099">0</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>].iter()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Switch this to use {} once you&#39;ve added an implementation
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>city<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>[<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>City<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>name: <span style="color:#d14">&#34;Dublin&#34;</span>,<span style="color:#bbb"> </span>lat: <span style="color:#099">53.347778</span>,<span style="color:#bbb"> </span>lon: <span style="color:#000;font-weight:bold">-</span><span style="color:#099">6.259722</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>City<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>name: <span style="color:#d14">&#34;Oslo&#34;</span>,<span style="color:#bbb"> </span>lat: <span style="color:#099">59.95</span>,<span style="color:#bbb"> </span>lon: <span style="color:#099">10.75</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>City<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>name: <span style="color:#d14">&#34;Vancouver&#34;</span>,<span style="color:#bbb"> </span>lat: <span style="color:#099">49.25</span>,<span style="color:#bbb"> </span>lon: <span style="color:#000;font-weight:bold">-</span><span style="color:#099">123.1</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>].iter()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span>city);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>color<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>[<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>Color<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>red: <span style="color:#099">128</span>,<span style="color:#bbb"> </span>green: <span style="color:#099">255</span>,<span style="color:#bbb"> </span>blue: <span style="color:#099">90</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>Color<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>red: <span style="color:#099">0</span>,<span style="color:#bbb"> </span>green: <span style="color:#099">3</span>,<span style="color:#bbb"> </span>blue: <span style="color:#099">254</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>Color<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>red: <span style="color:#099">0</span>,<span style="color:#bbb"> </span>green: <span style="color:#099">0</span>,<span style="color:#bbb"> </span>blue: <span style="color:#099">0</span><span style="color:#bbb"> </span>},<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>].iter()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// Switch this to use {} once you&#39;ve added an implementation
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// for fmt::Display.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span>color);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -601,27 +601,11 @@ Now Structure<span style="color:#000;font-weight:bold">(</span>3<span style="col
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -640,6 +624,22 @@ Now Structure<span style="color:#000;font-weight:bold">(</span>3<span style="col
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -655,8 +655,6 @@ Now Structure<span style="color:#000;font-weight:bold">(</span>3<span style="col
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -665,13 +663,13 @@ Now Structure<span style="color:#000;font-weight:bold">(</span>3<span style="col
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -691,8 +689,6 @@ Now Structure<span style="color:#000;font-weight:bold">(</span>3<span style="col
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

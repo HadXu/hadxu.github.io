@@ -151,7 +151,7 @@
     <li><a href="#repeat">Repeat</a></li>
     <li><a href="#error-handling">Error handling</a></li>
     <li><a href="#panic">panic!</a></li>
-    <li><a href="#option--unwrap">Option & unwrap</a></li>
+    <li><a href="#option--unwrap">Option &amp; unwrap</a></li>
     <li><a href="#result">Result</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -232,13 +232,13 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#998;font-style:italic">// 将() 展开为打印字符
 </span><span style="color:#998;font-style:italic"></span>macro_rules<span style="color:#000;font-weight:bold">!</span><span style="color:#bbb"> </span>say_hello{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Hello!&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Hello!&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>};<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>say_hello<span style="color:#000;font-weight:bold">!</span>()<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>say_hello<span style="color:#000;font-weight:bold">!</span>()<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -263,18 +263,18 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs">macro_rules<span style="color:#000;font-weight:bold">!</span><span style="color:#bbb"> </span>create_function{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>(<span style="color:#999;font-weight:bold;font-style:italic">$func_name</span>:<span style="color:#458;font-weight:bold">ident</span>)<span style="color:#bbb">  </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#999;font-weight:bold;font-style:italic">$func_name</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">            </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;You called {:?}()&#34;</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">                     </span>stringify<span style="color:#000;font-weight:bold">!</span>(<span style="color:#999;font-weight:bold;font-style:italic">$func_name</span>));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>(<span style="color:#999;font-weight:bold;font-style:italic">$func_name</span>:<span style="color:#458;font-weight:bold">ident</span>)<span style="color:#bbb">  </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#999;font-weight:bold;font-style:italic">$func_name</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;You called {:?}()&#34;</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">                     </span>stringify<span style="color:#000;font-weight:bold">!</span>(<span style="color:#999;font-weight:bold;font-style:italic">$func_name</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>};<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>create_function<span style="color:#000;font-weight:bold">!</span>(foo);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb">
 </span><span style="color:#bbb"></span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>foo()<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>foo()<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -299,16 +299,16 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">use</span><span style="color:#bbb"> </span>core::cmp::min;<span style="color:#bbb">
 </span><span style="color:#bbb"></span>macro_rules<span style="color:#000;font-weight:bold">!</span><span style="color:#bbb"> </span>find_min<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>(<span style="color:#999;font-weight:bold;font-style:italic">$x</span>:<span style="color:#458;font-weight:bold">expr</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>(<span style="color:#999;font-weight:bold;font-style:italic">$x</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>(<span style="color:#999;font-weight:bold;font-style:italic">$x</span>:<span style="color:#458;font-weight:bold">expr</span>,<span style="color:#bbb">  </span><span style="color:#999;font-weight:bold;font-style:italic">$(</span><span style="color:#999;font-weight:bold;font-style:italic">$y</span>:<span style="color:#458;font-weight:bold">expr</span>),<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>min(<span style="color:#999;font-weight:bold;font-style:italic">$x</span>,<span style="color:#bbb"> </span>find_min<span style="color:#000;font-weight:bold">!</span>(<span style="color:#999;font-weight:bold;font-style:italic">$(</span><span style="color:#999;font-weight:bold;font-style:italic">$y</span>),<span style="color:#000;font-weight:bold">+</span>))<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>(<span style="color:#999;font-weight:bold;font-style:italic">$x</span>:<span style="color:#458;font-weight:bold">expr</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>(<span style="color:#999;font-weight:bold;font-style:italic">$x</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>(<span style="color:#999;font-weight:bold;font-style:italic">$x</span>:<span style="color:#458;font-weight:bold">expr</span>,<span style="color:#bbb">  </span><span style="color:#999;font-weight:bold;font-style:italic">$($y</span>:<span style="color:#458;font-weight:bold">expr</span>),<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>min(<span style="color:#999;font-weight:bold;font-style:italic">$x</span>,<span style="color:#bbb"> </span>find_min<span style="color:#000;font-weight:bold">!</span>(<span style="color:#999;font-weight:bold;font-style:italic">$($y</span>),<span style="color:#000;font-weight:bold">+</span>))<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb">
 </span><span style="color:#bbb"></span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>find_min<span style="color:#000;font-weight:bold">!</span>(<span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span>));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>find_min<span style="color:#000;font-weight:bold">!</span>(<span style="color:#099">0</span><span style="color:#000;font-weight:bold">u32</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span><span style="color:#000;font-weight:bold">u32</span>));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>find_min<span style="color:#000;font-weight:bold">!</span>(<span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span>,<span style="color:#bbb"> </span><span style="color:#099">5</span><span style="color:#000;font-weight:bold">u32</span>,<span style="color:#bbb"> </span><span style="color:#099">5</span><span style="color:#000;font-weight:bold">u32</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>find_min<span style="color:#000;font-weight:bold">!</span>(<span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>find_min<span style="color:#000;font-weight:bold">!</span>(<span style="color:#099">0</span><span style="color:#000;font-weight:bold">u32</span>,<span style="color:#bbb"> </span><span style="color:#099">3</span><span style="color:#000;font-weight:bold">u32</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>find_min<span style="color:#000;font-weight:bold">!</span>(<span style="color:#099">1</span><span style="color:#000;font-weight:bold">u32</span>,<span style="color:#bbb"> </span><span style="color:#099">5</span><span style="color:#000;font-weight:bold">u32</span>,<span style="color:#bbb"> </span><span style="color:#099">5</span><span style="color:#000;font-weight:bold">u32</span>));<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -334,15 +334,15 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">give_princess</span>(gift: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">str</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Princesses hate snakes, so we need to stop if she disapproves!
-</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>gift<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;snake&#34;</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>panic<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;AAAaaaaa!!!!&#34;</span>);<span style="color:#bbb"> </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;I love {}s!!!!!&#34;</span>,<span style="color:#bbb"> </span>gift);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// Princesses hate snakes, so we need to stop if she disapproves!
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>gift<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;snake&#34;</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>panic<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;AAAaaaaa!!!!&#34;</span>);<span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;I love {}s!!!!!&#34;</span>,<span style="color:#bbb"> </span>gift);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>give_princess(<span style="color:#d14">&#34;teddy bear&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>give_princess(<span style="color:#d14">&#34;snake&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>give_princess(<span style="color:#d14">&#34;teddy bear&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>give_princess(<span style="color:#d14">&#34;snake&#34;</span>);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -360,13 +360,13 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">give_princess</span>(gift: <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">str</span><span style="color:#000;font-weight:bold">&gt;</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>inside<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>gift.unwrap();<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;I love {}s!!!!!&#34;</span>,<span style="color:#bbb"> </span>inside);<span style="color:#bbb">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">give_princess</span>(gift: <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;&amp;</span><span style="color:#458;font-weight:bold">str</span><span style="color:#000;font-weight:bold">&gt;</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>inside<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>gift.unwrap();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;I love {}s!!!!!&#34;</span>,<span style="color:#bbb"> </span>inside);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>bird<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#0086b3">Some</span>(<span style="color:#d14">&#34;robin&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>give_princess(bird);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>bird<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#0086b3">Some</span>(<span style="color:#d14">&#34;robin&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>give_princess(bird);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -385,15 +385,15 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">give_princess</span>(gift: <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">str</span><span style="color:#000;font-weight:bold">&gt;</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#0086b3">String</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>inside:<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">str</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>gift<span style="color:#000;font-weight:bold">?</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#0086b3">Some</span>(format<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>inside))<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">give_princess</span>(gift: <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;&amp;</span><span style="color:#458;font-weight:bold">str</span><span style="color:#000;font-weight:bold">&gt;</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Option</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#0086b3">String</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>inside:<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">str</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>gift<span style="color:#000;font-weight:bold">?</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#0086b3">Some</span>(format<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>inside))<span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>bird<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#0086b3">Some</span>(<span style="color:#d14">&#34;robin&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>y<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>give_princess(bird);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>y.unwrap());<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>bird<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#0086b3">Some</span>(<span style="color:#d14">&#34;robin&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>y<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>give_princess(bird);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>y.unwrap());<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -437,37 +437,37 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">use</span><span style="color:#bbb"> </span>std::num::ParseIntError;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Result</span><span style="color:#000;font-weight:bold">&lt;</span>(),<span style="color:#bbb"> </span>ParseIntError<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;10&#34;</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>num<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">match</span><span style="color:#bbb"> </span>s.parse::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#0086b3">Ok</span>(x)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>x,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#0086b3">Err</span>(e)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#0086b3">Err</span>(e),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#0086b3">Ok</span>(())<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>s<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;10&#34;</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>num<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">match</span><span style="color:#bbb"> </span>s.parse::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#0086b3">Ok</span>(x)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>x,<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#0086b3">Err</span>(e)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#0086b3">Err</span>(e),<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#0086b3">Ok</span>(())<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">use</span><span style="color:#bbb"> </span>std::num::ParseIntError;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">multiply</span>(first_number_str: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">str</span>,<span style="color:#bbb"> </span>second_number_str: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">str</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Result</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span>,<span style="color:#bbb"> </span>ParseIntError<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>first_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>first_number_str.parse::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#000;font-weight:bold">?</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>second_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>second_number_str.parse::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#000;font-weight:bold">?</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#0086b3">Ok</span>(first_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>second_number)<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>first_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>first_number_str.parse::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#000;font-weight:bold">?</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>second_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>second_number_str.parse::<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span><span style="color:#000;font-weight:bold">&gt;</span>()<span style="color:#000;font-weight:bold">?</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#0086b3">Ok</span>(first_number<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>second_number)<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">print</span>(result: <span style="color:#0086b3">Result</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">i32</span>,<span style="color:#bbb"> </span>ParseIntError<span style="color:#000;font-weight:bold">&gt;</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">match</span><span style="color:#bbb"> </span>result<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#0086b3">Ok</span>(n)<span style="color:#bbb">  </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;n is {}&#34;</span>,<span style="color:#bbb"> </span>n),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span><span style="color:#0086b3">Err</span>(e)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Error: {}&#34;</span>,<span style="color:#bbb"> </span>e),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">match</span><span style="color:#bbb"> </span>result<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#0086b3">Ok</span>(n)<span style="color:#bbb">  </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;n is {}&#34;</span>,<span style="color:#bbb"> </span>n),<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#0086b3">Err</span>(e)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Error: {}&#34;</span>,<span style="color:#bbb"> </span>e),<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>print(multiply(<span style="color:#d14">&#34;10&#34;</span>,<span style="color:#bbb"> </span><span style="color:#d14">&#34;2&#34;</span>));<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>print(multiply(<span style="color:#d14">&#34;t&#34;</span>,<span style="color:#bbb"> </span><span style="color:#d14">&#34;2&#34;</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>print(multiply(<span style="color:#d14">&#34;10&#34;</span>,<span style="color:#bbb"> </span><span style="color:#d14">&#34;2&#34;</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>print(multiply(<span style="color:#d14">&#34;t&#34;</span>,<span style="color:#bbb"> </span><span style="color:#d14">&#34;2&#34;</span>));<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -565,27 +565,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -604,6 +588,22 @@
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -619,8 +619,6 @@
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -629,13 +627,13 @@
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -655,8 +653,6 @@
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

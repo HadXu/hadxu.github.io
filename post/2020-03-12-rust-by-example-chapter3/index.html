@@ -271,46 +271,46 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">derive(Debug)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#999;font-weight:bold;font-style:italic">#[derive(Debug)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Person</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#008080">&#39;a</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// &#39;a 表示生命周期,当Person生命结束了，那么name也结束了。
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// &#39;a 表示生命周期,当Person生命结束了，那么name也结束了。
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>name: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#008080">&#39;a</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">str</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>age: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>age: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Nil</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Pair</span>(<span style="color:#458;font-weight:bold">i32</span>,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">f32</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Point</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>x: <span style="color:#458;font-weight:bold">f32</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>y: <span style="color:#458;font-weight:bold">f32</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>x: <span style="color:#458;font-weight:bold">f32</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>y: <span style="color:#458;font-weight:bold">f32</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#998;font-style:italic">// 取消禁用代码警告
-</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#[</span><span style="color:#999;font-weight:bold;font-style:italic">allow(dead_code)</span><span style="color:#999;font-weight:bold;font-style:italic">]</span><span style="color:#bbb">
+</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#[allow(dead_code)]</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">Rectangle</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>top_left: <span style="color:#458;font-weight:bold">Point</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>bottom_right: <span style="color:#458;font-weight:bold">Point</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>top_left: <span style="color:#458;font-weight:bold">Point</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>bottom_right: <span style="color:#458;font-weight:bold">Point</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>name<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;Peter&#34;</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>age<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">27</span>;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>peter<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Person<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>name,<span style="color:#bbb"> </span>age<span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>_nil<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Nil;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>pair<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Pair(<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">0.1</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>point1: <span style="color:#458;font-weight:bold">Point</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Point<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>x: <span style="color:#099">10.3</span>,<span style="color:#bbb"> </span>y: <span style="color:#099">0.4</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>point2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Point<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>x: <span style="color:#099">5.2</span>,<span style="color:#bbb"> </span>y: <span style="color:#458;font-weight:bold">point1</span>.y<span style="color:#bbb"> </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>_rectangle<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Rectangle<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>top_left:<span style="color:#458;font-weight:bold">point1</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>bottom_right: <span style="color:#458;font-weight:bold">point2</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>};<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>name<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;Peter&#34;</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>age<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">27</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>peter<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Person<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>name,<span style="color:#bbb"> </span>age<span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>_nil<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Nil;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>pair<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Pair(<span style="color:#099">1</span>,<span style="color:#bbb"> </span><span style="color:#099">0.1</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>point1: <span style="color:#458;font-weight:bold">Point</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Point<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>x: <span style="color:#099">10.3</span>,<span style="color:#bbb"> </span>y: <span style="color:#099">0.4</span><span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>point2<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Point<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>x: <span style="color:#099">5.2</span>,<span style="color:#bbb"> </span>y: <span style="color:#458;font-weight:bold">point1</span>.y<span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>_rectangle<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Rectangle<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>top_left:<span style="color:#458;font-weight:bold">point1</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>bottom_right: <span style="color:#458;font-weight:bold">point2</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -348,31 +348,31 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">enum</span> <span style="color:#458;font-weight:bold">WebEvent</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>PageLoad,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>PageUnload,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>KeyPress(char),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Paste(<span style="color:#0086b3">String</span>),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Click<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>x: <span style="color:#458;font-weight:bold">i64</span>,<span style="color:#bbb"> </span>y: <span style="color:#458;font-weight:bold">i64</span> },<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>PageLoad,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>PageUnload,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>KeyPress(char),<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>Paste(<span style="color:#0086b3">String</span>),<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>Click<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>x: <span style="color:#458;font-weight:bold">i64</span>,<span style="color:#bbb"> </span>y: <span style="color:#458;font-weight:bold">i64</span> },<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">inspect</span>(event:<span style="color:#458;font-weight:bold">WebEvent</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">match</span><span style="color:#bbb"> </span>event<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>WebEvent::PageLoad<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Page Load&#34;</span>),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>WebEvent::PageUnload<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;page unloaded&#34;</span>),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>WebEvent::KeyPress(c)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb">   </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;press {}&#34;</span>,<span style="color:#bbb"> </span>c),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>WebEvent::Paste(s)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;paste {}&#34;</span>,<span style="color:#bbb"> </span>s),<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>WebEvent::Click<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>x,y}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">            </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;clicked at x={}, y={}.&#34;</span>,<span style="color:#bbb"> </span>x,<span style="color:#bbb"> </span>y);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">        </span>},<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">match</span><span style="color:#bbb"> </span>event<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>WebEvent::PageLoad<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;Page Load&#34;</span>),<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">        </span>WebEvent::PageUnload<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;page unloaded&#34;</span>),<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>WebEvent::KeyPress(c)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb">   </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;press {}&#34;</span>,<span style="color:#bbb"> </span>c),<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>WebEvent::Paste(s)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;paste {}&#34;</span>,<span style="color:#bbb"> </span>s),<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>WebEvent::Click<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>x,y}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;clicked at x={}, y={}.&#34;</span>,<span style="color:#bbb"> </span>x,<span style="color:#bbb"> </span>y);<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>},<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>press<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>WebEvent::KeyPress(<span style="color:#d14">&#39;c&#39;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>inspect(press)<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>press<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>WebEvent::KeyPress(<span style="color:#d14">&#39;c&#39;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>inspect(press)<span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -388,8 +388,8 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">enum</span> <span style="color:#458;font-weight:bold">VeryVerboseEnumOfThingsToDoWithNumbers</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Add,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Subtract,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>Add,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>Subtract,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">type</span> <span style="color:#458;font-weight:bold">Operations</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>VeryVerboseEnumOfThingsToDoWithNumbers;<span style="color:#bbb">
 </span></code></pre></td></tr></table>
@@ -422,24 +422,24 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rs" data-lang="rs"><span style="color:#000;font-weight:bold">enum</span> <span style="color:#458;font-weight:bold">Number</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Zero,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// 0
+</span><span style="color:#bbb">    </span>Zero,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// 0
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>One,<span style="color:#bbb">   </span><span style="color:#998;font-style:italic">// 1
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>Two,<span style="color:#bbb">   </span><span style="color:#998;font-style:italic">// 2
 </span><span style="color:#998;font-style:italic"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">enum</span> <span style="color:#458;font-weight:bold">Color</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Red<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0xff0000</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Green<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0x00ff00</span>,<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>Blue<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0x0000ff</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>Red<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0xff0000</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>Green<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0x00ff00</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>Blue<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0x0000ff</span>,<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `enums` can be cast as integers.
+</span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// `enums` can be cast as integers.
 </span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;zero is {}&#34;</span>,<span style="color:#bbb"> </span>Number::Zero<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;one is {}&#34;</span>,<span style="color:#bbb"> </span>Number::One<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;roses are #{:06x}&#34;</span>,<span style="color:#bbb"> </span>Color::Red<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;violets are #{:06x}&#34;</span>,<span style="color:#bbb"> </span>Color::Blue<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;one is {}&#34;</span>,<span style="color:#bbb"> </span>Number::One<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;roses are #{:06x}&#34;</span>,<span style="color:#bbb"> </span>Color::Red<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println<span style="color:#000;font-weight:bold">!</span>(<span style="color:#d14">&#34;violets are #{:06x}&#34;</span>,<span style="color:#bbb"> </span>Color::Blue<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i32</span>);<span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></td></tr></table>
 </div>
@@ -553,27 +553,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -592,6 +576,22 @@
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -607,8 +607,6 @@
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -617,13 +615,13 @@
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -643,8 +641,6 @@
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     

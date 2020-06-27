@@ -326,14 +326,14 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
 <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_compress</span>(uint32_t state[<span style="color:#000;font-weight:bold">static</span> <span style="color:#099">4</span>], <span style="color:#000;font-weight:bold">const</span> uint8_t block[<span style="color:#000;font-weight:bold">static</span> <span style="color:#099">64</span>]) {
-	<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define LOADSCHEDULE(i)  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">		schedule[i] = (uint32_t)block[i * 4 + 0] &lt;&lt;  0  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 1] &lt;&lt;  8  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 2] &lt;&lt; 16  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 3] &lt;&lt; 24;</span><span style="color:#999;font-weight:bold;font-style:italic">
+	<span style="color:#999;font-weight:bold;font-style:italic">#define LOADSCHEDULE(i)  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">		schedule[i] = (uint32_t)block[i * 4 + 0] &lt;&lt;  0  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 1] &lt;&lt;  8  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 2] &lt;&lt; 16  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 3] &lt;&lt; 24;
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>	
 	uint32_t schedule[<span style="color:#099">16</span>];
 	LOADSCHEDULE( <span style="color:#099">0</span>)
@@ -353,14 +353,14 @@
 	LOADSCHEDULE(<span style="color:#099">14</span>)
 	LOADSCHEDULE(<span style="color:#099">15</span>)
 	
-	<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define ROTL32(x, n)  (((0U + (x)) &lt;&lt; (n)) | ((x) &gt;&gt; (32 - (n))))  </span><span style="color:#998;font-style:italic">// Assumes that x is uint32_t and 0 &lt; n &lt; 32
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define ROUND0(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, d ^ (b &amp; (c ^ d)), k, s, t)</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define ROUND1(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, c ^ (d &amp; (b ^ c)), k, s, t)</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define ROUND2(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, b ^ c ^ d        , k, s, t)</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define ROUND3(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, c ^ (b | ~d)     , k, s, t)</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define ROUND_TAIL(a, b, expr, k, s, t)    \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">		a = 0U + a + (expr) + UINT32_C(t) + schedule[k];  \</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">		a = 0U + b + ROTL32(a, s);</span><span style="color:#999;font-weight:bold;font-style:italic">
+	<span style="color:#999;font-weight:bold;font-style:italic">#define ROTL32(x, n)  (((0U + (x)) &lt;&lt; (n)) | ((x) &gt;&gt; (32 - (n))))  </span><span style="color:#998;font-style:italic">// Assumes that x is uint32_t and 0 &lt; n &lt; 32
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND0(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, d ^ (b &amp; (c ^ d)), k, s, t)
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND1(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, c ^ (d &amp; (b ^ c)), k, s, t)
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND2(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, b ^ c ^ d        , k, s, t)
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND3(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, c ^ (b | ~d)     , k, s, t)
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND_TAIL(a, b, expr, k, s, t)    \
+</span><span style="color:#999;font-weight:bold;font-style:italic">		a = 0U + a + (expr) + UINT32_C(t) + schedule[k];  \
+</span><span style="color:#999;font-weight:bold;font-style:italic">		a = 0U + b + ROTL32(a, s);
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>	
 	uint32_t a <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">0</span>];
 	uint32_t b <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">1</span>];
@@ -521,16 +521,16 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdbool.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stddef.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdlib.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;string.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;time.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdbool.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stddef.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdlib.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;string.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;time.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
 </span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define BLOCK_LEN 64  </span><span style="color:#998;font-style:italic">// In bytes
-</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define STATE_LEN 4  </span><span style="color:#998;font-style:italic">// In words
+<span style="color:#999;font-weight:bold;font-style:italic">#define BLOCK_LEN 64  </span><span style="color:#998;font-style:italic">// In bytes
+</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#define STATE_LEN 4  </span><span style="color:#998;font-style:italic">// In words
 </span><span style="color:#998;font-style:italic"></span>
 <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_hash</span>(<span style="color:#000;font-weight:bold">const</span> uint8_t message[], size_t len, uint32_t hash[<span style="color:#000;font-weight:bold">static</span> STATE_LEN]);
 <span style="color:#000;font-weight:bold">extern</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_compress</span>(uint32_t state[<span style="color:#000;font-weight:bold">static</span> STATE_LEN], <span style="color:#000;font-weight:bold">const</span> uint8_t block[<span style="color:#000;font-weight:bold">static</span> BLOCK_LEN]);
@@ -542,11 +542,11 @@
 	hash[<span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0x98BADCFE</span>);
 	hash[<span style="color:#099">3</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0x10325476</span>);
 
-    <span style="color:#999;font-weight:bold;font-style:italic">#</span><span style="color:#999;font-weight:bold;font-style:italic">define LENGTH_SIZE 8  </span><span style="color:#998;font-style:italic">// In bytes
+    <span style="color:#999;font-weight:bold;font-style:italic">#define LENGTH_SIZE 8  </span><span style="color:#998;font-style:italic">// In bytes
 </span><span style="color:#998;font-style:italic"></span>
     size_t off;
 
-    <span style="color:#000;font-weight:bold">for</span> (off <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; len <span style="color:#000;font-weight:bold">-</span> off <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> BLOCK_LEN; off <span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">=</span> BLOCK_LEN)
+    <span style="color:#000;font-weight:bold">for</span> (off <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; len <span style="color:#000;font-weight:bold">-</span> off <span style="color:#000;font-weight:bold">&gt;=</span> BLOCK_LEN; off <span style="color:#000;font-weight:bold">+=</span> BLOCK_LEN)
 		md5_compress(hash, <span style="color:#000;font-weight:bold">&amp;</span>message[off]);
 	
 	uint8_t block[BLOCK_LEN] <span style="color:#000;font-weight:bold">=</span> {<span style="color:#099">0</span>};
@@ -554,15 +554,15 @@
 	memcpy(block, <span style="color:#000;font-weight:bold">&amp;</span>message[off], rem);
 	
 	block[rem] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0x80</span>;
-	rem<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>;
+	rem<span style="color:#000;font-weight:bold">++</span>;
 	<span style="color:#000;font-weight:bold">if</span> (BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> rem <span style="color:#000;font-weight:bold">&lt;</span> LENGTH_SIZE) {
 		md5_compress(hash, block);
 		memset(block, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">sizeof</span>(block));
 	}
 	
-	block[BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> LENGTH_SIZE] <span style="color:#000;font-weight:bold">=</span> (uint8_t)((len <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x1FU</span>) <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#099">3</span>);
-	len <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">5</span>;
-	<span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; i <span style="color:#000;font-weight:bold">&lt;</span> LENGTH_SIZE; i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>, len <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">=</span> <span style="color:#099">8</span>)
+	block[BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> LENGTH_SIZE] <span style="color:#000;font-weight:bold">=</span> (uint8_t)((len <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x1FU</span>) <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#099">3</span>);
+	len <span style="color:#000;font-weight:bold">&gt;&gt;=</span> <span style="color:#099">5</span>;
+	<span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; i <span style="color:#000;font-weight:bold">&lt;</span> LENGTH_SIZE; i<span style="color:#000;font-weight:bold">++</span>, len <span style="color:#000;font-weight:bold">&gt;&gt;=</span> <span style="color:#099">8</span>)
 		block[BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> LENGTH_SIZE <span style="color:#000;font-weight:bold">+</span> i] <span style="color:#000;font-weight:bold">=</span> (uint8_t)(len <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xFFU</span>);
 	md5_compress(hash, block);
 }
@@ -573,24 +573,24 @@
 {
     size_t len <span style="color:#000;font-weight:bold">=</span> strlen(message);
     uint8_t <span style="color:#000;font-weight:bold">*</span>msg <span style="color:#000;font-weight:bold">=</span> calloc(len, <span style="color:#000;font-weight:bold">sizeof</span>(uint8_t));
-    <span style="color:#000;font-weight:bold">for</span> (size_t j <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; j <span style="color:#000;font-weight:bold">&lt;</span> len; j<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>)
+    <span style="color:#000;font-weight:bold">for</span> (size_t j <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; j <span style="color:#000;font-weight:bold">&lt;</span> len; j<span style="color:#000;font-weight:bold">++</span>)
         msg[j] <span style="color:#000;font-weight:bold">=</span> (uint8_t)message[j];
     uint32_t hash[STATE_LEN];
     md5_hash(msg, len, hash);
 
     <span style="color:#000;font-weight:bold">typedef</span> <span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>byte_point;
 
-    <span style="color:#000;font-weight:bold">for</span>(<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">4</span>;i<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>){
+    <span style="color:#000;font-weight:bold">for</span>(<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">4</span>;i<span style="color:#000;font-weight:bold">++</span>){
         byte_point start <span style="color:#000;font-weight:bold">=</span> (byte_point)<span style="color:#000;font-weight:bold">&amp;</span>hash[i];
-        <span style="color:#000;font-weight:bold">for</span>(<span style="color:#458;font-weight:bold">int</span> j<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>; j<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">4</span>; j<span style="color:#000;font-weight:bold">+</span><span style="color:#000;font-weight:bold">+</span>)
+        <span style="color:#000;font-weight:bold">for</span>(<span style="color:#458;font-weight:bold">int</span> j<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>; j<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">4</span>; j<span style="color:#000;font-weight:bold">++</span>)
         {
-            printf(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">%.2x</span><span style="color:#d14">&#34;</span>, start[j]);
+            printf(<span style="color:#d14">&#34;%.2x&#34;</span>, start[j]);
         }
     }
-    printf(<span style="color:#d14"></span><span style="color:#d14">&#34;</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+    printf(<span style="color:#d14">&#34;</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
 
 }
-<span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">main</span>(<span style="color:#458;font-weight:bold">int</span> argc, <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">*</span> argv)
+<span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">main</span>(<span style="color:#458;font-weight:bold">int</span> argc, <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">**</span> argv)
 {
 
     <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">*</span> message <span style="color:#000;font-weight:bold">=</span> argv[<span style="color:#099">1</span>];
@@ -707,27 +707,11 @@ $ ./a.out <span style="color:#d14">&#34;abc&#34;</span>
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="毕业">毕业</a>
+        <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/" title="Union find">Union find</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2020-06-06-graduation/" title="答辩结束">答辩结束</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-23-Chip-warsthe-Economist/" title="Chip wars">Chip wars</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-17-COS-and-CVM/" title="COS &amp; CVM">COS &amp; CVM</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-16-Goodbye-globalisationthe-Economist/" title="Goodbye globalisation">Goodbye globalisation</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="并查集">并查集</a>
+        <a href="https://hadxu.github.io/post/2020-05-12-union-find/" title="Union find">Union find</a>
     </li>
     
     <li>
@@ -746,6 +730,22 @@ $ ./a.out <span style="color:#d14">&#34;abc&#34;</span>
         <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="Bash一些操作">Bash一些操作</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-25-re-thinking-deep-learning-framework/" title="再次思考深度学习框架的自动求导">再次思考深度学习框架的自动求导</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-24-After-the-disease-the-debtthe-Economist/" title="After the disease, the debt">After the disease, the debt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-04-18-Is-China-winningthe-Economist/" title="Is China winning?">Is China winning?</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -761,8 +761,6 @@ $ ./a.out <span style="color:#d14">&#34;abc&#34;</span>
     
     <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/cos/">cos (1)</a></li>
-    
     <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
@@ -771,13 +769,13 @@ $ ./a.out <span style="color:#d14">&#34;abc&#34;</span>
     
     <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (10)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (2)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
     
@@ -797,8 +795,6 @@ $ ./a.out <span style="color:#d14">&#34;abc&#34;</span>
     <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
     
     <a href="https://hadxu.github.io/tags/bash/">bash</a>
-    
-    <a href="https://hadxu.github.io/tags/cos/">cos</a>
     
     <a href="https://hadxu.github.io/tags/linux/">linux</a>
     
