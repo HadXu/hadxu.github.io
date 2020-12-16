@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>eep-learning on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/categories/eep-learning/</link>
+    <description>Recent content in eep-learning on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 15 Dec 2020 09:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://hadxu.github.io/categories/eep-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Attention is All your need</title>
+      <link>https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/</link>
+      <pubDate>Tue, 15 Dec 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/</guid>
+      <description>Attention is All your need Attention的花式玩法 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 class Attention(nn.Module): def __init__(self, dim=512, num_heads=8): super(Attention, self).__init__() self.num_heads = num_heads self.scale = dim ** -0.5 assert dim % self.num_heads == 0 self.qkv = nn.Linear(dim, dim * 3, bias=False) self.fc = nn.Sequential( nn.Linear(512, 512), nn.Dropout(0.1), ) def forward(self, x): qkv = self.qkv(x).chunk(3, dim=-1) q, k, v = map(lambda t: rearrange(t, &amp;#39;b n (h d) -&amp;gt; b h n d&amp;#39;, h=self.num_heads), qkv) attn = torch.einsum(&amp;#39;bhid,bhjd-&amp;gt;bhij&amp;#39;, q, k) * self.scale attn = attn.softmax(dim=-1) out = torch.einsum(&amp;#39;bhij,bhjd-&amp;gt;bhid&amp;#39;, attn, v) out = rearrange(out, &amp;#39;b h n d -&amp;gt; b n (h d)&amp;#39;) out = self.fc(out) return out Visual-Transformer 几种实现</description>
+    </item>
+    
+  </channel>
+</rss>

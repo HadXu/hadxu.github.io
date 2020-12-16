@@ -3,23 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/</loc>
+    <lastmod>2020-12-15T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://hadxu.github.io/categories/</loc>
-    <lastmod>2020-11-09T09:00:00+08:00</lastmod>
+    <lastmod>2020-12-15T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/tags/deep-learning/</loc>
+    <lastmod>2020-12-15T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hadxu.github.io/categories/deep-learning/</loc>
+    <lastmod>2020-12-15T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/</loc>
-    <lastmod>2020-11-09T09:00:00+08:00</lastmod>
+    <lastmod>2020-12-15T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/post/</loc>
-    <lastmod>2020-11-09T09:00:00+08:00</lastmod>
+    <lastmod>2020-12-15T09:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hadxu.github.io/tags/</loc>
-    <lastmod>2020-11-09T09:00:00+08:00</lastmod>
+    <lastmod>2020-12-15T09:00:00+08:00</lastmod>
   </url>
   
   <url>
@@ -50,16 +65,6 @@
   <url>
     <loc>https://hadxu.github.io/categories/the-economist/</loc>
     <lastmod>2020-08-02T09:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/tags/deep-learning/</loc>
-    <lastmod>2020-07-29T11:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hadxu.github.io/categories/deep-learning/</loc>
-    <lastmod>2020-07-29T11:00:00+08:00</lastmod>
   </url>
   
   <url>
