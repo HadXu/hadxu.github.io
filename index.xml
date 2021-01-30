@@ -6,10 +6,19 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 29 Dec 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 30 Jan 2021 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Trait in Rust</title>
+      <link>https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/</link>
+      <pubDate>Sat, 30 Jan 2021 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/</guid>
+      <description>Trait in Rust Rust中的Trait非常优美，类似于泛型编程概念。有时候造轮子的时候发现不同的类型具有相同的方法，如果一个个写方法显得不那么友好，比如 1 2 3 4 5 6 7 8 9 10 11 12 fn double_i32(x: i32)-&amp;gt; i32 {x*2}fn double_i64(x: i64)-&amp;gt; i64 {x*2}fn main(){println!(&amp;#34;double 5_i32 == {}&amp;#34;,double_i32(5_i32));println!(&amp;#34;double 5_i64 == {}&amp;#34;,double_i64(5_i64));} 可以发现非常冗余，那么如何解决这种问题？可以使用Trait，先看Trait的定义 1</description>
+    </item>
     
     <item>
       <title>Year of 2020</title>
@@ -469,7 +478,7 @@
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hadxu.github.io/about/</guid>
-      <description>关于我 基本信息 姓名: 许振雷 网名: hadxu or lay 邮箱: hadxu123@gmail.com github: https://github.com/hadxu 爱好: 阅读、折腾、羽毛球 本科: 常熟理工学院计算机工程学院 研究生: 江南大学物联网工程学院 老家: 江苏高邮(没错,就是以鸭蛋出名的高邮,同时也是抗日战争最后一役地点:高邮战役) 推荐课程 Bash Bash 的基本语法 OS Computer Systems: A Programmer&amp;rsquo;s Perspective 6.828 Operating System Engineering tsinghua OS Parallel Computer Architecture and Programming CS140e: An</description>
+      <description>关于我 基本信息 姓名: 许振雷 网名: hadxu or lay 邮箱: hadxu123@gmail.com github: https://github.com/hadxu 爱好: 阅读、折腾、羽毛球 本科: 常熟理工学院计算机工程学院 研究生: 江南大学物联网工程学院 老家: 江苏高邮(没错,就是以鸭蛋出名的高邮,同时也是抗日战争最后一役地点:高邮战役) 推荐课程 Bash Bash 的基本语法 Math About Project Euler OS Computer Systems: A Programmer&amp;rsquo;s Perspective 6.828 Operating System Engineering tsinghua OS Parallel Computer Architecture</description>
     </item>
     
     <item>

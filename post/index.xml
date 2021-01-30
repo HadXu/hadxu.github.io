@@ -6,10 +6,19 @@
     <description>Recent content in Posts on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 29 Dec 2020 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 30 Jan 2021 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Trait in Rust</title>
+      <link>https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/</link>
+      <pubDate>Sat, 30 Jan 2021 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/</guid>
+      <description>Trait in Rust Rust中的Trait非常优美，类似于泛型编程概念。有时候造轮子的时候发现不同的类型具有相同的方法，如果一个个写方法显得不那么友好，比如 1 2 3 4 5 6 7 8 9 10 11 12 fn double_i32(x: i32)-&amp;gt; i32 {x*2}fn double_i64(x: i64)-&amp;gt; i64 {x*2}fn main(){println!(&amp;#34;double 5_i32 == {}&amp;#34;,double_i32(5_i32));println!(&amp;#34;double 5_i64 == {}&amp;#34;,double_i64(5_i64));} 可以发现非常冗余，那么如何解决这种问题？可以使用Trait，先看Trait的定义 1</description>
+    </item>
     
     <item>
       <title>Year of 2020</title>
