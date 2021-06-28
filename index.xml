@@ -6,10 +6,19 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 03 Jun 2021 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Jun 2021 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一种迷你解释器</title>
+      <link>https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/</link>
+      <pubDate>Mon, 21 Jun 2021 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/</guid>
+      <description>编写一个解释器(Github) 程序语言是给人读写的语言，如何将程序语言变成可执行的代码需要经过翻译。目前计算机语言分为两种派别1、解释器；2、编译器。其中解释器是边解释边执行，不需要将全部的代码一次性执行，经典的解释型语言有Python、Ruby，Perl， Matlab等等。而编</description>
+    </item>
     
     <item>
       <title>一种迷你操作系统</title>
@@ -487,7 +496,7 @@
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hadxu.github.io/books/</guid>
-      <description>读过的图书 2021-06-19 《人体简史》 2021-05-10 《文明 现代化 价值投资与中国》 2021-04-25 《被讨厌的勇气》 2021-03-28 《人类大瘟疫》 2021-02-30 《病毒来袭》 2021-01-16 《猎药师 发现新药的人》 2020-10-10 《两京十五日》 2020-08-29 《黄油 一部丰富的历史》 2020-08-25 《局外人》 2020-07-19 《枪炮、病菌与钢铁》 2020-06-20 《美国陷阱》 2020-06-10 《拉丁美洲被切开的血管》 2020-05-14 《万历十五年》 2020-01-26 《82年生的金智英》 2019-12-19</description>
+      <description>读过的图书 2021-06-29 《第一性原理》 2021-06-19 《人体简史》 2021-05-10 《文明 现代化 价值投资与中国》 2021-04-25 《被讨厌的勇气》 2021-03-28 《人类大瘟疫》 2021-02-30 《病毒来袭》 2021-01-16 《猎药师 发现新药的人》 2020-10-10 《两京十五日》 2020-08-29 《黄油 一部丰富的历史》 2020-08-25 《局外人》 2020-07-19 《枪炮、病菌与钢铁》 2020-06-20 《美国陷阱》 2020-06-10 《拉丁美洲被切开的血管》 2020-05-14 《万历十五年》 2020-01-26 《82</description>
     </item>
     
     <item>
