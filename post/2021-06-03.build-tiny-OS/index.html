@@ -173,7 +173,11 @@
     <li><a href="#5-线程-todo">5. 线程 （todo）</a></li>
     <li><a href="#6-文件系统">6. 文件系统</a></li>
     <li><a href="#7-总线peripheral-component-interconnect-pcihttpszhwikipediaorgwiki外设组件互连标准">7. <a href="https://zh.wikipedia.org/wiki/%E5%A4%96%E8%AE%BE%E7%BB%84%E4%BB%B6%E4%BA%92%E8%BF%9E%E6%A0%87%E5%87%86">总线(Peripheral Component Interconnect) PCI</a></a></li>
-    <li><a href="#8-网络todo">8. 网络(todo)</a></li>
+    <li><a href="#8-网络todo">8. 网络(todo)</a>
+      <ul>
+        <li><a href="#tcp三次握手">TCP三次握手</a></li>
+      </ul>
+    </li>
     <li><a href="#9-shell">9. shell</a></li>
     <li><a href="#总结">总结</a></li>
     <li><a href="#参考">参考</a></li>
@@ -839,6 +843,8 @@ run-args <span style="color:#000;font-weight:bold">=</span> <span style="color:#
 </code></pre></td></tr></table>
 </div>
 </div><p>然后在内核中就可以编写代码来驱动网卡，从而实现与网络的交互。</p>
+<h3 id="tcp三次握手">TCP三次握手</h3>
+<p>三次握手作为一个计算机面试常见的题目，是一个基本的知识。首先第一次握手是客户端发送一个特殊的报文给服务器，第二次握手是服务器返回一个特殊的报文给客户端，然后客户端再次发送请求报文，握手完成之后就是开始了信息的传递过程。</p>
 <h2 id="9-shell">9. shell</h2>
 <p>编写shell是最简单的事情之一，因为shell就是实现各种命令，而各种命令是均是调用操作系统的内核函数实现的。shell是一个死循环，每次将用户输入命令调用即可。一个简单的shell环境是</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
