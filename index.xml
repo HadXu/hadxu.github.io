@@ -491,6 +491,15 @@
     </item>
     
     <item>
+      <title>pdfs</title>
+      <link>https://hadxu.github.io/pdfs/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hadxu.github.io/pdfs/</guid>
+      <description>CS C The C Programming Language Algorithm Python CPython Internals Unix Linux unix-evolution 计算机系统 Computer-Architecture Rust Programming Rust Fast, Safe Systems Development 2nd Edition Rust in Action Go writing-a-compiler-in-go writing-an-interpreter-in-go Other 人工智能简史 SICP the economist 2021.7.10</description>
+    </item>
+    
+    <item>
       <title>书籍</title>
       <link>https://hadxu.github.io/books/</link>
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
