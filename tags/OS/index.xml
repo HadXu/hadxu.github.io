@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OS on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/tags/OS/</link>
+    <description>Recent content in OS on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 03 Jun 2021 09:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/tags/OS/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一种迷你操作系统</title>
+      <link>https://hadxu.github.io/post/2021-06-03.build-tiny-OS/</link>
+      <pubDate>Thu, 03 Jun 2021 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2021-06-03.build-tiny-OS/</guid>
+      <description>编写自己的一个操作系统(Github) 代码统计为 其中Rust代码量为2125行，好像也不是很多 编写自己的一个操作系统是非常有趣，从底层到顶层的一步一步地搭建，这个过程痛苦但是非常有意思，整个操作系统的搭建离不开两个字抽象，都知道计算机内部的表示都是01，单独的01是没有意义的，但</description>
+    </item>
+    
+  </channel>
+</rss>

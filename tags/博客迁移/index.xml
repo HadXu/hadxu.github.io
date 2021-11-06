@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>博客迁移 on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</link>
+    <description>Recent content in 博客迁移 on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 01 Mar 2020 21:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>博客迁移</title>
+      <link>https://hadxu.github.io/post/2020-03-01-blog-change/</link>
+      <pubDate>Sun, 01 Mar 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-01-blog-change/</guid>
+      <description>博客迁移 2020-03-28更新 使用hogo发现了新大陆，可以在markdown中嵌入各种我们需要的资源。比如官方的youtube，同时我们还可以自定义自己的shortcodes。比如我每一周都看经济学人，想将音频放上来，找了很多的资料，终于完成这个。非常感谢这个官方youtub</description>
+    </item>
+    
+  </channel>
+</rss>

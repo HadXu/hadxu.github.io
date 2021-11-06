@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>一种迷你操作系统 | lay&#39;s 博客</title>
+    <meta property="og:title" content="一种迷你操作系统 - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-06-03T09:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-06-03T09:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="一种迷你操作系统">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/2021-06-03.build-tiny-OS/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/films/" title="电影">电影</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-内核启动">0. 内核启动</a></li>
+    <li><a href="#1-打印字符到屏幕">1. 打印字符到屏幕</a></li>
+    <li><a href="#2-中断各种中断">2. 中断（各种中断）</a>
+      <ul>
+        <li><a href="#时间中断">时间中断</a></li>
+        <li><a href="#键盘中断">键盘中断</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-分页物理存储分配">3. 分页（物理存储分配）</a>
+      <ul>
+        <li><a href="#page-tables">Page Tables</a></li>
+        <li><a href="#寻址过程">寻址过程</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-内存分配堆与栈内存的分配">4. 内存分配（堆与栈内存的分配）</a>
+      <ul>
+        <li><a href="#1-最简单的一种分配就是块分配">1. 最简单的一种分配就是块分配。</a></li>
+        <li><a href="#2-linked-list-allocator">2. Linked List Allocator</a></li>
+        <li><a href="#3-fixed-size-block-allocator">3. Fixed-Size Block Allocator</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-线程-todo">5. 线程 （todo）</a></li>
+    <li><a href="#6-文件系统">6. 文件系统</a></li>
+    <li><a href="#7-总线peripheral-component-interconnect-pcihttpszhwikipediaorgwiki外设组件互连标准">7. <a href="https://zh.wikipedia.org/wiki/%E5%A4%96%E8%AE%BE%E7%BB%84%E4%BB%B6%E4%BA%92%E8%BF%9E%E6%A0%87%E5%87%86">总线(Peripheral Component Interconnect) PCI</a></a></li>
+    <li><a href="#8-网络todo">8. 网络(todo)</a>
+      <ul>
+        <li><a href="#tcp三次握手">TCP三次握手</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-shell">9. shell</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">一种迷你操作系统</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月3日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/OS'>OS</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h1 id="编写自己的一个操作系统githubhttpsgithubcomhadxuos">编写自己的一个操作系统(<a href="https://github.com/HadXu/os">Github</a>)</h1>
+<p>
+        <img class="mx-auto" alt="" src="/post/imgs/tiny-os/tiny-os.png" />   
+    </p>
+<p>代码统计为
+
+        <img class="mx-auto" alt="" src="/post/imgs/tiny-os/code_lines.png" />   
+    </p>
+<p>其中Rust代码量为2125行，好像也不是很多</p>
+<p>编写自己的一个操作系统是非常有趣，从底层到顶层的一步一步地搭建，这个过程痛苦但是非常有意思，整个操作系统的搭建离不开两个字<strong>抽象</strong>，都知道计算机内部的表示都是01，单独的01是没有意义的，但是如果将01组合起来并放在上下文中，就体现01的意义。比如<a href="http://www.asciitable.com">ASCII</a></p>
+<p>
+        <img class="mx-auto" alt="" src="http://www.asciitable.com/index/asciifull.gif" />   
+    
+ASCII表中每一个字符都是8位bit，一共表示了128个字符，有些字符可以打印，而有些字符不可以打印，赋予不同的含义。而字符是怎么打印到屏幕呢？那就需要显示方面的支持，下面会一一介绍。当赋予了01各种各样的含义，操作系统对01不同的功能进行封装，也就是系统内核的抽象，这些都是非常大的工程。编写一个操作系统有以下几个步骤</p>
+<ol start="0">
+<li>内核启动</li>
+<li>打印字符</li>
+<li>中断（各种中断）</li>
+<li>分页（物理存储分配）</li>
+<li>内存分配（堆与栈内存的分配）</li>
+<li>线程</li>
+<li>文件系统</li>
+<li>总线</li>
+<li>网络</li>
+<li>shell</li>
+</ol>
+<p>其中中断、分页、内存分配是操作系统的核心，直接决定了操作系统是如何运转的。</p>
+<h2 id="0-内核启动">0. 内核启动</h2>
+<p>操作系统本质上就是运行在一台机器上的程序，当机器启动就一直在运行，因此是无限循环的、一直开着的机器，在这机器中通过各种外设进行干预，从而实现了计算机的工作流程。一个简单的内核就是一个while循环的命令，使得机器一直开着，不能接受其他的任何操作。当机器启动的时候，就会开机自动检查，首先从给定的镜像文件中读取数据到机器的启动项中，然后执行我们烧写的系统命令。这一步启动一般采用<a href="https://wiki.osdev.org/GRUB">GRUB</a>，GRUB称之为GNU project&rsquo;s bootloader，是一种规范性的电脑启动标准，大部分计算机启动就是这种规范。后来发展了UEFI。在我写的内核代码中主要是下面的一段代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">entry_point<span style="color:#000;font-weight:bold">!</span>(kernel_main);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#999;font-weight:bold;font-style:italic">#[panic_handler]</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">panic</span>(_info: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">PanicInfo</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">!</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">loop</span><span style="color:#bbb"> </span>{}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">kernel_main</span>(boot_info: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&#39;</span><span style="color:#0086b3">static</span> <span style="color:#458;font-weight:bold">BootInfo</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">!</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">loop</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>通过入口进入<code>kernel_main</code>,然后让机器启动进入死循环，在这里我们啥也没有做，因此是一个简单的内核系统，没有什么功能，就是一个永久运行的机器而已。</p>
+<h2 id="1-打印字符到屏幕">1. 打印字符到屏幕</h2>
+<p>从这一步开始就进入到了操作系统核心的编写路程。首先我们需要能够看到操作系统发生了什么，如果不知道那怎么调试呢？因此计算机方面的人员首先采用<a href="https://en.wikipedia.org/wiki/VGA-compatible_text_mode">VGA</a>， VGA显示器是一个非常简单的显示模型，能够将ASCII中的可打印字符全部打印出来，因此早期的计算机首先采用这种方式来进行打印。那么如何打印？ <strong>硬件开发初始就已经设定了开关，通过设置电路从而使得打印成为可能。比如一个64位的字符，操作电路能够展示出不同的字符出来</strong>，那么计算机如何操作这些电路的呢？ 在VGA启动初期，就将自己的硬件地址写入到存储中，当你在规定的地址上写入数值的时候，那么就会将数据写入到硬件地址上。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">ref</span><span style="color:#bbb"> </span>WRITER: <span style="color:#458;font-weight:bold">Mutex</span><span style="color:#000;font-weight:bold">&lt;</span>Writer<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Mutex::new(Writer<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>column_position: <span style="color:#099">0</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>color_code: <span style="color:#458;font-weight:bold">ColorCode</span>::new(Color::Green,<span style="color:#bbb"> </span>Color::Black),<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>buffer: <span style="color:#458;font-weight:bold">unsafe</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span>(<span style="color:#099">0xb8000</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>Buffer)<span style="color:#bbb"> </span>},<span style="color:#bbb">
+</span><span style="color:#bbb"></span>});<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这里的<code>0xb8000</code>就是VGA的操作地址。还有一种方式就是操作端口，但是一般不用，都是直接使用操作地址来操作VGA显示。（There are generally two ways to access VGA text-mode for an application: through the Video BIOS interface or by directly accessing video RAM[4] and I/O ports. The latter method is considerably faster, and allows quick reading of the text buffer, for which reason it is preferred for advanced TUI programs.）
+在这里<code>0xb8000</code>就是对应的物理地址，直接操作了VGA的显示。这种方式是最高效的操作设备的方法，称之为<strong>DMA</strong>，一般来说不允许这样操作，因为操作错误的地址容易引起系统的崩溃，因此安全一般操作虚拟内存，然后通过虚拟内存映射到真实的物理地址。虚拟内存是内存分配中的内容。</p>
+<h2 id="2-中断各种中断">2. 中断（各种中断）</h2>
+<p>在计算机系统中，中断是一个非常重要的机制，因为有了中断，才使得计算机的操作多样性，能够使得计算机接受外部的信号、时间信号以及其他各种信号。想象一下如果没有中断，一个计算机程序必须要运行完才能运行下一个程序，如果突然来了一个紧急的程序，那么就需要等待，因此大大降低了计算机的性能。在x86系统中，称之为<a href="https://wiki.osdev.org/Interrupts">Interrupt Request (IRQ) or Hardware Interrupt</a>，一共定义了16个中断，分别是</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SHELL" data-lang="SHELL">IRQ	Description
+0	Programmable Interrupt Timer Interrupt
+1	Keyboard Interrupt
+2	Cascade <span style="color:#000;font-weight:bold">(</span>used internally by the two PICs. never raised<span style="color:#000;font-weight:bold">)</span>
+3	COM2 <span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">if</span> enabled<span style="color:#000;font-weight:bold">)</span>
+4	COM1 <span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">if</span> enabled<span style="color:#000;font-weight:bold">)</span>
+5	LPT2 <span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">if</span> enabled<span style="color:#000;font-weight:bold">)</span>
+6	Floppy Disk
+7	LPT1 / Unreliable <span style="color:#d14">&#34;spurious&#34;</span> interrupt <span style="color:#000;font-weight:bold">(</span>usually<span style="color:#000;font-weight:bold">)</span>
+8	CMOS real-time clock <span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">if</span> enabled<span style="color:#000;font-weight:bold">)</span>
+9	Free <span style="color:#000;font-weight:bold">for</span> peripherals / legacy SCSI / NIC
+10	Free <span style="color:#000;font-weight:bold">for</span> peripherals / SCSI / NIC
+11	Free <span style="color:#000;font-weight:bold">for</span> peripherals / SCSI / NIC
+12	PS2 Mouse
+13	FPU / Coprocessor / Inter-processor
+14	Primary ATA Hard Disk
+15	Secondary ATA Hard Disk
+</code></pre></td></tr></table>
+</div>
+</div><p>这些表达了x86支持的中断类型，比如第一个就是时间中断，第二个就是键盘中断，时间中断用来控制程序的切换以及其他功能，键盘中断能够使得程序进行中能够接受外部的信号，这样就可以进行人机交互，中断的定义如下</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">ref</span><span style="color:#bbb"> </span>IRQ_HANDLERS: <span style="color:#458;font-weight:bold">Mutex</span><span style="color:#000;font-weight:bold">&lt;</span>[<span style="color:#000;font-weight:bold">fn</span>();<span style="color:#bbb"> </span><span style="color:#099">16</span>]<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Mutex::new([default_handler;<span style="color:#bbb"> </span><span style="color:#099">16</span>]);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">ref</span><span style="color:#bbb"> </span>IDT: <span style="color:#458;font-weight:bold">InterruptDescriptorTable</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>idt<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>InterruptDescriptorTable::new();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt.breakpoint.set_handler_fn(breakpoint_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">unsafe</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>idt.double_fault<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>.set_handler_fn(double_fault_handler)<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>.set_stack_index(kernel::gdt::DOUBLE_FAULT_IST_INDEX);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">0</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq0_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">1</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq1_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">2</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq2_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">3</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq3_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">4</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq4_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">5</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq5_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">6</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq6_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">7</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq7_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">8</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq8_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">9</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq9_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">10</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq10_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">11</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq11_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">12</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq12_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">13</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq13_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">14</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq14_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt[interrupt_index(<span style="color:#099">15</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>].set_handler_fn(irq15_handler);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>idt<span style="color:#bbb">
+</span><span style="color:#bbb"></span>};<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这里定义了16个中断，比如实现第一个中断将产生中断后发生的动作用一个函数来表示</p>
+<h3 id="时间中断">时间中断</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">macro_rules!<span style="color:#bbb"> </span>irq_handler<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>(<span style="color:#999;font-weight:bold;font-style:italic">$handler</span>:<span style="color:#458;font-weight:bold">ident</span>,<span style="color:#bbb"> </span><span style="color:#999;font-weight:bold;font-style:italic">$irq</span>:<span style="color:#458;font-weight:bold">expr</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">extern</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;x86-interrupt&#34;</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#999;font-weight:bold;font-style:italic">$handler</span>(_stack_frame: <span style="color:#458;font-weight:bold">InterruptStackFrame</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>handlers<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>IRQ_HANDLERS.lock();<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>handlers[<span style="color:#999;font-weight:bold;font-style:italic">$irq</span>]();<span style="color:#bbb">
+</span><span style="color:#bbb">            </span><span style="color:#000;font-weight:bold">unsafe</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">                </span>PICS.lock().notify_end_of_interrupt(interrupt_index(<span style="color:#999;font-weight:bold;font-style:italic">$irq</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>};<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">set_irq_handler</span>(irq: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>handler: <span style="color:#458;font-weight:bold">fn</span>())<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>interrupts::without_interrupts(<span style="color:#000;font-weight:bold">||</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>handlers<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>IRQ_HANDLERS.lock();<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>handlers[irq<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">usize</span>]<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>handler;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>clear_irq_mask(irq);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>});<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">pit_interrupt_handler</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>println!(<span style="color:#d14">&#34;.&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>在这里定义了一个时间中断函数，如果每次时间中断就会打印一个<code>.</code>，时间中断中包含<strong>pit、rtc</strong>这是两种不同的时间中断，第一个是可编程控制程序的中断<a href="https://wiki.osdev.org/Programmable_Interval_Timer">Programmable Interval Timer(PIT)</a>，第二个中断是读取<a href="https://wiki.osdev.org/CMOS">Real-Time Clock(RTC)</a>上真实时间以后的中断。</p>
+<ul>
+<li>PIT中断是用来计数来控制时间的编程</li>
+<li>RTC中断真实时间的控制系统，当计算机启动，先从BIOS上读取真实的时间时间，然后读取到系统中开始计时，核心代码如下
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">rtc</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">RTC</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">while</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.is_updating()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>x86_64::instructions::hlt();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>minute<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.read_register(Register::Minute);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>hour<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.read_register(Register::Hour);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>day<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.read_register(Register::Day);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>month<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.read_register(Register::Month);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>year<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.read_register(Register::Year)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u16</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>读取到时间以后就可以通过编程来得到时间以及各种地区的时间转换。</p>
+<h3 id="键盘中断">键盘中断</h3>
+<p>通过键盘中断能够使得人机交互成为可能。键盘的字符主要是通过IO端口来读取的</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">read_scancode</span>()<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">u8</span> {<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>port<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Port::new(<span style="color:#099">0x60</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">unsafe</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>port.read()<span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">interrupt_handler</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>keyboard<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>KEYBOARD.lock();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>scancode<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>read_scancode();<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#0086b3">Ok</span>(<span style="color:#0086b3">Some</span>(key_event))<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>keyboard.add_byte(scancode)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#0086b3">Some</span>(key)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>keyboard.process_keyevent(key_event)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>c<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">match</span><span style="color:#bbb"> </span>key<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">                </span>DecodedKey::Unicode(c)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>c,<span style="color:#bbb">
+</span><span style="color:#bbb">                </span>DecodedKey::RawKey(KeyCode::ArrowLeft)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span><span style="color:#d14">&#39;←&#39;</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// U+2190
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">                </span>DecodedKey::RawKey(KeyCode::ArrowUp)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span><span style="color:#d14">&#39;↑&#39;</span>,<span style="color:#bbb">   </span><span style="color:#998;font-style:italic">// U+2191
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">                </span>DecodedKey::RawKey(KeyCode::ArrowRight)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span><span style="color:#d14">&#39;→&#39;</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// U+2192
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">                </span>DecodedKey::RawKey(KeyCode::ArrowDown)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span><span style="color:#d14">&#39;↓&#39;</span>,<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">// U+2193
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">                </span>DecodedKey::RawKey(_)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">                    </span><span style="color:#000;font-weight:bold">return</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">                </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>kernel::console::key_handle(c);<span style="color:#bbb">
+</span><span style="color:#bbb">            </span><span style="color:#998;font-style:italic">// print!(&#34;{}&#34;, c);
+</span><span style="color:#998;font-style:italic"></span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-分页物理存储分配">3. 分页（物理存储分配）</h2>
+<p>在操作系统中一个重要的功能就是将各个程序的操作空间区分开来，避免相互影响防止导致系统的崩溃。比如浏览器的进程不会影响到听歌的进程，因此对程序进行隔离是非常重要的，在这种情况下的计算机系统也称之为保护模式，即用户的进程不会影响到操作系统的进程。在很久之前科学家就提出了<a href="https://wiki.osdev.org/Memory_management">Virtual Memory</a>，用来管理真实的物理内存，通过虚拟内存的映射，来指向真实内存的地址，从而实现对真实内存的操作，而不会影响其他程序的正常工作。一个典型的虚拟内存
+
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/paging-introduction/segmentation-same-program-twice.svg" />   
+    
+从图中可以看到虚拟内存对应的物理内存空间。但是这样有一个问题那就是不利于内存的管理，为什么这么说当已经分配了一个非常大的内存之后，但是物理内存中有很多空闲的空间，无法被充分利用起来，要知道计算机中的cpu以及内存资源是非常紧张的，因此不能被浪费，于是科学家就提出了<code>Page</code>这个概念。如图所示
+
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/paging-introduction/paging-fragmentation.svg" />   
+    
+通过将虚拟内存以及真实内存进行一小块一小块分割(<strong>虚拟内存中叫page、真实内存中叫frames</strong>)从而实现虚拟内存到真实内存的映射。那么如何建立这种映射呢？那就是Page Table。</p>
+<h3 id="page-tables">Page Tables</h3>
+<p><code>Page Tables</code>是一个虚拟内存到物理实际内存的一个映射表，如下图所示
+
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/paging-introduction/paging-page-tables.svg" />   
+    
+可以看到虚拟内存的大小以及对应的frame在哪里。每一个程序开始运行的时候都会有一个页表，那么怎么知道第一个页表呢？ 那就是<strong>CR3</strong>这个寄存器，当程序开始运行的时候，第一步读取CR3寄存器中的值，然后找到对应的表，然后开始一级一级往下映射。在现代操作系统中，不会只有一级表的，因为一级表会大量浪费空间，以及寻址时间。因此发展了级联表
+
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/paging-introduction/multilevel-page-table.svg" />   
+    
+在x86_64系统中，有4级页表
+
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/paging-introduction/x86_64-table-indices-from-address.svg" />   
+    
+(We see that each table index consists of 9 bits, which makes sense because each table has 2^9 = 512 entries. The lowest 12 bits are the offset in the 4KiB page (2^12 bytes = 4KiB). Bits 48 to 64 are discarded, which means that x86_64 is not really 64-bit since it only supports 48-bit addresses.)
+因此，目前的x86_64并不是真正意义上的64位，因此目前只支持48位寻址。
+从CPU的角度来说，一旦MMU打开了，它执行的每条指令中的地址都是虚拟内存地址。</p>
+<h3 id="寻址过程">寻址过程</h3>
+<p>首先计算机或者程序启动从<code>CR3</code>得到最顶层的页表映射，然后找第4级物理地址，找第三级，一直到第一级物理地址，从而映射到真实的物理地址
+
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/paging-introduction/x86_64-page-table-translation.svg" />   
+    如图所示，在程序中代码如下</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">unsafe</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">active_level_4_table</span>(physical_memory_offset: <span style="color:#458;font-weight:bold">VirtAddr</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&#39;</span><span style="color:#0086b3">static</span> <span style="color:#458;font-weight:bold">mut</span><span style="color:#bbb"> </span>PageTable<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">use</span><span style="color:#bbb"> </span>x86_64::registers::control::Cr3;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>(level_4_table_frame,<span style="color:#bbb"> </span>_)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Cr3::read();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>phys<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>level_4_table_frame.start_address();<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>virt<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>physical_memory_offset<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>phys.as_u64();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>page_table_ptr: <span style="color:#000;font-weight:bold">*</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>PageTable<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>virt.as_mut_ptr();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span>page_table_ptr<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>只要能够得到第一个映射表就好办了，可以一级一级找到最开始的物理地址，这个过程就是内存映射，然后通过这种映射能够找到空闲的物理空间，从而为下一步的内存分配打好基础。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">usable_frames</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">impl</span><span style="color:#bbb"> </span><span style="color:#0086b3">Iterator</span><span style="color:#000;font-weight:bold">&lt;</span>Item<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>PhysFrame<span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>regions<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.memory_map.iter();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>usable_regions<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>regions.filter(<span style="color:#000;font-weight:bold">|</span>r<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>r.region_type<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span>MemoryRegionType::Usable);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>addr_ranges<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>usable_regions.map(<span style="color:#000;font-weight:bold">|</span>r<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>r.range.start_addr()<span style="color:#000;font-weight:bold">..</span>r.range.end_addr());<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>frame_addresses<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>addr_ranges.flat_map(<span style="color:#000;font-weight:bold">|</span>r<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>r.step_by(<span style="color:#099">4096</span>));<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>frame_addresses.map(<span style="color:#000;font-weight:bold">|</span>addr<span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>PhysFrame::containing_address(PhysAddr::new(addr)))<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>当建立完页表之后，就到了内存分配这个环节。</p>
+<h2 id="4-内存分配堆与栈内存的分配">4. 内存分配（堆与栈内存的分配）</h2>
+<p>在计算机中有两种内存，<code>stack &amp; heap</code>。一般说内存分配指的是堆内存分配，在计算机内存中，内存的分配如下图所示
+
+        <img class="mx-auto" alt="" src="https://www.programmersought.com/images/421/6876e7994c0632004f23daa096297da5.png" />   
+    
+栈是向地址低的方向扩展，而堆则是向高的方向扩展，栈的操作速度比堆快，因为栈只有一个方向可以操作，而堆不一样了，堆可以有很多很多方向进行操作，因为堆是通过地址来访问的，同时还涉及到堆内存的分配以及回收，因此操作比栈慢。栈内存的分配比较简单，直接操作栈顶就可以了，通过出栈以及入栈实现数据的转移等等。而堆不一样，第一步去内存中寻找空闲的区域，第二步去将数据写入被分配的空间中，第三步是程序完成之后进行回收。那么栈与堆的区别在哪里？ 数据分别很多种，最常见的是基本数据类型，这种数据类型是固定的，比如int、float等等，都是32位或者64位，但是有一种数据类型是不确定的，确定的类型是在程序编译期间就固定大小的，而有些类型是运行时分配，比如获取用户的输入，运行时大小变化的量，而这些量在程序编译期间是不知道的，这就是栈和堆最大的区别。
+在x86_64系统中，内存空间是随机的，这是为了安全，如果是固定的，那就会给黑客带来可乘之机，具体的技术查阅<a href="https://en.wikipedia.org/wiki/Address_space_layout_randomization">Address space layout randomization</a>。在我写的操作系统中，是固定大小的</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">const</span><span style="color:#bbb"> </span>HEAP_START: <span style="color:#458;font-weight:bold">usize</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">0x_4444_4444_0000</span>;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">const</span><span style="color:#bbb"> </span>HEAP_SIZE: <span style="color:#458;font-weight:bold">usize</span> <span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#099">100</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span><span style="color:#099">1024</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">init_heap</span>(<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>mapper: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>Mapper<span style="color:#000;font-weight:bold">&lt;</span>Size4KiB<span style="color:#000;font-weight:bold">&gt;</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>frame_allocator: <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#458;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>FrameAllocator<span style="color:#000;font-weight:bold">&lt;</span>Size4KiB<span style="color:#000;font-weight:bold">&gt;</span>,<span style="color:#bbb">
+</span><span style="color:#bbb"></span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#0086b3">Result</span><span style="color:#000;font-weight:bold">&lt;</span>(),<span style="color:#bbb"> </span>MapToError<span style="color:#000;font-weight:bold">&lt;</span>Size4KiB<span style="color:#000;font-weight:bold">&gt;&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>page_range<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>heap_start<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>VirtAddr::new(HEAP_START<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u64</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>heap_end<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>heap_start<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>HEAP_SIZE<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span><span style="color:#099">1</span><span style="color:#000;font-weight:bold">u64</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>heap_start_page<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Page::containing_address(heap_start);<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>heap_end_page<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>Page::containing_address(heap_end);<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>Page::range_inclusive(heap_start_page,<span style="color:#bbb"> </span>heap_end_page)<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">for</span><span style="color:#bbb"> </span>page<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">in</span><span style="color:#bbb"> </span>page_range<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>frame<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>frame_allocator<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>.allocate_frame()<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>.ok_or(MapToError::FrameAllocationFailed)<span style="color:#000;font-weight:bold">?</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>flags<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>PageTableFlags::PRESENT<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>PageTableFlags::WRITABLE;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">unsafe</span><span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>mapper.map_to(page,<span style="color:#bbb"> </span>frame,<span style="color:#bbb"> </span>flags,<span style="color:#bbb"> </span>frame_allocator)<span style="color:#000;font-weight:bold">?</span>.flush()<span style="color:#bbb"> </span>};<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">unsafe</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>ALLOCATOR.lock().init(HEAP_START,<span style="color:#bbb"> </span>HEAP_SIZE);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#0086b3">Ok</span>(())<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>开辟虚拟heap空间，然后使用<a href="https://wiki.osdev.org/Memory_Management_Unit">MMU</a>进行映射，将虚拟空间的页映射到真实物理地址的frames。然后在运行程序中就可以直接进行内存的分配，</p>
+<h3 id="1-最简单的一种分配就是块分配">1. 最简单的一种分配就是块分配。</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>BumpAllocator<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">const</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">new</span>()<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">Self</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>BumpAllocator<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>heap_start: <span style="color:#099">0</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>heap_end: <span style="color:#099">0</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>next: <span style="color:#099">0</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>allocations: <span style="color:#099">0</span>,<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">unsafe</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">init</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#999">self</span>,<span style="color:#bbb"> </span>heap_start: <span style="color:#458;font-weight:bold">usize</span>,<span style="color:#bbb"> </span>heap_size: <span style="color:#458;font-weight:bold">usize</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#999">self</span>.heap_start<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>heap_start;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#999">self</span>.heap_end<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>heap_start<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>heap_size;<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#999">self</span>.next<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>heap_start;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>如图直接分配一个大块，但是当程序多容易造成浪费。
+
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/allocator-designs/bump-allocation.svg" />   
+    </p>
+<h3 id="2-linked-list-allocator">2. Linked List Allocator</h3>
+<p>链表方式的内存分配是最常见的也是相对来说比较容易理解的，核心思想就是将空闲空间通过链表来链接起来，分配的时候将free的空间从链表中除去，回收的时候添加到链表中。如图
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/allocator-designs/linked-list-allocation.svg" />   
+    
+通过对链表的操作从而实现对内存的分配。</p>
+<h3 id="3-fixed-size-block-allocator">3. Fixed-Size Block Allocator</h3>
+<p>上述链表方式的内存分配也有缺点，那就是一旦在大的空闲内存空间分配一个小的空间，容易造成<a href="https://en.wikipedia.org/wiki/Fragmentation_(computing)#Internal_fragmentation">Internal fragmentation</a>，因此需要一个更好的方法来进行内存分配。一个比较好的内存分配方式是固定开辟，也就是设定一个多个链表，每一个链表管理不同大小的固定空间，(For example, with block sizes of 16, 64, and 512 bytes, an allocation of 4 bytes would return a 16-byte block, an allocation of 48 bytes a 64-byte block, and an allocation of 128 bytes an 512-byte block.)
+如图
+        <img class="mx-auto" alt="" src="https://os.phil-opp.com/allocator-designs/fixed-size-block-example.svg" />   
+    
+不同的内存分配方法具有不同的性能，没有一个内存分配是最好的，只有权衡，因此这个内存分配还有大量的工作可以探索。</p>
+<h2 id="5-线程-todo">5. 线程 （todo）</h2>
+<h2 id="6-文件系统">6. 文件系统</h2>
+<h2 id="7-总线peripheral-component-interconnect-pcihttpszhwikipediaorgwiki外设组件互连标准">7. <a href="https://zh.wikipedia.org/wiki/%E5%A4%96%E8%AE%BE%E7%BB%84%E4%BB%B6%E4%BA%92%E8%BF%9E%E6%A0%87%E5%87%86">总线(Peripheral Component Interconnect) PCI</a></h2>
+<p>计算机的一个大功能就与外部设备进行交互，计算机有一个外设组件互连标准与外设进行交互。常见的PCI卡包括网卡、声卡、调制解调器、电视调谐器和磁盘控制器等，另外还有USB和串列端口等端口。原本显卡通常也是PCI设备，但很快其频宽已不足以支持显卡的性能。PCI显卡现在仅用在需要额外的外接显示器或主板上没有AGP和PCI Express槽的情况。因此一个操作系统必须要有一个统一的方式操作PCI设备。根据<a href="https://wiki.osdev.org/PCI">文档</a>，操作PCI设备是通过一些port进行操作的，</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">impl</span><span style="color:#bbb"> </span>ConfigRegister<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">new</span>(bus: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>device: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>function: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>offset: <span style="color:#458;font-weight:bold">u8</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">Self</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#999">Self</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>data_port: <span style="color:#458;font-weight:bold">Port</span>::new(<span style="color:#099">0xCFC</span>),<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>addr_port: <span style="color:#458;font-weight:bold">Port</span>::new(<span style="color:#099">0xCF8</span>),<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>addr: <span style="color:#099">0x8000_0000</span><span style="color:#bbb">
+</span><span style="color:#bbb">                </span><span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>((bus<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u32</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;&lt;</span><span style="color:#bbb"> </span><span style="color:#099">16</span>)<span style="color:#bbb">
+</span><span style="color:#bbb">                </span><span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>((device<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u32</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;&lt;</span><span style="color:#bbb"> </span><span style="color:#099">11</span>)<span style="color:#bbb">
+</span><span style="color:#bbb">                </span><span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>((function<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u32</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;&lt;</span><span style="color:#bbb"> </span><span style="color:#099">8</span>)<span style="color:#bbb">
+</span><span style="color:#bbb">                </span><span style="color:#000;font-weight:bold">|</span><span style="color:#bbb"> </span>((offset<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u32</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&amp;</span><span style="color:#bbb"> </span><span style="color:#099">0xFC</span>),<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">read</span>(<span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span><span style="color:#999">self</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">u32</span> {<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">unsafe</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span><span style="color:#999">self</span>.addr_port.write(<span style="color:#999">self</span>.addr);<span style="color:#bbb">
+</span><span style="color:#bbb">            </span><span style="color:#999">self</span>.data_port.read()<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>比如得到设备的名称以及id等等都是通过读写对应的端口实现的</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">get_vendor_id</span>(bus: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>device: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>function: <span style="color:#458;font-weight:bold">u8</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">u16</span> {<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>register<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>ConfigRegister::new(bus,<span style="color:#bbb"> </span>device,<span style="color:#bbb"> </span>function,<span style="color:#bbb"> </span><span style="color:#099">0x00</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>register.read().get_bits(<span style="color:#099">0</span><span style="color:#000;font-weight:bold">..</span><span style="color:#099">16</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u16</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">get_device_id</span>(bus: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>device: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>function: <span style="color:#458;font-weight:bold">u8</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">u16</span> {<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>register<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>ConfigRegister::new(bus,<span style="color:#bbb"> </span>device,<span style="color:#bbb"> </span>function,<span style="color:#bbb"> </span><span style="color:#099">0x00</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>register.read().get_bits(<span style="color:#099">16</span><span style="color:#000;font-weight:bold">..</span><span style="color:#099">32</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u16</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">get_header_type</span>(bus: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>device: <span style="color:#458;font-weight:bold">u8</span>,<span style="color:#bbb"> </span>function: <span style="color:#458;font-weight:bold">u8</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">u8</span> {<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">mut</span><span style="color:#bbb"> </span>register<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>ConfigRegister::new(bus,<span style="color:#bbb"> </span>device,<span style="color:#bbb"> </span>function,<span style="color:#bbb"> </span><span style="color:#099">0x0C</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>register.read().get_bits(<span style="color:#099">16</span><span style="color:#000;font-weight:bold">..</span><span style="color:#099">24</span>)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">u8</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8-网络todo">8. 网络(todo)</h2>
+<p>当完成PCI之后，就可以直接使用PCI来控制网卡驱动，从而实现网络的功能。在本系统中，使用的网络驱动模块是RTL8139，在启动qemu时候需要在toml文件中添加如下的语句</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#000;font-weight:bold">[</span>package.metadata.bootimage<span style="color:#000;font-weight:bold">]</span>
+run-args <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#d14">&#34;-nic&#34;</span>, <span style="color:#d14">&#34;model=rtl8139&#34;</span><span style="color:#000;font-weight:bold">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后在内核中就可以编写代码来驱动网卡，从而实现与网络的交互。</p>
+<h3 id="tcp三次握手">TCP三次握手</h3>
+<p>三次握手作为一个计算机面试常见的题目，是一个基本的知识。首先第一次握手是客户端发送一个特殊的报文给服务器，第二次握手是服务器返回一个特殊的报文给客户端，然后客户端再次发送请求报文，握手完成之后就是开始了信息的传递过程。</p>
+<h2 id="9-shell">9. shell</h2>
+<p>编写shell是最简单的事情之一，因为shell就是实现各种命令，而各种命令是均是调用操作系统的内核函数实现的。shell是一个死循环，每次将用户输入命令调用即可。一个简单的shell环境是</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.cmd.len()<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span><span style="color:#099">0</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>line<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.cmd.clone();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#999">self</span>.history.push(line.clone());<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#999">self</span>.history_index<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#999">self</span>.history.len();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#999">self</span>.exec(<span style="color:#000;font-weight:bold">&amp;</span>line);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#999">self</span>.cmd.clear();<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>而其中的exec就是执行各种用户的函数，比如实现date函数</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#000;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>seconds<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>kernel::clock::realtime();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>nanoseconds<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>libm::floor(<span style="color:#099">1e9</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span>(seconds<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>libm::floor(seconds)))<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i64</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>date<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>OffsetDateTime::from_unix_timestamp(seconds<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">i64</span>).to_offset(offset())<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>Duration::nanoseconds(nanoseconds);<span style="color:#bbb">
+</span><span style="color:#bbb">    
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">let</span><span style="color:#bbb"> </span>format<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span><span style="color:#d14">&#34;%FT%H:%M:%S&#34;</span>;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">match</span><span style="color:#bbb"> </span>time::util::validate_format_string(format)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#0086b3">Ok</span>(())<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>print!(<span style="color:#d14">&#34;{}\n&#34;</span>,<span style="color:#bbb"> </span>date.format(format));<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#0086b3">Err</span>(e)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">            </span>print!(<span style="color:#d14">&#34;Error: {}\n&#34;</span>,<span style="color:#bbb"> </span>e);<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">fn</span> <span style="color:#900;font-weight:bold">offset</span>()<span style="color:#bbb"> </span>-&gt; <span style="color:#458;font-weight:bold">UtcOffset</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>UtcOffset::seconds(<span style="color:#099">8</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">*</span><span style="color:#bbb"> </span><span style="color:#099">3600</span>)<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>通过系统函数得到RTC然后根据时区去更改需要显示的数值即可</p>
+<p>在我的系统中实现了3个简单的命令，分别是</p>
+<ol>
+<li>date</li>
+<li>sleep</li>
+<li>uptime</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>写如此的一个操作系统是非常耗时的，但是每次写操作系统代码的时候就非常兴奋，因为每次编写都能够学到各种各样的系统知识，当完成到shell这一步，操作系统仍有很长的路要走，比如各种各样的命令实现如<code>curl</code>,而这个工程是非常巨大的，作为一个tiny-os，路到这里就差不多了，但是操作系统内核的学习远远没有结束。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://wiki.osdev.org/Main_Page">wiki.osdev</a></li>
+<li><a href="https://os.phil-opp.com">os.phil</a></li>
+<li><a href="https://github.com/vinc/moros">mor-os</a></li>
+<li><a href="https://github.com/huihongxiao/MIT6.S081">MIT6.S081</a></li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2021-05-29.yuan-long-ping/">Yuan long ping</a></li>
+        
+        <li><a href="/post/2021-01-30-the-trait-in-Rust/">Trait in Rust</a></li>
+        
+        <li><a href="/post/2020-12-29-year-of-2020/">Year of 2020</a></li>
+        
+        <li><a href="/post/2020-12-15-Attention-is-all-your-need/">Attention is All your need</a></li>
+        
+        <li><a href="/post/2020-11-08-biden-win/">US Election</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/OS'>OS</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-06.recent/" title="近况">近况</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-09-12.911/" title="911恐怖袭击">911恐怖袭击</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-07-22.henan/" title="No safe place">No safe place</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/" title="一种迷你解释器">一种迷你解释器</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-03.build-tiny-OS/" title="一种迷你操作系统">一种迷你操作系统</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-05-29.yuan-long-ping/" title="Yuan long ping">Yuan long ping</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/" title="Trait in Rust">Trait in Rust</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-29-year-of-2020/" title="Year of 2020">Year of 2020</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/" title="Attention is All your need">Attention is All your need</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-11-08-biden-win/" title="US Election">US Election</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/911/">911 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/deep-learning/">deep-learning (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (11)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E4%B8%AD%E5%9B%BD/">中国 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%8A%95%E8%B5%84/">投资 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/911/">911</a>
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/OS/">OS</a>
+    
+    <a href="https://hadxu.github.io/tags/US/">US</a>
+    
+    <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://hadxu.github.io/tags/bash/">bash</a>
+    
+    <a href="https://hadxu.github.io/tags/deep-learning/">deep-learning</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E4%B8%AD%E5%9B%BD/">中国</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">大学</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E6%8A%95%E8%B5%84/">投资</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://hadxu.github.io" title="lay&#39;s 博客">lay&#39;s 博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://getmyte.com" title="The Economist">The Economist</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/%e6%8c%af%e9%9b%b7-%e8%ae%b8-22aa5b133/" title="lay&#39;s Linkin">Linkin</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

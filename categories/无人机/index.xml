@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>无人机 on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/</link>
+    <description>Recent content in 无人机 on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 24 Mar 2020 09:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>大疆在线直播</title>
+      <link>https://hadxu.github.io/post/2020-03-24-live-with-dji/</link>
+      <pubDate>Tue, 24 Mar 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-24-live-with-dji/</guid>
+      <description>大疆在线直播 2020-04-10更新 突然发现新大陆，可以使用各种平台来直播restream 直接将直播地址以及密码添加进来就ok rtmp://live.restream.io/live/re_2162584xxxxxxx 正文开始 很久之前买了一个大疆无人机，它长这样 这款无人机能够飞行15min，高度500m，长度2km，能够满足我们一般人的需求。 开始玩这个无人机的时候，并</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/categories/linux/</link>
+    <description>Recent content in linux on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 25 Mar 2020 09:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux shell脚本监控进程崩溃自动重启</title>
+      <link>https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/</link>
+      <pubDate>Wed, 25 Mar 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/</guid>
+      <description>linux shell脚本监控进程崩溃自动重启 在工作的时候，有时候会碰到程序非常慢，但是又容易崩溃的程序，这时候可以考虑使用一个进程来时刻监督进程执行，如果崩溃就重启。 1 2 3 4 5 6 7 8 9 10 11 # ! /bin/sh while true do procnum=`ps -ef|grep 进程名称|wc -l` if [ $procnum -eq 0 ] then echo &amp;#34;start service....................&amp;#34; ${START_CMD} fi sleep 1 done</description>
+    </item>
+    
+    <item>
+      <title>命令用的好,监狱进的早</title>
+      <link>https://hadxu.github.io/post/2020-03-10-wipe-hard-driver/</link>
+      <pubDate>Tue, 10 Mar 2020 10:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-10-wipe-hard-driver/</guid>
+      <description>命令用的好,监狱进的早 2月23日19点，微盟服务器出现大规模宕机，大面积服务集群无法响应，生产环境及数据遭受严重破坏，致使无法向客户提供服务，涉及百万商家，2月24日，进一步查明是公司研发中心运维部核心运维人员贺某“通过个人VPN登入公司内网跳板机破坏所为，犯罪嫌疑人已经被宝山区</description>
+    </item>
+    
+  </channel>
+</rss>

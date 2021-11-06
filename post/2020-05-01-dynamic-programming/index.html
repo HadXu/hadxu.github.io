@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>Dynamic Programming | lay&#39;s 博客</title>
+    <meta property="og:title" content="Dynamic Programming - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-05-01T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-05-01T11:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="Dynamic Programming">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/2020-05-01-dynamic-programming/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/films/" title="电影">电影</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-最长上升子序列httpsleetcode-cncomproblemslongest-increasing-subsequence">1. <a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">最长上升子序列</a></a></li>
+    <li><a href="#2-最长公共子序列httpsleetcode-cncomproblemslongest-common-subsequence">2. <a href="https://leetcode-cn.com/problems/longest-common-subsequence/">最长公共子序列</a></a></li>
+    <li><a href="#3-三角形最小路径和httpsleetcode-cncomproblemstriangle">3. <a href="https://leetcode-cn.com/problems/triangle/">三角形最小路径和</a></a></li>
+    <li><a href="#4-最大子序和httpsleetcode-cncomproblemsmaximum-subarray">4. <a href="https://leetcode-cn.com/problems/maximum-subarray/">最大子序和</a></a></li>
+    <li><a href="#5-乘积最大子数组httpsleetcode-cncomproblemsmaximum-product-subarray">5. <a href="https://leetcode-cn.com/problems/maximum-product-subarray/">乘积最大子数组</a></a></li>
+    <li><a href="#6-鸡蛋掉落httpsleetcode-cncomproblemssuper-egg-drop">6. <a href="https://leetcode-cn.com/problems/super-egg-drop/">鸡蛋掉落</a></a></li>
+    <li><a href="#7-俄罗斯套娃信封问题httpsleetcode-cncomproblemsrussian-doll-envelopes">7. <a href="https://leetcode-cn.com/problems/russian-doll-envelopes/">俄罗斯套娃信封问题</a></a></li>
+    <li><a href="#8-打家劫舍httpsleetcode-cncomproblemshouse-robber">8. <a href="https://leetcode-cn.com/problems/house-robber/">打家劫舍</a></a></li>
+    <li><a href="#9-打家劫舍2httpsleetcode-cncomproblemshouse-robber-ii">9. <a href="https://leetcode-cn.com/problems/house-robber-ii/">打家劫舍2</a></a></li>
+    <li><a href="#10-买卖股票的最佳时机httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock">10. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">买卖股票的最佳时机</a></a></li>
+    <li><a href="#11-买卖股票的最佳时机-iihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-ii">11. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">买卖股票的最佳时机 II</a></a></li>
+    <li><a href="#12-最佳买卖股票时机含冷冻期httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-cooldown">12. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">最佳买卖股票时机含冷冻期</a></a></li>
+    <li><a href="#13-买卖股票的最佳时机-iiihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iii">13. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">买卖股票的最佳时机 III</a></a></li>
+    <li><a href="#14-买卖股票的最佳时机-ivhttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iv">14. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/">买卖股票的最佳时机 IV</a></a></li>
+    <li><a href="#15-买卖股票的最佳时机含手续费httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-transaction-fee">15. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">买卖股票的最佳时机含手续费</a></a></li>
+    <li><a href="#16">16.</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Dynamic Programming</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/algorithm'>algorithm</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h1 id="dynamic-programming">Dynamic Programming</h1>
+<h2 id="1-最长上升子序列httpsleetcode-cncomproblemslongest-increasing-subsequence">1. <a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">最长上升子序列</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">lengthOfLIS</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
+            <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+
+        dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(nums)
+        L <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(L):
+            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(i):
+                <span style="color:#000;font-weight:bold">if</span> nums[i] <span style="color:#000;font-weight:bold">&gt;</span> nums[j]:
+                    dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i], dp[j]<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)
+        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-最长公共子序列httpsleetcode-cncomproblemslongest-common-subsequence">2. <a href="https://leetcode-cn.com/problems/longest-common-subsequence/">最长公共子序列</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">longestCommonSubsequence</span>(<span style="color:#999">self</span>, text1: <span style="color:#0086b3">str</span>, text2: <span style="color:#0086b3">str</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+        L1, L2 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(text1), <span style="color:#0086b3">len</span>(text2)
+        dp <span style="color:#000;font-weight:bold">=</span> [[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> (L1<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(L2<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)]
+
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, L2<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, L1<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+                <span style="color:#000;font-weight:bold">if</span> text2[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> text1[j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]:
+                    dp[i][j] <span style="color:#000;font-weight:bold">=</span> dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+                <span style="color:#000;font-weight:bold">else</span>:
+                    dp[i][j] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j], dp[i][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>])
+
+        <span style="color:#000;font-weight:bold">return</span> dp[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3-三角形最小路径和httpsleetcode-cncomproblemstriangle">3. <a href="https://leetcode-cn.com/problems/triangle/">三角形最小路径和</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">minimumTotal</span>(<span style="color:#999">self</span>, triangle: List[List[<span style="color:#0086b3">int</span>]]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+        n <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(triangle)
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>):
+            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(triangle[i])):
+                triangle[i][j] <span style="color:#000;font-weight:bold">+=</span> <span style="color:#0086b3">min</span>(triangle[i<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>], triangle[i<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>][j])
+        <span style="color:#000;font-weight:bold">return</span> triangle[<span style="color:#099">0</span>][<span style="color:#099">0</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-最大子序和httpsleetcode-cncomproblemsmaximum-subarray">4. <a href="https://leetcode-cn.com/problems/maximum-subarray/">最大子序和</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxSubArray</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+        N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+        dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
+        dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, N):
+
+            dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">+</span>nums[i], nums[i])
+
+        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="5-乘积最大子数组httpsleetcode-cncomproblemsmaximum-product-subarray">5. <a href="https://leetcode-cn.com/problems/maximum-product-subarray/">乘积最大子数组</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProduct</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+        N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+        dp_max <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> (N)
+        dp_min <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> (N)
+        dp_max[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+        dp_min[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+
+        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, N):
+            dp_max[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_max[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i], nums[i], dp_min[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i])
+            dp_min[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(dp_min[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i], nums[i], dp_max[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i])
+        
+        <span style="color:#0086b3">print</span>(dp_max)
+        <span style="color:#0086b3">print</span>(dp_min)
+
+        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">max</span>(dp_max) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">max</span>(dp_min):
+            <span style="color:#000;font-weight:bold">return</span>  <span style="color:#0086b3">max</span>(dp_max)
+        <span style="color:#000;font-weight:bold">else</span>:
+            <span style="color:#000;font-weight:bold">return</span>  <span style="color:#0086b3">max</span>(dp_min)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="6-鸡蛋掉落httpsleetcode-cncomproblemssuper-egg-drop">6. <a href="https://leetcode-cn.com/problems/super-egg-drop/">鸡蛋掉落</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">superEggDrop</span>(<span style="color:#999">self</span>, K: <span style="color:#0086b3">int</span>, N: <span style="color:#0086b3">int</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		cache <span style="color:#000;font-weight:bold">=</span> {}
+
+		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">dp</span>(k,n):
+			<span style="color:#000;font-weight:bold">if</span> k<span style="color:#000;font-weight:bold">==</span><span style="color:#099">1</span>: <span style="color:#000;font-weight:bold">return</span> n
+			<span style="color:#000;font-weight:bold">if</span> n<span style="color:#000;font-weight:bold">==</span><span style="color:#099">0</span>: <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+
+			<span style="color:#000;font-weight:bold">if</span> (k,n) <span style="color:#000;font-weight:bold">in</span> cache:
+				<span style="color:#000;font-weight:bold">return</span> cache[(k,n)]
+
+			<span style="color:#998;font-style:italic"># res = float(&#39;inf&#39;)</span>
+			<span style="color:#998;font-style:italic"># for x in range(1, n+1):</span>
+			<span style="color:#998;font-style:italic"># 	res = min(max(dp(k-1, x-1),dp(k, n-x))+1,res)</span>
+
+			res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+			lo, hi <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>, n
+			<span style="color:#000;font-weight:bold">while</span> lo <span style="color:#000;font-weight:bold">&lt;=</span> hi:
+				mid <span style="color:#000;font-weight:bold">=</span> (lo<span style="color:#000;font-weight:bold">+</span>hi) <span style="color:#000;font-weight:bold">//</span> <span style="color:#099">2</span>
+
+				broken <span style="color:#000;font-weight:bold">=</span> dp(k <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, mid <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+				not_broken <span style="color:#000;font-weight:bold">=</span> dp(k, n <span style="color:#000;font-weight:bold">-</span> mid)
+				
+				<span style="color:#000;font-weight:bold">if</span> broken <span style="color:#000;font-weight:bold">&gt;</span> not_broken:
+					hi <span style="color:#000;font-weight:bold">=</span> mid <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+					res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(res, broken <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>)
+				<span style="color:#000;font-weight:bold">else</span>:
+					lo <span style="color:#000;font-weight:bold">=</span> mid <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+					res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(res, not_broken <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>)
+
+			cache[(k,n)] <span style="color:#000;font-weight:bold">=</span> res
+
+			<span style="color:#000;font-weight:bold">return</span> res
+
+		<span style="color:#000;font-weight:bold">return</span> dp(K, N)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="https://leetcode-cn.com/problems/super-egg-drop/solution/ji-ben-dong-tai-gui-hua-jie-fa-by-labuladong/">887. 鸡蛋掉落</a></li>
+<li><a href="https://www.youtube.com/watch?v=mLV_vOet0ss">先来看看这道面试题：双蛋问题</a></li>
+</ul>
+<h2 id="7-俄罗斯套娃信封问题httpsleetcode-cncomproblemsrussian-doll-envelopes">7. <a href="https://leetcode-cn.com/problems/russian-doll-envelopes/">俄罗斯套娃信封问题</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxEnvelopes</span>(<span style="color:#999">self</span>, envelopes: List[List[<span style="color:#0086b3">int</span>]]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> envelopes:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+
+		<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">functools</span> <span style="color:#000;font-weight:bold">import</span> cmp_to_key
+		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">cmp</span>(a, b):
+			<span style="color:#000;font-weight:bold">if</span> a[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">==</span> b[<span style="color:#099">0</span>]:
+				<span style="color:#000;font-weight:bold">return</span> b[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">-</span> a[<span style="color:#099">1</span>]
+			<span style="color:#000;font-weight:bold">else</span>:
+				<span style="color:#000;font-weight:bold">return</span> a[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> b[<span style="color:#099">0</span>]
+
+		tmp <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">sorted</span>(envelopes, key<span style="color:#000;font-weight:bold">=</span>cmp_to_key(cmp))
+
+		ll <span style="color:#000;font-weight:bold">=</span> [x[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">for</span> x <span style="color:#000;font-weight:bold">in</span> tmp]
+
+		dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(ll)
+
+		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(ll)):
+			<span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(i):
+				<span style="color:#000;font-weight:bold">if</span> ll[i] <span style="color:#000;font-weight:bold">&gt;</span> ll[j]:
+					dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i], dp[j]<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)
+
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="8-打家劫舍httpsleetcode-cncomproblemshouse-robber">8. <a href="https://leetcode-cn.com/problems/house-robber/">打家劫舍</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">rob</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> nums:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>:
+			<span style="color:#000;font-weight:bold">return</span> nums[<span style="color:#099">0</span>]
+
+		N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+		dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
+
+		dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+		dp[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
+
+		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>, N):
+			dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">+</span> nums[i])
+
+
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="9-打家劫舍2httpsleetcode-cncomproblemshouse-robber-ii">9. <a href="https://leetcode-cn.com/problems/house-robber-ii/">打家劫舍2</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">rob</span>(<span style="color:#999">self</span>, nums) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> nums:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums)<span style="color:#000;font-weight:bold">==</span><span style="color:#099">1</span>:
+			<span style="color:#000;font-weight:bold">return</span> nums[<span style="color:#099">0</span>]
+
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums)<span style="color:#000;font-weight:bold">==</span><span style="color:#099">2</span>:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
+
+		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">fun</span>(nums):
+			N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+			dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
+
+			dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+			dp[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
+
+			<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>, N):
+				dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">+</span> nums[i])
+
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+
+		res1 <span style="color:#000;font-weight:bold">=</span> fun(nums[:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>])
+		res2 <span style="color:#000;font-weight:bold">=</span> fun(nums[<span style="color:#099">1</span>:])
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(res1, res2)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="10-买卖股票的最佳时机httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock">10. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">买卖股票的最佳时机</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># 用一个变量维护最小值</span>
+<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+		cur_min <span style="color:#000;font-weight:bold">=</span> prices[<span style="color:#099">0</span>]
+		max_res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, <span style="color:#0086b3">len</span>(prices)):
+			max_res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(max_res, prices[i]<span style="color:#000;font-weight:bold">-</span>cur_min)
+			cur_min <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(cur_min, prices[i])
+		<span style="color:#000;font-weight:bold">return</span> max_res
+
+<span style="color:#998;font-style:italic"># 1. 今天没有(昨天没有 保持不变，昨天有 卖了 )</span>
+<span style="color:#998;font-style:italic"># 2. 今天有(昨天没有 买，昨天有 保持不变)</span>
+<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+
+		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
+			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, <span style="color:#000;font-weight:bold">-</span>p)
+		<span style="color:#000;font-weight:bold">return</span> dp_0
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="11-买卖股票的最佳时机-iihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-ii">11. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">买卖股票的最佳时机 II</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+
+		res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+
+		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+			tmp <span style="color:#000;font-weight:bold">=</span> dp_0
+			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
+			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, tmp <span style="color:#000;font-weight:bold">-</span> p)
+		<span style="color:#000;font-weight:bold">return</span> dp_0
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="12-最佳买卖股票时机含冷冻期httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-cooldown">12. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">最佳买卖股票时机含冷冻期</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+        <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+            <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+        
+        dp_0, dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+        pre_dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+        <span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+            tmp <span style="color:#000;font-weight:bold">=</span> dp_0
+            dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
+            dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, pre_dp_0 <span style="color:#000;font-weight:bold">-</span> p)
+            pre_dp_0 <span style="color:#000;font-weight:bold">=</span> tmp
+        <span style="color:#000;font-weight:bold">return</span> dp_0
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="13-买卖股票的最佳时机-iiihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iii">13. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">买卖股票的最佳时机 III</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+        dp_i10, dp_i20 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span> ,<span style="color:#099">0</span>
+        dp_i11, dp_i21 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>), <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+        <span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+            dp_i20 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i20, dp_i21 <span style="color:#000;font-weight:bold">+</span> p)
+            dp_i21 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i21, dp_i10 <span style="color:#000;font-weight:bold">-</span> p)
+
+            dp_i10 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i10, dp_i11 <span style="color:#000;font-weight:bold">+</span> p)
+            dp_i11 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i11, <span style="color:#000;font-weight:bold">-</span>p);  <span style="color:#998;font-style:italic"># 第一次买</span>
+        <span style="color:#000;font-weight:bold">return</span> dp_i20
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="14-买卖股票的最佳时机-ivhttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iv">14. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/">买卖股票的最佳时机 IV</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, k: <span style="color:#0086b3">int</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices <span style="color:#000;font-weight:bold">or</span> <span style="color:#000;font-weight:bold">not</span> k:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+
+		N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(prices)
+
+		<span style="color:#000;font-weight:bold">if</span> k <span style="color:#000;font-weight:bold">&gt;</span> N <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>:
+			dp_i_0, dp_i_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+			<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+				tmp <span style="color:#000;font-weight:bold">=</span> dp_i_0
+				dp_i_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i_0, dp_i_1 <span style="color:#000;font-weight:bold">+</span> p)
+				dp_i_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i_1, tmp <span style="color:#000;font-weight:bold">-</span> p)
+			<span style="color:#000;font-weight:bold">return</span> dp_i_0
+
+
+		dp <span style="color:#000;font-weight:bold">=</span> [[ [<span style="color:#099">0</span> <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>)] <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(k<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>) ] <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(N)]
+
+		<span style="color:#000;font-weight:bold">for</span> a <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(N): <span style="color:#998;font-style:italic"># 交易时间</span>
+			<span style="color:#000;font-weight:bold">for</span> b <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(k, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>): <span style="color:#998;font-style:italic"># 交易次数</span>
+				<span style="color:#000;font-weight:bold">if</span> a <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
+					dp[<span style="color:#099">0</span>][b][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+					dp[<span style="color:#099">0</span>][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span>prices[a]
+				<span style="color:#000;font-weight:bold">else</span>:
+					dp[a][b][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">0</span>], dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> prices[a])
+					dp[a][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">1</span>], dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> prices[a])
+
+		<span style="color:#000;font-weight:bold">return</span> dp[N<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][k][<span style="color:#099">0</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="15-买卖股票的最佳时机含手续费httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-transaction-fee">15. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">买卖股票的最佳时机含手续费</a></h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices, fee: <span style="color:#0086b3">int</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+
+		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p <span style="color:#000;font-weight:bold">-</span> fee)
+			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, dp_0 <span style="color:#000;font-weight:bold">-</span> p)
+		<span style="color:#000;font-weight:bold">return</span> dp_0
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="16">16.</h2>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2020-04-30-Bash/">命令行的艺术</a></li>
+        
+        <li><a href="/post/2020-04-25-re-thinking-deep-learning-framework/">再次思考深度学习框架的自动求导</a></li>
+        
+        <li><a href="/post/2020-04-24-After-the-disease-the-debtthe-Economist/">After the disease, the debt</a></li>
+        
+        <li><a href="/post/2020-04-18-Is-China-winningthe-Economist/">Is China winning?</a></li>
+        
+        <li><a href="/post/2020-04-11-The-coronavirus-crisis-will-change-the-world-of-commercethe-Economist/">The coronavirus crisis will change the world of commerce</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/algorithm'>algorithm</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-06.recent/" title="近况">近况</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-09-12.911/" title="911恐怖袭击">911恐怖袭击</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-07-22.henan/" title="No safe place">No safe place</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/" title="一种迷你解释器">一种迷你解释器</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-03.build-tiny-OS/" title="一种迷你操作系统">一种迷你操作系统</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-05-29.yuan-long-ping/" title="Yuan long ping">Yuan long ping</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/" title="Trait in Rust">Trait in Rust</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-29-year-of-2020/" title="Year of 2020">Year of 2020</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/" title="Attention is All your need">Attention is All your need</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-11-08-biden-win/" title="US Election">US Election</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/911/">911 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/deep-learning/">deep-learning (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (11)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E4%B8%AD%E5%9B%BD/">中国 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%8A%95%E8%B5%84/">投资 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/911/">911</a>
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/OS/">OS</a>
+    
+    <a href="https://hadxu.github.io/tags/US/">US</a>
+    
+    <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://hadxu.github.io/tags/bash/">bash</a>
+    
+    <a href="https://hadxu.github.io/tags/deep-learning/">deep-learning</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E4%B8%AD%E5%9B%BD/">中国</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">大学</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E6%8A%95%E8%B5%84/">投资</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://hadxu.github.io" title="lay&#39;s 博客">lay&#39;s 博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://getmyte.com" title="The Economist">The Economist</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/%e6%8c%af%e9%9b%b7-%e8%ae%b8-22aa5b133/" title="lay&#39;s Linkin">Linkin</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

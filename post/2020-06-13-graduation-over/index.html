@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>毕业 | lay&#39;s 博客</title>
+    <meta property="og:title" content="毕业 - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-06-13T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-06-13T11:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="毕业">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/2020-06-13-graduation-over/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/films/" title="电影">电影</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#专科">专科</a></li>
+    <li><a href="#本科">本科</a></li>
+    <li><a href="#研究生">研究生</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">毕业</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%A4%A7%E5%AD%A6'>大学</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h1 id="毕业">毕业</h1>
+<p>今天是2020年6月13日，作为研究生的我，本来是不太很伤感的，但是看到身边的人一个一个地离开校园，不知道是不是最后一次见面，莫名感觉鼻子有点酸酸的。回想我读大学8年，每次毕业都有不同的感觉，同时走了很多歪路，以此文章记录我8年来的路以及感想。</p>
+<p>我的路分为3个部分</p>
+<ul>
+<li>专科 2012.9-2015.6</li>
+<li>本科 2015.9-2017.6</li>
+<li>研究生 2017.9-2020.6</li>
+</ul>
+<h2 id="专科">专科</h2>
+<p>我的路从8年前的专科开始。2012年高考，从农村出来的我，还在为没有考上本科而苦恼，每天麻痹自己，玩游戏，还是玩游戏，当时玩的一款游戏是DNF，为了玩狂战士以及女大枪，我花费了人生中第一笔100元，买了游戏币。2012年暑假，不甘于现状的我和我哥一起去打工，去工地搬砖，打下水道，磨钢管，每天早晨7点走，晚上6点回，大夏天一直在打工，晚上玩游戏。那个时候我一直在看嵌入式软件，觉得51单片机很有意思，于是学习了大量的资料，但是感觉还是很难，没有坚持下去。8月我去了我爸的工厂里住了一段时间，9月去无锡职院报道。 我在无锡职院，刚开始认识了几个宿舍的小伙伴，3个专科3个本科，当时看到本科就感觉很厉害的样子，所以一直向他们学习各种各样的课程。从C语言到大学物理，我浅尝辄止。大一学的课程是C#,这门语言我没有听说过，但是学起来还是挺有难度的，当时对编程一点不懂，不知道从哪里开始，也不知道能够用来干什么，每天上课，晚上玩游戏，就这样将大一的一整年度过。2012年的冬天，我向我爸拿了5000元买了联想笔记本电脑Z580，心疼啊。由于我的大学数学还行，被选入数学建模竞赛。2013年的暑假特别特别热，但是曲老师仍然带着我们一起搞数学建模。坚持到7月中旬实在受不了，宿舍也没有空调就撤，回去继续看数学建模比赛。那个放假我去了无锡小天鹅打工，做流水线，早上8点到下午3点，干了一个多月3000元，感觉已经很多很多了。大二开学的第一天被拉去搞数学竞赛，干三天，吃泡面，那个时候是我大学以来第一次熬夜，最后仅仅是参与奖，很是可惜。 大二开始，学校的课程是Java以及.net编程。这两门课程不是很难，我学有余力去和沈欢学习了C语言，那个时候第一次接触windows编程，通过编程实现鼠标的控制。我用自己的电脑装了虚拟机，在虚拟机里面运行鼠标操作程序却不能运行，困恼了我很长很长一段时间。和沈欢将C语言的链表、指针掌握，同时看网上的课程郝斌C语言与数据结构，这个课程让我打开了C语言编程的大门。在大二的春季，我参加了江苏省二级C语言考试，成绩优秀。在大二下学期我认识了宋昕以及陈涛，搞大学生创新项目，可喜的是，我们获得了很多很多奖项，包括TI杯一等奖，江苏省软件竞赛二等奖，外包服务大赛二等奖。 大三开始认识了史荧中老师，开始搞算法比赛，这个比赛对于我非常非常难，每天刷题，看解题思路，获得了江苏省一等奖。大三课程学习了asp.net编程，同时我准备专转本，自己一个人看书，认识了刘汉勇，毛卫卫。专转本是我最艰难的时刻，看不到前面的路，不知道考不上会怎么样，也不知道未来怎么说。很是难受。每天坚持一个人做题目，看英语，背单词以及做计算机方向的题目。2015年过年后3月份考试，考完的那一天到5月出成绩这两个月是我最艰难的时间。感冒、发烧、上火、下雨，宿舍网又慢，真的对世界失去了希望。5月结果出来，感觉结果不错，投的常熟理工学院录取了，非常非常开心。在5月初，我用我领取的各种奖状在学校那边领了3000多元，然后买了iphone5s，真的非常非常好用，顿时变成苹果的粉丝。带着这个iphone，我5月参加了全国蓝桥杯编程大赛，最终获得了全国二等奖。 大三的暑假我没有出去，一直留在无锡职院里面，呆在我当时做实验的实验室，看叶丙成老师的概率论以及张宇的考研数学。买了本科一套数学书看，复习概率论以及微积分。同时接触了shadowsocks，能够用来看第一手资料，自从接触了google，开始看机器学习，那个时候真正打开了知识的大门，接触的第一个语言是Python，然后第一个库是numpy以及pandas，第一个机器学习库是scikit-learn，同时接触了第一个深度学习库keras，那个时候keras的后端还是theano，这个库安装挺麻烦的。接触了Ng的机器学习课程，用Octave来进行深度神经网络的搭建。大三毕业的那两个月是我最充实的两个月。</p>
+<h2 id="本科">本科</h2>
+<p>2015年的9月我坐着我哥的车来到了常熟理工学院，见到了新的同学。当时在别的宿舍看到了有一个同学桌子上满满的都是书，关于编程的，当时给我留下了很深的印象。后来知道他叫花晋，以前开发前端的，非常之厉害。在本科，需要重新学习很多很多课程，包括Java、计算机原理，离散数学以及数据库。在本科遇到了应文豪老师，对我非常好，提供资金给我买书以及做项目，并发表了一篇文章。常熟理工学院特别喜欢放假，刚过去没有多久放国庆，别的学校还有调休，而常熟理工学院没有调休。这让我有大量的时间去研究一本书Machine Learning With Python。这本书真的是神书，讲解了如何用Python构建机器学习项目，在这本书中，我学会了Flask以及scikit-learn，以及神经网络的搭建。2016年冬天，Tensorflow出来，让我看到了机器学习的方向，立马赶紧学习Tensorflow，做的第一个项目就是keras+Tensorflow的。捣鼓各种各样的服务器以及树莓派，学会了如何使用Linux编程。大四开始，我认识了张衡，他没有什么课，于是帮我找各种考研复习资料，帮我省下了很多很多事情，每天看英语，做数学，背单词，将何凯文的一本单词书吃透，来回复习，不会的文章抄写，直到抄写能够看懂为止。期间，我感觉自己每天晚上睡不着觉，心砰砰的跳，感觉自己快要废了。我回到我哥家，去医院看了病，量了血压，高压160，我的天。没有看书，休息了一个多月。暑假快结束我回到了学校，感觉每天还是睡得不踏实，于是去医院看了病，以为自己身体有状况，后来医生说我压力太大，不要太累，那段时间真的让我崩溃。我记得有篇文章关于美国的大法官制度，我抄写了9次，终于将每一个单词，每一个词组搞明白。大四上学期快要结束的时候，我的班主任还在让我们上课，马上都考研了，我也是醉了。2016年的圣诞节前后，我在苏州一个中专院校里面考试。第一门是政治，感觉一般般。第二门是英语，我考的感觉不错，每一个单词都是认识的，觉得英语的阅读理解可能错一个。第二天第一门考数学，考完感觉不错。下午考专业课，专业课感觉有点难度。四门考下来感觉还行，但是不确定自己能够上。考研结束我就去无锡打工了，入职的一家公司是做人脸的，本来想做算法，但是被安排去搞开发了。 2017年年后，当我坐在无锡的公司进行工作的时候，张衡发来了一个消息，我考研考了336，当时我赶紧看了下历年的考研分数，276，我超了60分!当时激动坏了，过了一周辞职去准备复试。看408的课程很累，很多不懂但是只能硬着头皮学下去。来到江大复试，没有想到还有英语听力，我当时就懵逼了，英语听力我很差的啊，然后下午的考试。当时感觉自己凉透了，第三天看到了结果，我被录取了。但是看到很多很多考研分数比我少60分，虽然考上了，但是并没有很开心。考完，回到常熟理工学院，我治疗脚上的跖疣，尝试了冷冻电镜，快一个多月了，还是么有好，算了，不治疗了。毕业我就去南京玩了，在一家公司实习，搞量化交易，但是感觉没有什么前途，赚了7000多元就回去读书了。</p>
+<h2 id="研究生">研究生</h2>
+<p>2017年9月我来到江南大学来读研，在这里开始度我的研究生涯。我的导师是董洪伟董老师，对我们非常好，虽然不管我们，但是支持我们做自己的东西。刚读研满怀热血来学各种机器学习的东西，但是没有机器没有资源我就放弃了。研一上半年一直在上课，u1s1，江南大学的课程真的是垃圾啊，PPT还是10年前的，当时我看到我就醉了。下学期我就去希捷实习了，在希捷实习了6个月，但是感觉什么也没有，放弃。2019年年初，我投了腾讯的实习，没有想到我竟然通过了，然后去泰国玩，第一次坐飞机、第一个出国，而且这个行程是我策划的。从泰国回来我就去深圳实习了，在深圳认识了很多很多小伙伴，住在深圳大学，里面还是很舒服的。认识了史周安以及王飞、林继平等等。后来8月我就回学校了，拿到了腾讯的转正名额，非常感谢。2020年初始，来的一场疫情让我们每一个人都没有想到2020年是如此艰难，从开始的爆发，我们中国立即将武汉封住，还是非常果断的，不然不知道会造成什么样的影响。与此同时，国外疫情日益严重，而且各种迷惑行为让我们不能理解。我从2月开始一直呆在家里面，一直到4月20日才到学校。在学校度过了最后一段学生时光，在学校搞论文、搞毕业设计。到6月初，我们快速答辩，答辩完开始离校，随着毕业典礼日子越来越近，大家也越来越珍惜最后一段时光，我19号离开学校，离开学校的时候，鼻子酸酸的，以后再也没有这种生活了。研究生生涯结束，走上社会，要被社会按在地上疯狂摩擦。2020年6月21日我们学校，江南大学毕业典礼，我没有参加，我先后去了广州，深圳，然后到达了林智敏这边。开始我的工作生涯。</p>
+<p>回想过去的几年，我觉得对我影响最大的就是江苏省的专转本政策，在这里我给江苏省教育厅一个赞。如果没有这个考试，也许我不会走这么远，也不会走到这步。希望后面的人，不管你考上什么学校，只要你努力，能够坚持自己，我相信这个社会终究温柔以待人。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2020-05-12-union-find/">Union find</a></li>
+        
+        <li><a href="/post/2020-05-10-The-new-scold-warthe-Economist/">The new scold war</a></li>
+        
+        <li><a href="/post/2020-05-03-md5-algorithm/">MD5 algorithm</a></li>
+        
+        <li><a href="/post/2020-05-02-Open-schools-firstthe-Economist/">Open schools first</a></li>
+        
+        <li><a href="/post/2020-05-01-dynamic-programming/">Dynamic Programming</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E5%A4%A7%E5%AD%A6'>大学</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-06.recent/" title="近况">近况</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-09-12.911/" title="911恐怖袭击">911恐怖袭击</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-07-22.henan/" title="No safe place">No safe place</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/" title="一种迷你解释器">一种迷你解释器</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-03.build-tiny-OS/" title="一种迷你操作系统">一种迷你操作系统</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-05-29.yuan-long-ping/" title="Yuan long ping">Yuan long ping</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/" title="Trait in Rust">Trait in Rust</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-29-year-of-2020/" title="Year of 2020">Year of 2020</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/" title="Attention is All your need">Attention is All your need</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-11-08-biden-win/" title="US Election">US Election</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/911/">911 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/deep-learning/">deep-learning (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (11)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E4%B8%AD%E5%9B%BD/">中国 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%8A%95%E8%B5%84/">投资 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/911/">911</a>
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/OS/">OS</a>
+    
+    <a href="https://hadxu.github.io/tags/US/">US</a>
+    
+    <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://hadxu.github.io/tags/bash/">bash</a>
+    
+    <a href="https://hadxu.github.io/tags/deep-learning/">deep-learning</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E4%B8%AD%E5%9B%BD/">中国</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">大学</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E6%8A%95%E8%B5%84/">投资</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://hadxu.github.io" title="lay&#39;s 博客">lay&#39;s 博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://getmyte.com" title="The Economist">The Economist</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/%e6%8c%af%e9%9b%b7-%e8%ae%b8-22aa5b133/" title="lay&#39;s Linkin">Linkin</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

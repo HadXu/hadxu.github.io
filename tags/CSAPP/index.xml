@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CSAPP on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/tags/CSAPP/</link>
+    <description>Recent content in CSAPP on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 07 Apr 2020 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/tags/CSAPP/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CASPP 第三章课后习题解答</title>
+      <link>https://hadxu.github.io/post/2020-04-08-solution-of-CASPP-chapter3/</link>
+      <pubDate>Tue, 07 Apr 2020 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-04-08-solution-of-CASPP-chapter3/</guid>
+      <description>CASPP 第三章课后习题解答 3.58 一个函数的原型为 1 long decode2(long x, long y, long z); GCC产生的汇编代码为 1 2 3 4 5 6 7 decode2: subq %rdx, %rsi imulq %rsi, %rdi movq %rsi, %rax salq $63, %rax sarq $63, %rax xorq %rdi, %rax 参数x、y、z通过寄存器%rdi、%rsi和%rdx传递。代码将返回值存放在寄存器%rax中。写出等价于上述汇编代码的C代码。 1 2 3 4 5 6 7 8 int decode(int x, int y,</description>
+    </item>
+    
+    <item>
+      <title>CASPP 第二章课后习题解答</title>
+      <link>https://hadxu.github.io/post/2020-03-10-solution-of-CASPP-chapter2/</link>
+      <pubDate>Tue, 10 Mar 2020 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-10-solution-of-CASPP-chapter2/</guid>
+      <description>CASPP 第二章课后习题解答 准备 在实现CSAPP的习题之前，首先需要配置环境。去买一个机器明显不现实，于是我们可以使用docker来搭建我们的学习环境，而且docker非常轻量级，有各种各样的环境可以配置。在接下来的工作中，我们使用vscode+docker进行。推荐七牛云docker镜</description>
+    </item>
+    
+  </channel>
+</rss>

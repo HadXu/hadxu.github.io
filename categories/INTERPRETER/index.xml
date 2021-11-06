@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>INTERPRETER on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/categories/INTERPRETER/</link>
+    <description>Recent content in INTERPRETER on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 21 Jun 2021 09:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/categories/INTERPRETER/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一种迷你解释器</title>
+      <link>https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/</link>
+      <pubDate>Mon, 21 Jun 2021 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/</guid>
+      <description>编写一个解释器(Github) 程序语言是给人读写的语言，如何将程序语言变成可执行的代码需要经过翻译。目前计算机语言分为两种派别1、解释器；2、编译器。其中解释器是边解释边执行，不需要将全部的代码一次性执行，经典的解释型语言有Python、Ruby，Perl， Matlab等等。而编</description>
+    </item>
+    
+  </channel>
+</rss>

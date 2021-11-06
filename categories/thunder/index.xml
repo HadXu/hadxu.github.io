@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>thunder on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/categories/thunder/</link>
+    <description>Recent content in thunder on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 08 Mar 2020 22:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/categories/thunder/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从零实现深度学习框架(day4)</title>
+      <link>https://hadxu.github.io/post/2020-03-09-thunderday4/</link>
+      <pubDate>Sun, 08 Mar 2020 22:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-09-thunderday4/</guid>
+      <description>第四天 实现自动求导机制 前3天，我们已经实现了基本的数据结构无缝切换与CPU与GPU，现在实现自动求导机制。 第一步 建立计算节点。 1 2 3 4 5 6 class Node(object): def __init__(self): self.inputs = [] self.op = None self.const_attr = None self.name = &amp;#34;&amp;#34; 每个节点有输入 操作符 常量值 以及 名称 定义操作运算符 1 2 3 4 5 6 7 8 9 10 11 12 13 14 class Op(object): def __call__(self): new_node = Node() new_node.op = self</description>
+    </item>
+    
+    <item>
+      <title>从零实现深度学习框架(day3)</title>
+      <link>https://hadxu.github.io/post/2020-03-08-thunderday3/</link>
+      <pubDate>Sun, 08 Mar 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-08-thunderday3/</guid>
+      <description>到目前为止，已经实现了GPU与CPU无缝切换的数据结构，但是我们需要在Python语言中使用，今天我们来实现Python调用。 第三天 实现Python调用动态链接库 今天的目标是实现Python来调用已经编译好的动态链接库来进行GPU与CPU的无缝切换。 首先，将编译好的libc_</description>
+    </item>
+    
+    <item>
+      <title>从零实现深度学习框架(day2)</title>
+      <link>https://hadxu.github.io/post/2020-03-07-thunderday2/</link>
+      <pubDate>Sat, 07 Mar 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-07-thunderday2/</guid>
+      <description>前一天我们实现了CPU数据结构的操作，今天我们实现GPU的操作。 CUDA是NVIDIA提出的并行计算框架，结合了CPU与GPU的优点，主要用来处理密集型并行计算。GPU用来提高计算密集型应用程序中并行程序段的执行速度。CUDA是非常重要的计算加速平台。 需要注意的是，网上并没有</description>
+    </item>
+    
+    <item>
+      <title>从零实现深度学习框架(day1)</title>
+      <link>https://hadxu.github.io/post/2020-03-06-thunderday1/</link>
+      <pubDate>Fri, 06 Mar 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-03-06-thunderday1/</guid>
+      <description>第一天(构建数据结构，无缝切换GPU与CPU) 深度学习框架层出不穷，作为学生，需要学习的东西特别多，常见的深度学习框架有Tensorflow,Caffe,Theano,Pytorch,Mxnet,Keras等，这些深度学习被广泛应用于计算机视觉、语音识别、自然语言处理等领域，并</description>
+    </item>
+    
+  </channel>
+</rss>

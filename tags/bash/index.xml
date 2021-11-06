@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bash on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/tags/bash/</link>
+    <description>Recent content in bash on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 30 Apr 2020 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>命令行的艺术</title>
+      <link>https://hadxu.github.io/post/2020-04-30-Bash/</link>
+      <pubDate>Thu, 30 Apr 2020 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-04-30-Bash/</guid>
+      <description>命令行的艺术 bg, fg and CTRL+Z ssh-add, ssh-agent ls -i描述符, df -i个数 dig grep -i, -v, -o, -A, -B, -C xargs pgrep, pkill lsof here documents python -m http.server 7777 128限制 ag wc, tee awk, sed, grep httpie ncdu awk sw_vers BASH ${#varname} ${varname:offset:length} ${variable#pattern} ${variable##pattern} ${path##*/} ${variable/#pattern/string} ${file%.png}.jpg ${varname^^} ${varname,,} shell $0 脚本文件名 $1 对应脚本的第一个参数 $# 参数的总数 $@ 全部的参数 read 1 2 3 4 5 6 filename=&amp;#39;/etc/hosts&amp;#39; while read myline do echo &amp;#34;$myline&amp;#34; done &amp;lt; $filename IFS 1 2 3 4 5 input=&amp;#34;/path/to/txt/file&amp;#34; while IFS= read -r line do echo &amp;#34;$line&amp;#34; done &amp;lt; &amp;#34;$input&amp;#34; 上面的命令可以逐</description>
+    </item>
+    
+  </channel>
+</rss>

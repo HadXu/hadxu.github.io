@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>deep-learning on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/tags/deep-learning/</link>
+    <description>Recent content in deep-learning on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 15 Dec 2020 09:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Attention is All your need</title>
+      <link>https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/</link>
+      <pubDate>Tue, 15 Dec 2020 09:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/</guid>
+      <description>Attention is All your need Attention的花式玩法 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 class Residual(nn.Module): def __init__(self, fn): super().__init__() self.fn = fn def forward(self, x, **kwargs): return self.fn(x, **kwargs) + x class PreNorm(nn.Module): def __init__(self, dim, fn): super().__init__() self.norm = nn.LayerNorm(dim) self.fn = fn def forward(self, x, **kwargs): return self.fn(self.norm(x), **kwargs) class FeedForward(nn.Module): def __init__(self, dim, hidden_dim, dropout=0.): super().__init__() self.net =</description>
+    </item>
+    
+    <item>
+      <title>diskcache</title>
+      <link>https://hadxu.github.io/post/2020-07-29-diskcache/</link>
+      <pubDate>Wed, 29 Jul 2020 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2020-07-29-diskcache/</guid>
+      <description>数据科学神器-Diskcache 在实际工作中或者打比赛中，我们常见的一个巨大问题就是数据读取加载的问题，比如数据集大，多，处理耗时等问题，今天这篇文章就用diskcache来解决数据读取方面的问题。（手把手教） 产生大量的数据 一时找不到大量的数据的我，只能先产生大量的数据了。 1 2 3</description>
+    </item>
+    
+  </channel>
+</rss>

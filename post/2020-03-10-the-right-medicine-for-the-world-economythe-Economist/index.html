@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>The right medicine for the world economy | lay&#39;s 博客</title>
+    <meta property="og:title" content="The right medicine for the world economy - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-03-09T22:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-03-09T22:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="The right medicine for the world economy">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/2020-03-10-the-right-medicine-for-the-world-economythe-Economist/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/films/" title="电影">电影</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#coping-with-the-pandemic-involves-all-of-government-not-just-the-health-system">Coping with the pandemic involves all of government, not just the health system</a></li>
+    <li><a href="#核心思想如何解救全球经济">核心思想(如何解救全球经济)</a></li>
+    <li><a href="#希望病毒早日结束">希望病毒早日结束。</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">The right medicine for the world economy</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/the-economist'>the economist</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h1 id="the-right-medicine-for-the-world-economy">The right medicine for the world economy</h1>
+<h2 id="coping-with-the-pandemic-involves-all-of-government-not-just-the-health-system">Coping with the pandemic involves all of government, not just the health system</h2>
+<p>
+        <img class="mx-auto" alt="" src="/post/imgs/2020-03-07.png" />   
+    </p>
+<p>IT IS NOT a fair fight, but it is a fight that many countries will face all the same. <strong>Left to itself, the covid-19 pandemic doubles every five to six days.</strong> When you get your next issue of The Economist the outbreak could in theory have infected twice as many people as today.Governments can slow that ferocious(凶猛的) pace, but bureaucratic time is not the same as virus time.( <strong>这句话有点难以理解, 官方的数据和病毒真实的数据不一样</strong>)  And at the moment governments across the world are being left flat-footed(鲁莽的).</p>
+<p>The disease is in 85 countries and territories, up from 50 a week earlier. Over 95,000 cases and 3,200 deaths have been recorded. Yet our analysis, based on patterns of travel to and from China, suggests that many countries which have spotted tens of cases have hundreds more circulating undetected. Iran, South Korea and Italy are exporting the virus. America has registered 159 cases in 14 states but as of March 1st it had, indefensibly, tested just 472 people when South Korea was testing 10,000 a day. Now that America is looking, it is sure to find scores of infections—and possibly unearth(发现) a runaway(逃跑的) epidemic.</p>
+<p>Wherever the virus takes hold, containing it and mitigating its effects will involve more than doctors and paramedics(隔离). The World Health Organisation has distilled lessons from China for how health-care systems should cope. The same thinking is needed across the government, especially over how to protect people and companies as supply chains fracture and the worried and the ill shut themselves away.</p>
+<p>The first task is to get manpower and money to hospitals. China drafted in 40,000 health workers to Hubei province. Britain may bring medics out of retirement. This week the World Bank made $12bn and the IMF $50bn available for covid-19. The Global Fund, which fights diseases like malaria and TB, said countries can switch grants. In America Congress is allocating $8.3bn of funding. The country has some of the world’s most advanced hospitals, but its fragmented health system has little spare capacity. Much more money will be needed.</p>
+<p>Just as important is to slow the spread of the disease by getting patients to come forward for testing when outbreaks are small and possible to contain. They may be deterred in many countries, including much of America, where 28m people are without health coverage and many more have to pay for a large slug of their own treatment. People also need to isolate themselves if they have mild symptoms, as about 80% of them will. Here sick pay matters, because many people cannot afford to miss work. In America a quarter of employees have no access to paid sick leave and only scattered states and cities offer sickness benefits. Often the self-employed, a fifth of Italy’s workforce, do not qualify. One study found that, in epidemics, guaranteed sick pay cuts the spread of flu in America by 40%.</p>
+<p>Sick pay also helps soften the blow to demand which, along with a supply shock and a general panic, is hitting economies. These three factors, as China shows, can have a dramatic effect on output. Manufacturing activity there sank in February to its lowest level since managers were first surveyed in 2004. In the quarter to March the economy as a whole could shrink for the first time since the death of Mao Zedong. The OECD expects global growth this year to be its slowest since 2009. Modelling by academics at the Australian National University suggests that GDP in America and Europe would be 2% lower than it would have been in the absence of a pandemic and perhaps as much as 8% lower if the rate of deaths is many times higher than expected. Financial markets are pricing in fear. The S&amp;P 500 has fallen by 8% from its peak on February 19th. Issuance of corporate debt on Wall Street has more or less stopped. The yield on ten-year Treasuries dipped below 1% for the first time ever.</p>
+<p>In rich countries, most of the economic effort has been directed towards calming financial markets. On March 3rd America’s Federal Reserve cut rates a fortnight before its monetary-policy meeting, and by an unusually large half-a-percentage point. The central banks of Australia, Canada and Indonesia have also acted. The Bank of England and the European Central Bank are both expected to loosen policy, too.</p>
+<p>Yet this slowdown is not a textbook downturn. Lower rates will ease borrowing costs and shore up sentiment, but no amount of cheap credit can stop people falling ill. Monetary policy cannot repair broken supply chains or tempt anxious people into venturing out. These obvious limitations help explain why stockmarkets failed to revive after the Fed’s cut.</p>
+<p><strong>Better to support the economy directly, by helping affected people and firms pay bills and borrow money if they need it. For individuals, the priority should be paying for health care and providing paid sick leave. The Trump administration is considering paying some hospital bills for those with the virus. Japan’s government will cover the wages of parents who stay at home to care for children or sick relatives; Singapore’s will help cab drivers and bosses whose employees are struck down. More such ideas will be needed.</strong></p>
+<p><strong>For companies the big challenge will be liquidity. And although this shock is unlike the financial crisis, when the poison spread from within, that period did show how to cope with a liquidity crunch. Firms that lose revenues will still face tax, wage and interest bills. Easing that burden, for as long as the epidemic lasts, can avoid needless bankruptcies and lay-offs. Temporary relief on tax and wage costs can help. Employers can be encouraged to choose shorter hours for all their staff over lay-offs for some of them. Authorities could fund banks to lend to firms that are suffering, as they did during the financial crisis and as China is doing today. China is also ordering banks to go easy on delinquent borrowers. Western governments cannot do that, but it is in the interest of lenders everywhere to show forbearance towards borrowers facing a cash squeeze, much as banks did to public-sector employees during America’s government shutdown in 2018-19.</strong></p>
+<p><strong>There is a tension. Health policy aims to spare hospitals by lowering the epidemic’s peak so that it is less intense, if longer-lasting. Economic policy, by contrast, aims to minimise how long factories are shut and staff absent. Eventually governments will have to strike a balance. Today, however, they are so far behind the epidemic that the priority must be to slow its spread.</strong></p>
+<h2 id="核心思想如何解救全球经济">核心思想(如何解救全球经济)</h2>
+<ul>
+<li>For individuals, the priority should be paying for health care and providing paid sick leave.</li>
+<li>For companies the big challenge will be liquidity.</li>
+<li>Employers can be encouraged to choose shorter hours for all their staff over lay-offs for some of them.</li>
+<li>Authorities could fund banks to lend to firms that are suffering</li>
+<li>Eventually governments will have to strike a balance. Today, however, they are so far behind the epidemic that the priority must be to slow its spread.</li>
+</ul>
+<h2 id="希望病毒早日结束">希望病毒早日结束。</h2>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2020-03-09-thunderday4/">从零实现深度学习框架(day4)</a></li>
+        
+        <li><a href="/post/2020-03-08-thunderday3/">从零实现深度学习框架(day3)</a></li>
+        
+        <li><a href="/post/2020-03-07-thunderday2/">从零实现深度学习框架(day2)</a></li>
+        
+        <li><a href="/post/2020-03-06-thunderday1/">从零实现深度学习框架(day1)</a></li>
+        
+        <li><a href="/post/2020-03-01-the-tour-of-thailand/">泰国游玩</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/the-economist'>the economist</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-06.recent/" title="近况">近况</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-09-12.911/" title="911恐怖袭击">911恐怖袭击</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-07-22.henan/" title="No safe place">No safe place</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/" title="一种迷你解释器">一种迷你解释器</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-03.build-tiny-OS/" title="一种迷你操作系统">一种迷你操作系统</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-05-29.yuan-long-ping/" title="Yuan long ping">Yuan long ping</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/" title="Trait in Rust">Trait in Rust</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-29-year-of-2020/" title="Year of 2020">Year of 2020</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/" title="Attention is All your need">Attention is All your need</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-11-08-biden-win/" title="US Election">US Election</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/911/">911 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/deep-learning/">deep-learning (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (11)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E4%B8%AD%E5%9B%BD/">中国 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%8A%95%E8%B5%84/">投资 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/911/">911</a>
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/OS/">OS</a>
+    
+    <a href="https://hadxu.github.io/tags/US/">US</a>
+    
+    <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://hadxu.github.io/tags/bash/">bash</a>
+    
+    <a href="https://hadxu.github.io/tags/deep-learning/">deep-learning</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E4%B8%AD%E5%9B%BD/">中国</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">大学</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E6%8A%95%E8%B5%84/">投资</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://hadxu.github.io" title="lay&#39;s 博客">lay&#39;s 博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://getmyte.com" title="The Economist">The Economist</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/%e6%8c%af%e9%9b%b7-%e8%ae%b8-22aa5b133/" title="lay&#39;s Linkin">Linkin</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>Posts | lay&#39;s 博客</title>
+    <meta property="og:title" content="Posts - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="Posts">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml" href="https://hadxu.github.io/post/index.xml" title="lay's 博客" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/films/" title="电影">电影</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/" title="linux shell脚本监控进程崩溃自动重启">linux shell脚本监控进程崩溃自动重启</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            linux shell脚本监控进程崩溃自动重启 在工作的时候，有时候会碰到程序非常慢，但是又容易崩溃的程序，这时候可以考虑使用一个进程来时刻监督进程执行，如果崩溃就重启。 1 2 3 4 5 6 7 8 9 10 11 # ! /bin/sh while true do procnum=`ps -ef|grep 进程名称|wc -l` if [ $procnum -eq 0 ] then echo &#34;start service....................&#34; ${START_CMD} fi sleep 1 done……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-24-live-with-dji/" title="大疆在线直播">大疆在线直播</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月24日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA'>无人机</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            大疆在线直播 2020-04-10更新 突然发现新大陆，可以使用各种平台来直播restream 直接将直播地址以及密码添加进来就ok rtmp://live.restream.io/live/re_2162584xxxxxxx 正文开始 很久之前买了一个大疆无人机，它长这样 这款无人机能够飞行15min，高度500m，长度2km，能够满足我们一般人的需求。 开始玩这个无人机的时候，并……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-24-live-with-dji/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-22-rust-by-example-chapter17/" title="Rust by Example(chapter17)">Rust by Example(chapter17)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            标准库 这一章主要介绍标准库，Rust中提供了各种各样的标准库供我们使用。 String vectors Option Result Box Box Box是一个智能指针，在计算机程序中，所有的值都是在栈中分配的，同时是固定大小的。但是可以使用Box来向堆中分配空间，同时返回一个指针，如果指针不在上下文中，那么分配的区域就会被回收。 1 2 3 4 5 6……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-22-rust-by-example-chapter17/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-21-Paying-to-stop-the-pandemic/" title="Paying to stop the pandemic">Paying to stop the pandemic</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/the-economist'>the economist</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Paying to stop the pandemic  ……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-21-Paying-to-stop-the-pandemic/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-21-rust-by-example-chapter16/" title="Rust by Example(chapter16)">Rust by Example(chapter16)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            macro_rules! 在Rust中，宏非常之强大，宏就像一个函数一样，但是接着!。However, unlike macros in C and other languages, Rust macros are expanded into abstract syntax trees, rather than string preprocessing, so you don&rsquo;t get unexpected precedence bugs. 1 2 3 4 5 6 7 8 9 10 // 将() 展开为打印字符 macro_rules!say_hello{()=&gt;{println!(&#34;Hello!&#34;);};}fn main(){say_hello!()} Designators 通过一种宏来创建函数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 macro_rules!create_function{($func_name:ident)=&gt;{fn $func_name(){println!(&#34;You called {:?}()&#34;,stringify!($func_name));}};}create_function!(foo);fn main(){foo()} Repeat 可以使用宏来进行递归 1 2 3 4 5 6 7 8 9 10 11……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-21-rust-by-example-chapter16/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-20-rust-by-example-chapter15/" title="Rust by Example(chapter15)">Rust by Example(chapter15)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Derive(派生) 在Rust中，提供了各种各样的派生特性。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 #[derive(PartialOrd, PartialEq)]struct Centimeters(f64);struct Inches(i32);implInches{fn to_centimeters(&amp;self)-&gt; Centimeters{let&amp;Inches(inches)=self;Centimeters(inchesasf64*2.54)}}fn main(){letfoot=Inches(12);letmeter=Centimeters(100.0);letcmp=iffoot.to_centimeters()&lt;meter{&#34;smaller&#34;}else{&#34;bigger&#34;};println!(&#34;{}&#34;,cmp);} 在这里，首先定义了Centimeters，同时重载了比较运算符，在接下来的代码中，可以对该结构体进行比较。 dyn Rust编译器需要知道返回类型的大小，……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-20-rust-by-example-chapter15/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-19-rust-by-example-chapter14/" title="Rust by Example(chapter14)">Rust by Example(chapter14)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月19日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Generics(泛型) Generics是Rust中的重要内容，能够最大化地减少代码的重复。fn foo&lt;T&gt;(arg: T) { ... }来定义一个函数，传入的参数为T。 1 2 3 4 5 6 7 8 9 10 11 12 struct Val{val: f64,}implVal{pubfn value(&amp;self)-&gt; &amp;f64 {&amp;self.val}}fn main(){letx=Val{val: 3.};lety=x.value();} trait(接口) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 //定义接口 traitHasArea{fn area(&amp;self)-&gt; f64;}struct Rectangle{length: f64,height: f64 }// 实现接口 implHasAreaforRectangle{fn area(&amp;self)-&gt; f64……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-19-rust-by-example-chapter14/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-18-rust-by-example-chapter9-13/" title="Rust by Example(chapter9-13)">Rust by Example(chapter9-13)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月18日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            模块 &amp; crate &amp; Cargo &amp; Attributes 可见性 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 mod my_mod{// 不可见 fn private_function(){println!(&#34;called `my_mod::private_function()`&#34;);}// 可见 pubfn function(){println!(&#34;called `my_mod::function()`&#34;);}// 可以嵌套 pubmod nested{pubfn function(){println!(&#34;called `my_mod::nested::function()`&#34;);}}}mod my{// struct默认是私有的 pubstruct OpenBox&lt;T&gt;{pubcontents: T,}#[allow(dead_code)]pubstruct ClosedBox&lt;T&gt;{contents: T,}impl&lt;T&gt;ClosedBox&lt;T&gt;{pubfn new(contents: T)-&gt; ClosedBox&lt;T&gt;{ClosedBox{contents: contents,}}}} 包可见性 Crates 在Rust中，crates是一个compilation unit，默认是编译成可执行文件，如……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-18-rust-by-example-chapter9-13/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-17-rust-by-example-chapter8/" title="Rust by Example(chapter8)">Rust by Example(chapter8)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月17日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            函数 函数定义 1 2 3 fn fun(v:i32)-&gt; i32{v+3} 定义类型以及返回类型，同时在Rust函数是一个表达式，也就是不需要return。 方法 1 2 3 4 5 6 7 struct Pair(Box&lt;i32&gt;,Box&lt;i32&gt;);implPair{fn destory(self){letPair(x,y)=self;println!(&#34;Destroying Pair({}, {})&#34;,x,y);}} 闭包(也称之为lambda表达式) 1 2 3 fn function(i: i32)-&gt; i32 {i+1}letclosure_annotated=|i: i32|-&gt; i32 {i+1};letone=||1; 下面看一下指针借用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 fn main(){lethaystack=vec![1,2,3];letcontains=move|needle|haystack.contains(needle);println!(&#34;{}&#34;,contains(&amp;1));println!(&#34;{}&#34;,contains(&amp;4));println!(&#34;There&#39;re {} elements in vec&#34;,haystack.len());// ^ Uncommenting above line will result in compile-time error // because borrow checker doesn&#39;t……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-17-rust-by-example-chapter8/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-16-rust-by-example-chapter7/" title="Rust by Example(chapter7)">Rust by Example(chapter7)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/rust'>rust</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Rust是一个现代的系统级编程语言，侧重于安全、速度和并发。 条件控制 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 fn main(){letn=5;ifn&lt;0{print!(&#34;{} is negative&#34;,n);}elseifn&gt;0{print!(&#34;{} is positive&#34;,n);}else{print!(&#34;{} is zero&#34;,n);}letbig_n=ifn&lt;10&amp;&amp;n&gt;-10{println!(&#34;, and is a small number, increase ten-fold&#34;);10*n}else{println!(&#34;, and is a big number, halve the number&#34;);n/2};println!(&#34;{} -&gt; {}&#34;,n,big_n);} loop循环 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 fn main(){letmutcount=0u32;println!(&#34;Let&#39;s count until infinity!&#34;);loop{count+=1;ifcount==3{println!(&#34;three&#34;);continue;}println!(&#34;{}&#34;,count);ifcount==5{println!(&#34;OK, that&#39;s enough&#34;);break;}}}fn main(){letmutcounter=0;letresult=loop{counter+=1;ifcounter==10{breakcounter*2;}};assert_eq!(result,20);} for 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-16-rust-by-example-chapter7/">阅读全文</a></p>
+    </article>
+    
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://hadxu.github.io/post/page/3/">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="https://hadxu.github.io/post/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://hadxu.github.io/post/page/2/">2</a>
+    </li>
+    
+    <li >
+        <a href="https://hadxu.github.io/post/page/3/">3</a>
+    </li>
+    
+    <li  class="current">
+        <a href="https://hadxu.github.io/post/page/4/">4</a>
+    </li>
+    
+    <li >
+        <a href="https://hadxu.github.io/post/page/5/">5</a>
+    </li>
+    
+    <li >
+        <a href="https://hadxu.github.io/post/page/6/">6</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://hadxu.github.io/post/page/5/">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-06.recent/" title="近况">近况</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-09-12.911/" title="911恐怖袭击">911恐怖袭击</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-07-22.henan/" title="No safe place">No safe place</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-21.A-tiny-Interpreter-written-by-Rust/" title="一种迷你解释器">一种迷你解释器</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-06-03.build-tiny-OS/" title="一种迷你操作系统">一种迷你操作系统</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-05-29.yuan-long-ping/" title="Yuan long ping">Yuan long ping</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-01-30-the-trait-in-Rust/" title="Trait in Rust">Trait in Rust</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-29-year-of-2020/" title="Year of 2020">Year of 2020</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-12-15-Attention-is-all-your-need/" title="Attention is All your need">Attention is All your need</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2020-11-08-biden-win/" title="US Election">US Election</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/911/">911 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/deep-learning/">deep-learning (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (11)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E4%B8%AD%E5%9B%BD/">中国 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%8A%95%E8%B5%84/">投资 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/911/">911</a>
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/OS/">OS</a>
+    
+    <a href="https://hadxu.github.io/tags/US/">US</a>
+    
+    <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://hadxu.github.io/tags/bash/">bash</a>
+    
+    <a href="https://hadxu.github.io/tags/deep-learning/">deep-learning</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E4%B8%AD%E5%9B%BD/">中国</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">大学</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E6%8A%95%E8%B5%84/">投资</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://hadxu.github.io" title="lay&#39;s 博客">lay&#39;s 博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://getmyte.com" title="The Economist">The Economist</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/%e6%8c%af%e9%9b%b7-%e8%ae%b8-22aa5b133/" title="lay&#39;s Linkin">Linkin</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
