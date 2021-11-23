@@ -107,7 +107,7 @@
         </div>
         
         <div class="post-content">
-            CASPP 第二章课后习题解答 2021年11月更新 发现之前的docker已经不能使用了，同时使用了ubuntu20.04镜像的话会出现问题，于是修改了镜像的操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 FROM ubuntu:20.04 ARG DEBIAN_FRONTEND=noninteractive RUN sed -i &#39;/security/d&#39; /etc/apt/sources.list RUN sed -i s@/archive.ubuntu.com/@/mirrors.tencent.com/@g /etc/apt/sources.list RUN apt-get clean &amp;&amp; apt-get update --fix-missing &amp;&amp; apt-get upgrade \ &amp;&amp; apt-get install -y build-essential curl wget vim net-tools bzip2 git openssh-server RUN apt-get install -y gdb-multiarch qemu-system-misc……
+            CASPP 第二章课后习题解答 2021年11月更新 一些很好的docker笔记Docker-从入门到入土 发现之前的docker已经不能使用了，同时使用了ubuntu20.04镜像的话会出现问题，于是修改了镜像的操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 FROM ubuntu:20.04 ARG DEBIAN_FRONTEND=noninteractive RUN sed -i &#39;/security/d&#39; /etc/apt/sources.list RUN sed -i s@/archive.ubuntu.com/@/mirrors.tencent.com/@g /etc/apt/sources.list RUN apt-get clean……
             <p class="readmore"><a href="https://hadxu.github.io/post/2021-11-21-solution-of-CASPP-chapter2/">阅读全文</a></p>
         </div>
     </article>
