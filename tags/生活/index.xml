@@ -6,7 +6,16 @@
     <description>Recent content in 生活 on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 06 Nov 2021 09:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Dec 2021 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>12月近况</title>
+      <link>https://hadxu.github.io/post/2021-12-01.recent/</link>
+      <pubDate>Wed, 01 Dec 2021 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2021-12-01.recent/</guid>
+      <description>12月近况 cross-compile 喜欢上了折腾NAS,好想赶紧回家搞NAS，总价2999，还是很香的。突然发现威联通好像不是很香啊，哈哈哈。 在折腾rust cross-compile的时候，突然想将mac上的编译放到linux上运行，好在手里有mac以及linux云服务器，因此就尝试了一下，亲测可行。 官</description>
+    </item>
+    
     <item>
       <title>近况</title>
       <link>https://hadxu.github.io/post/2021-11-06.recent/</link>
