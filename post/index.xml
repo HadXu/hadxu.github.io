@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 08 Jan 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Jan 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>raspberry PI NAS玩法</title>
+      <link>https://hadxu.github.io/post/2022-02-11.raspberry/</link>
+      <pubDate>Tue, 11 Jan 2022 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2022-02-11.raspberry/</guid>
+      <description>Raspberry PI NAS 玩法 起因（为什么用树莓派做NAS下载） 在鹅厂的NAS群里面申请到了TCCF的pt下载邀请码，但是pt下载需要一个很好的客户端来保证你的分享，否则的话就会限制登陆以及下载种子资源。而年前买的群晖220在家里面不能进行quickconnect登陆，因此萌生了使用树莓派来搭建pt</description>
+    </item>
+    
     <item>
       <title>2022新年第二篇</title>
       <link>https://hadxu.github.io/post/2022-02-08.happy-new-year/</link>

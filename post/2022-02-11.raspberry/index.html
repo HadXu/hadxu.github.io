@@ -9,21 +9,24 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>大学 | lay&#39;s 博客</title>
-    <meta property="og:title" content="大学 - lay&#39;s 博客">
+    <title>raspberry PI NAS玩法 | lay&#39;s 博客</title>
+    <meta property="og:title" content="raspberry PI NAS玩法 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2022-01-11T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-01-11T11:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="大学">
+    <meta name="description" content="raspberry PI NAS玩法">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2022-02-11.raspberry/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/index.xml" title="lay's 博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -55,7 +58,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://hadxu.github.io">首页</a>
+                    <a class="current" href="https://hadxu.github.io">首页</a>
                     
                     <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
                     
@@ -80,45 +83,257 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <h3 class="archive-title">
-        包含标签
-        <span class="keyword">大学</span>
-        的文章
-    </h3>
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 
-    
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#起因为什么用树莓派做nas下载">起因（为什么用树莓派做NAS下载）</a></li>
+    <li><a href="#做法">做法</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-06-13-graduation-over/">毕业</a>
-            </h1>
+            <h1 class="post-title">raspberry PI NAS玩法</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年6月13日
+            2022年1月11日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/%E5%A4%A7%E5%AD%A6'>大学</a>
+            <span class="meta-category"><a href='/categories/%E7%94%9F%E6%B4%BB'>生活</a></span>
             
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
         </div>
         
         <div class="post-content">
-            毕业 今天是2020年6月13日，作为研究生的我，本来是不太很伤感的，但是看到身边的人一个一个地离开校园，不知道是不是最后一次见面，莫名感觉鼻子有点酸酸的。回想我读大学8年，每次毕业都有不同的感觉，同时走了很多歪路，以此文章记录我8年来的路以及感想。 我的路分为3个部分 专科 2012.9-2015.6 本科 2015.9-2017.6 研……
-            <p class="readmore"><a href="https://hadxu.github.io/post/2020-06-13-graduation-over/">阅读全文</a></p>
+            <h1 id="raspberry-pi-nas-玩法">Raspberry PI NAS 玩法</h1>
+<h2 id="起因为什么用树莓派做nas下载">起因（为什么用树莓派做NAS下载）</h2>
+<p>在鹅厂的NAS群里面申请到了TCCF的pt下载邀请码，但是pt下载需要一个很好的客户端来保证你的分享，否则的话就会限制登陆以及下载种子资源。而年前买的群晖220在家里面不能进行quickconnect登陆，因此萌生了使用树莓派来搭建pt下载器来进行下载。</p>
+<h2 id="做法">做法</h2>
+<p>买大一点的tf卡！
+买大一点的tf卡！
+买大一点的tf卡！</p>
+<p>不然后面会发现容量不够用的情况。</p>
+<p>首先对树莓派进行系统安装，这里建议使用树莓派的官方系统<a href="https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-32-bit">Raspberry Pi OS with desktop</a>
+下载完成之后需要进行下面的操作</p>
+<ol>
+<li>烧写系统到tf卡（mac下面使用balenaEtcher，win下面使用winDisk）</li>
+<li>新建一个ssh文件在root目录下</li>
+<li>新建wpa_supplicant.conf文件， 设置wifi密码登陆</li>
+</ol>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008080">ctrl_interface</span><span style="color:#000;font-weight:bold">=</span><span style="color:#008080">DIR</span><span style="color:#000;font-weight:bold">=</span>/var/run/wpa_supplicant <span style="color:#008080">GROUP</span><span style="color:#000;font-weight:bold">=</span>netdev
+<span style="color:#008080">update_config</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
+<span style="color:#008080">country</span><span style="color:#000;font-weight:bold">=</span>&lt;Country Code&gt; https://www.iban.com/country-codes
+
+<span style="color:#008080">network</span><span style="color:#000;font-weight:bold">={</span>
+    <span style="color:#008080">ssid</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&lt;SSID&gt;&#34;</span>
+    <span style="color:#008080">psk</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&lt;PASSWORD&gt;&#34;</span>
+    <span style="color:#008080">scan_ssid</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>
+<p>启动树莓派，如果能够登陆路由器就可以直接找到ip进行ssh登陆，如果不能，比如我在宿舍，路由器不是自己的，那只能使用端口扫描工具，这里推荐<a href="https://github.com/angryip/ipscan">Angry Ip scan</a> 用户名<strong>pi</strong>， 密码<strong>raspberry</strong></p>
+</li>
+<li>
+<p>登陆进树莓派进行设置qBittorrent <a href="https://pimylifeup.com/raspberry-pi-qbittorrent/">Running qBittorrent on the Raspberry Pi</a></p>
+</li>
+<li>
+<p>设置jellyfin <a href="https://pimylifeup.com/raspberry-pi-jellyfin/">jellyfin</a></p>
+</li>
+<li>
+<p>开始享用吧</p>
+</li>
+</ol>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2022-02-08.happy-new-year/">2022新年第二篇</a></li>
+        
+        <li><a href="/post/2022-01-01.new-year/">2022新年第一篇</a></li>
+        
+        <li><a href="/post/2021-12-01.recent/">12月近况</a></li>
+        
+        <li><a href="/post/2021-11-06.recent/">近况</a></li>
+        
+        <li><a href="/post/2020-12-29-year-of-2020/">Year of 2020</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E7%94%9F%E6%B4%BB'>生活</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
     
-
-
-
-
-
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -141,6 +356,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
