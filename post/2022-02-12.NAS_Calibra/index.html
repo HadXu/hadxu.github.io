@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>2020年的清明 | lay&#39;s 博客</title>
-    <meta property="og:title" content="2020年的清明 - lay&#39;s 博客">
+    <title>raspberry PI NAS玩法 | lay&#39;s 博客</title>
+    <meta property="og:title" content="raspberry PI NAS玩法 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-04-04T09:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2022-01-11T11:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-04-04T09:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-11T11:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="2020年的清明">
+    <meta name="description" content="raspberry PI NAS玩法">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/post/2020-04-04-2020-qingming/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2022-02-12.NAS_Calibra/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -179,10 +179,10 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">2020年的清明</h1>
+            <h1 class="post-title">raspberry PI NAS玩法</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年4月4日
+            2022年1月11日
         </date>
         
         <div class="post-meta">
@@ -206,13 +206,9 @@
         </div>
         
         <div class="post-content">
-            <h1 id="清明">清明</h1>
-<p>今天是2020年4月4日，中国的清明节。今年的清明节尤其特殊，从年前1月份开始，陆续的有人感染新型冠状病毒，能够使得肺部逐渐纤维化，不能呼吸，但是意识还是清醒的，因此病人如果得不到及时的救治，就会非常痛苦地死亡。目前为止，全球已经超过<strong>109万</strong>人感染，超过<strong>5.8万</strong>人去世。</p>
-<p>
-        <img class="mx-auto" alt="" src="/post/imgs/2020-qingming.png" />   
-    </p>
-<p>目前最为严重的国家包括美国，而美国同时经历着股市动荡、石油危机（俄罗斯与沙特阿拉伯进行的石油价格战）、疫情等情况，但是特朗普却一点都不慌，仍表示对自己这次疫情中的表现打满分，迷惑之行为。也许需要看一次半佛老师推荐的《君主论》。目前国内疫情已经控制差不多了，而国外一天比一天严重，在全球化的今天，没有一个国家能够置身事外，而美国作为全球经济的老大，它的经济是时刻影响着全球经济。希望这次疫情早日结束。</p>
-<p>今天，国家在早晨10点，全国哀悼，为在这次疫情中去世的烈士以及同胞表示深刻的缅怀。地球不需要人类保护，人类保护的是自己。</p>
+            <h1 id="nas--calibra--frp穿透远程访问">NAS + Calibra + FRP穿透远程访问</h1>
+<p>过年前买了一个NAS，型号群晖ds220+，2300块大洋，放在家里面以后就一直使用quickconnect来进行访问，并没有考虑到后面的速度问题以及端口访问问题。</p>
+<p>来到了工作地，还是只能quickconnect来远程控制NAS。如果打开群晖自己的应用如photo或者文件管理就没有问题，如果打开第三方软件比如qbt或者jellfin就不行了，因为这些端口并没有被群晖自带的quickconnect加入进来。 可以安装Nginx，让群晖自带的反向代理指向Nginx，具体做法没有实现。 第二种是使用</p>
 
         </div>
 
@@ -225,15 +221,15 @@
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/post/2020-04-03-2020-wuhan/">2020年的武汉新年</a></li>
+        <li><a href="/post/2022-02-11.raspberry/">raspberry PI NAS玩法</a></li>
         
-        <li><a href="/post/2020-03-28-The-state-in-the-time-of-covid-19the-Economist/">The state in the time of covid-19</a></li>
+        <li><a href="/post/2022-02-08.happy-new-year/">2022新年第二篇</a></li>
         
-        <li><a href="/post/2020-03-25-linux-restart-with-shell/">linux shell脚本监控进程崩溃自动重启</a></li>
+        <li><a href="/post/2022-01-01.new-year/">2022新年第一篇</a></li>
         
-        <li><a href="/post/2020-03-24-live-with-dji/">大疆在线直播</a></li>
+        <li><a href="/post/2021-12-01.recent/">12月近况</a></li>
         
-        <li><a href="/post/2020-03-22-rust-by-example-chapter17/">Rust by Example(chapter17)</a></li>
+        <li><a href="/post/2021-11-06.recent/">近况</a></li>
         
     </ul>
 </div>
