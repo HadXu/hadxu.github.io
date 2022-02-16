@@ -147,7 +147,13 @@
 <div class="post-toc" style="position: absolute; top: 188px;">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-        <nav id="TableOfContents"></nav>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#搭建frp">搭建FRP</a></li>
+    <li><a href="#搭建calibra并完成豆瓣刮削">搭建Calibra并完成豆瓣刮削</a></li>
+    <li><a href="#搭建qbt">搭建qbt</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 <script type="text/javascript">
@@ -206,9 +212,13 @@
         </div>
         
         <div class="post-content">
-            <h1 id="nas--calibra--frp穿透远程访问">NAS + Calibra + FRP穿透远程访问</h1>
+            <h1 id="nas--calibra--frp穿透远程访问--qbtittorrent下载">NAS + Calibra + FRP穿透远程访问 + qBtittorrent下载</h1>
 <p>过年前买了一个NAS，型号群晖ds220+，2300块大洋，放在家里面以后就一直使用quickconnect来进行访问，并没有考虑到后面的速度问题以及端口访问问题。</p>
-<p>来到了工作地，还是只能quickconnect来远程控制NAS。如果打开群晖自己的应用如photo或者文件管理就没有问题，如果打开第三方软件比如qbt或者jellfin就不行了，因为这些端口并没有被群晖自带的quickconnect加入进来。 可以安装Nginx，让群晖自带的反向代理指向Nginx，具体做法没有实现。 第二种是使用</p>
+<p>来到了工作地，还是只能quickconnect来远程控制NAS。如果打开群晖自己的应用如photo或者文件管理就没有问题，如果打开第三方软件比如qbt或者jellfin就不行了，因为这些端口并没有被群晖自带的quickconnect加入进来。 可以安装Nginx，让群晖自带的反向代理指向Nginx，具体做法没有实现。 第二种是使用frp将机器设备映射到公网，前提是需要一个公网ip，好在有服务商提供了这个服务，我这边使用的是樱花frp。通过这种方式就可以访问第三方服务了，比如Calibra之类的需要内网访问的服务。</p>
+<h2 id="搭建frp">搭建FRP</h2>
+<h2 id="搭建calibra并完成豆瓣刮削">搭建Calibra并完成豆瓣刮削</h2>
+<h2 id="搭建qbt">搭建qbt</h2>
+<p>NAS的最大的用处就是能够24小时不停地下载上传，点对点能够发挥每一个人的作用，可以使得带宽达到最大。在群里搞到了一个站，就需要完成相关的任务，因此需要你NAS长期开着并开放上传，人家使用你的资源下载，这样达到了<strong>我为人人，人人为我</strong>的目的。在这种情况下，需要每个人自觉地去分享上传，那你才能下载。</p>
 
         </div>
 
