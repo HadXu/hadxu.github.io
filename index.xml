@@ -6,7 +6,16 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 11 Jan 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Feb 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</title>
+      <link>https://hadxu.github.io/post/2022-02-12.NAS_Calibra/</link>
+      <pubDate>Sat, 12 Feb 2022 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2022-02-12.NAS_Calibra/</guid>
+      <description>NAS + Calibra + FRP穿透远程访问 + qBtittorrent下载 过年前买了一个NAS，型号群晖ds220+，2300块大洋，放在家里面以后就一直使用quickconnect来进行访问，并没有考虑到后面的速度问题以及端口访问问题。 来到了工作地，还是只能quickconnect来远程控制NA</description>
+    </item>
+    
     <item>
       <title>raspberry PI NAS玩法</title>
       <link>https://hadxu.github.io/post/2022-02-11.raspberry/</link>
@@ -14,15 +23,6 @@
       
       <guid>https://hadxu.github.io/post/2022-02-11.raspberry/</guid>
       <description>Raspberry PI NAS 玩法 起因（为什么用树莓派做NAS下载） 在鹅厂的NAS群里面申请到了TCCF的pt下载邀请码，但是pt下载需要一个很好的客户端来保证你的分享，否则的话就会限制登陆以及下载种子资源。而年前买的群晖220在家里面不能进行quickconnect登陆，因此萌生了使用树莓派来搭建pt</description>
-    </item>
-    
-    <item>
-      <title>raspberry PI NAS玩法</title>
-      <link>https://hadxu.github.io/post/2022-02-12.NAS_Calibra/</link>
-      <pubDate>Tue, 11 Jan 2022 11:00:00 +0800</pubDate>
-      
-      <guid>https://hadxu.github.io/post/2022-02-12.NAS_Calibra/</guid>
-      <description>NAS + Calibra + FRP穿透远程访问 + qBtittorrent下载 过年前买了一个NAS，型号群晖ds220+，2300块大洋，放在家里面以后就一直使用quickconnect来进行访问，并没有考虑到后面的速度问题以及端口访问问题。 来到了工作地，还是只能quickconnect来远程控制NA</description>
     </item>
     
     <item>

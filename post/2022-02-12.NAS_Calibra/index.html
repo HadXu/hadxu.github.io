@@ -9,17 +9,17 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>raspberry PI NAS玩法 | lay&#39;s 博客</title>
-    <meta property="og:title" content="raspberry PI NAS玩法 - lay&#39;s 博客">
+    <title>NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载 | lay&#39;s 博客</title>
+    <meta property="og:title" content="NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2022-01-11T11:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2022-02-12T11:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-11T11:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2022-02-12T11:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="raspberry PI NAS玩法">
+    <meta name="description" content="NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载">
         
     <meta name="author" content="lay">
     <meta property="og:url" content="https://hadxu.github.io/post/2022-02-12.NAS_Calibra/">
@@ -185,16 +185,16 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">raspberry PI NAS玩法</h1>
+            <h1 class="post-title">NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</h1>
         </header>
         <date class="post-meta meta-date">
-            2022年1月11日
+            2022年2月12日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/%E7%94%9F%E6%B4%BB'>生活</a></span>
+            <span class="meta-category"><a href='/categories/NAS'>NAS</a></span>
             
         </div>
         
@@ -216,6 +216,34 @@
 <p>过年前买了一个NAS，型号群晖ds220+，2300块大洋，放在家里面以后就一直使用quickconnect来进行访问，并没有考虑到后面的速度问题以及端口访问问题。</p>
 <p>来到了工作地，还是只能quickconnect来远程控制NAS。如果打开群晖自己的应用如photo或者文件管理就没有问题，如果打开第三方软件比如qbt或者jellfin就不行了，因为这些端口并没有被群晖自带的quickconnect加入进来。 可以安装Nginx，让群晖自带的反向代理指向Nginx，具体做法没有实现。 第二种是使用frp将机器设备映射到公网，前提是需要一个公网ip，好在有服务商提供了这个服务，我这边使用的是樱花frp。通过这种方式就可以访问第三方服务了，比如Calibra之类的需要内网访问的服务。</p>
 <h2 id="搭建frp">搭建FRP</h2>
+<p>这里使用的<a href="https://www.natfrp.com/user/">樱花FRP</a>。
+首先在NAS中安装docker，如图所示
+
+        <img class="mx-auto" alt="" src="/post/imgs/2022/nas/nas_docker.png" />   
+    </p>
+<p>docker安装完成以后，打开在注册表中搜索<code>frpc</code>，使用如图所示的樱花
+
+        <img class="mx-auto" alt="" src="/post/imgs/2022/nas/nas_docker.png" />   
+    
+frpc镜像。下载完成以后在左边栏找到映像，双击刚刚下载好的镜像，创建容器。这个时候先别
+下一步，先去樱花网站注册并实名登记，需要一块钱（实名登记需要调用外面的库），实名注册以后点击穿透，点击隧道列表，新建隧道，穿透类型选择<strong>TCP</strong>， 然后
+
+        <img class="mx-auto" alt="" src="/post/imgs/2022/nas/frp_new.png" />   
+    </p>
+<p>注意本地ip选择<code>172.17.0.1</code>以及端口，这里为了演示选择映射群晖的桌面系统，桌面系统端口为5001，因此本地端口选择5001，然后点击创建得到
+
+        <img class="mx-auto" alt="" src="/post/imgs/2022/nas/sakura_frp_config.png" />   
+    , 点击最上方的复制按钮，得到一串代码如<code>-f azy6vopolpj4wugnnxxxxxxxxxxxxxxx:2859197</code>，然后回到刚刚的创建docker镜像，</p>
+<p>如图填写环境<code>LANG, en_US.UTF-8</code>以及执行命令,如图所示</p>
+<p>
+        <img class="mx-auto" alt="" src="/post/imgs/2022/nas/config.png" />   
+    </p>
+<p>然后点击应用，启动容器成功。</p>
+<p>在docker的左边栏打开容器，点击详情，点击日记如图
+
+        <img class="mx-auto" alt="" src="/post/imgs/2022/nas/frp_info.png" />   
+    
+可以看到创建隧道成功，然后就可以使用该域名进行登陆到群晖的桌面系统了，注意需要加<strong>https://</strong></p>
 <h2 id="搭建calibra并完成豆瓣刮削">搭建Calibra并完成豆瓣刮削</h2>
 <h2 id="搭建qbt">搭建qbt</h2>
 <p>NAS的最大的用处就是能够24小时不停地下载上传，点对点能够发挥每一个人的作用，可以使得带宽达到最大。在群里搞到了一个站，就需要完成相关的任务，因此需要你NAS长期开着并开放上传，人家使用你的资源下载，这样达到了<strong>我为人人，人人为我</strong>的目的。在这种情况下，需要每个人自觉地去分享上传，那你才能下载。</p>
@@ -239,7 +267,7 @@
         
         <li><a href="/post/2021-12-01.recent/">12月近况</a></li>
         
-        <li><a href="/post/2021-11-06.recent/">近况</a></li>
+        <li><a href="/post/2021-11-21-solution-of-CASPP-chapter2/">CASPP 第二章课后习题解答</a></li>
         
     </ul>
 </div>
@@ -249,7 +277,7 @@
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/%E7%94%9F%E6%B4%BB'>生活</a></li>
+                <li><a href='/tags/NAS'>NAS</a></li>
                 
             </ul>
             
@@ -351,11 +379,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2022-02-11.raspberry/" title="raspberry PI NAS玩法">raspberry PI NAS玩法</a>
+        <a href="https://hadxu.github.io/post/2022-02-12.NAS_Calibra/" title="NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载">NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</a>
     </li>
     
     <li>
-        <a href="https://hadxu.github.io/post/2022-02-12.NAS_Calibra/" title="raspberry PI NAS玩法">raspberry PI NAS玩法</a>
+        <a href="https://hadxu.github.io/post/2022-02-11.raspberry/" title="raspberry PI NAS玩法">raspberry PI NAS玩法</a>
     </li>
     
     <li>
@@ -405,6 +433,8 @@
     
     <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
     
+    <li><a href="https://hadxu.github.io/categories/NAS/">NAS (1)</a></li>
+    
     <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
@@ -439,7 +469,7 @@
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (9)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (8)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
     
@@ -455,6 +485,8 @@
     <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
     
     <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/NAS/">NAS</a>
     
     <a href="https://hadxu.github.io/tags/OS/">OS</a>
     
