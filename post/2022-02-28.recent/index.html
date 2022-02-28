@@ -9,21 +9,24 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>the economist | lay&#39;s 博客</title>
-    <meta property="og:title" content="the economist - lay&#39;s 博客">
+    <title>2022新年第二篇 | lay&#39;s 博客</title>
+    <meta property="og:title" content="2022新年第二篇 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2022-02-28T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-02-28T11:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="the economist">
+    <meta name="description" content="2022新年第二篇">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/categories/the-economist/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2022-02-28.recent/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://hadxu.github.io/categories/the-economist/index.xml" title="lay's 博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -55,7 +58,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://hadxu.github.io">首页</a>
+                    <a class="current" href="https://hadxu.github.io">首页</a>
                     
                     <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
                     
@@ -80,65 +83,201 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <h3 class="archive-title">
-        分类
-        <span class="keyword">the economist</span>
-        中的文章
-    </h3>
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 
-    
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents"></nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-10-the-right-medicine-for-the-world-economythe-Economist/">The right medicine for the world economy</a>
-            </h1>
+            <h1 class="post-title">2022新年第二篇</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月9日
+            2022年2月28日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/the-economist'>the economist</a>
+            <span class="meta-category"><a href='/categories/%E7%94%9F%E6%B4%BB'>生活</a></span>
             
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
         </div>
         
         <div class="post-content">
-            The right medicine for the world economy Coping with the pandemic involves all of government, not just the health system IT IS NOT a fair fight, but it is a fight that many countries will face all the same. Left to itself, the covid-19 pandemic doubles every five to six days. When you get your next issue of The Economist the outbreak could in theory have infected twice as many people as today.Governments can slow that ferocious(凶猛的) pace, but bureaucratic time is not the same as virus time.( 这句话有点难以理解, 官方的数据和病毒真实的数据不一样) And at the moment governments across the world are being left f……
-            <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-10-the-right-medicine-for-the-world-economythe-Economist/">阅读全文</a></p>
+            <h1 id="2022最近生活第二篇">2022最近生活第二篇</h1>
+<p>最近的大事莫过于俄罗斯攻打乌克兰🇺🇦了，网友争辩的有来有回，对于这种大事我们关心不了，更加管不了，只是不知道有什么对我们影响的地方而已。又是核武器又是SWIFT，发生的事情太多太多了。包括最近香港的事情，香港的疫情一天比一天严重，导致深圳每天都有病例增加，我在深圳当然也不能幸免。目前每天都要核酸。今天晚上去了科技园那个核酸检测，我的天，目测要三个小时以上，我立马就不测了，时间浪费太严重，于是回去。在路上突然看到群友说深南花园是可以测的，于是立马赶过去，果然15min就测完了，信息不平等导致的时间浪费。不知疫情什么时候才能结束，明天就是3月1日，时间过的太快，以至于忽略了什么是重要的，什么事不重要的。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2022-02-11.raspberry/">raspberry PI NAS玩法</a></li>
+        
+        <li><a href="/post/2022-02-08.happy-new-year/">2022新年第二篇</a></li>
+        
+        <li><a href="/post/2022-01-01.new-year/">2022新年第一篇</a></li>
+        
+        <li><a href="/post/2021-12-01.recent/">12月近况</a></li>
+        
+        <li><a href="/post/2021-11-06.recent/">近况</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E7%94%9F%E6%B4%BB'>生活</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
     
-
-
-
-<ol class="page-navigator">
     
-    <li class="prev">
-        <a href="https://hadxu.github.io/categories/the-economist/">上一页</a>
-    </li>
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
     
-
-    
-    <li >
-        <a href="https://hadxu.github.io/categories/the-economist/">1</a>
-    </li>
-    
-    <li  class="current">
-        <a href="https://hadxu.github.io/categories/the-economist/page/2/">2</a>
-    </li>
-    
-
-    
-</ol>
-
-
-
 </div>
 
                     <footer id="footer">
@@ -161,6 +300,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
