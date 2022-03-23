@@ -238,88 +238,88 @@ $$
 ，其中由于$z$有两个输入，因此需要对$x$进行两次求导，而求导的路径是不同的。经过这个简单的例子，很容易手动算出来，但是如何让计算机进行计算成为重点，因为一旦操作数多，手动算非常耗时且容易出错。</p>
 <h2 id="构造自动求导-microgradhttpsgithubcomhadxumicrograd">构造自动求导 <a href="https://github.com/HadXu/micrograd">micrograd</a></h2>
 <p>在手动计算中，我们发现了当计算一个节点的时候，我们需要知道它的输入，也就是前驱节点，比如$x$的前驱节点是没有的，因此需要数据结构来保存前驱节点的信息。所以第一步是找出所有的无前驱节点的节点，由于依赖的关系，才能继续求导,那么使用topo排序来得到所有的前驱节点。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">topo <span style="color:#000;font-weight:bold">=</span> []
-visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">set</span>()
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">build_topo</span>(v):
-    <span style="color:#000;font-weight:bold">if</span> v <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> visited:
-        visited<span style="color:#000;font-weight:bold">.</span>add(v)
-        <span style="color:#000;font-weight:bold">for</span> child <span style="color:#000;font-weight:bold">in</span> v<span style="color:#000;font-weight:bold">.</span>_prev:
-            build_topo(child)
-        topo<span style="color:#000;font-weight:bold">.</span>append(v)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>topo <span style="color:#000;font-weight:bold">=</span> []
+</span></span><span style="display:flex;"><span>visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">set</span>()
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">build_topo</span>(v):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> v <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">in</span> visited:
+</span></span><span style="display:flex;"><span>        visited<span style="color:#000;font-weight:bold">.</span>add(v)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> child <span style="color:#000;font-weight:bold">in</span> v<span style="color:#000;font-weight:bold">.</span>_prev:
+</span></span><span style="display:flex;"><span>            build_topo(child)
+</span></span><span style="display:flex;"><span>        topo<span style="color:#000;font-weight:bold">.</span>append(v)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于<code>topo</code>是从无节点开始push的，因此计算梯度的时候需要反向</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">for</span> v <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">reversed</span>(topo):
-    v<span style="color:#000;font-weight:bold">.</span>_backward()
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> v <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">reversed</span>(topo):
+</span></span><span style="display:flex;"><span>    v<span style="color:#000;font-weight:bold">.</span>_backward()
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>而每一个操作的反向传播是这样的</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> __mul__(<span style="color:#999">self</span>, other):
-    other <span style="color:#000;font-weight:bold">=</span> other <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Value) <span style="color:#000;font-weight:bold">else</span> Value(other)
-    out <span style="color:#000;font-weight:bold">=</span> Value(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> other<span style="color:#000;font-weight:bold">.</span>data, (<span style="color:#999">self</span>, other), <span style="color:#d14">&#39;*&#39;</span>)
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_backward</span>():
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+=</span> other<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
-        other<span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
-
-    out<span style="color:#000;font-weight:bold">.</span>_backward <span style="color:#000;font-weight:bold">=</span> _backward
-    <span style="color:#000;font-weight:bold">return</span> out
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> __mul__(<span style="color:#999">self</span>, other):
+</span></span><span style="display:flex;"><span>    other <span style="color:#000;font-weight:bold">=</span> other <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Value) <span style="color:#000;font-weight:bold">else</span> Value(other)
+</span></span><span style="display:flex;"><span>    out <span style="color:#000;font-weight:bold">=</span> Value(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> other<span style="color:#000;font-weight:bold">.</span>data, (<span style="color:#999">self</span>, other), <span style="color:#d14">&#39;*&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_backward</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+=</span> other<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
+</span></span><span style="display:flex;"><span>        other<span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">+=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">*</span> out<span style="color:#000;font-weight:bold">.</span>grad
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    out<span style="color:#000;font-weight:bold">.</span>_backward <span style="color:#000;font-weight:bold">=</span> _backward
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> out
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对<code>topo</code>中每一个节点进行反向求导，就能够得到每一个变量的梯度。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">test_sanity_check</span>():
-    x <span style="color:#000;font-weight:bold">=</span> Value(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">4.0</span>)
-    z <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> x <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> x
-
-    z<span style="color:#000;font-weight:bold">.</span>backward()
-
-    <span style="color:#000;font-weight:bold">assert</span> z<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#099">10.0</span>
-    <span style="color:#000;font-weight:bold">assert</span> x<span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">3.0</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">test_sanity_check</span>():
+</span></span><span style="display:flex;"><span>    x <span style="color:#000;font-weight:bold">=</span> Value(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">4.0</span>)
+</span></span><span style="display:flex;"><span>    z <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> x <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">+</span> x
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    z<span style="color:#000;font-weight:bold">.</span>backward()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> z<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#099">10.0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> x<span style="color:#000;font-weight:bold">.</span>grad <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">3.0</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="参考">参考</h2>
 <ul>
@@ -367,7 +367,7 @@ visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

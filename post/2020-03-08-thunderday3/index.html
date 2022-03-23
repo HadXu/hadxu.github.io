@@ -222,576 +222,576 @@
 </blockquote>
 <p>首先，将编译好的<code>libc_runtime_api.so</code>读取进来</p>
 <p>新建<code>_base.py</code>文件</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">os</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ctypes</span>
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_load_lib</span>():
-    curr_path <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>dirname(os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>abspath(os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>expanduser(__file__)))
-    lib_path <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>join(curr_path, <span style="color:#d14">&#39;../../build/lib/&#39;</span>)
-    path_to_so_file <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>join(lib_path, <span style="color:#d14">&#34;libc_runtime_api.so&#34;</span>)
-    lib <span style="color:#000;font-weight:bold">=</span> ctypes<span style="color:#000;font-weight:bold">.</span>CDLL(path_to_so_file, ctypes<span style="color:#000;font-weight:bold">.</span>RTLD_GLOBAL)
-    <span style="color:#000;font-weight:bold">return</span> lib
-
-_LIB <span style="color:#000;font-weight:bold">=</span> _load_lib()
-
-<span style="color:#998;font-style:italic"># 用来检测调用是否成功</span>
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">check_call</span>(ret):
-    <span style="color:#000;font-weight:bold">assert</span>(ret <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)
-
-<span style="color:#998;font-style:italic"># 将tuple 或 list 转换成 c 数组形式</span>
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">c_array</span>(ctype, values):
-    <span style="color:#000;font-weight:bold">return</span> (ctype <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(values))(<span style="color:#000;font-weight:bold">*</span>values)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">os</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ctypes</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_load_lib</span>():
+</span></span><span style="display:flex;"><span>    curr_path <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>dirname(os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>abspath(os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>expanduser(__file__)))
+</span></span><span style="display:flex;"><span>    lib_path <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>join(curr_path, <span style="color:#d14">&#39;../../build/lib/&#39;</span>)
+</span></span><span style="display:flex;"><span>    path_to_so_file <span style="color:#000;font-weight:bold">=</span> os<span style="color:#000;font-weight:bold">.</span>path<span style="color:#000;font-weight:bold">.</span>join(lib_path, <span style="color:#d14">&#34;libc_runtime_api.so&#34;</span>)
+</span></span><span style="display:flex;"><span>    lib <span style="color:#000;font-weight:bold">=</span> ctypes<span style="color:#000;font-weight:bold">.</span>CDLL(path_to_so_file, ctypes<span style="color:#000;font-weight:bold">.</span>RTLD_GLOBAL)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> lib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_LIB <span style="color:#000;font-weight:bold">=</span> _load_lib()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 用来检测调用是否成功</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">check_call</span>(ret):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span>(ret <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 将tuple 或 list 转换成 c 数组形式</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">c_array</span>(ctype, values):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> (ctype <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(values))(<span style="color:#000;font-weight:bold">*</span>values)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>同时，新建<code>ndarray.py</code>文件，将C语言的数据结构映射到<code>Python</code>数据结构来。</p>
 <p>首先是数据结构的上下文的处理</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">__author__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;haxu&#39;</span>
-
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ctypes</span>
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">_base</span> <span style="color:#000;font-weight:bold">import</span> _LIB, c_array, check_call
-
-
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">DLContext</span>(ctypes<span style="color:#000;font-weight:bold">.</span>Structure):
-    _fields_ <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#d14">&#39;device_id&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int),
-                (<span style="color:#d14">&#39;device_type&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int)]
-
-    MASK2STR <span style="color:#000;font-weight:bold">=</span> {
-        <span style="color:#099">1</span>: <span style="color:#d14">&#39;cpu&#39;</span>,
-        <span style="color:#099">2</span>: <span style="color:#d14">&#39;gpu&#39;</span>,
-    }
-
-    <span style="color:#000;font-weight:bold">def</span> __int__(<span style="color:#999">self</span>, device_id, device_type):
-        <span style="color:#0086b3">super</span>(DLContext, <span style="color:#999">self</span>)<span style="color:#000;font-weight:bold">.</span>__init__()
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_id <span style="color:#000;font-weight:bold">=</span> device_id
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_type <span style="color:#000;font-weight:bold">=</span> device_type
-
-    <span style="color:#000;font-weight:bold">def</span> __repr__(<span style="color:#999">self</span>):
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#d14">&#39;</span><span style="color:#d14">%s</span><span style="color:#d14">(</span><span style="color:#d14">%d</span><span style="color:#d14">)&#39;</span> <span style="color:#000;font-weight:bold">%</span> (DLContext<span style="color:#000;font-weight:bold">.</span>MASK2STR[<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_type], <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_id)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>__author__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;haxu&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ctypes</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">_base</span> <span style="color:#000;font-weight:bold">import</span> _LIB, c_array, check_call
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">DLContext</span>(ctypes<span style="color:#000;font-weight:bold">.</span>Structure):
+</span></span><span style="display:flex;"><span>    _fields_ <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#d14">&#39;device_id&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int),
+</span></span><span style="display:flex;"><span>                (<span style="color:#d14">&#39;device_type&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    MASK2STR <span style="color:#000;font-weight:bold">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#099">1</span>: <span style="color:#d14">&#39;cpu&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#099">2</span>: <span style="color:#d14">&#39;gpu&#39;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __int__(<span style="color:#999">self</span>, device_id, device_type):
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">super</span>(DLContext, <span style="color:#999">self</span>)<span style="color:#000;font-weight:bold">.</span>__init__()
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_id <span style="color:#000;font-weight:bold">=</span> device_id
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_type <span style="color:#000;font-weight:bold">=</span> device_type
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __repr__(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> <span style="color:#d14">&#39;</span><span style="color:#d14">%s</span><span style="color:#d14">(</span><span style="color:#d14">%d</span><span style="color:#d14">)&#39;</span> <span style="color:#000;font-weight:bold">%</span> (DLContext<span style="color:#000;font-weight:bold">.</span>MASK2STR[<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_type], <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>device_id)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下来是无缝切换的数据结构</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">DLArray</span>(ctypes<span style="color:#000;font-weight:bold">.</span>Structure):
-    _fields_ <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#d14">&#39;data&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_void_p),
-                (<span style="color:#d14">&#39;ctx&#39;</span>, DLContext),
-                (<span style="color:#d14">&#39;ndim&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int),
-                (<span style="color:#d14">&#39;shape&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>POINTER(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64))]
-
-DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span style="color:#000;font-weight:bold">.</span>POINTER(DLArray)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">DLArray</span>(ctypes<span style="color:#000;font-weight:bold">.</span>Structure):
+</span></span><span style="display:flex;"><span>    _fields_ <span style="color:#000;font-weight:bold">=</span> [(<span style="color:#d14">&#39;data&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_void_p),
+</span></span><span style="display:flex;"><span>                (<span style="color:#d14">&#39;ctx&#39;</span>, DLContext),
+</span></span><span style="display:flex;"><span>                (<span style="color:#d14">&#39;ndim&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>c_int),
+</span></span><span style="display:flex;"><span>                (<span style="color:#d14">&#39;shape&#39;</span>, ctypes<span style="color:#000;font-weight:bold">.</span>POINTER(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64))]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span style="color:#000;font-weight:bold">.</span>POINTER(DLArray)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>定义各个方法</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">cpu</span>(dev_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>):
-    <span style="color:#000;font-weight:bold">return</span> DLContext(dev_id, <span style="color:#099">1</span>)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gpu</span>(dev_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>):
-    <span style="color:#000;font-weight:bold">return</span> DLContext(dev_id, <span style="color:#099">2</span>)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">is_gpu_ctx</span>(ctx):
-    <span style="color:#000;font-weight:bold">return</span> ctx <span style="color:#000;font-weight:bold">and</span> ctx<span style="color:#000;font-weight:bold">.</span>device_type <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">cpu</span>(dev_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> DLContext(dev_id, <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gpu</span>(dev_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> DLContext(dev_id, <span style="color:#099">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">is_gpu_ctx</span>(ctx):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> ctx <span style="color:#000;font-weight:bold">and</span> ctx<span style="color:#000;font-weight:bold">.</span>device_type <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>实现NDArray,是运行时数据结构</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">93
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">83
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">85
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">86
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">87
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">88
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">89
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">90
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">91
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">92
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">93
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">NDArray</span>(<span style="color:#0086b3">object</span>):
-    __slots__ <span style="color:#000;font-weight:bold">=</span> [<span style="color:#d14">&#34;handle&#34;</span>]
-
-    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>, handle):
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle <span style="color:#000;font-weight:bold">=</span> handle
-
-    <span style="color:#000;font-weight:bold">def</span> __del__(<span style="color:#999">self</span>):
-        check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayFree(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle))
-
-    <span style="color:#3c5d5d;font-weight:bold">@property</span>
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">shape</span>(<span style="color:#999">self</span>):
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">tuple</span>(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle<span style="color:#000;font-weight:bold">.</span>contents<span style="color:#000;font-weight:bold">.</span>shape[i]
-                     <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle<span style="color:#000;font-weight:bold">.</span>contents<span style="color:#000;font-weight:bold">.</span>ndim))
-
-    <span style="color:#3c5d5d;font-weight:bold">@property</span>
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">ctx</span>(<span style="color:#999">self</span>):
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle<span style="color:#000;font-weight:bold">.</span>contents<span style="color:#000;font-weight:bold">.</span>ctx
-
-    <span style="color:#000;font-weight:bold">def</span> __setitem__(<span style="color:#999">self</span>, in_slice, value):
-        <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">not</span> <span style="color:#0086b3">isinstance</span>(in_slice, <span style="color:#0086b3">slice</span>) <span style="color:#000;font-weight:bold">or</span>
-                in_slice<span style="color:#000;font-weight:bold">.</span>start <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">None</span>
-                <span style="color:#000;font-weight:bold">or</span> in_slice<span style="color:#000;font-weight:bold">.</span>stop <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">None</span>):
-            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;Array only support set from numpy array&#39;</span>)
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(value, NDArray):
-            <span style="color:#000;font-weight:bold">if</span> value<span style="color:#000;font-weight:bold">.</span>handle <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle:
-                value<span style="color:#000;font-weight:bold">.</span>copyto(<span style="color:#999">self</span>)
-        <span style="color:#000;font-weight:bold">elif</span> <span style="color:#0086b3">isinstance</span>(value, (np<span style="color:#000;font-weight:bold">.</span>ndarray, np<span style="color:#000;font-weight:bold">.</span>generic)):
-            <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>_sync_copyfrom(value)
-        <span style="color:#000;font-weight:bold">else</span>:
-            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">TypeError</span>(<span style="color:#d14">&#39;type </span><span style="color:#d14">%s</span><span style="color:#d14"> not supported&#39;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(value)))
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_sync_copyfrom</span>(<span style="color:#999">self</span>, source_array):
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#0086b3">isinstance</span>(source_array, np<span style="color:#000;font-weight:bold">.</span>ndarray):
-            <span style="color:#000;font-weight:bold">try</span>:
-                source_array <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array(source_array, dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
-            <span style="color:#000;font-weight:bold">except</span>:
-                <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">TypeError</span>(<span style="color:#d14">&#39;array must be an array_like data,&#39;</span> <span style="color:#000;font-weight:bold">+</span>
-                                <span style="color:#d14">&#39;type </span><span style="color:#d14">%s</span><span style="color:#d14"> is not supported&#39;</span>
-                                <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(source_array)))
-        source_array <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>ascontiguousarray(source_array, dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
-        <span style="color:#000;font-weight:bold">if</span> source_array<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">!=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>shape:
-            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;array shape do not match the shape of NDArray&#39;</span>)
-        source_arr, shape <span style="color:#000;font-weight:bold">=</span> NDArray<span style="color:#000;font-weight:bold">.</span>_numpyasarray(source_array)
-        check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayCopyFromTo(
-            ctypes<span style="color:#000;font-weight:bold">.</span>byref(source_arr), <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle, <span style="color:#000;font-weight:bold">None</span>))
-        _ <span style="color:#000;font-weight:bold">=</span> shape
-
-    <span style="color:#3c5d5d;font-weight:bold">@staticmethod</span>
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_numpyasarray</span>(np_data):
-        data <span style="color:#000;font-weight:bold">=</span> np_data
-        <span style="color:#000;font-weight:bold">assert</span> data<span style="color:#000;font-weight:bold">.</span>flags[<span style="color:#d14">&#39;C_CONTIGUOUS&#39;</span>]
-        arr <span style="color:#000;font-weight:bold">=</span> DLArray()
-        shape <span style="color:#000;font-weight:bold">=</span> c_array(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64, data<span style="color:#000;font-weight:bold">.</span>shape)
-        arr<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">=</span> data<span style="color:#000;font-weight:bold">.</span>ctypes<span style="color:#000;font-weight:bold">.</span>data_as(ctypes<span style="color:#000;font-weight:bold">.</span>c_void_p)
-        arr<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">=</span> shape
-        arr<span style="color:#000;font-weight:bold">.</span>ndim <span style="color:#000;font-weight:bold">=</span> data<span style="color:#000;font-weight:bold">.</span>ndim
-        <span style="color:#998;font-style:italic"># CPU device</span>
-        arr<span style="color:#000;font-weight:bold">.</span>ctx <span style="color:#000;font-weight:bold">=</span> cpu(<span style="color:#099">0</span>)
-        <span style="color:#000;font-weight:bold">return</span> arr, shape
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">asnumpy</span>(<span style="color:#999">self</span>):
-        np_arr <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>shape, dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
-        arr, shape <span style="color:#000;font-weight:bold">=</span> NDArray<span style="color:#000;font-weight:bold">.</span>_numpyasarray(np_arr)
-        check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayCopyFromTo(
-            <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle, ctypes<span style="color:#000;font-weight:bold">.</span>byref(arr), <span style="color:#000;font-weight:bold">None</span>))
-        _ <span style="color:#000;font-weight:bold">=</span> shape
-        <span style="color:#000;font-weight:bold">return</span> np_arr
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">copyto</span>(<span style="color:#999">self</span>, target):
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(target, DLContext):
-            target <span style="color:#000;font-weight:bold">=</span> empty(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>shape, target)
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(target, NDArray):
-            check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayCopyFromTo(
-                <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle, target<span style="color:#000;font-weight:bold">.</span>handle, <span style="color:#000;font-weight:bold">None</span>))
-        <span style="color:#000;font-weight:bold">else</span>:
-            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#34;Unsupported target type </span><span style="color:#d14">%s</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(target)))
-        <span style="color:#000;font-weight:bold">return</span> target
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">array</span>(arr, ctx<span style="color:#000;font-weight:bold">=</span>cpu(<span style="color:#099">0</span>)):
-    <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#0086b3">isinstance</span>(arr, np<span style="color:#000;font-weight:bold">.</span>ndarray):
-        arr <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array(arr)
-    ret <span style="color:#000;font-weight:bold">=</span> empty(arr<span style="color:#000;font-weight:bold">.</span>shape, ctx)
-    ret<span style="color:#000;font-weight:bold">.</span>_sync_copyfrom(arr)
-    <span style="color:#000;font-weight:bold">return</span> ret
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">empty</span>(shape, ctx<span style="color:#000;font-weight:bold">=</span>cpu(<span style="color:#099">0</span>)):
-    shape <span style="color:#000;font-weight:bold">=</span> c_array(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64, shape)
-    ndim <span style="color:#000;font-weight:bold">=</span> ctypes<span style="color:#000;font-weight:bold">.</span>c_int(<span style="color:#0086b3">len</span>(shape))
-    handle <span style="color:#000;font-weight:bold">=</span> DLArrayHandle()
-    check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayAlloc(
-        shape, ndim, ctx, ctypes<span style="color:#000;font-weight:bold">.</span>byref(handle)))
-    <span style="color:#000;font-weight:bold">return</span> NDArray(handle)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">NDArray</span>(<span style="color:#0086b3">object</span>):
+</span></span><span style="display:flex;"><span>    __slots__ <span style="color:#000;font-weight:bold">=</span> [<span style="color:#d14">&#34;handle&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>, handle):
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle <span style="color:#000;font-weight:bold">=</span> handle
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __del__(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayFree(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3c5d5d;font-weight:bold">@property</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">shape</span>(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">tuple</span>(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle<span style="color:#000;font-weight:bold">.</span>contents<span style="color:#000;font-weight:bold">.</span>shape[i]
+</span></span><span style="display:flex;"><span>                     <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle<span style="color:#000;font-weight:bold">.</span>contents<span style="color:#000;font-weight:bold">.</span>ndim))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3c5d5d;font-weight:bold">@property</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">ctx</span>(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle<span style="color:#000;font-weight:bold">.</span>contents<span style="color:#000;font-weight:bold">.</span>ctx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __setitem__(<span style="color:#999">self</span>, in_slice, value):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">not</span> <span style="color:#0086b3">isinstance</span>(in_slice, <span style="color:#0086b3">slice</span>) <span style="color:#000;font-weight:bold">or</span>
+</span></span><span style="display:flex;"><span>                in_slice<span style="color:#000;font-weight:bold">.</span>start <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">or</span> in_slice<span style="color:#000;font-weight:bold">.</span>stop <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#000;font-weight:bold">None</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;Array only support set from numpy array&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(value, NDArray):
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">if</span> value<span style="color:#000;font-weight:bold">.</span>handle <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle:
+</span></span><span style="display:flex;"><span>                value<span style="color:#000;font-weight:bold">.</span>copyto(<span style="color:#999">self</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">elif</span> <span style="color:#0086b3">isinstance</span>(value, (np<span style="color:#000;font-weight:bold">.</span>ndarray, np<span style="color:#000;font-weight:bold">.</span>generic)):
+</span></span><span style="display:flex;"><span>            <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>_sync_copyfrom(value)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">TypeError</span>(<span style="color:#d14">&#39;type </span><span style="color:#d14">%s</span><span style="color:#d14"> not supported&#39;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(value)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_sync_copyfrom</span>(<span style="color:#999">self</span>, source_array):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#0086b3">isinstance</span>(source_array, np<span style="color:#000;font-weight:bold">.</span>ndarray):
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>                source_array <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array(source_array, dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">except</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">TypeError</span>(<span style="color:#d14">&#39;array must be an array_like data,&#39;</span> <span style="color:#000;font-weight:bold">+</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#d14">&#39;type </span><span style="color:#d14">%s</span><span style="color:#d14"> is not supported&#39;</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(source_array)))
+</span></span><span style="display:flex;"><span>        source_array <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>ascontiguousarray(source_array, dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> source_array<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">!=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>shape:
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#39;array shape do not match the shape of NDArray&#39;</span>)
+</span></span><span style="display:flex;"><span>        source_arr, shape <span style="color:#000;font-weight:bold">=</span> NDArray<span style="color:#000;font-weight:bold">.</span>_numpyasarray(source_array)
+</span></span><span style="display:flex;"><span>        check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayCopyFromTo(
+</span></span><span style="display:flex;"><span>            ctypes<span style="color:#000;font-weight:bold">.</span>byref(source_arr), <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle, <span style="color:#000;font-weight:bold">None</span>))
+</span></span><span style="display:flex;"><span>        _ <span style="color:#000;font-weight:bold">=</span> shape
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#3c5d5d;font-weight:bold">@staticmethod</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_numpyasarray</span>(np_data):
+</span></span><span style="display:flex;"><span>        data <span style="color:#000;font-weight:bold">=</span> np_data
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">assert</span> data<span style="color:#000;font-weight:bold">.</span>flags[<span style="color:#d14">&#39;C_CONTIGUOUS&#39;</span>]
+</span></span><span style="display:flex;"><span>        arr <span style="color:#000;font-weight:bold">=</span> DLArray()
+</span></span><span style="display:flex;"><span>        shape <span style="color:#000;font-weight:bold">=</span> c_array(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64, data<span style="color:#000;font-weight:bold">.</span>shape)
+</span></span><span style="display:flex;"><span>        arr<span style="color:#000;font-weight:bold">.</span>data <span style="color:#000;font-weight:bold">=</span> data<span style="color:#000;font-weight:bold">.</span>ctypes<span style="color:#000;font-weight:bold">.</span>data_as(ctypes<span style="color:#000;font-weight:bold">.</span>c_void_p)
+</span></span><span style="display:flex;"><span>        arr<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">=</span> shape
+</span></span><span style="display:flex;"><span>        arr<span style="color:#000;font-weight:bold">.</span>ndim <span style="color:#000;font-weight:bold">=</span> data<span style="color:#000;font-weight:bold">.</span>ndim
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic"># CPU device</span>
+</span></span><span style="display:flex;"><span>        arr<span style="color:#000;font-weight:bold">.</span>ctx <span style="color:#000;font-weight:bold">=</span> cpu(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> arr, shape
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">asnumpy</span>(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        np_arr <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>shape, dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
+</span></span><span style="display:flex;"><span>        arr, shape <span style="color:#000;font-weight:bold">=</span> NDArray<span style="color:#000;font-weight:bold">.</span>_numpyasarray(np_arr)
+</span></span><span style="display:flex;"><span>        check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayCopyFromTo(
+</span></span><span style="display:flex;"><span>            <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle, ctypes<span style="color:#000;font-weight:bold">.</span>byref(arr), <span style="color:#000;font-weight:bold">None</span>))
+</span></span><span style="display:flex;"><span>        _ <span style="color:#000;font-weight:bold">=</span> shape
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> np_arr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">copyto</span>(<span style="color:#999">self</span>, target):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(target, DLContext):
+</span></span><span style="display:flex;"><span>            target <span style="color:#000;font-weight:bold">=</span> empty(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>shape, target)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(target, NDArray):
+</span></span><span style="display:flex;"><span>            check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayCopyFromTo(
+</span></span><span style="display:flex;"><span>                <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>handle, target<span style="color:#000;font-weight:bold">.</span>handle, <span style="color:#000;font-weight:bold">None</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">ValueError</span>(<span style="color:#d14">&#34;Unsupported target type </span><span style="color:#d14">%s</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">str</span>(<span style="color:#0086b3">type</span>(target)))
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">array</span>(arr, ctx<span style="color:#000;font-weight:bold">=</span>cpu(<span style="color:#099">0</span>)):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> <span style="color:#0086b3">isinstance</span>(arr, np<span style="color:#000;font-weight:bold">.</span>ndarray):
+</span></span><span style="display:flex;"><span>        arr <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>array(arr)
+</span></span><span style="display:flex;"><span>    ret <span style="color:#000;font-weight:bold">=</span> empty(arr<span style="color:#000;font-weight:bold">.</span>shape, ctx)
+</span></span><span style="display:flex;"><span>    ret<span style="color:#000;font-weight:bold">.</span>_sync_copyfrom(arr)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> ret
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">empty</span>(shape, ctx<span style="color:#000;font-weight:bold">=</span>cpu(<span style="color:#099">0</span>)):
+</span></span><span style="display:flex;"><span>    shape <span style="color:#000;font-weight:bold">=</span> c_array(ctypes<span style="color:#000;font-weight:bold">.</span>c_int64, shape)
+</span></span><span style="display:flex;"><span>    ndim <span style="color:#000;font-weight:bold">=</span> ctypes<span style="color:#000;font-weight:bold">.</span>c_int(<span style="color:#0086b3">len</span>(shape))
+</span></span><span style="display:flex;"><span>    handle <span style="color:#000;font-weight:bold">=</span> DLArrayHandle()
+</span></span><span style="display:flex;"><span>    check_call(_LIB<span style="color:#000;font-weight:bold">.</span>DLArrayAlloc(
+</span></span><span style="display:flex;"><span>        shape, ndim, ctx, ctypes<span style="color:#000;font-weight:bold">.</span>byref(handle)))
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> NDArray(handle)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当将数据结构完成，同时需要实现gpu中定义的方法</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">83
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ctypes</span>
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">_base</span> <span style="color:#000;font-weight:bold">import</span> _LIB
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ndarray</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">_nd</span>
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">array_set</span>(arr, value):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuArraySet(arr<span style="color:#000;font-weight:bold">.</span>handle, ctypes<span style="color:#000;font-weight:bold">.</span>c_float(value))
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">broadcast_to</span>(in_arr, out_arr):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuBroadcastTo(in_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">reduce_sum_axis_zero</span>(in_arr, out_arr):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuReduceSumAxisZero(in_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_elementwise_add</span>(matA, matB, matC):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matA, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matB, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matC, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixElementwiseAdd(matA<span style="color:#000;font-weight:bold">.</span>handle, matB<span style="color:#000;font-weight:bold">.</span>handle, matC<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_elementwise_add_by_const</span>(in_mat, val, out_mat):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_mat, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_mat, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixElementwiseAddByConst(
-        in_mat<span style="color:#000;font-weight:bold">.</span>handle, ctypes<span style="color:#000;font-weight:bold">.</span>c_float(val), out_mat<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_elementwise_multiply</span>(matA, matB, matC):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matA, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matB, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matC, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixElementwiseMultiply(
-        matA<span style="color:#000;font-weight:bold">.</span>handle, matB<span style="color:#000;font-weight:bold">.</span>handle, matC<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_elementwise_multiply_by_const</span>(in_mat, val, out_mat):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_mat, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_mat, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixMultiplyByConst(
-        in_mat<span style="color:#000;font-weight:bold">.</span>handle, ctypes<span style="color:#000;font-weight:bold">.</span>c_float(val), out_mat<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_multiply</span>(matA, transA, matB, transB, matC):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matA, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matB, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matC, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixMultiply(
-        matA<span style="color:#000;font-weight:bold">.</span>handle, transA, matB<span style="color:#000;font-weight:bold">.</span>handle, transB, matC<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">relu</span>(in_arr, out_arr):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuRelu(in_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">relu_gradient</span>(in_arr, in_grad_arr, out_arr):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_grad_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuReluGradient(in_arr<span style="color:#000;font-weight:bold">.</span>handle, in_grad_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">softmax</span>(in_arr, out_arr):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuSoftmax(in_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">softmax_cross_entropy</span>(in_arr_a, in_arr_b, out_arr):
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr_a, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr_b, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
-    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuSoftmaxCrossEntropy(
-        in_arr_a<span style="color:#000;font-weight:bold">.</span>handle, in_arr_b<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ctypes</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">_base</span> <span style="color:#000;font-weight:bold">import</span> _LIB
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ndarray</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">_nd</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">array_set</span>(arr, value):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuArraySet(arr<span style="color:#000;font-weight:bold">.</span>handle, ctypes<span style="color:#000;font-weight:bold">.</span>c_float(value))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">broadcast_to</span>(in_arr, out_arr):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuBroadcastTo(in_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">reduce_sum_axis_zero</span>(in_arr, out_arr):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuReduceSumAxisZero(in_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_elementwise_add</span>(matA, matB, matC):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matA, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matB, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matC, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixElementwiseAdd(matA<span style="color:#000;font-weight:bold">.</span>handle, matB<span style="color:#000;font-weight:bold">.</span>handle, matC<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_elementwise_add_by_const</span>(in_mat, val, out_mat):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_mat, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_mat, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixElementwiseAddByConst(
+</span></span><span style="display:flex;"><span>        in_mat<span style="color:#000;font-weight:bold">.</span>handle, ctypes<span style="color:#000;font-weight:bold">.</span>c_float(val), out_mat<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_elementwise_multiply</span>(matA, matB, matC):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matA, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matB, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matC, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixElementwiseMultiply(
+</span></span><span style="display:flex;"><span>        matA<span style="color:#000;font-weight:bold">.</span>handle, matB<span style="color:#000;font-weight:bold">.</span>handle, matC<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_elementwise_multiply_by_const</span>(in_mat, val, out_mat):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_mat, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_mat, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixMultiplyByConst(
+</span></span><span style="display:flex;"><span>        in_mat<span style="color:#000;font-weight:bold">.</span>handle, ctypes<span style="color:#000;font-weight:bold">.</span>c_float(val), out_mat<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">matrix_multiply</span>(matA, transA, matB, transB, matC):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matA, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matB, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(matC, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuMatrixMultiply(
+</span></span><span style="display:flex;"><span>        matA<span style="color:#000;font-weight:bold">.</span>handle, transA, matB<span style="color:#000;font-weight:bold">.</span>handle, transB, matC<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">relu</span>(in_arr, out_arr):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuRelu(in_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">relu_gradient</span>(in_arr, in_grad_arr, out_arr):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_grad_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuReluGradient(in_arr<span style="color:#000;font-weight:bold">.</span>handle, in_grad_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">softmax</span>(in_arr, out_arr):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuSoftmax(in_arr<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">softmax_cross_entropy</span>(in_arr_a, in_arr_b, out_arr):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr_a, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(in_arr_b, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">isinstance</span>(out_arr, _nd<span style="color:#000;font-weight:bold">.</span>NDArray)
+</span></span><span style="display:flex;"><span>    _LIB<span style="color:#000;font-weight:bold">.</span>DLGpuSoftmaxCrossEntropy(
+</span></span><span style="display:flex;"><span>        in_arr_a<span style="color:#000;font-weight:bold">.</span>handle, in_arr_b<span style="color:#000;font-weight:bold">.</span>handle, out_arr<span style="color:#000;font-weight:bold">.</span>handle)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>进行测试</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ndarray</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">test_array_set</span>():
-    ctx <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>gpu(<span style="color:#099">0</span>)
-    shape <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">500</span>, <span style="color:#099">200</span>)
-    <span style="color:#998;font-style:italic"># oneslike</span>
-    arr_x <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>empty(shape, ctx<span style="color:#000;font-weight:bold">=</span>ctx)
-    gpu_op<span style="color:#000;font-weight:bold">.</span>array_set(arr_x, <span style="color:#099">1.</span>)
-    x <span style="color:#000;font-weight:bold">=</span> arr_x<span style="color:#000;font-weight:bold">.</span>asnumpy()
-    np<span style="color:#000;font-weight:bold">.</span>testing<span style="color:#000;font-weight:bold">.</span>assert_allclose(np<span style="color:#000;font-weight:bold">.</span>ones(shape), x)
-    <span style="color:#998;font-style:italic"># zeroslike</span>
-    gpu_op<span style="color:#000;font-weight:bold">.</span>array_set(arr_x, <span style="color:#099">0.</span>)
-    x <span style="color:#000;font-weight:bold">=</span> arr_x<span style="color:#000;font-weight:bold">.</span>asnumpy()
-    <span style="color:#0086b3">print</span>(x)
-    np<span style="color:#000;font-weight:bold">.</span>testing<span style="color:#000;font-weight:bold">.</span>assert_allclose(np<span style="color:#000;font-weight:bold">.</span>zeros(shape), x)
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">test_softmax</span>():
-    ctx <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>gpu(<span style="color:#099">0</span>)
-    shape <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">400</span>, <span style="color:#099">1000</span>)
-    x <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>uniform(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">5</span>, <span style="color:#099">5</span>, shape)<span style="color:#000;font-weight:bold">.</span>astype(np<span style="color:#000;font-weight:bold">.</span>float32)
-    arr_x <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(x, ctx<span style="color:#000;font-weight:bold">=</span>ctx)
-    arr_y <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>empty(shape, ctx<span style="color:#000;font-weight:bold">=</span>ctx)
-    gpu_op<span style="color:#000;font-weight:bold">.</span>softmax(arr_x, arr_y)
-    y <span style="color:#000;font-weight:bold">=</span> arr_y<span style="color:#000;font-weight:bold">.</span>asnumpy()
-    np<span style="color:#000;font-weight:bold">.</span>testing<span style="color:#000;font-weight:bold">.</span>assert_allclose(autodiff<span style="color:#000;font-weight:bold">.</span>softmax_func(x), y, rtol<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1e-5</span>)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">ndarray</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">test_array_set</span>():
+</span></span><span style="display:flex;"><span>    ctx <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>gpu(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>    shape <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">500</span>, <span style="color:#099">200</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># oneslike</span>
+</span></span><span style="display:flex;"><span>    arr_x <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>empty(shape, ctx<span style="color:#000;font-weight:bold">=</span>ctx)
+</span></span><span style="display:flex;"><span>    gpu_op<span style="color:#000;font-weight:bold">.</span>array_set(arr_x, <span style="color:#099">1.</span>)
+</span></span><span style="display:flex;"><span>    x <span style="color:#000;font-weight:bold">=</span> arr_x<span style="color:#000;font-weight:bold">.</span>asnumpy()
+</span></span><span style="display:flex;"><span>    np<span style="color:#000;font-weight:bold">.</span>testing<span style="color:#000;font-weight:bold">.</span>assert_allclose(np<span style="color:#000;font-weight:bold">.</span>ones(shape), x)
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># zeroslike</span>
+</span></span><span style="display:flex;"><span>    gpu_op<span style="color:#000;font-weight:bold">.</span>array_set(arr_x, <span style="color:#099">0.</span>)
+</span></span><span style="display:flex;"><span>    x <span style="color:#000;font-weight:bold">=</span> arr_x<span style="color:#000;font-weight:bold">.</span>asnumpy()
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(x)
+</span></span><span style="display:flex;"><span>    np<span style="color:#000;font-weight:bold">.</span>testing<span style="color:#000;font-weight:bold">.</span>assert_allclose(np<span style="color:#000;font-weight:bold">.</span>zeros(shape), x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">test_softmax</span>():
+</span></span><span style="display:flex;"><span>    ctx <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>gpu(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>    shape <span style="color:#000;font-weight:bold">=</span> (<span style="color:#099">400</span>, <span style="color:#099">1000</span>)
+</span></span><span style="display:flex;"><span>    x <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>random<span style="color:#000;font-weight:bold">.</span>uniform(<span style="color:#000;font-weight:bold">-</span><span style="color:#099">5</span>, <span style="color:#099">5</span>, shape)<span style="color:#000;font-weight:bold">.</span>astype(np<span style="color:#000;font-weight:bold">.</span>float32)
+</span></span><span style="display:flex;"><span>    arr_x <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(x, ctx<span style="color:#000;font-weight:bold">=</span>ctx)
+</span></span><span style="display:flex;"><span>    arr_y <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>empty(shape, ctx<span style="color:#000;font-weight:bold">=</span>ctx)
+</span></span><span style="display:flex;"><span>    gpu_op<span style="color:#000;font-weight:bold">.</span>softmax(arr_x, arr_y)
+</span></span><span style="display:flex;"><span>    y <span style="color:#000;font-weight:bold">=</span> arr_y<span style="color:#000;font-weight:bold">.</span>asnumpy()
+</span></span><span style="display:flex;"><span>    np<span style="color:#000;font-weight:bold">.</span>testing<span style="color:#000;font-weight:bold">.</span>assert_allclose(autodiff<span style="color:#000;font-weight:bold">.</span>softmax_func(x), y, rtol<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1e-5</span>)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下一天来实现动态图节点，在深度学习中，节点图作为基本的元素，节点之间的计算是以图来进行的。</p>
 
@@ -833,7 +833,7 @@ DLArrayHadnle <span style="color:#000;font-weight:bold">=</span> ctypes<span sty
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -218,178 +218,178 @@
             <h1 id="caspp-第三章课后习题解答">CASPP 第三章课后习题解答</h1>
 <h2 id="358">3.58</h2>
 <p>一个函数的原型为</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">decode2</span>(<span style="color:#458;font-weight:bold">long</span> x, <span style="color:#458;font-weight:bold">long</span> y, <span style="color:#458;font-weight:bold">long</span> z);
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">decode2</span>(<span style="color:#458;font-weight:bold">long</span> x, <span style="color:#458;font-weight:bold">long</span> y, <span style="color:#458;font-weight:bold">long</span> z);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>GCC产生的汇编代码为</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#900;font-weight:bold">decode2:</span>
-<span style="color:#900;font-weight:bold">subq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%rsi</span>
-<span style="color:#900;font-weight:bold">imulq</span> <span style="color:#008080">%rsi</span>, <span style="color:#008080">%rdi</span>
-<span style="color:#900;font-weight:bold">movq</span> <span style="color:#008080">%rsi</span>, <span style="color:#008080">%rax</span>
-<span style="color:#900;font-weight:bold">salq</span> <span style="color:#008080">$63</span>, <span style="color:#008080">%rax</span>
-<span style="color:#900;font-weight:bold">sarq</span> <span style="color:#008080">$63</span>, <span style="color:#008080">%rax</span>
-<span style="color:#900;font-weight:bold">xorq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%rax</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#900;font-weight:bold">decode2:</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">subq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%rsi</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">imulq</span> <span style="color:#008080">%rsi</span>, <span style="color:#008080">%rdi</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">movq</span> <span style="color:#008080">%rsi</span>, <span style="color:#008080">%rax</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">salq</span> <span style="color:#008080">$63</span>, <span style="color:#008080">%rax</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">sarq</span> <span style="color:#008080">$63</span>, <span style="color:#008080">%rax</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">xorq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%rax</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>参数x、y、z通过寄存器%rdi、%rsi和%rdx传递。代码将返回值存放在寄存器%rax中。写出等价于上述汇编代码的C代码。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">decode</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> y, <span style="color:#458;font-weight:bold">int</span> z)
-{
-    y <span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">-</span> z;
-    x <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">*</span> y;
-    <span style="color:#458;font-weight:bold">int</span> res <span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#099">63</span>;
-    res <span style="color:#000;font-weight:bold">&gt;&gt;=</span> <span style="color:#099">63</span>;
-    <span style="color:#000;font-weight:bold">return</span> res <span style="color:#000;font-weight:bold">^</span> x;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">decode</span>(<span style="color:#458;font-weight:bold">int</span> x, <span style="color:#458;font-weight:bold">int</span> y, <span style="color:#458;font-weight:bold">int</span> z)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    y <span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">-</span> z;
+</span></span><span style="display:flex;"><span>    x <span style="color:#000;font-weight:bold">=</span> x <span style="color:#000;font-weight:bold">*</span> y;
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">int</span> res <span style="color:#000;font-weight:bold">=</span> y <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#099">63</span>;
+</span></span><span style="display:flex;"><span>    res <span style="color:#000;font-weight:bold">&gt;&gt;=</span> <span style="color:#099">63</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> res <span style="color:#000;font-weight:bold">^</span> x;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里可以使用将汇编代码进行编译连接，产生方法嵌入到可执行文件中。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcc -c -m64 decode2.s -o decode2.o
-gcc -m64 main.c decode.c decode2.o -o main
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gcc -c -m64 decode2.s -o decode2.o
+</span></span><span style="display:flex;"><span>gcc -m64 main.c decode.c decode2.o -o main
+</span></span></code></pre></td></tr></table>
 </div>
 </div><!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <h2 id="360">3.60</h2>
 <p>请解释下面汇编代码</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#900;font-weight:bold">loop:</span>
-  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">%esi</span>, <span style="color:#008080">%ecx</span>
-  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$1</span>, <span style="color:#008080">%edx</span>
-  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$0</span>, <span style="color:#008080">%eax</span>
-  <span style="color:#900;font-weight:bold">jmp</span> <span style="color:#008080">.L2</span>
-<span style="color:#900;font-weight:bold">.L3:</span>
-  <span style="color:#900;font-weight:bold">movq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%r8</span>
-  <span style="color:#900;font-weight:bold">andq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%r8</span>
-  <span style="color:#900;font-weight:bold">orq</span> <span style="color:#008080">%r8</span>, <span style="color:#008080">%rax</span>
-  <span style="color:#900;font-weight:bold">salq</span> <span style="color:#008080">%cl</span>, <span style="color:#008080">%rdx</span>
-<span style="color:#900;font-weight:bold">.L2:</span>
-  <span style="color:#900;font-weight:bold">testq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%rdx</span>
-  <span style="color:#900;font-weight:bold">jne</span> <span style="color:#008080">.L3</span>
-  <span style="color:#008080">rep</span>
-  <span style="color:#900;font-weight:bold">ret</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#900;font-weight:bold">loop:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">%esi</span>, <span style="color:#008080">%ecx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$1</span>, <span style="color:#008080">%edx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$0</span>, <span style="color:#008080">%eax</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">jmp</span> <span style="color:#008080">.L2</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">.L3:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">movq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%r8</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">andq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%r8</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">orq</span> <span style="color:#008080">%r8</span>, <span style="color:#008080">%rax</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">salq</span> <span style="color:#008080">%cl</span>, <span style="color:#008080">%rdx</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">.L2:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">testq</span> <span style="color:#008080">%rdx</span>, <span style="color:#008080">%rdx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">jne</span> <span style="color:#008080">.L3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">rep</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">ret</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>将其转换为C语言(涉及的知识有)</p>
 <ul>
 <li>寄存器的类型 p120</li>
 <li>test用法 p136</li>
 </ul>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">loop2</span>(<span style="color:#458;font-weight:bold">long</span> x, <span style="color:#458;font-weight:bold">int</span> n)
-{
-    <span style="color:#458;font-weight:bold">long</span> res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
-    <span style="color:#458;font-weight:bold">long</span> mask;
-    <span style="color:#000;font-weight:bold">for</span> (mask <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; mask <span style="color:#000;font-weight:bold">!=</span><span style="color:#099">0</span> ; mask<span style="color:#000;font-weight:bold">=</span>mask<span style="color:#000;font-weight:bold">&lt;&lt;</span>n)
-    {
-        res <span style="color:#000;font-weight:bold">|=</span> x <span style="color:#000;font-weight:bold">&amp;</span> mask;
-    }
-    <span style="color:#000;font-weight:bold">return</span> res;   
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">loop2</span>(<span style="color:#458;font-weight:bold">long</span> x, <span style="color:#458;font-weight:bold">int</span> n)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">long</span> res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">long</span> mask;
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> (mask <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; mask <span style="color:#000;font-weight:bold">!=</span><span style="color:#099">0</span> ; mask<span style="color:#000;font-weight:bold">=</span>mask<span style="color:#000;font-weight:bold">&lt;&lt;</span>n)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        res <span style="color:#000;font-weight:bold">|=</span> x <span style="color:#000;font-weight:bold">&amp;</span> mask;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> res;   
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="361">3.61</h2>
 <p>查看代码</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#998;font-style:italic">// 试图读取空地址的值
-</span><span style="color:#998;font-style:italic"></span><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">cread</span>(<span style="color:#458;font-weight:bold">long</span> <span style="color:#000;font-weight:bold">*</span>xp) {
-  <span style="color:#000;font-weight:bold">return</span> (xp <span style="color:#000;font-weight:bold">?</span> <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">xp</span> : <span style="color:#099">0</span>);
-}
-
-<span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">cread_alt</span>(<span style="color:#458;font-weight:bold">long</span> <span style="color:#000;font-weight:bold">*</span>xp) {
-  <span style="color:#000;font-weight:bold">return</span> (<span style="color:#000;font-weight:bold">!</span>xp <span style="color:#000;font-weight:bold">?</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">*</span>xp);
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// 试图读取空地址的值
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">cread</span>(<span style="color:#458;font-weight:bold">long</span> <span style="color:#000;font-weight:bold">*</span>xp) {
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">return</span> (xp <span style="color:#000;font-weight:bold">?</span> <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">xp</span> : <span style="color:#099">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">long</span> <span style="color:#900;font-weight:bold">cread_alt</span>(<span style="color:#458;font-weight:bold">long</span> <span style="color:#000;font-weight:bold">*</span>xp) {
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">return</span> (<span style="color:#000;font-weight:bold">!</span>xp <span style="color:#000;font-weight:bold">?</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">*</span>xp);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用条件传送指令(CSAPP 147页)</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#900;font-weight:bold">cread_alt:</span>
-  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$0</span>, <span style="color:#008080">%eax</span>
-  <span style="color:#900;font-weight:bold">testq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%rdi</span>
-  <span style="color:#900;font-weight:bold">cmovne</span> (<span style="color:#008080">%rdi</span>), <span style="color:#008080">%rax</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#900;font-weight:bold">cread_alt:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">movl</span> <span style="color:#008080">$0</span>, <span style="color:#008080">%eax</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">testq</span> <span style="color:#008080">%rdi</span>, <span style="color:#008080">%rdi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#900;font-weight:bold">cmovne</span> (<span style="color:#008080">%rdi</span>), <span style="color:#008080">%rax</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="362">3.62</h2>
 <h2 id="363">3.63</h2>
@@ -433,7 +433,7 @@ gcc -m64 main.c decode.c decode2.o -o main
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

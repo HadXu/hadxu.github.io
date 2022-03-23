@@ -225,250 +225,250 @@
 <p>前3天，我们已经实现了基本的数据结构无缝切换与CPU与GPU，现在实现自动求导机制。</p>
 </blockquote>
 <h3 id="第一步-建立计算节点">第一步 建立计算节点。</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Node</span>(<span style="color:#0086b3">object</span>):
-    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>):
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> []
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>op <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">None</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>const_attr <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">None</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Node</span>(<span style="color:#0086b3">object</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>op <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>const_attr <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>每个节点有输入 操作符 常量值 以及 名称</p>
 </blockquote>
 <p>定义操作运算符</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Op</span>(<span style="color:#0086b3">object</span>):
-    <span style="color:#000;font-weight:bold">def</span> __call__(<span style="color:#999">self</span>):
-        new_node <span style="color:#000;font-weight:bold">=</span> Node()
-        new_node<span style="color:#000;font-weight:bold">.</span>op <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span>
-        <span style="color:#000;font-weight:bold">return</span> new_node
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">compute</span>(<span style="color:#999">self</span>, node, input_vals, output_val, use_numpy<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>):
-        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">NotImplementedError</span>
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradient</span>(<span style="color:#999">self</span>, node, output_grad):
-        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">NotImplementedError</span>
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">infer_shape</span>(<span style="color:#999">self</span>, node, input_shapes):
-        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">NotImplementedError</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Op</span>(<span style="color:#0086b3">object</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __call__(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        new_node <span style="color:#000;font-weight:bold">=</span> Node()
+</span></span><span style="display:flex;"><span>        new_node<span style="color:#000;font-weight:bold">.</span>op <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> new_node
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">compute</span>(<span style="color:#999">self</span>, node, input_vals, output_val, use_numpy<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">NotImplementedError</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradient</span>(<span style="color:#999">self</span>, node, output_grad):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">NotImplementedError</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">infer_shape</span>(<span style="color:#999">self</span>, node, input_shapes):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">raise</span> <span style="color:#900;font-weight:bold">NotImplementedError</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下来的各种操作都是继承该运算符
 比如 加法运算符</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">AddOp</span>(Op):
-    <span style="color:#000;font-weight:bold">def</span> __call__(<span style="color:#999">self</span>, node_A, node_B):
-        new_node <span style="color:#000;font-weight:bold">=</span> Op<span style="color:#000;font-weight:bold">.</span>__call__(<span style="color:#999">self</span>)
-        new_node<span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> [node_A, node_B]
-        new_node<span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;(</span><span style="color:#d14">%s</span><span style="color:#d14">+</span><span style="color:#d14">%s</span><span style="color:#d14">)&#34;</span> <span style="color:#000;font-weight:bold">%</span> (node_A<span style="color:#000;font-weight:bold">.</span>name, node_B<span style="color:#000;font-weight:bold">.</span>name)
-        <span style="color:#000;font-weight:bold">return</span> new_node
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">compute</span>(<span style="color:#999">self</span>, node, input_vals, output_val, use_numpy<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>):
-        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">len</span>(input_vals) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>
-        <span style="color:#000;font-weight:bold">if</span> use_numpy:
-            <span style="color:#998;font-style:italic"># output_val[:] allows modify in-place</span>
-            output_val[:] <span style="color:#000;font-weight:bold">=</span> input_vals[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> input_vals[<span style="color:#099">1</span>]
-        <span style="color:#000;font-weight:bold">else</span>:
-            <span style="color:#000;font-weight:bold">if</span> input_vals[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">==</span> input_vals[<span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>shape:
-                gpu_op<span style="color:#000;font-weight:bold">.</span>matrix_elementwise_add(
-                    input_vals[<span style="color:#099">0</span>], input_vals[<span style="color:#099">1</span>], output_val)
-            <span style="color:#000;font-weight:bold">else</span>:
-                <span style="color:#000;font-weight:bold">if</span> input_vals[<span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">==</span> (<span style="color:#099">1</span>,):
-                    const_val <span style="color:#000;font-weight:bold">=</span> input_vals[<span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>asnumpy()[<span style="color:#099">0</span>]
-                    gpu_op<span style="color:#000;font-weight:bold">.</span>matrix_elementwise_add_by_const(
-                        input_vals[<span style="color:#099">0</span>], const_val, output_val)
-                <span style="color:#000;font-weight:bold">elif</span> input_vals[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">==</span> (<span style="color:#099">1</span>,):
-                    const_val <span style="color:#000;font-weight:bold">=</span> input_vals[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>asnumpy()[<span style="color:#099">0</span>]
-                    gpu_op<span style="color:#000;font-weight:bold">.</span>matrix_elementwise_add_by_const(
-                        input_vals[<span style="color:#099">1</span>], const_val, output_val)
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradient</span>(<span style="color:#999">self</span>, node, output_grad):
-        <span style="color:#000;font-weight:bold">return</span> [output_grad, output_grad]
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">infer_shape</span>(<span style="color:#999">self</span>, node, input_shapes):
-        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">len</span>(input_shapes) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>
-        <span style="color:#000;font-weight:bold">assert</span> input_shapes[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">==</span> input_shapes[<span style="color:#099">1</span>]
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">AddOp</span>(Op):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __call__(<span style="color:#999">self</span>, node_A, node_B):
+</span></span><span style="display:flex;"><span>        new_node <span style="color:#000;font-weight:bold">=</span> Op<span style="color:#000;font-weight:bold">.</span>__call__(<span style="color:#999">self</span>)
+</span></span><span style="display:flex;"><span>        new_node<span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> [node_A, node_B]
+</span></span><span style="display:flex;"><span>        new_node<span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;(</span><span style="color:#d14">%s</span><span style="color:#d14">+</span><span style="color:#d14">%s</span><span style="color:#d14">)&#34;</span> <span style="color:#000;font-weight:bold">%</span> (node_A<span style="color:#000;font-weight:bold">.</span>name, node_B<span style="color:#000;font-weight:bold">.</span>name)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> new_node
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">compute</span>(<span style="color:#999">self</span>, node, input_vals, output_val, use_numpy<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">len</span>(input_vals) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> use_numpy:
+</span></span><span style="display:flex;"><span>            <span style="color:#998;font-style:italic"># output_val[:] allows modify in-place</span>
+</span></span><span style="display:flex;"><span>            output_val[:] <span style="color:#000;font-weight:bold">=</span> input_vals[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> input_vals[<span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">if</span> input_vals[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">==</span> input_vals[<span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>shape:
+</span></span><span style="display:flex;"><span>                gpu_op<span style="color:#000;font-weight:bold">.</span>matrix_elementwise_add(
+</span></span><span style="display:flex;"><span>                    input_vals[<span style="color:#099">0</span>], input_vals[<span style="color:#099">1</span>], output_val)
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">if</span> input_vals[<span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">==</span> (<span style="color:#099">1</span>,):
+</span></span><span style="display:flex;"><span>                    const_val <span style="color:#000;font-weight:bold">=</span> input_vals[<span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>asnumpy()[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>                    gpu_op<span style="color:#000;font-weight:bold">.</span>matrix_elementwise_add_by_const(
+</span></span><span style="display:flex;"><span>                        input_vals[<span style="color:#099">0</span>], const_val, output_val)
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">elif</span> input_vals[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>shape <span style="color:#000;font-weight:bold">==</span> (<span style="color:#099">1</span>,):
+</span></span><span style="display:flex;"><span>                    const_val <span style="color:#000;font-weight:bold">=</span> input_vals[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>asnumpy()[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>                    gpu_op<span style="color:#000;font-weight:bold">.</span>matrix_elementwise_add_by_const(
+</span></span><span style="display:flex;"><span>                        input_vals[<span style="color:#099">1</span>], const_val, output_val)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradient</span>(<span style="color:#999">self</span>, node, output_grad):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> [output_grad, output_grad]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">infer_shape</span>(<span style="color:#999">self</span>, node, input_shapes):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#0086b3">len</span>(input_shapes) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">assert</span> input_shapes[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">==</span> input_shapes[<span style="color:#099">1</span>]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>同时，将<code>Node</code>类添加各种运算符</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Node</span>(<span style="color:#0086b3">object</span>):
-    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>):
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> []
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>op <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">None</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>const_attr <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">None</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;&#34;</span>
-
-    <span style="color:#000;font-weight:bold">def</span> __add__(<span style="color:#999">self</span>, other):
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Node):
-            new_node <span style="color:#000;font-weight:bold">=</span> add_op(<span style="color:#999">self</span>, other)
-        <span style="color:#000;font-weight:bold">else</span>:
-            <span style="color:#998;font-style:italic"># Add by a constant stores the constant in new node&#39;s const_attr</span>
-            <span style="color:#998;font-style:italic"># &#39;other&#39; argument is a constant</span>
-            new_node <span style="color:#000;font-weight:bold">=</span> add_byconst_op(<span style="color:#999">self</span>, other)
-        <span style="color:#000;font-weight:bold">return</span> new_node
-
-    <span style="color:#000;font-weight:bold">def</span> __mul__(<span style="color:#999">self</span>, other):
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Node):
-            new_node <span style="color:#000;font-weight:bold">=</span> mul_op(<span style="color:#999">self</span>, other)
-        <span style="color:#000;font-weight:bold">else</span>:
-            new_node <span style="color:#000;font-weight:bold">=</span> mul_byconst_op(<span style="color:#999">self</span>, other)
-        <span style="color:#000;font-weight:bold">return</span> new_node
-
-    __radd__ <span style="color:#000;font-weight:bold">=</span> __add__
-    __rmul__ <span style="color:#000;font-weight:bold">=</span> __mul__
-
-    <span style="color:#000;font-weight:bold">def</span> __str__(<span style="color:#999">self</span>):
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Node</span>(<span style="color:#0086b3">object</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>inputs <span style="color:#000;font-weight:bold">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>op <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>const_attr <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __add__(<span style="color:#999">self</span>, other):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Node):
+</span></span><span style="display:flex;"><span>            new_node <span style="color:#000;font-weight:bold">=</span> add_op(<span style="color:#999">self</span>, other)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#998;font-style:italic"># Add by a constant stores the constant in new node&#39;s const_attr</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#998;font-style:italic"># &#39;other&#39; argument is a constant</span>
+</span></span><span style="display:flex;"><span>            new_node <span style="color:#000;font-weight:bold">=</span> add_byconst_op(<span style="color:#999">self</span>, other)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> new_node
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __mul__(<span style="color:#999">self</span>, other):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(other, Node):
+</span></span><span style="display:flex;"><span>            new_node <span style="color:#000;font-weight:bold">=</span> mul_op(<span style="color:#999">self</span>, other)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            new_node <span style="color:#000;font-weight:bold">=</span> mul_byconst_op(<span style="color:#999">self</span>, other)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> new_node
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    __radd__ <span style="color:#000;font-weight:bold">=</span> __add__
+</span></span><span style="display:flex;"><span>    __rmul__ <span style="color:#000;font-weight:bold">=</span> __mul__
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __str__(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>name
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>同时定义<code>Varibale</code></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Variable</span>(name):
-    <span style="color:#d14">&#34;&#34;&#34;
-</span><span style="color:#d14">        x = Variable(name = &#34;x&#34;)
-</span><span style="color:#d14">    &#34;&#34;&#34;</span>
-    placeholder_node <span style="color:#000;font-weight:bold">=</span> placeholder_op()
-    placeholder_node<span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> name
-    <span style="color:#000;font-weight:bold">return</span> placeholder_node
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Variable</span>(name):
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">        x = Variable(name = &#34;x&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    placeholder_node <span style="color:#000;font-weight:bold">=</span> placeholder_op()
+</span></span><span style="display:flex;"><span>    placeholder_node<span style="color:#000;font-weight:bold">.</span>name <span style="color:#000;font-weight:bold">=</span> name
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> placeholder_node
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>定义<code>placeholder</code></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">PlaceholderOp</span>(Op):
-    <span style="color:#000;font-weight:bold">def</span> __call__(<span style="color:#999">self</span>):
-        new_node <span style="color:#000;font-weight:bold">=</span> Op<span style="color:#000;font-weight:bold">.</span>__call__(<span style="color:#999">self</span>)
-        <span style="color:#000;font-weight:bold">return</span> new_node
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">compute</span>(<span style="color:#999">self</span>, node, input_vals, output_val, use_numpy<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>):
-        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#000;font-weight:bold">False</span>, <span style="color:#d14">&#34;placeholder </span><span style="color:#d14">%s</span><span style="color:#d14"> values provided by feed_dict&#34;</span> <span style="color:#000;font-weight:bold">%</span> node<span style="color:#000;font-weight:bold">.</span>name
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradient</span>(<span style="color:#999">self</span>, node, output_grad):
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">None</span>
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">infer_shape</span>(<span style="color:#999">self</span>, node, input_shapes):
-        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#000;font-weight:bold">False</span>, <span style="color:#d14">&#34;placeholder </span><span style="color:#d14">%s</span><span style="color:#d14"> shape provided by feed_shape&#34;</span> <span style="color:#000;font-weight:bold">%</span> node<span style="color:#000;font-weight:bold">.</span>name
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">PlaceholderOp</span>(Op):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __call__(<span style="color:#999">self</span>):
+</span></span><span style="display:flex;"><span>        new_node <span style="color:#000;font-weight:bold">=</span> Op<span style="color:#000;font-weight:bold">.</span>__call__(<span style="color:#999">self</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> new_node
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">compute</span>(<span style="color:#999">self</span>, node, input_vals, output_val, use_numpy<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#000;font-weight:bold">False</span>, <span style="color:#d14">&#34;placeholder </span><span style="color:#d14">%s</span><span style="color:#d14"> values provided by feed_dict&#34;</span> <span style="color:#000;font-weight:bold">%</span> node<span style="color:#000;font-weight:bold">.</span>name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradient</span>(<span style="color:#999">self</span>, node, output_grad):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">infer_shape</span>(<span style="color:#999">self</span>, node, input_shapes):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">assert</span> <span style="color:#000;font-weight:bold">False</span>, <span style="color:#d14">&#34;placeholder </span><span style="color:#d14">%s</span><span style="color:#d14"> shape provided by feed_shape&#34;</span> <span style="color:#000;font-weight:bold">%</span> node<span style="color:#000;font-weight:bold">.</span>name
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="自动求导机制">自动求导机制</h3>
 <p>在过去的神经网络计算中，都是采用的反向求导算法，但是反向求导有一个不好的地方在于对于内存消耗特别厉害，原因在于反向求导需要记住已经运算过的数值。而本文采用的为<strong>逆向自动</strong>求导。</p>
@@ -488,109 +488,109 @@
 <p>答： 拓扑排序。</p>
 </blockquote>
 <p>采用拓扑排序得到没有输入值得节点（即placeholder节点）</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">find_topo_sort</span>(node_list):
-    visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">set</span>()
-    topo_order <span style="color:#000;font-weight:bold">=</span> []
-    <span style="color:#000;font-weight:bold">for</span> node <span style="color:#000;font-weight:bold">in</span> node_list:
-        topo_sort_dfs(node, visited, topo_order)
-    <span style="color:#000;font-weight:bold">return</span> topo_order
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">topo_sort_dfs</span>(node, visited, topo_order):
-    <span style="color:#000;font-weight:bold">if</span> node <span style="color:#000;font-weight:bold">in</span> visited:
-        <span style="color:#000;font-weight:bold">return</span>
-    visited<span style="color:#000;font-weight:bold">.</span>add(node)
-    <span style="color:#000;font-weight:bold">for</span> n <span style="color:#000;font-weight:bold">in</span> node<span style="color:#000;font-weight:bold">.</span>inputs:
-        topo_sort_dfs(n, visited, topo_order)
-    topo_order<span style="color:#000;font-weight:bold">.</span>append(node)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">find_topo_sort</span>(node_list):
+</span></span><span style="display:flex;"><span>    visited <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">set</span>()
+</span></span><span style="display:flex;"><span>    topo_order <span style="color:#000;font-weight:bold">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> node <span style="color:#000;font-weight:bold">in</span> node_list:
+</span></span><span style="display:flex;"><span>        topo_sort_dfs(node, visited, topo_order)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> topo_order
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">topo_sort_dfs</span>(node, visited, topo_order):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> node <span style="color:#000;font-weight:bold">in</span> visited:
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>    visited<span style="color:#000;font-weight:bold">.</span>add(node)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> n <span style="color:#000;font-weight:bold">in</span> node<span style="color:#000;font-weight:bold">.</span>inputs:
+</span></span><span style="display:flex;"><span>        topo_sort_dfs(n, visited, topo_order)
+</span></span><span style="display:flex;"><span>    topo_order<span style="color:#000;font-weight:bold">.</span>append(node)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当获得节点依赖信息后,先进行前向传播</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">for</span> node <span style="color:#000;font-weight:bold">in</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>topo_order:
-    <span style="color:#000;font-weight:bold">if</span> node <span style="color:#000;font-weight:bold">in</span> node_to_val_map:
-        <span style="color:#998;font-style:italic"># Skip placeholder nodes. Values already provided by feed_dict.</span>
-        <span style="color:#000;font-weight:bold">continue</span>
-    input_vals <span style="color:#000;font-weight:bold">=</span> [node_to_val_map[n] <span style="color:#000;font-weight:bold">for</span> n <span style="color:#000;font-weight:bold">in</span> node<span style="color:#000;font-weight:bold">.</span>inputs]
-    <span style="color:#000;font-weight:bold">if</span> use_numpy:
-        node_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span><span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>node_to_shape_map[node])
-    <span style="color:#000;font-weight:bold">else</span>:
-        node_val <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>node_to_arr_map[node]
-    <span style="color:#998;font-style:italic"># node_val is modified in-place whether np.ndarray or NDArray</span>
-    node<span style="color:#000;font-weight:bold">.</span>op<span style="color:#000;font-weight:bold">.</span>compute(node, input_vals, node_val, use_numpy)
-    node_to_val_map[node] <span style="color:#000;font-weight:bold">=</span> node_val
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> node <span style="color:#000;font-weight:bold">in</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>topo_order:
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> node <span style="color:#000;font-weight:bold">in</span> node_to_val_map:
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic"># Skip placeholder nodes. Values already provided by feed_dict.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">continue</span>
+</span></span><span style="display:flex;"><span>    input_vals <span style="color:#000;font-weight:bold">=</span> [node_to_val_map[n] <span style="color:#000;font-weight:bold">for</span> n <span style="color:#000;font-weight:bold">in</span> node<span style="color:#000;font-weight:bold">.</span>inputs]
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> use_numpy:
+</span></span><span style="display:flex;"><span>        node_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span><span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>node_to_shape_map[node])
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        node_val <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>node_to_arr_map[node]
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># node_val is modified in-place whether np.ndarray or NDArray</span>
+</span></span><span style="display:flex;"><span>    node<span style="color:#000;font-weight:bold">.</span>op<span style="color:#000;font-weight:bold">.</span>compute(node, input_vals, node_val, use_numpy)
+</span></span><span style="display:flex;"><span>    node_to_val_map[node] <span style="color:#000;font-weight:bold">=</span> node_val
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>自动求导反向传播</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradients</span>(output_node, node_list):
-    node_to_output_grads_list <span style="color:#000;font-weight:bold">=</span> {}
-    node_to_output_grads_list[output_node] <span style="color:#000;font-weight:bold">=</span> [oneslike_op(output_node)]
-    node_to_output_grad <span style="color:#000;font-weight:bold">=</span> {}
-    reverse_topo_order <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">reversed</span>(find_topo_sort([output_node]))
-    <span style="color:#000;font-weight:bold">for</span> node <span style="color:#000;font-weight:bold">in</span> reverse_topo_order:
-        node_to_output_grad[node] <span style="color:#000;font-weight:bold">=</span> sum_node_list(node_to_output_grads_list[node])
-        grads <span style="color:#000;font-weight:bold">=</span> node<span style="color:#000;font-weight:bold">.</span>op<span style="color:#000;font-weight:bold">.</span>gradient(node, node_to_output_grad[node])
-        <span style="color:#000;font-weight:bold">for</span> ind, in_node <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(node<span style="color:#000;font-weight:bold">.</span>inputs):
-            <span style="color:#000;font-weight:bold">if</span> in_node <span style="color:#000;font-weight:bold">in</span> node_to_output_grads_list:
-                node_to_output_grads_list[in_node]<span style="color:#000;font-weight:bold">.</span>append(grads[ind])
-            <span style="color:#000;font-weight:bold">else</span>:
-                node_to_output_grads_list[in_node] <span style="color:#000;font-weight:bold">=</span> [grads[ind]]
-    grad_node_list <span style="color:#000;font-weight:bold">=</span> [node_to_output_grad[node] <span style="color:#000;font-weight:bold">for</span> node <span style="color:#000;font-weight:bold">in</span> node_list]
-    <span style="color:#000;font-weight:bold">return</span> grad_node_list
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">gradients</span>(output_node, node_list):
+</span></span><span style="display:flex;"><span>    node_to_output_grads_list <span style="color:#000;font-weight:bold">=</span> {}
+</span></span><span style="display:flex;"><span>    node_to_output_grads_list[output_node] <span style="color:#000;font-weight:bold">=</span> [oneslike_op(output_node)]
+</span></span><span style="display:flex;"><span>    node_to_output_grad <span style="color:#000;font-weight:bold">=</span> {}
+</span></span><span style="display:flex;"><span>    reverse_topo_order <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">reversed</span>(find_topo_sort([output_node]))
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> node <span style="color:#000;font-weight:bold">in</span> reverse_topo_order:
+</span></span><span style="display:flex;"><span>        node_to_output_grad[node] <span style="color:#000;font-weight:bold">=</span> sum_node_list(node_to_output_grads_list[node])
+</span></span><span style="display:flex;"><span>        grads <span style="color:#000;font-weight:bold">=</span> node<span style="color:#000;font-weight:bold">.</span>op<span style="color:#000;font-weight:bold">.</span>gradient(node, node_to_output_grad[node])
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> ind, in_node <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(node<span style="color:#000;font-weight:bold">.</span>inputs):
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">if</span> in_node <span style="color:#000;font-weight:bold">in</span> node_to_output_grads_list:
+</span></span><span style="display:flex;"><span>                node_to_output_grads_list[in_node]<span style="color:#000;font-weight:bold">.</span>append(grads[ind])
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                node_to_output_grads_list[in_node] <span style="color:#000;font-weight:bold">=</span> [grads[ind]]
+</span></span><span style="display:flex;"><span>    grad_node_list <span style="color:#000;font-weight:bold">=</span> [node_to_output_grad[node] <span style="color:#000;font-weight:bold">for</span> node <span style="color:#000;font-weight:bold">in</span> node_list]
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> grad_node_list
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>具体实现方式我会另开一篇文章来完成Autodiff的实现方式。</p>
@@ -598,263 +598,263 @@
 <h2 id="完成">完成</h2>
 <p>到现在为止，已经实现了基本的功能，接下来进行测试</p>
 <p>测试MNIST的效果</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">mnist_mlp</span>(executor_ctx<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">None</span>, num_epochs<span style="color:#000;font-weight:bold">=</span><span style="color:#099">10</span>, print_loss_val_each_epoch<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>):
-    W1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W1&#34;</span>)
-    W2 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W2&#34;</span>)
-    W3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W3&#34;</span>)
-    b1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b1&#34;</span>)
-    b2 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b2&#34;</span>)
-    b3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b3&#34;</span>)
-    X <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;X&#34;</span>)
-    y_ <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;y_&#34;</span>)
-
-    <span style="color:#998;font-style:italic"># relu(X W1+b1)</span>
-    z1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>matmul_op(X, W1)
-    z2 <span style="color:#000;font-weight:bold">=</span> z1 <span style="color:#000;font-weight:bold">+</span> ad<span style="color:#000;font-weight:bold">.</span>broadcastto_op(b1, z1)
-    z3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>relu_op(z2)
-
-    <span style="color:#998;font-style:italic"># relu(z3 W2+b2)</span>
-    z4 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>matmul_op(z3, W2)
-    z5 <span style="color:#000;font-weight:bold">=</span> z4 <span style="color:#000;font-weight:bold">+</span> ad<span style="color:#000;font-weight:bold">.</span>broadcastto_op(b2, z4)
-    z6 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>relu_op(z5)
-
-    <span style="color:#998;font-style:italic"># softmax(z5 W2+b2)</span>
-    z7 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>matmul_op(z6, W3)
-    y <span style="color:#000;font-weight:bold">=</span> z7 <span style="color:#000;font-weight:bold">+</span> ad<span style="color:#000;font-weight:bold">.</span>broadcastto_op(b3, z7)
-
-    loss <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>softmaxcrossentropy_op(y, y_)
-
-    grad_W1, grad_W2, grad_W3, grad_b1, grad_b2, grad_b3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>gradients(
-        loss, [W1, W2, W3, b1, b2, b3])
-    executor <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Executor(
-        [loss, grad_W1, grad_W2, grad_W3, grad_b1, grad_b2, grad_b3, y],
-        ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-
-    datasets <span style="color:#000;font-weight:bold">=</span> load_mnist_data(<span style="color:#d14">&#34;mnist.pkl.gz&#34;</span>)
-    train_set_x, train_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">0</span>]
-    valid_set_x, valid_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">1</span>]
-    test_set_x, test_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">2</span>]
-    batch_size <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1000</span>
-    n_train_batches <span style="color:#000;font-weight:bold">=</span> train_set_x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">//</span> batch_size
-    n_valid_batches <span style="color:#000;font-weight:bold">=</span> valid_set_x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">//</span> batch_size
-
-    <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;Start training loop...&#34;</span>)
-
-    W2_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">256</span>, <span style="color:#099">100</span>))
-    W3_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">100</span>, <span style="color:#099">10</span>))
-    b1_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">256</span>))
-    b2_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">100</span>))
-    b3_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">10</span>))
-    X_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span>(batch_size, <span style="color:#099">784</span>), dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
-    y_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span>(batch_size, <span style="color:#099">10</span>), dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
-    valid_X_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span>(batch_size, <span style="color:#099">784</span>), dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
-    valid_y_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span>(batch_size, <span style="color:#099">10</span>), dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
-    <span style="color:#000;font-weight:bold">if</span> ndarray<span style="color:#000;font-weight:bold">.</span>is_gpu_ctx(executor_ctx):
-        W1_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(W1_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-        W2_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(W2_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-        W3_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(W3_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-        b1_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(b1_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-        b2_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(b2_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-        b3_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(b3_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-        X_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(X_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-        y_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(y_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
-
-    lr <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1.0e-3</span>
-    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(num_epochs):
-        <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;epoch </span><span style="color:#d14">%d</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> i)
-        <span style="color:#000;font-weight:bold">for</span> minibatch_index <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_train_batches):
-            minibatch_start <span style="color:#000;font-weight:bold">=</span> minibatch_index <span style="color:#000;font-weight:bold">*</span> batch_size
-            minibatch_end <span style="color:#000;font-weight:bold">=</span> (minibatch_index <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">*</span> batch_size
-            X_val[:] <span style="color:#000;font-weight:bold">=</span> train_set_x[minibatch_start:minibatch_end]
-            y_val[:] <span style="color:#000;font-weight:bold">=</span> convert_to_one_hot(
-                train_set_y[minibatch_start:minibatch_end])
-            loss_val, grad_W1_val, grad_W2_val, grad_W3_val, \
-                grad_b1_val, grad_b2_val, grad_b3_val, _ <span style="color:#000;font-weight:bold">=</span> executor<span style="color:#000;font-weight:bold">.</span>run(
-                    feed_dict<span style="color:#000;font-weight:bold">=</span>{
-                        X: X_val,
-                        y_: y_val,
-                        W1: W1_val,
-                        W2: W2_val,
-                        W3: W3_val,
-                        b1: b1_val,
-                        b2: b2_val,
-                        b3: b3_val})
-            <span style="color:#998;font-style:italic"># SGD update</span>
-            <span style="color:#000;font-weight:bold">if</span> (executor_ctx <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">None</span>):
-                W1_val <span style="color:#000;font-weight:bold">=</span> W1_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_W1_val
-                W2_val <span style="color:#000;font-weight:bold">=</span> W2_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_W2_val
-                W3_val <span style="color:#000;font-weight:bold">=</span> W3_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_W3_val
-                b1_val <span style="color:#000;font-weight:bold">=</span> b1_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_b1_val
-                b2_val <span style="color:#000;font-weight:bold">=</span> b2_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_b2_val
-                b3_val <span style="color:#000;font-weight:bold">=</span> b3_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_b3_val
-            <span style="color:#000;font-weight:bold">else</span>:
-                sgd_update_gpu(W1_val, grad_W1_val, lr)
-                sgd_update_gpu(W2_val, grad_W2_val, lr)
-                sgd_update_gpu(W3_val, grad_W3_val, lr)
-                sgd_update_gpu(b1_val, grad_b1_val, lr)
-                sgd_update_gpu(b2_val, grad_b2_val, lr)
-                sgd_update_gpu(b3_val, grad_b3_val, lr)
-        <span style="color:#000;font-weight:bold">if</span> print_loss_val_each_epoch:
-            <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(loss_val, ndarray<span style="color:#000;font-weight:bold">.</span>NDArray):
-                <span style="color:#0086b3">print</span>(loss_val<span style="color:#000;font-weight:bold">.</span>asnumpy())
-            <span style="color:#000;font-weight:bold">else</span>:
-                <span style="color:#0086b3">print</span>(loss_val)
-
-    correct_predictions <span style="color:#000;font-weight:bold">=</span> []
-    <span style="color:#000;font-weight:bold">for</span> minibatch_index <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_valid_batches):
-        minibatch_start <span style="color:#000;font-weight:bold">=</span> minibatch_index <span style="color:#000;font-weight:bold">*</span> batch_size
-        minibatch_end <span style="color:#000;font-weight:bold">=</span> (minibatch_index <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">*</span> batch_size
-        valid_X_val[:] <span style="color:#000;font-weight:bold">=</span> valid_set_x[minibatch_start:minibatch_end]
-        valid_y_val[:] <span style="color:#000;font-weight:bold">=</span> convert_to_one_hot(
-            valid_set_y[minibatch_start:minibatch_end])
-        _, _, _, _, _, _, _, valid_y_predicted <span style="color:#000;font-weight:bold">=</span> executor<span style="color:#000;font-weight:bold">.</span>run(
-            feed_dict<span style="color:#000;font-weight:bold">=</span>{
-                X: valid_X_val,
-                y_: valid_y_val,
-                W1: W1_val,
-                W2: W2_val,
-                W3: W3_val,
-                b1: b1_val,
-                b2: b2_val,
-                b3: b3_val},
-            convert_to_numpy_ret_vals<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
-        correct_prediction <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>equal(
-            np<span style="color:#000;font-weight:bold">.</span>argmax(valid_y_val, <span style="color:#099">1</span>),
-            np<span style="color:#000;font-weight:bold">.</span>argmax(valid_y_predicted, <span style="color:#099">1</span>))<span style="color:#000;font-weight:bold">.</span>astype(np<span style="color:#000;font-weight:bold">.</span>float)
-        correct_predictions<span style="color:#000;font-weight:bold">.</span>extend(correct_prediction)
-    accuracy <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>mean(correct_predictions)
-    <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;validation set accuracy=</span><span style="color:#d14">%f</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> accuracy)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">mnist_mlp</span>(executor_ctx<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">None</span>, num_epochs<span style="color:#000;font-weight:bold">=</span><span style="color:#099">10</span>, print_loss_val_each_epoch<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>):
+</span></span><span style="display:flex;"><span>    W1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W1&#34;</span>)
+</span></span><span style="display:flex;"><span>    W2 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W2&#34;</span>)
+</span></span><span style="display:flex;"><span>    W3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;W3&#34;</span>)
+</span></span><span style="display:flex;"><span>    b1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b1&#34;</span>)
+</span></span><span style="display:flex;"><span>    b2 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b2&#34;</span>)
+</span></span><span style="display:flex;"><span>    b3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;b3&#34;</span>)
+</span></span><span style="display:flex;"><span>    X <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;X&#34;</span>)
+</span></span><span style="display:flex;"><span>    y_ <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Variable(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;y_&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># relu(X W1+b1)</span>
+</span></span><span style="display:flex;"><span>    z1 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>matmul_op(X, W1)
+</span></span><span style="display:flex;"><span>    z2 <span style="color:#000;font-weight:bold">=</span> z1 <span style="color:#000;font-weight:bold">+</span> ad<span style="color:#000;font-weight:bold">.</span>broadcastto_op(b1, z1)
+</span></span><span style="display:flex;"><span>    z3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>relu_op(z2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># relu(z3 W2+b2)</span>
+</span></span><span style="display:flex;"><span>    z4 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>matmul_op(z3, W2)
+</span></span><span style="display:flex;"><span>    z5 <span style="color:#000;font-weight:bold">=</span> z4 <span style="color:#000;font-weight:bold">+</span> ad<span style="color:#000;font-weight:bold">.</span>broadcastto_op(b2, z4)
+</span></span><span style="display:flex;"><span>    z6 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>relu_op(z5)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># softmax(z5 W2+b2)</span>
+</span></span><span style="display:flex;"><span>    z7 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>matmul_op(z6, W3)
+</span></span><span style="display:flex;"><span>    y <span style="color:#000;font-weight:bold">=</span> z7 <span style="color:#000;font-weight:bold">+</span> ad<span style="color:#000;font-weight:bold">.</span>broadcastto_op(b3, z7)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    loss <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>softmaxcrossentropy_op(y, y_)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    grad_W1, grad_W2, grad_W3, grad_b1, grad_b2, grad_b3 <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>gradients(
+</span></span><span style="display:flex;"><span>        loss, [W1, W2, W3, b1, b2, b3])
+</span></span><span style="display:flex;"><span>    executor <span style="color:#000;font-weight:bold">=</span> ad<span style="color:#000;font-weight:bold">.</span>Executor(
+</span></span><span style="display:flex;"><span>        [loss, grad_W1, grad_W2, grad_W3, grad_b1, grad_b2, grad_b3, y],
+</span></span><span style="display:flex;"><span>        ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    datasets <span style="color:#000;font-weight:bold">=</span> load_mnist_data(<span style="color:#d14">&#34;mnist.pkl.gz&#34;</span>)
+</span></span><span style="display:flex;"><span>    train_set_x, train_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>    valid_set_x, valid_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>    test_set_x, test_set_y <span style="color:#000;font-weight:bold">=</span> datasets[<span style="color:#099">2</span>]
+</span></span><span style="display:flex;"><span>    batch_size <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1000</span>
+</span></span><span style="display:flex;"><span>    n_train_batches <span style="color:#000;font-weight:bold">=</span> train_set_x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">//</span> batch_size
+</span></span><span style="display:flex;"><span>    n_valid_batches <span style="color:#000;font-weight:bold">=</span> valid_set_x<span style="color:#000;font-weight:bold">.</span>shape[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">//</span> batch_size
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;Start training loop...&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    W2_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">256</span>, <span style="color:#099">100</span>))
+</span></span><span style="display:flex;"><span>    W3_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">100</span>, <span style="color:#099">10</span>))
+</span></span><span style="display:flex;"><span>    b1_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">256</span>))
+</span></span><span style="display:flex;"><span>    b2_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">100</span>))
+</span></span><span style="display:flex;"><span>    b3_val <span style="color:#000;font-weight:bold">=</span> rand<span style="color:#000;font-weight:bold">.</span>normal(scale<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0.1</span>, size<span style="color:#000;font-weight:bold">=</span>(<span style="color:#099">10</span>))
+</span></span><span style="display:flex;"><span>    X_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span>(batch_size, <span style="color:#099">784</span>), dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
+</span></span><span style="display:flex;"><span>    y_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span>(batch_size, <span style="color:#099">10</span>), dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
+</span></span><span style="display:flex;"><span>    valid_X_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span>(batch_size, <span style="color:#099">784</span>), dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
+</span></span><span style="display:flex;"><span>    valid_y_val <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>empty(shape<span style="color:#000;font-weight:bold">=</span>(batch_size, <span style="color:#099">10</span>), dtype<span style="color:#000;font-weight:bold">=</span>np<span style="color:#000;font-weight:bold">.</span>float32)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> ndarray<span style="color:#000;font-weight:bold">.</span>is_gpu_ctx(executor_ctx):
+</span></span><span style="display:flex;"><span>        W1_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(W1_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>        W2_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(W2_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>        W3_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(W3_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>        b1_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(b1_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>        b2_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(b2_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>        b3_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(b3_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>        X_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(X_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>        y_val <span style="color:#000;font-weight:bold">=</span> ndarray<span style="color:#000;font-weight:bold">.</span>array(y_val, ctx<span style="color:#000;font-weight:bold">=</span>executor_ctx)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    lr <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1.0e-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(num_epochs):
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;epoch </span><span style="color:#d14">%d</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> i)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> minibatch_index <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_train_batches):
+</span></span><span style="display:flex;"><span>            minibatch_start <span style="color:#000;font-weight:bold">=</span> minibatch_index <span style="color:#000;font-weight:bold">*</span> batch_size
+</span></span><span style="display:flex;"><span>            minibatch_end <span style="color:#000;font-weight:bold">=</span> (minibatch_index <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">*</span> batch_size
+</span></span><span style="display:flex;"><span>            X_val[:] <span style="color:#000;font-weight:bold">=</span> train_set_x[minibatch_start:minibatch_end]
+</span></span><span style="display:flex;"><span>            y_val[:] <span style="color:#000;font-weight:bold">=</span> convert_to_one_hot(
+</span></span><span style="display:flex;"><span>                train_set_y[minibatch_start:minibatch_end])
+</span></span><span style="display:flex;"><span>            loss_val, grad_W1_val, grad_W2_val, grad_W3_val, \
+</span></span><span style="display:flex;"><span>                grad_b1_val, grad_b2_val, grad_b3_val, _ <span style="color:#000;font-weight:bold">=</span> executor<span style="color:#000;font-weight:bold">.</span>run(
+</span></span><span style="display:flex;"><span>                    feed_dict<span style="color:#000;font-weight:bold">=</span>{
+</span></span><span style="display:flex;"><span>                        X: X_val,
+</span></span><span style="display:flex;"><span>                        y_: y_val,
+</span></span><span style="display:flex;"><span>                        W1: W1_val,
+</span></span><span style="display:flex;"><span>                        W2: W2_val,
+</span></span><span style="display:flex;"><span>                        W3: W3_val,
+</span></span><span style="display:flex;"><span>                        b1: b1_val,
+</span></span><span style="display:flex;"><span>                        b2: b2_val,
+</span></span><span style="display:flex;"><span>                        b3: b3_val})
+</span></span><span style="display:flex;"><span>            <span style="color:#998;font-style:italic"># SGD update</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">if</span> (executor_ctx <span style="color:#000;font-weight:bold">is</span> <span style="color:#000;font-weight:bold">None</span>):
+</span></span><span style="display:flex;"><span>                W1_val <span style="color:#000;font-weight:bold">=</span> W1_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_W1_val
+</span></span><span style="display:flex;"><span>                W2_val <span style="color:#000;font-weight:bold">=</span> W2_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_W2_val
+</span></span><span style="display:flex;"><span>                W3_val <span style="color:#000;font-weight:bold">=</span> W3_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_W3_val
+</span></span><span style="display:flex;"><span>                b1_val <span style="color:#000;font-weight:bold">=</span> b1_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_b1_val
+</span></span><span style="display:flex;"><span>                b2_val <span style="color:#000;font-weight:bold">=</span> b2_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_b2_val
+</span></span><span style="display:flex;"><span>                b3_val <span style="color:#000;font-weight:bold">=</span> b3_val <span style="color:#000;font-weight:bold">-</span> lr <span style="color:#000;font-weight:bold">*</span> grad_b3_val
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                sgd_update_gpu(W1_val, grad_W1_val, lr)
+</span></span><span style="display:flex;"><span>                sgd_update_gpu(W2_val, grad_W2_val, lr)
+</span></span><span style="display:flex;"><span>                sgd_update_gpu(W3_val, grad_W3_val, lr)
+</span></span><span style="display:flex;"><span>                sgd_update_gpu(b1_val, grad_b1_val, lr)
+</span></span><span style="display:flex;"><span>                sgd_update_gpu(b2_val, grad_b2_val, lr)
+</span></span><span style="display:flex;"><span>                sgd_update_gpu(b3_val, grad_b3_val, lr)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> print_loss_val_each_epoch:
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">isinstance</span>(loss_val, ndarray<span style="color:#000;font-weight:bold">.</span>NDArray):
+</span></span><span style="display:flex;"><span>                <span style="color:#0086b3">print</span>(loss_val<span style="color:#000;font-weight:bold">.</span>asnumpy())
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#0086b3">print</span>(loss_val)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    correct_predictions <span style="color:#000;font-weight:bold">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> minibatch_index <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n_valid_batches):
+</span></span><span style="display:flex;"><span>        minibatch_start <span style="color:#000;font-weight:bold">=</span> minibatch_index <span style="color:#000;font-weight:bold">*</span> batch_size
+</span></span><span style="display:flex;"><span>        minibatch_end <span style="color:#000;font-weight:bold">=</span> (minibatch_index <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">*</span> batch_size
+</span></span><span style="display:flex;"><span>        valid_X_val[:] <span style="color:#000;font-weight:bold">=</span> valid_set_x[minibatch_start:minibatch_end]
+</span></span><span style="display:flex;"><span>        valid_y_val[:] <span style="color:#000;font-weight:bold">=</span> convert_to_one_hot(
+</span></span><span style="display:flex;"><span>            valid_set_y[minibatch_start:minibatch_end])
+</span></span><span style="display:flex;"><span>        _, _, _, _, _, _, _, valid_y_predicted <span style="color:#000;font-weight:bold">=</span> executor<span style="color:#000;font-weight:bold">.</span>run(
+</span></span><span style="display:flex;"><span>            feed_dict<span style="color:#000;font-weight:bold">=</span>{
+</span></span><span style="display:flex;"><span>                X: valid_X_val,
+</span></span><span style="display:flex;"><span>                y_: valid_y_val,
+</span></span><span style="display:flex;"><span>                W1: W1_val,
+</span></span><span style="display:flex;"><span>                W2: W2_val,
+</span></span><span style="display:flex;"><span>                W3: W3_val,
+</span></span><span style="display:flex;"><span>                b1: b1_val,
+</span></span><span style="display:flex;"><span>                b2: b2_val,
+</span></span><span style="display:flex;"><span>                b3: b3_val},
+</span></span><span style="display:flex;"><span>            convert_to_numpy_ret_vals<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>        correct_prediction <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>equal(
+</span></span><span style="display:flex;"><span>            np<span style="color:#000;font-weight:bold">.</span>argmax(valid_y_val, <span style="color:#099">1</span>),
+</span></span><span style="display:flex;"><span>            np<span style="color:#000;font-weight:bold">.</span>argmax(valid_y_predicted, <span style="color:#099">1</span>))<span style="color:#000;font-weight:bold">.</span>astype(np<span style="color:#000;font-weight:bold">.</span>float)
+</span></span><span style="display:flex;"><span>        correct_predictions<span style="color:#000;font-weight:bold">.</span>extend(correct_prediction)
+</span></span><span style="display:flex;"><span>    accuracy <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>mean(correct_predictions)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;validation set accuracy=</span><span style="color:#d14">%f</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> accuracy)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>最后的效果在 97%。</p>
 <h2 id="总结">总结</h2>
@@ -912,7 +912,7 @@
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

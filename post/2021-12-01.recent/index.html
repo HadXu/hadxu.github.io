@@ -220,19 +220,19 @@
 <p>喜欢上了折腾NAS,好想赶紧回家搞NAS，总价2999，还是很香的。突然发现威联通好像不是很香啊，哈哈哈。</p>
 <p>在折腾rust cross-compile的时候，突然想将mac上的编译放到linux上运行，好在手里有mac以及linux云服务器，因此就尝试了一下，亲测可行。</p>
 <p>官方中说rust支持各种平台，可以使用<code>rustup target list</code>来看，如果想在哪个平台上运行就用<code>rustup target xxx</code>来添加，接下来使用<code>cargo build --target=arm-linux-androideabi</code>就可以编译啦，实际中mac端需要进行如下的操作</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rustup target add x86_64-unknown-linux-gnu
-$ brew tap SergioBenitez/osxct
-$ brew install x86_64-unknown-linux-gnu
-$ <span style="color:#008080">CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER</span><span style="color:#000;font-weight:bold">=</span>x86_64-unknown-linux-gnu-gcc cargo build --release --target<span style="color:#000;font-weight:bold">=</span>x86_64-unknown-linux-gnu
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ rustup target add x86_64-unknown-linux-gnu
+</span></span><span style="display:flex;"><span>$ brew tap SergioBenitez/osxct
+</span></span><span style="display:flex;"><span>$ brew install x86_64-unknown-linux-gnu
+</span></span><span style="display:flex;"><span>$ <span style="color:#008080">CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER</span><span style="color:#000;font-weight:bold">=</span>x86_64-unknown-linux-gnu-gcc cargo build --release --target<span style="color:#000;font-weight:bold">=</span>x86_64-unknown-linux-gnu
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>亲测在linux端可以运行。</p>
 <h3 id="arm_neon折腾记">arm_neon折腾记</h3>
@@ -288,7 +288,7 @@ $ <span style="color:#008080">CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER</span
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

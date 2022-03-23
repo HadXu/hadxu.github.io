@@ -208,251 +208,251 @@
         <div class="post-content">
             <h1 id="pytorch-distributed-training">Pytorch Distributed Training</h1>
 <p><a href="https://yangkky.github.io/2019/07/08/distributed-pytorch-tutorial.html">Distributed data parallel training in Pytorch</a></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">os</span>
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">datetime</span> <span style="color:#000;font-weight:bold">import</span> datetime
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">argparse</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.multiprocessing</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">mp</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torchvision</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torchvision.transforms</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">transforms</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.nn</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">nn</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.distributed</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">dist</span>
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">apex.parallel</span> <span style="color:#000;font-weight:bold">import</span> DistributedDataParallel <span style="color:#000;font-weight:bold">as</span> DDP
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">apex</span> <span style="color:#000;font-weight:bold">import</span> amp
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">main</span>():
-    parser <span style="color:#000;font-weight:bold">=</span> argparse<span style="color:#000;font-weight:bold">.</span>ArgumentParser()
-    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-n&#39;</span>, <span style="color:#d14">&#39;--nodes&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;N&#39;</span>,
-                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of data loading workers (default: 4)&#39;</span>)
-    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-g&#39;</span>, <span style="color:#d14">&#39;--gpus&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
-                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of gpus per node&#39;</span>)
-    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-nr&#39;</span>, <span style="color:#d14">&#39;--nr&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
-                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;ranking within the nodes&#39;</span>)
-    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;--epochs&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;N&#39;</span>,
-                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of total epochs to run&#39;</span>)
-    args <span style="color:#000;font-weight:bold">=</span> parser<span style="color:#000;font-weight:bold">.</span>parse_args()
-    args<span style="color:#000;font-weight:bold">.</span>world_size <span style="color:#000;font-weight:bold">=</span> args<span style="color:#000;font-weight:bold">.</span>gpus <span style="color:#000;font-weight:bold">*</span> args<span style="color:#000;font-weight:bold">.</span>nodes
-    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14">&#39;MASTER_ADDR&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;localhost&#39;</span>
-    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14">&#39;MASTER_PORT&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;8888&#39;</span>
-    mp<span style="color:#000;font-weight:bold">.</span>spawn(train, nprocs<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>gpus, args<span style="color:#000;font-weight:bold">=</span>(args,))
-
-
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ConvNet</span>(nn<span style="color:#000;font-weight:bold">.</span>Module):
-    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>, num_classes<span style="color:#000;font-weight:bold">=</span><span style="color:#099">10</span>):
-        <span style="color:#0086b3">super</span>(ConvNet, <span style="color:#999">self</span>)<span style="color:#000;font-weight:bold">.</span>__init__()
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer1 <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Sequential(
-            nn<span style="color:#000;font-weight:bold">.</span>Conv2d(<span style="color:#099">1</span>, <span style="color:#099">16</span>, kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">5</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, padding<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>),
-            nn<span style="color:#000;font-weight:bold">.</span>BatchNorm2d(<span style="color:#099">16</span>),
-            nn<span style="color:#000;font-weight:bold">.</span>ReLU(),
-            nn<span style="color:#000;font-weight:bold">.</span>MaxPool2d(kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>))
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer2 <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Sequential(
-            nn<span style="color:#000;font-weight:bold">.</span>Conv2d(<span style="color:#099">16</span>, <span style="color:#099">32</span>, kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">5</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, padding<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>),
-            nn<span style="color:#000;font-weight:bold">.</span>BatchNorm2d(<span style="color:#099">32</span>),
-            nn<span style="color:#000;font-weight:bold">.</span>ReLU(),
-            nn<span style="color:#000;font-weight:bold">.</span>MaxPool2d(kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>))
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>fc <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Linear(<span style="color:#099">7</span><span style="color:#000;font-weight:bold">*</span><span style="color:#099">7</span><span style="color:#000;font-weight:bold">*</span><span style="color:#099">32</span>, num_classes)
-
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">forward</span>(<span style="color:#999">self</span>, x):
-        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer1(x)
-        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer2(out)
-        out <span style="color:#000;font-weight:bold">=</span> out<span style="color:#000;font-weight:bold">.</span>reshape(out<span style="color:#000;font-weight:bold">.</span>size(<span style="color:#099">0</span>), <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)
-        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>fc(out)
-        <span style="color:#000;font-weight:bold">return</span> out
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">train</span>(gpu, args):
-    rank <span style="color:#000;font-weight:bold">=</span> args<span style="color:#000;font-weight:bold">.</span>nr <span style="color:#000;font-weight:bold">*</span> args<span style="color:#000;font-weight:bold">.</span>gpus <span style="color:#000;font-weight:bold">+</span> gpu
-    dist<span style="color:#000;font-weight:bold">.</span>init_process_group(
-        backend<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;nccl&#39;</span>,
-        init_method<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;env://&#39;</span>,
-        world_size<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>world_size,
-        rank<span style="color:#000;font-weight:bold">=</span>rank)
-    torch<span style="color:#000;font-weight:bold">.</span>manual_seed(<span style="color:#099">0</span>)
-    model <span style="color:#000;font-weight:bold">=</span> ConvNet()
-    torch<span style="color:#000;font-weight:bold">.</span>cuda<span style="color:#000;font-weight:bold">.</span>set_device(gpu)
-    model<span style="color:#000;font-weight:bold">.</span>cuda(gpu)
-    batch_size <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">100</span>
-    <span style="color:#998;font-style:italic"># define loss function (criterion) and optimizer</span>
-    criterion <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>CrossEntropyLoss()<span style="color:#000;font-weight:bold">.</span>cuda(gpu)
-    optimizer <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>optim<span style="color:#000;font-weight:bold">.</span>SGD(model<span style="color:#000;font-weight:bold">.</span>parameters(), <span style="color:#099">1e-4</span>)
-    <span style="color:#998;font-style:italic"># Wrap the model</span>
-    model, optimizer <span style="color:#000;font-weight:bold">=</span> amp<span style="color:#000;font-weight:bold">.</span>initialize(model, optimizer, opt_level<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;O2&#39;</span>)
-    model <span style="color:#000;font-weight:bold">=</span> DDP(model)
-    <span style="color:#998;font-style:italic"># Data loading code</span>
-    train_dataset <span style="color:#000;font-weight:bold">=</span> torchvision<span style="color:#000;font-weight:bold">.</span>datasets<span style="color:#000;font-weight:bold">.</span>MNIST(
-        root<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;./data&#39;</span>,
-        train<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>,
-        transform<span style="color:#000;font-weight:bold">=</span>transforms<span style="color:#000;font-weight:bold">.</span>ToTensor(),
-        download<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>
-    )
-    train_sampler <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>utils<span style="color:#000;font-weight:bold">.</span>data<span style="color:#000;font-weight:bold">.</span>distributed<span style="color:#000;font-weight:bold">.</span>DistributedSampler(
-        train_dataset,
-        num_replicas<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>world_size,
-        rank<span style="color:#000;font-weight:bold">=</span>rank)
-    train_loader <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>utils<span style="color:#000;font-weight:bold">.</span>data<span style="color:#000;font-weight:bold">.</span>DataLoader(
-        dataset<span style="color:#000;font-weight:bold">=</span>train_dataset,
-        batch_size<span style="color:#000;font-weight:bold">=</span>batch_size,
-        shuffle<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>,
-        num_workers<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>,
-        pin_memory<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>,
-        sampler<span style="color:#000;font-weight:bold">=</span>train_sampler
-    )
-
-    start <span style="color:#000;font-weight:bold">=</span> datetime<span style="color:#000;font-weight:bold">.</span>now()
-    total_step <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(train_loader)
-    <span style="color:#000;font-weight:bold">for</span> epoch <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(args<span style="color:#000;font-weight:bold">.</span>epochs):
-        <span style="color:#000;font-weight:bold">for</span> i, (images, labels) <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(train_loader):
-            images <span style="color:#000;font-weight:bold">=</span> images<span style="color:#000;font-weight:bold">.</span>cuda(non_blocking<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
-            labels <span style="color:#000;font-weight:bold">=</span> labels<span style="color:#000;font-weight:bold">.</span>cuda(non_blocking<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
-            <span style="color:#998;font-style:italic"># Forward pass</span>
-            outputs <span style="color:#000;font-weight:bold">=</span> model(images)
-            loss <span style="color:#000;font-weight:bold">=</span> criterion(outputs, labels)
-
-            <span style="color:#998;font-style:italic"># Backward and optimize</span>
-            optimizer<span style="color:#000;font-weight:bold">.</span>zero_grad()
-            <span style="color:#000;font-weight:bold">with</span> amp<span style="color:#000;font-weight:bold">.</span>scale_loss(loss, optimizer) <span style="color:#000;font-weight:bold">as</span> scaled_loss:
-                scaled_loss<span style="color:#000;font-weight:bold">.</span>backward()
-            optimizer<span style="color:#000;font-weight:bold">.</span>step()
-            <span style="color:#000;font-weight:bold">if</span> (i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">%</span> <span style="color:#099">100</span> <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">and</span> gpu <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
-                <span style="color:#0086b3">print</span>(<span style="color:#d14">&#39;Epoch [</span><span style="color:#d14">{}</span><span style="color:#d14">/</span><span style="color:#d14">{}</span><span style="color:#d14">], Step [</span><span style="color:#d14">{}</span><span style="color:#d14">/</span><span style="color:#d14">{}</span><span style="color:#d14">], Loss: </span><span style="color:#d14">{:.4f}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(
-                    epoch <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>,
-                    args<span style="color:#000;font-weight:bold">.</span>epochs,
-                    i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>,
-                    total_step,
-                    loss<span style="color:#000;font-weight:bold">.</span>item())
-                )
-    <span style="color:#000;font-weight:bold">if</span> gpu <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
-        <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;Training complete in: &#34;</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#0086b3">str</span>(datetime<span style="color:#000;font-weight:bold">.</span>now() <span style="color:#000;font-weight:bold">-</span> start))
-
-
-<span style="color:#000;font-weight:bold">if</span> __name__ <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#39;__main__&#39;</span>:
-    main()
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">os</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">datetime</span> <span style="color:#000;font-weight:bold">import</span> datetime
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">argparse</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.multiprocessing</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">mp</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torchvision</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torchvision.transforms</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">transforms</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.nn</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">nn</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">torch.distributed</span> <span style="color:#000;font-weight:bold">as</span> <span style="color:#555">dist</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">apex.parallel</span> <span style="color:#000;font-weight:bold">import</span> DistributedDataParallel <span style="color:#000;font-weight:bold">as</span> DDP
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">apex</span> <span style="color:#000;font-weight:bold">import</span> amp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">main</span>():
+</span></span><span style="display:flex;"><span>    parser <span style="color:#000;font-weight:bold">=</span> argparse<span style="color:#000;font-weight:bold">.</span>ArgumentParser()
+</span></span><span style="display:flex;"><span>    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-n&#39;</span>, <span style="color:#d14">&#39;--nodes&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;N&#39;</span>,
+</span></span><span style="display:flex;"><span>                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of data loading workers (default: 4)&#39;</span>)
+</span></span><span style="display:flex;"><span>    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-g&#39;</span>, <span style="color:#d14">&#39;--gpus&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
+</span></span><span style="display:flex;"><span>                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of gpus per node&#39;</span>)
+</span></span><span style="display:flex;"><span>    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;-nr&#39;</span>, <span style="color:#d14">&#39;--nr&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>,
+</span></span><span style="display:flex;"><span>                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;ranking within the nodes&#39;</span>)
+</span></span><span style="display:flex;"><span>    parser<span style="color:#000;font-weight:bold">.</span>add_argument(<span style="color:#d14">&#39;--epochs&#39;</span>, default<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, <span style="color:#0086b3">type</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">int</span>, metavar<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;N&#39;</span>,
+</span></span><span style="display:flex;"><span>                        help<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;number of total epochs to run&#39;</span>)
+</span></span><span style="display:flex;"><span>    args <span style="color:#000;font-weight:bold">=</span> parser<span style="color:#000;font-weight:bold">.</span>parse_args()
+</span></span><span style="display:flex;"><span>    args<span style="color:#000;font-weight:bold">.</span>world_size <span style="color:#000;font-weight:bold">=</span> args<span style="color:#000;font-weight:bold">.</span>gpus <span style="color:#000;font-weight:bold">*</span> args<span style="color:#000;font-weight:bold">.</span>nodes
+</span></span><span style="display:flex;"><span>    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14">&#39;MASTER_ADDR&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;localhost&#39;</span>
+</span></span><span style="display:flex;"><span>    os<span style="color:#000;font-weight:bold">.</span>environ[<span style="color:#d14">&#39;MASTER_PORT&#39;</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;8888&#39;</span>
+</span></span><span style="display:flex;"><span>    mp<span style="color:#000;font-weight:bold">.</span>spawn(train, nprocs<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>gpus, args<span style="color:#000;font-weight:bold">=</span>(args,))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ConvNet</span>(nn<span style="color:#000;font-weight:bold">.</span>Module):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>, num_classes<span style="color:#000;font-weight:bold">=</span><span style="color:#099">10</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">super</span>(ConvNet, <span style="color:#999">self</span>)<span style="color:#000;font-weight:bold">.</span>__init__()
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer1 <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Sequential(
+</span></span><span style="display:flex;"><span>            nn<span style="color:#000;font-weight:bold">.</span>Conv2d(<span style="color:#099">1</span>, <span style="color:#099">16</span>, kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">5</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, padding<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>),
+</span></span><span style="display:flex;"><span>            nn<span style="color:#000;font-weight:bold">.</span>BatchNorm2d(<span style="color:#099">16</span>),
+</span></span><span style="display:flex;"><span>            nn<span style="color:#000;font-weight:bold">.</span>ReLU(),
+</span></span><span style="display:flex;"><span>            nn<span style="color:#000;font-weight:bold">.</span>MaxPool2d(kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer2 <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Sequential(
+</span></span><span style="display:flex;"><span>            nn<span style="color:#000;font-weight:bold">.</span>Conv2d(<span style="color:#099">16</span>, <span style="color:#099">32</span>, kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">5</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, padding<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>),
+</span></span><span style="display:flex;"><span>            nn<span style="color:#000;font-weight:bold">.</span>BatchNorm2d(<span style="color:#099">32</span>),
+</span></span><span style="display:flex;"><span>            nn<span style="color:#000;font-weight:bold">.</span>ReLU(),
+</span></span><span style="display:flex;"><span>            nn<span style="color:#000;font-weight:bold">.</span>MaxPool2d(kernel_size<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, stride<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>fc <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>Linear(<span style="color:#099">7</span><span style="color:#000;font-weight:bold">*</span><span style="color:#099">7</span><span style="color:#000;font-weight:bold">*</span><span style="color:#099">32</span>, num_classes)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">forward</span>(<span style="color:#999">self</span>, x):
+</span></span><span style="display:flex;"><span>        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer1(x)
+</span></span><span style="display:flex;"><span>        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>layer2(out)
+</span></span><span style="display:flex;"><span>        out <span style="color:#000;font-weight:bold">=</span> out<span style="color:#000;font-weight:bold">.</span>reshape(out<span style="color:#000;font-weight:bold">.</span>size(<span style="color:#099">0</span>), <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>        out <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>fc(out)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> out
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">train</span>(gpu, args):
+</span></span><span style="display:flex;"><span>    rank <span style="color:#000;font-weight:bold">=</span> args<span style="color:#000;font-weight:bold">.</span>nr <span style="color:#000;font-weight:bold">*</span> args<span style="color:#000;font-weight:bold">.</span>gpus <span style="color:#000;font-weight:bold">+</span> gpu
+</span></span><span style="display:flex;"><span>    dist<span style="color:#000;font-weight:bold">.</span>init_process_group(
+</span></span><span style="display:flex;"><span>        backend<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;nccl&#39;</span>,
+</span></span><span style="display:flex;"><span>        init_method<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;env://&#39;</span>,
+</span></span><span style="display:flex;"><span>        world_size<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>world_size,
+</span></span><span style="display:flex;"><span>        rank<span style="color:#000;font-weight:bold">=</span>rank)
+</span></span><span style="display:flex;"><span>    torch<span style="color:#000;font-weight:bold">.</span>manual_seed(<span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>    model <span style="color:#000;font-weight:bold">=</span> ConvNet()
+</span></span><span style="display:flex;"><span>    torch<span style="color:#000;font-weight:bold">.</span>cuda<span style="color:#000;font-weight:bold">.</span>set_device(gpu)
+</span></span><span style="display:flex;"><span>    model<span style="color:#000;font-weight:bold">.</span>cuda(gpu)
+</span></span><span style="display:flex;"><span>    batch_size <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">100</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># define loss function (criterion) and optimizer</span>
+</span></span><span style="display:flex;"><span>    criterion <span style="color:#000;font-weight:bold">=</span> nn<span style="color:#000;font-weight:bold">.</span>CrossEntropyLoss()<span style="color:#000;font-weight:bold">.</span>cuda(gpu)
+</span></span><span style="display:flex;"><span>    optimizer <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>optim<span style="color:#000;font-weight:bold">.</span>SGD(model<span style="color:#000;font-weight:bold">.</span>parameters(), <span style="color:#099">1e-4</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># Wrap the model</span>
+</span></span><span style="display:flex;"><span>    model, optimizer <span style="color:#000;font-weight:bold">=</span> amp<span style="color:#000;font-weight:bold">.</span>initialize(model, optimizer, opt_level<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;O2&#39;</span>)
+</span></span><span style="display:flex;"><span>    model <span style="color:#000;font-weight:bold">=</span> DDP(model)
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># Data loading code</span>
+</span></span><span style="display:flex;"><span>    train_dataset <span style="color:#000;font-weight:bold">=</span> torchvision<span style="color:#000;font-weight:bold">.</span>datasets<span style="color:#000;font-weight:bold">.</span>MNIST(
+</span></span><span style="display:flex;"><span>        root<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;./data&#39;</span>,
+</span></span><span style="display:flex;"><span>        train<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>,
+</span></span><span style="display:flex;"><span>        transform<span style="color:#000;font-weight:bold">=</span>transforms<span style="color:#000;font-weight:bold">.</span>ToTensor(),
+</span></span><span style="display:flex;"><span>        download<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    train_sampler <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>utils<span style="color:#000;font-weight:bold">.</span>data<span style="color:#000;font-weight:bold">.</span>distributed<span style="color:#000;font-weight:bold">.</span>DistributedSampler(
+</span></span><span style="display:flex;"><span>        train_dataset,
+</span></span><span style="display:flex;"><span>        num_replicas<span style="color:#000;font-weight:bold">=</span>args<span style="color:#000;font-weight:bold">.</span>world_size,
+</span></span><span style="display:flex;"><span>        rank<span style="color:#000;font-weight:bold">=</span>rank)
+</span></span><span style="display:flex;"><span>    train_loader <span style="color:#000;font-weight:bold">=</span> torch<span style="color:#000;font-weight:bold">.</span>utils<span style="color:#000;font-weight:bold">.</span>data<span style="color:#000;font-weight:bold">.</span>DataLoader(
+</span></span><span style="display:flex;"><span>        dataset<span style="color:#000;font-weight:bold">=</span>train_dataset,
+</span></span><span style="display:flex;"><span>        batch_size<span style="color:#000;font-weight:bold">=</span>batch_size,
+</span></span><span style="display:flex;"><span>        shuffle<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>,
+</span></span><span style="display:flex;"><span>        num_workers<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>,
+</span></span><span style="display:flex;"><span>        pin_memory<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>,
+</span></span><span style="display:flex;"><span>        sampler<span style="color:#000;font-weight:bold">=</span>train_sampler
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    start <span style="color:#000;font-weight:bold">=</span> datetime<span style="color:#000;font-weight:bold">.</span>now()
+</span></span><span style="display:flex;"><span>    total_step <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(train_loader)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> epoch <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(args<span style="color:#000;font-weight:bold">.</span>epochs):
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> i, (images, labels) <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(train_loader):
+</span></span><span style="display:flex;"><span>            images <span style="color:#000;font-weight:bold">=</span> images<span style="color:#000;font-weight:bold">.</span>cuda(non_blocking<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>            labels <span style="color:#000;font-weight:bold">=</span> labels<span style="color:#000;font-weight:bold">.</span>cuda(non_blocking<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#998;font-style:italic"># Forward pass</span>
+</span></span><span style="display:flex;"><span>            outputs <span style="color:#000;font-weight:bold">=</span> model(images)
+</span></span><span style="display:flex;"><span>            loss <span style="color:#000;font-weight:bold">=</span> criterion(outputs, labels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#998;font-style:italic"># Backward and optimize</span>
+</span></span><span style="display:flex;"><span>            optimizer<span style="color:#000;font-weight:bold">.</span>zero_grad()
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">with</span> amp<span style="color:#000;font-weight:bold">.</span>scale_loss(loss, optimizer) <span style="color:#000;font-weight:bold">as</span> scaled_loss:
+</span></span><span style="display:flex;"><span>                scaled_loss<span style="color:#000;font-weight:bold">.</span>backward()
+</span></span><span style="display:flex;"><span>            optimizer<span style="color:#000;font-weight:bold">.</span>step()
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">if</span> (i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">%</span> <span style="color:#099">100</span> <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">and</span> gpu <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#0086b3">print</span>(<span style="color:#d14">&#39;Epoch [</span><span style="color:#d14">{}</span><span style="color:#d14">/</span><span style="color:#d14">{}</span><span style="color:#d14">], Step [</span><span style="color:#d14">{}</span><span style="color:#d14">/</span><span style="color:#d14">{}</span><span style="color:#d14">], Loss: </span><span style="color:#d14">{:.4f}</span><span style="color:#d14">&#39;</span><span style="color:#000;font-weight:bold">.</span>format(
+</span></span><span style="display:flex;"><span>                    epoch <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>,
+</span></span><span style="display:flex;"><span>                    args<span style="color:#000;font-weight:bold">.</span>epochs,
+</span></span><span style="display:flex;"><span>                    i <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>,
+</span></span><span style="display:flex;"><span>                    total_step,
+</span></span><span style="display:flex;"><span>                    loss<span style="color:#000;font-weight:bold">.</span>item())
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> gpu <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;Training complete in: &#34;</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#0086b3">str</span>(datetime<span style="color:#000;font-weight:bold">.</span>now() <span style="color:#000;font-weight:bold">-</span> start))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">if</span> __name__ <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
         </div>
@@ -493,7 +493,7 @@
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

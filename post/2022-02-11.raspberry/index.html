@@ -226,29 +226,29 @@
 <li>新建一个ssh文件在root目录下</li>
 <li>新建wpa_supplicant.conf文件， 设置wifi密码登陆</li>
 </ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008080">ctrl_interface</span><span style="color:#000;font-weight:bold">=</span><span style="color:#008080">DIR</span><span style="color:#000;font-weight:bold">=</span>/var/run/wpa_supplicant <span style="color:#008080">GROUP</span><span style="color:#000;font-weight:bold">=</span>netdev
-<span style="color:#008080">update_config</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
-<span style="color:#008080">country</span><span style="color:#000;font-weight:bold">=</span>&lt;Country Code&gt; https://www.iban.com/country-codes
-
-<span style="color:#008080">network</span><span style="color:#000;font-weight:bold">={</span>
-    <span style="color:#008080">ssid</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&lt;SSID&gt;&#34;</span>
-    <span style="color:#008080">psk</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&lt;PASSWORD&gt;&#34;</span>
-    <span style="color:#008080">scan_ssid</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
-<span style="color:#000;font-weight:bold">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#008080">ctrl_interface</span><span style="color:#000;font-weight:bold">=</span><span style="color:#008080">DIR</span><span style="color:#000;font-weight:bold">=</span>/var/run/wpa_supplicant <span style="color:#008080">GROUP</span><span style="color:#000;font-weight:bold">=</span>netdev
+</span></span><span style="display:flex;"><span><span style="color:#008080">update_config</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">country</span><span style="color:#000;font-weight:bold">=</span>&lt;Country Code&gt; https://www.iban.com/country-codes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">network</span><span style="color:#000;font-weight:bold">={</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">ssid</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&lt;SSID&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">psk</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&lt;PASSWORD&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">scan_ssid</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="4">
 <li>
@@ -303,7 +303,7 @@
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

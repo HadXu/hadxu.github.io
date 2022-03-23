@@ -213,407 +213,407 @@
         <div class="post-content">
             <h1 id="md5-algorithm">MD5 Algorithm</h1>
 <p>一个最小的MD5算法(md5.c)</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_compress</span>(<span style="color:#458;font-weight:bold">uint32_t</span> state[<span style="color:#000;font-weight:bold">static</span> <span style="color:#099">4</span>], <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> block[<span style="color:#000;font-weight:bold">static</span> <span style="color:#099">64</span>]) {
-	<span style="color:#999;font-weight:bold;font-style:italic">#define LOADSCHEDULE(i)  \
-</span><span style="color:#999;font-weight:bold;font-style:italic">		schedule[i] = (uint32_t)block[i * 4 + 0] &lt;&lt;  0  \
-</span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 1] &lt;&lt;  8  \
-</span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 2] &lt;&lt; 16  \
-</span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 3] &lt;&lt; 24;
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	
-	<span style="color:#458;font-weight:bold">uint32_t</span> schedule[<span style="color:#099">16</span>];
-	LOADSCHEDULE( <span style="color:#099">0</span>)
-	LOADSCHEDULE( <span style="color:#099">1</span>)
-	LOADSCHEDULE( <span style="color:#099">2</span>)
-	LOADSCHEDULE( <span style="color:#099">3</span>)
-	LOADSCHEDULE( <span style="color:#099">4</span>)
-	LOADSCHEDULE( <span style="color:#099">5</span>)
-	LOADSCHEDULE( <span style="color:#099">6</span>)
-	LOADSCHEDULE( <span style="color:#099">7</span>)
-	LOADSCHEDULE( <span style="color:#099">8</span>)
-	LOADSCHEDULE( <span style="color:#099">9</span>)
-	LOADSCHEDULE(<span style="color:#099">10</span>)
-	LOADSCHEDULE(<span style="color:#099">11</span>)
-	LOADSCHEDULE(<span style="color:#099">12</span>)
-	LOADSCHEDULE(<span style="color:#099">13</span>)
-	LOADSCHEDULE(<span style="color:#099">14</span>)
-	LOADSCHEDULE(<span style="color:#099">15</span>)
-	
-	<span style="color:#999;font-weight:bold;font-style:italic">#define ROTL32(x, n)  (((0U + (x)) &lt;&lt; (n)) | ((x) &gt;&gt; (32 - (n))))  </span><span style="color:#998;font-style:italic">// Assumes that x is uint32_t and 0 &lt; n &lt; 32
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND0(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, d ^ (b &amp; (c ^ d)), k, s, t)
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND1(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, c ^ (d &amp; (b ^ c)), k, s, t)
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND2(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, b ^ c ^ d        , k, s, t)
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND3(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, c ^ (b | ~d)     , k, s, t)
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND_TAIL(a, b, expr, k, s, t)    \
-</span><span style="color:#999;font-weight:bold;font-style:italic">		a = 0U + a + (expr) + UINT32_C(t) + schedule[k];  \
-</span><span style="color:#999;font-weight:bold;font-style:italic">		a = 0U + b + ROTL32(a, s);
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>	
-	<span style="color:#458;font-weight:bold">uint32_t</span> a <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">0</span>];
-	<span style="color:#458;font-weight:bold">uint32_t</span> b <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">1</span>];
-	<span style="color:#458;font-weight:bold">uint32_t</span> c <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">2</span>];
-	<span style="color:#458;font-weight:bold">uint32_t</span> d <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">3</span>];
-	
-	ROUND0(a, b, c, d,  <span style="color:#099">0</span>,  <span style="color:#099">7</span>, <span style="color:#099">0xD76AA478</span>)
-	ROUND0(d, a, b, c,  <span style="color:#099">1</span>, <span style="color:#099">12</span>, <span style="color:#099">0xE8C7B756</span>)
-	ROUND0(c, d, a, b,  <span style="color:#099">2</span>, <span style="color:#099">17</span>, <span style="color:#099">0x242070DB</span>)
-	ROUND0(b, c, d, a,  <span style="color:#099">3</span>, <span style="color:#099">22</span>, <span style="color:#099">0xC1BDCEEE</span>)
-	ROUND0(a, b, c, d,  <span style="color:#099">4</span>,  <span style="color:#099">7</span>, <span style="color:#099">0xF57C0FAF</span>)
-	ROUND0(d, a, b, c,  <span style="color:#099">5</span>, <span style="color:#099">12</span>, <span style="color:#099">0x4787C62A</span>)
-	ROUND0(c, d, a, b,  <span style="color:#099">6</span>, <span style="color:#099">17</span>, <span style="color:#099">0xA8304613</span>)
-	ROUND0(b, c, d, a,  <span style="color:#099">7</span>, <span style="color:#099">22</span>, <span style="color:#099">0xFD469501</span>)
-	ROUND0(a, b, c, d,  <span style="color:#099">8</span>,  <span style="color:#099">7</span>, <span style="color:#099">0x698098D8</span>)
-	ROUND0(d, a, b, c,  <span style="color:#099">9</span>, <span style="color:#099">12</span>, <span style="color:#099">0x8B44F7AF</span>)
-	ROUND0(c, d, a, b, <span style="color:#099">10</span>, <span style="color:#099">17</span>, <span style="color:#099">0xFFFF5BB1</span>)
-	ROUND0(b, c, d, a, <span style="color:#099">11</span>, <span style="color:#099">22</span>, <span style="color:#099">0x895CD7BE</span>)
-	ROUND0(a, b, c, d, <span style="color:#099">12</span>,  <span style="color:#099">7</span>, <span style="color:#099">0x6B901122</span>)
-	ROUND0(d, a, b, c, <span style="color:#099">13</span>, <span style="color:#099">12</span>, <span style="color:#099">0xFD987193</span>)
-	ROUND0(c, d, a, b, <span style="color:#099">14</span>, <span style="color:#099">17</span>, <span style="color:#099">0xA679438E</span>)
-	ROUND0(b, c, d, a, <span style="color:#099">15</span>, <span style="color:#099">22</span>, <span style="color:#099">0x49B40821</span>)
-	ROUND1(a, b, c, d,  <span style="color:#099">1</span>,  <span style="color:#099">5</span>, <span style="color:#099">0xF61E2562</span>)
-	ROUND1(d, a, b, c,  <span style="color:#099">6</span>,  <span style="color:#099">9</span>, <span style="color:#099">0xC040B340</span>)
-	ROUND1(c, d, a, b, <span style="color:#099">11</span>, <span style="color:#099">14</span>, <span style="color:#099">0x265E5A51</span>)
-	ROUND1(b, c, d, a,  <span style="color:#099">0</span>, <span style="color:#099">20</span>, <span style="color:#099">0xE9B6C7AA</span>)
-	ROUND1(a, b, c, d,  <span style="color:#099">5</span>,  <span style="color:#099">5</span>, <span style="color:#099">0xD62F105D</span>)
-	ROUND1(d, a, b, c, <span style="color:#099">10</span>,  <span style="color:#099">9</span>, <span style="color:#099">0x02441453</span>)
-	ROUND1(c, d, a, b, <span style="color:#099">15</span>, <span style="color:#099">14</span>, <span style="color:#099">0xD8A1E681</span>)
-	ROUND1(b, c, d, a,  <span style="color:#099">4</span>, <span style="color:#099">20</span>, <span style="color:#099">0xE7D3FBC8</span>)
-	ROUND1(a, b, c, d,  <span style="color:#099">9</span>,  <span style="color:#099">5</span>, <span style="color:#099">0x21E1CDE6</span>)
-	ROUND1(d, a, b, c, <span style="color:#099">14</span>,  <span style="color:#099">9</span>, <span style="color:#099">0xC33707D6</span>)
-	ROUND1(c, d, a, b,  <span style="color:#099">3</span>, <span style="color:#099">14</span>, <span style="color:#099">0xF4D50D87</span>)
-	ROUND1(b, c, d, a,  <span style="color:#099">8</span>, <span style="color:#099">20</span>, <span style="color:#099">0x455A14ED</span>)
-	ROUND1(a, b, c, d, <span style="color:#099">13</span>,  <span style="color:#099">5</span>, <span style="color:#099">0xA9E3E905</span>)
-	ROUND1(d, a, b, c,  <span style="color:#099">2</span>,  <span style="color:#099">9</span>, <span style="color:#099">0xFCEFA3F8</span>)
-	ROUND1(c, d, a, b,  <span style="color:#099">7</span>, <span style="color:#099">14</span>, <span style="color:#099">0x676F02D9</span>)
-	ROUND1(b, c, d, a, <span style="color:#099">12</span>, <span style="color:#099">20</span>, <span style="color:#099">0x8D2A4C8A</span>)
-	ROUND2(a, b, c, d,  <span style="color:#099">5</span>,  <span style="color:#099">4</span>, <span style="color:#099">0xFFFA3942</span>)
-	ROUND2(d, a, b, c,  <span style="color:#099">8</span>, <span style="color:#099">11</span>, <span style="color:#099">0x8771F681</span>)
-	ROUND2(c, d, a, b, <span style="color:#099">11</span>, <span style="color:#099">16</span>, <span style="color:#099">0x6D9D6122</span>)
-	ROUND2(b, c, d, a, <span style="color:#099">14</span>, <span style="color:#099">23</span>, <span style="color:#099">0xFDE5380C</span>)
-	ROUND2(a, b, c, d,  <span style="color:#099">1</span>,  <span style="color:#099">4</span>, <span style="color:#099">0xA4BEEA44</span>)
-	ROUND2(d, a, b, c,  <span style="color:#099">4</span>, <span style="color:#099">11</span>, <span style="color:#099">0x4BDECFA9</span>)
-	ROUND2(c, d, a, b,  <span style="color:#099">7</span>, <span style="color:#099">16</span>, <span style="color:#099">0xF6BB4B60</span>)
-	ROUND2(b, c, d, a, <span style="color:#099">10</span>, <span style="color:#099">23</span>, <span style="color:#099">0xBEBFBC70</span>)
-	ROUND2(a, b, c, d, <span style="color:#099">13</span>,  <span style="color:#099">4</span>, <span style="color:#099">0x289B7EC6</span>)
-	ROUND2(d, a, b, c,  <span style="color:#099">0</span>, <span style="color:#099">11</span>, <span style="color:#099">0xEAA127FA</span>)
-	ROUND2(c, d, a, b,  <span style="color:#099">3</span>, <span style="color:#099">16</span>, <span style="color:#099">0xD4EF3085</span>)
-	ROUND2(b, c, d, a,  <span style="color:#099">6</span>, <span style="color:#099">23</span>, <span style="color:#099">0x04881D05</span>)
-	ROUND2(a, b, c, d,  <span style="color:#099">9</span>,  <span style="color:#099">4</span>, <span style="color:#099">0xD9D4D039</span>)
-	ROUND2(d, a, b, c, <span style="color:#099">12</span>, <span style="color:#099">11</span>, <span style="color:#099">0xE6DB99E5</span>)
-	ROUND2(c, d, a, b, <span style="color:#099">15</span>, <span style="color:#099">16</span>, <span style="color:#099">0x1FA27CF8</span>)
-	ROUND2(b, c, d, a,  <span style="color:#099">2</span>, <span style="color:#099">23</span>, <span style="color:#099">0xC4AC5665</span>)
-	ROUND3(a, b, c, d,  <span style="color:#099">0</span>,  <span style="color:#099">6</span>, <span style="color:#099">0xF4292244</span>)
-	ROUND3(d, a, b, c,  <span style="color:#099">7</span>, <span style="color:#099">10</span>, <span style="color:#099">0x432AFF97</span>)
-	ROUND3(c, d, a, b, <span style="color:#099">14</span>, <span style="color:#099">15</span>, <span style="color:#099">0xAB9423A7</span>)
-	ROUND3(b, c, d, a,  <span style="color:#099">5</span>, <span style="color:#099">21</span>, <span style="color:#099">0xFC93A039</span>)
-	ROUND3(a, b, c, d, <span style="color:#099">12</span>,  <span style="color:#099">6</span>, <span style="color:#099">0x655B59C3</span>)
-	ROUND3(d, a, b, c,  <span style="color:#099">3</span>, <span style="color:#099">10</span>, <span style="color:#099">0x8F0CCC92</span>)
-	ROUND3(c, d, a, b, <span style="color:#099">10</span>, <span style="color:#099">15</span>, <span style="color:#099">0xFFEFF47D</span>)
-	ROUND3(b, c, d, a,  <span style="color:#099">1</span>, <span style="color:#099">21</span>, <span style="color:#099">0x85845DD1</span>)
-	ROUND3(a, b, c, d,  <span style="color:#099">8</span>,  <span style="color:#099">6</span>, <span style="color:#099">0x6FA87E4F</span>)
-	ROUND3(d, a, b, c, <span style="color:#099">15</span>, <span style="color:#099">10</span>, <span style="color:#099">0xFE2CE6E0</span>)
-	ROUND3(c, d, a, b,  <span style="color:#099">6</span>, <span style="color:#099">15</span>, <span style="color:#099">0xA3014314</span>)
-	ROUND3(b, c, d, a, <span style="color:#099">13</span>, <span style="color:#099">21</span>, <span style="color:#099">0x4E0811A1</span>)
-	ROUND3(a, b, c, d,  <span style="color:#099">4</span>,  <span style="color:#099">6</span>, <span style="color:#099">0xF7537E82</span>)
-	ROUND3(d, a, b, c, <span style="color:#099">11</span>, <span style="color:#099">10</span>, <span style="color:#099">0xBD3AF235</span>)
-	ROUND3(c, d, a, b,  <span style="color:#099">2</span>, <span style="color:#099">15</span>, <span style="color:#099">0x2AD7D2BB</span>)
-	ROUND3(b, c, d, a,  <span style="color:#099">9</span>, <span style="color:#099">21</span>, <span style="color:#099">0xEB86D391</span>)
-	
-	state[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span> <span style="color:#000;font-weight:bold">+</span> state[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> a;
-	state[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span> <span style="color:#000;font-weight:bold">+</span> state[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> b;
-	state[<span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span> <span style="color:#000;font-weight:bold">+</span> state[<span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">+</span> c;
-	state[<span style="color:#099">3</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span> <span style="color:#000;font-weight:bold">+</span> state[<span style="color:#099">3</span>] <span style="color:#000;font-weight:bold">+</span> d;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_compress</span>(<span style="color:#458;font-weight:bold">uint32_t</span> state[<span style="color:#000;font-weight:bold">static</span> <span style="color:#099">4</span>], <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> block[<span style="color:#000;font-weight:bold">static</span> <span style="color:#099">64</span>]) {
+</span></span><span style="display:flex;"><span>	<span style="color:#999;font-weight:bold;font-style:italic">#define LOADSCHEDULE(i)  \
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">		schedule[i] = (uint32_t)block[i * 4 + 0] &lt;&lt;  0  \
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 1] &lt;&lt;  8  \
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 2] &lt;&lt; 16  \
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">		            | (uint32_t)block[i * 4 + 3] &lt;&lt; 24;
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#458;font-weight:bold">uint32_t</span> schedule[<span style="color:#099">16</span>];
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">2</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">4</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">5</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">6</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">7</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">8</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE( <span style="color:#099">9</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE(<span style="color:#099">10</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE(<span style="color:#099">11</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE(<span style="color:#099">12</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE(<span style="color:#099">13</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE(<span style="color:#099">14</span>)
+</span></span><span style="display:flex;"><span>	LOADSCHEDULE(<span style="color:#099">15</span>)
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROTL32(x, n)  (((0U + (x)) &lt;&lt; (n)) | ((x) &gt;&gt; (32 - (n))))  </span><span style="color:#998;font-style:italic">// Assumes that x is uint32_t and 0 &lt; n &lt; 32
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND0(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, d ^ (b &amp; (c ^ d)), k, s, t)
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND1(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, c ^ (d &amp; (b ^ c)), k, s, t)
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND2(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, b ^ c ^ d        , k, s, t)
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND3(a, b, c, d, k, s, t)  ROUND_TAIL(a, b, c ^ (b | ~d)     , k, s, t)
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>	<span style="color:#999;font-weight:bold;font-style:italic">#define ROUND_TAIL(a, b, expr, k, s, t)    \
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">		a = 0U + a + (expr) + UINT32_C(t) + schedule[k];  \
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">		a = 0U + b + ROTL32(a, s);
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#458;font-weight:bold">uint32_t</span> a <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">0</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#458;font-weight:bold">uint32_t</span> b <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">1</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#458;font-weight:bold">uint32_t</span> c <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">2</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#458;font-weight:bold">uint32_t</span> d <span style="color:#000;font-weight:bold">=</span> state[<span style="color:#099">3</span>];
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	ROUND0(a, b, c, d,  <span style="color:#099">0</span>,  <span style="color:#099">7</span>, <span style="color:#099">0xD76AA478</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(d, a, b, c,  <span style="color:#099">1</span>, <span style="color:#099">12</span>, <span style="color:#099">0xE8C7B756</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(c, d, a, b,  <span style="color:#099">2</span>, <span style="color:#099">17</span>, <span style="color:#099">0x242070DB</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(b, c, d, a,  <span style="color:#099">3</span>, <span style="color:#099">22</span>, <span style="color:#099">0xC1BDCEEE</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(a, b, c, d,  <span style="color:#099">4</span>,  <span style="color:#099">7</span>, <span style="color:#099">0xF57C0FAF</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(d, a, b, c,  <span style="color:#099">5</span>, <span style="color:#099">12</span>, <span style="color:#099">0x4787C62A</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(c, d, a, b,  <span style="color:#099">6</span>, <span style="color:#099">17</span>, <span style="color:#099">0xA8304613</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(b, c, d, a,  <span style="color:#099">7</span>, <span style="color:#099">22</span>, <span style="color:#099">0xFD469501</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(a, b, c, d,  <span style="color:#099">8</span>,  <span style="color:#099">7</span>, <span style="color:#099">0x698098D8</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(d, a, b, c,  <span style="color:#099">9</span>, <span style="color:#099">12</span>, <span style="color:#099">0x8B44F7AF</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(c, d, a, b, <span style="color:#099">10</span>, <span style="color:#099">17</span>, <span style="color:#099">0xFFFF5BB1</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(b, c, d, a, <span style="color:#099">11</span>, <span style="color:#099">22</span>, <span style="color:#099">0x895CD7BE</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(a, b, c, d, <span style="color:#099">12</span>,  <span style="color:#099">7</span>, <span style="color:#099">0x6B901122</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(d, a, b, c, <span style="color:#099">13</span>, <span style="color:#099">12</span>, <span style="color:#099">0xFD987193</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(c, d, a, b, <span style="color:#099">14</span>, <span style="color:#099">17</span>, <span style="color:#099">0xA679438E</span>)
+</span></span><span style="display:flex;"><span>	ROUND0(b, c, d, a, <span style="color:#099">15</span>, <span style="color:#099">22</span>, <span style="color:#099">0x49B40821</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(a, b, c, d,  <span style="color:#099">1</span>,  <span style="color:#099">5</span>, <span style="color:#099">0xF61E2562</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(d, a, b, c,  <span style="color:#099">6</span>,  <span style="color:#099">9</span>, <span style="color:#099">0xC040B340</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(c, d, a, b, <span style="color:#099">11</span>, <span style="color:#099">14</span>, <span style="color:#099">0x265E5A51</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(b, c, d, a,  <span style="color:#099">0</span>, <span style="color:#099">20</span>, <span style="color:#099">0xE9B6C7AA</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(a, b, c, d,  <span style="color:#099">5</span>,  <span style="color:#099">5</span>, <span style="color:#099">0xD62F105D</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(d, a, b, c, <span style="color:#099">10</span>,  <span style="color:#099">9</span>, <span style="color:#099">0x02441453</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(c, d, a, b, <span style="color:#099">15</span>, <span style="color:#099">14</span>, <span style="color:#099">0xD8A1E681</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(b, c, d, a,  <span style="color:#099">4</span>, <span style="color:#099">20</span>, <span style="color:#099">0xE7D3FBC8</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(a, b, c, d,  <span style="color:#099">9</span>,  <span style="color:#099">5</span>, <span style="color:#099">0x21E1CDE6</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(d, a, b, c, <span style="color:#099">14</span>,  <span style="color:#099">9</span>, <span style="color:#099">0xC33707D6</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(c, d, a, b,  <span style="color:#099">3</span>, <span style="color:#099">14</span>, <span style="color:#099">0xF4D50D87</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(b, c, d, a,  <span style="color:#099">8</span>, <span style="color:#099">20</span>, <span style="color:#099">0x455A14ED</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(a, b, c, d, <span style="color:#099">13</span>,  <span style="color:#099">5</span>, <span style="color:#099">0xA9E3E905</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(d, a, b, c,  <span style="color:#099">2</span>,  <span style="color:#099">9</span>, <span style="color:#099">0xFCEFA3F8</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(c, d, a, b,  <span style="color:#099">7</span>, <span style="color:#099">14</span>, <span style="color:#099">0x676F02D9</span>)
+</span></span><span style="display:flex;"><span>	ROUND1(b, c, d, a, <span style="color:#099">12</span>, <span style="color:#099">20</span>, <span style="color:#099">0x8D2A4C8A</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(a, b, c, d,  <span style="color:#099">5</span>,  <span style="color:#099">4</span>, <span style="color:#099">0xFFFA3942</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(d, a, b, c,  <span style="color:#099">8</span>, <span style="color:#099">11</span>, <span style="color:#099">0x8771F681</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(c, d, a, b, <span style="color:#099">11</span>, <span style="color:#099">16</span>, <span style="color:#099">0x6D9D6122</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(b, c, d, a, <span style="color:#099">14</span>, <span style="color:#099">23</span>, <span style="color:#099">0xFDE5380C</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(a, b, c, d,  <span style="color:#099">1</span>,  <span style="color:#099">4</span>, <span style="color:#099">0xA4BEEA44</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(d, a, b, c,  <span style="color:#099">4</span>, <span style="color:#099">11</span>, <span style="color:#099">0x4BDECFA9</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(c, d, a, b,  <span style="color:#099">7</span>, <span style="color:#099">16</span>, <span style="color:#099">0xF6BB4B60</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(b, c, d, a, <span style="color:#099">10</span>, <span style="color:#099">23</span>, <span style="color:#099">0xBEBFBC70</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(a, b, c, d, <span style="color:#099">13</span>,  <span style="color:#099">4</span>, <span style="color:#099">0x289B7EC6</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(d, a, b, c,  <span style="color:#099">0</span>, <span style="color:#099">11</span>, <span style="color:#099">0xEAA127FA</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(c, d, a, b,  <span style="color:#099">3</span>, <span style="color:#099">16</span>, <span style="color:#099">0xD4EF3085</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(b, c, d, a,  <span style="color:#099">6</span>, <span style="color:#099">23</span>, <span style="color:#099">0x04881D05</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(a, b, c, d,  <span style="color:#099">9</span>,  <span style="color:#099">4</span>, <span style="color:#099">0xD9D4D039</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(d, a, b, c, <span style="color:#099">12</span>, <span style="color:#099">11</span>, <span style="color:#099">0xE6DB99E5</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(c, d, a, b, <span style="color:#099">15</span>, <span style="color:#099">16</span>, <span style="color:#099">0x1FA27CF8</span>)
+</span></span><span style="display:flex;"><span>	ROUND2(b, c, d, a,  <span style="color:#099">2</span>, <span style="color:#099">23</span>, <span style="color:#099">0xC4AC5665</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(a, b, c, d,  <span style="color:#099">0</span>,  <span style="color:#099">6</span>, <span style="color:#099">0xF4292244</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(d, a, b, c,  <span style="color:#099">7</span>, <span style="color:#099">10</span>, <span style="color:#099">0x432AFF97</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(c, d, a, b, <span style="color:#099">14</span>, <span style="color:#099">15</span>, <span style="color:#099">0xAB9423A7</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(b, c, d, a,  <span style="color:#099">5</span>, <span style="color:#099">21</span>, <span style="color:#099">0xFC93A039</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(a, b, c, d, <span style="color:#099">12</span>,  <span style="color:#099">6</span>, <span style="color:#099">0x655B59C3</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(d, a, b, c,  <span style="color:#099">3</span>, <span style="color:#099">10</span>, <span style="color:#099">0x8F0CCC92</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(c, d, a, b, <span style="color:#099">10</span>, <span style="color:#099">15</span>, <span style="color:#099">0xFFEFF47D</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(b, c, d, a,  <span style="color:#099">1</span>, <span style="color:#099">21</span>, <span style="color:#099">0x85845DD1</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(a, b, c, d,  <span style="color:#099">8</span>,  <span style="color:#099">6</span>, <span style="color:#099">0x6FA87E4F</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(d, a, b, c, <span style="color:#099">15</span>, <span style="color:#099">10</span>, <span style="color:#099">0xFE2CE6E0</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(c, d, a, b,  <span style="color:#099">6</span>, <span style="color:#099">15</span>, <span style="color:#099">0xA3014314</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(b, c, d, a, <span style="color:#099">13</span>, <span style="color:#099">21</span>, <span style="color:#099">0x4E0811A1</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(a, b, c, d,  <span style="color:#099">4</span>,  <span style="color:#099">6</span>, <span style="color:#099">0xF7537E82</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(d, a, b, c, <span style="color:#099">11</span>, <span style="color:#099">10</span>, <span style="color:#099">0xBD3AF235</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(c, d, a, b,  <span style="color:#099">2</span>, <span style="color:#099">15</span>, <span style="color:#099">0x2AD7D2BB</span>)
+</span></span><span style="display:flex;"><span>	ROUND3(b, c, d, a,  <span style="color:#099">9</span>, <span style="color:#099">21</span>, <span style="color:#099">0xEB86D391</span>)
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	state[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span> <span style="color:#000;font-weight:bold">+</span> state[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">+</span> a;
+</span></span><span style="display:flex;"><span>	state[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span> <span style="color:#000;font-weight:bold">+</span> state[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> b;
+</span></span><span style="display:flex;"><span>	state[<span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span> <span style="color:#000;font-weight:bold">+</span> state[<span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">+</span> c;
+</span></span><span style="display:flex;"><span>	state[<span style="color:#099">3</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0U</span> <span style="color:#000;font-weight:bold">+</span> state[<span style="color:#099">3</span>] <span style="color:#000;font-weight:bold">+</span> d;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可执行文件(main.c)</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdbool.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stddef.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdlib.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;string.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;time.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#define BLOCK_LEN 64  </span><span style="color:#998;font-style:italic">// In bytes
-</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#define STATE_LEN 4  </span><span style="color:#998;font-style:italic">// In words
-</span><span style="color:#998;font-style:italic"></span>
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_hash</span>(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> message[], size_t len, <span style="color:#458;font-weight:bold">uint32_t</span> hash[<span style="color:#000;font-weight:bold">static</span> STATE_LEN]);
-<span style="color:#000;font-weight:bold">extern</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_compress</span>(<span style="color:#458;font-weight:bold">uint32_t</span> state[<span style="color:#000;font-weight:bold">static</span> STATE_LEN], <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> block[<span style="color:#000;font-weight:bold">static</span> BLOCK_LEN]);
-
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_hash</span>(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> message[], size_t len, <span style="color:#458;font-weight:bold">uint32_t</span> hash[<span style="color:#000;font-weight:bold">static</span> STATE_LEN]) 
-{
-    hash[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0x67452301</span>);
-	hash[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0xEFCDAB89</span>);
-	hash[<span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0x98BADCFE</span>);
-	hash[<span style="color:#099">3</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0x10325476</span>);
-
-    <span style="color:#999;font-weight:bold;font-style:italic">#define LENGTH_SIZE 8  </span><span style="color:#998;font-style:italic">// In bytes
-</span><span style="color:#998;font-style:italic"></span>
-    size_t off;
-
-    <span style="color:#000;font-weight:bold">for</span> (off <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; len <span style="color:#000;font-weight:bold">-</span> off <span style="color:#000;font-weight:bold">&gt;=</span> BLOCK_LEN; off <span style="color:#000;font-weight:bold">+=</span> BLOCK_LEN)
-		md5_compress(hash, <span style="color:#000;font-weight:bold">&amp;</span>message[off]);
-	
-	<span style="color:#458;font-weight:bold">uint8_t</span> block[BLOCK_LEN] <span style="color:#000;font-weight:bold">=</span> {<span style="color:#099">0</span>};
-	size_t rem <span style="color:#000;font-weight:bold">=</span> len <span style="color:#000;font-weight:bold">-</span> off;
-	memcpy(block, <span style="color:#000;font-weight:bold">&amp;</span>message[off], rem);
-	
-	block[rem] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0x80</span>;
-	rem<span style="color:#000;font-weight:bold">++</span>;
-	<span style="color:#000;font-weight:bold">if</span> (BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> rem <span style="color:#000;font-weight:bold">&lt;</span> LENGTH_SIZE) {
-		md5_compress(hash, block);
-		memset(block, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">sizeof</span>(block));
-	}
-	
-	block[BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> LENGTH_SIZE] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">uint8_t</span>)((len <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x1FU</span>) <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#099">3</span>);
-	len <span style="color:#000;font-weight:bold">&gt;&gt;=</span> <span style="color:#099">5</span>;
-	<span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; i <span style="color:#000;font-weight:bold">&lt;</span> LENGTH_SIZE; i<span style="color:#000;font-weight:bold">++</span>, len <span style="color:#000;font-weight:bold">&gt;&gt;=</span> <span style="color:#099">8</span>)
-		block[BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> LENGTH_SIZE <span style="color:#000;font-weight:bold">+</span> i] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">uint8_t</span>)(len <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xFFU</span>);
-	md5_compress(hash, block);
-}
-
-<span style="color:#458;font-weight:bold">char</span> res[<span style="color:#099">32</span>];
-
-<span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5</span>(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">*</span> message)
-{
-    size_t len <span style="color:#000;font-weight:bold">=</span> strlen(message);
-    <span style="color:#458;font-weight:bold">uint8_t</span> <span style="color:#000;font-weight:bold">*</span>msg <span style="color:#000;font-weight:bold">=</span> calloc(len, <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">uint8_t</span>));
-    <span style="color:#000;font-weight:bold">for</span> (size_t j <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; j <span style="color:#000;font-weight:bold">&lt;</span> len; j<span style="color:#000;font-weight:bold">++</span>)
-        msg[j] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">uint8_t</span>)message[j];
-    <span style="color:#458;font-weight:bold">uint32_t</span> hash[STATE_LEN];
-    md5_hash(msg, len, hash);
-
-    <span style="color:#000;font-weight:bold">typedef</span> <span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>byte_point;
-
-    <span style="color:#000;font-weight:bold">for</span>(<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">4</span>;i<span style="color:#000;font-weight:bold">++</span>){
-        byte_point start <span style="color:#000;font-weight:bold">=</span> (byte_point)<span style="color:#000;font-weight:bold">&amp;</span>hash[i];
-        <span style="color:#000;font-weight:bold">for</span>(<span style="color:#458;font-weight:bold">int</span> j<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>; j<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">4</span>; j<span style="color:#000;font-weight:bold">++</span>)
-        {
-            printf(<span style="color:#d14">&#34;%.2x&#34;</span>, start[j]);
-        }
-    }
-    printf(<span style="color:#d14">&#34;</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
-
-}
-<span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">main</span>(<span style="color:#458;font-weight:bold">int</span> argc, <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">**</span> argv)
-{
-
-    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">*</span> message <span style="color:#000;font-weight:bold">=</span> argv[<span style="color:#099">1</span>];
-    md5(message);
-
-    <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdbool.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stddef.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdlib.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;string.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;time.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#define BLOCK_LEN 64  </span><span style="color:#998;font-style:italic">// In bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#define STATE_LEN 4  </span><span style="color:#998;font-style:italic">// In words
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_hash</span>(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> message[], size_t len, <span style="color:#458;font-weight:bold">uint32_t</span> hash[<span style="color:#000;font-weight:bold">static</span> STATE_LEN]);
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">extern</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_compress</span>(<span style="color:#458;font-weight:bold">uint32_t</span> state[<span style="color:#000;font-weight:bold">static</span> STATE_LEN], <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> block[<span style="color:#000;font-weight:bold">static</span> BLOCK_LEN]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5_hash</span>(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> message[], size_t len, <span style="color:#458;font-weight:bold">uint32_t</span> hash[<span style="color:#000;font-weight:bold">static</span> STATE_LEN]) 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    hash[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0x67452301</span>);
+</span></span><span style="display:flex;"><span>	hash[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0xEFCDAB89</span>);
+</span></span><span style="display:flex;"><span>	hash[<span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0x98BADCFE</span>);
+</span></span><span style="display:flex;"><span>	hash[<span style="color:#099">3</span>] <span style="color:#000;font-weight:bold">=</span> UINT32_C(<span style="color:#099">0x10325476</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#999;font-weight:bold;font-style:italic">#define LENGTH_SIZE 8  </span><span style="color:#998;font-style:italic">// In bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    size_t off;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> (off <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; len <span style="color:#000;font-weight:bold">-</span> off <span style="color:#000;font-weight:bold">&gt;=</span> BLOCK_LEN; off <span style="color:#000;font-weight:bold">+=</span> BLOCK_LEN)
+</span></span><span style="display:flex;"><span>		md5_compress(hash, <span style="color:#000;font-weight:bold">&amp;</span>message[off]);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#458;font-weight:bold">uint8_t</span> block[BLOCK_LEN] <span style="color:#000;font-weight:bold">=</span> {<span style="color:#099">0</span>};
+</span></span><span style="display:flex;"><span>	size_t rem <span style="color:#000;font-weight:bold">=</span> len <span style="color:#000;font-weight:bold">-</span> off;
+</span></span><span style="display:flex;"><span>	memcpy(block, <span style="color:#000;font-weight:bold">&amp;</span>message[off], rem);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	block[rem] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0x80</span>;
+</span></span><span style="display:flex;"><span>	rem<span style="color:#000;font-weight:bold">++</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> (BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> rem <span style="color:#000;font-weight:bold">&lt;</span> LENGTH_SIZE) {
+</span></span><span style="display:flex;"><span>		md5_compress(hash, block);
+</span></span><span style="display:flex;"><span>		memset(block, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">sizeof</span>(block));
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	block[BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> LENGTH_SIZE] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">uint8_t</span>)((len <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0x1FU</span>) <span style="color:#000;font-weight:bold">&lt;&lt;</span> <span style="color:#099">3</span>);
+</span></span><span style="display:flex;"><span>	len <span style="color:#000;font-weight:bold">&gt;&gt;=</span> <span style="color:#099">5</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>; i <span style="color:#000;font-weight:bold">&lt;</span> LENGTH_SIZE; i<span style="color:#000;font-weight:bold">++</span>, len <span style="color:#000;font-weight:bold">&gt;&gt;=</span> <span style="color:#099">8</span>)
+</span></span><span style="display:flex;"><span>		block[BLOCK_LEN <span style="color:#000;font-weight:bold">-</span> LENGTH_SIZE <span style="color:#000;font-weight:bold">+</span> i] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">uint8_t</span>)(len <span style="color:#000;font-weight:bold">&amp;</span> <span style="color:#099">0xFFU</span>);
+</span></span><span style="display:flex;"><span>	md5_compress(hash, block);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">char</span> res[<span style="color:#099">32</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">md5</span>(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">*</span> message)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    size_t len <span style="color:#000;font-weight:bold">=</span> strlen(message);
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">uint8_t</span> <span style="color:#000;font-weight:bold">*</span>msg <span style="color:#000;font-weight:bold">=</span> calloc(len, <span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#458;font-weight:bold">uint8_t</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> (size_t j <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; j <span style="color:#000;font-weight:bold">&lt;</span> len; j<span style="color:#000;font-weight:bold">++</span>)
+</span></span><span style="display:flex;"><span>        msg[j] <span style="color:#000;font-weight:bold">=</span> (<span style="color:#458;font-weight:bold">uint8_t</span>)message[j];
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">uint32_t</span> hash[STATE_LEN];
+</span></span><span style="display:flex;"><span>    md5_hash(msg, len, hash);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">typedef</span> <span style="color:#458;font-weight:bold">unsigned</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>byte_point;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span>(<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">4</span>;i<span style="color:#000;font-weight:bold">++</span>){
+</span></span><span style="display:flex;"><span>        byte_point start <span style="color:#000;font-weight:bold">=</span> (byte_point)<span style="color:#000;font-weight:bold">&amp;</span>hash[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span>(<span style="color:#458;font-weight:bold">int</span> j<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>; j<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#099">4</span>; j<span style="color:#000;font-weight:bold">++</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            printf(<span style="color:#d14">&#34;%.2x&#34;</span>, start[j]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">main</span>(<span style="color:#458;font-weight:bold">int</span> argc, <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">**</span> argv)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span><span style="color:#000;font-weight:bold">*</span> message <span style="color:#000;font-weight:bold">=</span> argv[<span style="color:#099">1</span>];
+</span></span><span style="display:flex;"><span>    md5(message);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="usage">usage</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ gcc main.c md5.c
-$ ./a.out <span style="color:#d14">&#34;abc&#34;</span>
-900150983cd24fb0d6963f7d28e17f72
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ gcc main.c md5.c
+</span></span><span style="display:flex;"><span>$ ./a.out <span style="color:#d14">&#34;abc&#34;</span>
+</span></span><span style="display:flex;"><span>900150983cd24fb0d6963f7d28e17f72
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="参考">参考</h2>
 <ul>
@@ -659,7 +659,7 @@ $ ./a.out <span style="color:#d14">&#34;abc&#34;</span>
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

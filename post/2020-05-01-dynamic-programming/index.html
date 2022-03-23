@@ -227,639 +227,639 @@
         <div class="post-content">
             <h1 id="dynamic-programming">Dynamic Programming</h1>
 <h2 id="1-最长上升子序列httpsleetcode-cncomproblemslongest-increasing-subsequence">1. <a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">最长上升子序列</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">lengthOfLIS</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
-            <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-
-        dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(nums)
-        L <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
-        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(L):
-            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(i):
-                <span style="color:#000;font-weight:bold">if</span> nums[i] <span style="color:#000;font-weight:bold">&gt;</span> nums[j]:
-                    dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i], dp[j]<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">lengthOfLIS</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(nums)
+</span></span><span style="display:flex;"><span>        L <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(L):
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(i):
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">if</span> nums[i] <span style="color:#000;font-weight:bold">&gt;</span> nums[j]:
+</span></span><span style="display:flex;"><span>                    dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i], dp[j]<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="2-最长公共子序列httpsleetcode-cncomproblemslongest-common-subsequence">2. <a href="https://leetcode-cn.com/problems/longest-common-subsequence/">最长公共子序列</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">longestCommonSubsequence</span>(<span style="color:#999">self</span>, text1: <span style="color:#0086b3">str</span>, text2: <span style="color:#0086b3">str</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-        L1, L2 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(text1), <span style="color:#0086b3">len</span>(text2)
-        dp <span style="color:#000;font-weight:bold">=</span> [[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> (L1<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(L2<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)]
-
-        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, L2<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
-            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, L1<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
-                <span style="color:#000;font-weight:bold">if</span> text2[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> text1[j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]:
-                    dp[i][j] <span style="color:#000;font-weight:bold">=</span> dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
-                <span style="color:#000;font-weight:bold">else</span>:
-                    dp[i][j] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j], dp[i][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>])
-
-        <span style="color:#000;font-weight:bold">return</span> dp[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">longestCommonSubsequence</span>(<span style="color:#999">self</span>, text1: <span style="color:#0086b3">str</span>, text2: <span style="color:#0086b3">str</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>        L1, L2 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(text1), <span style="color:#0086b3">len</span>(text2)
+</span></span><span style="display:flex;"><span>        dp <span style="color:#000;font-weight:bold">=</span> [[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> (L1<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(L2<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, L2<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, L1<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>):
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">if</span> text2[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">==</span> text1[j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]:
+</span></span><span style="display:flex;"><span>                    dp[i][j] <span style="color:#000;font-weight:bold">=</span> dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                    dp[i][j] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][j], dp[i][j<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> dp[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="3-三角形最小路径和httpsleetcode-cncomproblemstriangle">3. <a href="https://leetcode-cn.com/problems/triangle/">三角形最小路径和</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">minimumTotal</span>(<span style="color:#999">self</span>, triangle: List[List[<span style="color:#0086b3">int</span>]]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-        n <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(triangle)
-        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>):
-            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(triangle[i])):
-                triangle[i][j] <span style="color:#000;font-weight:bold">+=</span> <span style="color:#0086b3">min</span>(triangle[i<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>], triangle[i<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>][j])
-        <span style="color:#000;font-weight:bold">return</span> triangle[<span style="color:#099">0</span>][<span style="color:#099">0</span>]
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">minimumTotal</span>(<span style="color:#999">self</span>, triangle: List[List[<span style="color:#0086b3">int</span>]]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>        n <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(triangle)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(n<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(triangle[i])):
+</span></span><span style="display:flex;"><span>                triangle[i][j] <span style="color:#000;font-weight:bold">+=</span> <span style="color:#0086b3">min</span>(triangle[i<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>][j<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>], triangle[i<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>][j])
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> triangle[<span style="color:#099">0</span>][<span style="color:#099">0</span>]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="4-最大子序和httpsleetcode-cncomproblemsmaximum-subarray">4. <a href="https://leetcode-cn.com/problems/maximum-subarray/">最大子序和</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxSubArray</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-        N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
-        dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
-        dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
-        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, N):
-
-            dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">+</span>nums[i], nums[i])
-
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxSubArray</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>        N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+</span></span><span style="display:flex;"><span>        dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
+</span></span><span style="display:flex;"><span>        dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, N):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">+</span>nums[i], nums[i])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="5-乘积最大子数组httpsleetcode-cncomproblemsmaximum-product-subarray">5. <a href="https://leetcode-cn.com/problems/maximum-product-subarray/">乘积最大子数组</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProduct</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-        N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
-        dp_max <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> (N)
-        dp_min <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> (N)
-        dp_max[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
-        dp_min[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
-
-        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, N):
-            dp_max[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_max[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i], nums[i], dp_min[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i])
-            dp_min[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(dp_min[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i], nums[i], dp_max[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i])
-        
-        <span style="color:#0086b3">print</span>(dp_max)
-        <span style="color:#0086b3">print</span>(dp_min)
-
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">max</span>(dp_max) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">max</span>(dp_min):
-            <span style="color:#000;font-weight:bold">return</span>  <span style="color:#0086b3">max</span>(dp_max)
-        <span style="color:#000;font-weight:bold">else</span>:
-            <span style="color:#000;font-weight:bold">return</span>  <span style="color:#0086b3">max</span>(dp_min)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProduct</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>        N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+</span></span><span style="display:flex;"><span>        dp_max <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> (N)
+</span></span><span style="display:flex;"><span>        dp_min <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> (N)
+</span></span><span style="display:flex;"><span>        dp_max[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>        dp_min[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, N):
+</span></span><span style="display:flex;"><span>            dp_max[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_max[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i], nums[i], dp_min[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i])
+</span></span><span style="display:flex;"><span>            dp_min[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(dp_min[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i], nums[i], dp_max[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">*</span>nums[i])
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">print</span>(dp_max)
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">print</span>(dp_min)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">max</span>(dp_max) <span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#0086b3">max</span>(dp_min):
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">return</span>  <span style="color:#0086b3">max</span>(dp_max)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">return</span>  <span style="color:#0086b3">max</span>(dp_min)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="6-鸡蛋掉落httpsleetcode-cncomproblemssuper-egg-drop">6. <a href="https://leetcode-cn.com/problems/super-egg-drop/">鸡蛋掉落</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">superEggDrop</span>(<span style="color:#999">self</span>, K: <span style="color:#0086b3">int</span>, N: <span style="color:#0086b3">int</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		cache <span style="color:#000;font-weight:bold">=</span> {}
-
-		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">dp</span>(k,n):
-			<span style="color:#000;font-weight:bold">if</span> k<span style="color:#000;font-weight:bold">==</span><span style="color:#099">1</span>: <span style="color:#000;font-weight:bold">return</span> n
-			<span style="color:#000;font-weight:bold">if</span> n<span style="color:#000;font-weight:bold">==</span><span style="color:#099">0</span>: <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-
-			<span style="color:#000;font-weight:bold">if</span> (k,n) <span style="color:#000;font-weight:bold">in</span> cache:
-				<span style="color:#000;font-weight:bold">return</span> cache[(k,n)]
-
-			<span style="color:#998;font-style:italic"># res = float(&#39;inf&#39;)</span>
-			<span style="color:#998;font-style:italic"># for x in range(1, n+1):</span>
-			<span style="color:#998;font-style:italic"># 	res = min(max(dp(k-1, x-1),dp(k, n-x))+1,res)</span>
-
-			res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
-			lo, hi <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>, n
-			<span style="color:#000;font-weight:bold">while</span> lo <span style="color:#000;font-weight:bold">&lt;=</span> hi:
-				mid <span style="color:#000;font-weight:bold">=</span> (lo<span style="color:#000;font-weight:bold">+</span>hi) <span style="color:#000;font-weight:bold">//</span> <span style="color:#099">2</span>
-
-				broken <span style="color:#000;font-weight:bold">=</span> dp(k <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, mid <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
-				not_broken <span style="color:#000;font-weight:bold">=</span> dp(k, n <span style="color:#000;font-weight:bold">-</span> mid)
-				
-				<span style="color:#000;font-weight:bold">if</span> broken <span style="color:#000;font-weight:bold">&gt;</span> not_broken:
-					hi <span style="color:#000;font-weight:bold">=</span> mid <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
-					res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(res, broken <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>)
-				<span style="color:#000;font-weight:bold">else</span>:
-					lo <span style="color:#000;font-weight:bold">=</span> mid <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
-					res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(res, not_broken <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>)
-
-			cache[(k,n)] <span style="color:#000;font-weight:bold">=</span> res
-
-			<span style="color:#000;font-weight:bold">return</span> res
-
-		<span style="color:#000;font-weight:bold">return</span> dp(K, N)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">superEggDrop</span>(<span style="color:#999">self</span>, K: <span style="color:#0086b3">int</span>, N: <span style="color:#0086b3">int</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		cache <span style="color:#000;font-weight:bold">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">dp</span>(k,n):
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">if</span> k<span style="color:#000;font-weight:bold">==</span><span style="color:#099">1</span>: <span style="color:#000;font-weight:bold">return</span> n
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">if</span> n<span style="color:#000;font-weight:bold">==</span><span style="color:#099">0</span>: <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">if</span> (k,n) <span style="color:#000;font-weight:bold">in</span> cache:
+</span></span><span style="display:flex;"><span>				<span style="color:#000;font-weight:bold">return</span> cache[(k,n)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#998;font-style:italic"># res = float(&#39;inf&#39;)</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#998;font-style:italic"># for x in range(1, n+1):</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#998;font-style:italic"># 	res = min(max(dp(k-1, x-1),dp(k, n-x))+1,res)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+</span></span><span style="display:flex;"><span>			lo, hi <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>, n
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">while</span> lo <span style="color:#000;font-weight:bold">&lt;=</span> hi:
+</span></span><span style="display:flex;"><span>				mid <span style="color:#000;font-weight:bold">=</span> (lo<span style="color:#000;font-weight:bold">+</span>hi) <span style="color:#000;font-weight:bold">//</span> <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				broken <span style="color:#000;font-weight:bold">=</span> dp(k <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>, mid <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>				not_broken <span style="color:#000;font-weight:bold">=</span> dp(k, n <span style="color:#000;font-weight:bold">-</span> mid)
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#000;font-weight:bold">if</span> broken <span style="color:#000;font-weight:bold">&gt;</span> not_broken:
+</span></span><span style="display:flex;"><span>					hi <span style="color:#000;font-weight:bold">=</span> mid <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>					res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(res, broken <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>				<span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>					lo <span style="color:#000;font-weight:bold">=</span> mid <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>					res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(res, not_broken <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			cache[(k,n)] <span style="color:#000;font-weight:bold">=</span> res
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> res
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> dp(K, N)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li><a href="https://leetcode-cn.com/problems/super-egg-drop/solution/ji-ben-dong-tai-gui-hua-jie-fa-by-labuladong/">887. 鸡蛋掉落</a></li>
 <li><a href="https://www.youtube.com/watch?v=mLV_vOet0ss">先来看看这道面试题：双蛋问题</a></li>
 </ul>
 <h2 id="7-俄罗斯套娃信封问题httpsleetcode-cncomproblemsrussian-doll-envelopes">7. <a href="https://leetcode-cn.com/problems/russian-doll-envelopes/">俄罗斯套娃信封问题</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxEnvelopes</span>(<span style="color:#999">self</span>, envelopes: List[List[<span style="color:#0086b3">int</span>]]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> envelopes:
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-
-		<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">functools</span> <span style="color:#000;font-weight:bold">import</span> cmp_to_key
-		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">cmp</span>(a, b):
-			<span style="color:#000;font-weight:bold">if</span> a[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">==</span> b[<span style="color:#099">0</span>]:
-				<span style="color:#000;font-weight:bold">return</span> b[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">-</span> a[<span style="color:#099">1</span>]
-			<span style="color:#000;font-weight:bold">else</span>:
-				<span style="color:#000;font-weight:bold">return</span> a[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> b[<span style="color:#099">0</span>]
-
-		tmp <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">sorted</span>(envelopes, key<span style="color:#000;font-weight:bold">=</span>cmp_to_key(cmp))
-
-		ll <span style="color:#000;font-weight:bold">=</span> [x[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">for</span> x <span style="color:#000;font-weight:bold">in</span> tmp]
-
-		dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(ll)
-
-		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(ll)):
-			<span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(i):
-				<span style="color:#000;font-weight:bold">if</span> ll[i] <span style="color:#000;font-weight:bold">&gt;</span> ll[j]:
-					dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i], dp[j]<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)
-
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxEnvelopes</span>(<span style="color:#999">self</span>, envelopes: List[List[<span style="color:#0086b3">int</span>]]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> envelopes:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">functools</span> <span style="color:#000;font-weight:bold">import</span> cmp_to_key
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">cmp</span>(a, b):
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">if</span> a[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">==</span> b[<span style="color:#099">0</span>]:
+</span></span><span style="display:flex;"><span>				<span style="color:#000;font-weight:bold">return</span> b[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">-</span> a[<span style="color:#099">1</span>]
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>				<span style="color:#000;font-weight:bold">return</span> a[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> b[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		tmp <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">sorted</span>(envelopes, key<span style="color:#000;font-weight:bold">=</span>cmp_to_key(cmp))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		ll <span style="color:#000;font-weight:bold">=</span> [x[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">for</span> x <span style="color:#000;font-weight:bold">in</span> tmp]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">len</span>(ll)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#0086b3">len</span>(ll)):
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">for</span> j <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(i):
+</span></span><span style="display:flex;"><span>				<span style="color:#000;font-weight:bold">if</span> ll[i] <span style="color:#000;font-weight:bold">&gt;</span> ll[j]:
+</span></span><span style="display:flex;"><span>					dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i], dp[j]<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="8-打家劫舍httpsleetcode-cncomproblemshouse-robber">8. <a href="https://leetcode-cn.com/problems/house-robber/">打家劫舍</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">rob</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> nums:
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>:
-			<span style="color:#000;font-weight:bold">return</span> nums[<span style="color:#099">0</span>]
-
-		N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
-		dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
-
-		dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
-		dp[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
-
-		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>, N):
-			dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">+</span> nums[i])
-
-
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">rob</span>(<span style="color:#999">self</span>, nums: List[<span style="color:#0086b3">int</span>]) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> nums:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums) <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> nums[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+</span></span><span style="display:flex;"><span>		dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>		dp[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>, N):
+</span></span><span style="display:flex;"><span>			dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">+</span> nums[i])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="9-打家劫舍2httpsleetcode-cncomproblemshouse-robber-ii">9. <a href="https://leetcode-cn.com/problems/house-robber-ii/">打家劫舍2</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">rob</span>(<span style="color:#999">self</span>, nums) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> nums:
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums)<span style="color:#000;font-weight:bold">==</span><span style="color:#099">1</span>:
-			<span style="color:#000;font-weight:bold">return</span> nums[<span style="color:#099">0</span>]
-
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums)<span style="color:#000;font-weight:bold">==</span><span style="color:#099">2</span>:
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
-
-		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">fun</span>(nums):
-			N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
-			dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
-
-			dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
-			dp[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
-
-			<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>, N):
-				dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">+</span> nums[i])
-
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
-
-		res1 <span style="color:#000;font-weight:bold">=</span> fun(nums[:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>])
-		res2 <span style="color:#000;font-weight:bold">=</span> fun(nums[<span style="color:#099">1</span>:])
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(res1, res2)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">rob</span>(<span style="color:#999">self</span>, nums) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> nums:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums)<span style="color:#000;font-weight:bold">==</span><span style="color:#099">1</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> nums[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(nums)<span style="color:#000;font-weight:bold">==</span><span style="color:#099">2</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">fun</span>(nums):
+</span></span><span style="display:flex;"><span>			N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(nums)
+</span></span><span style="display:flex;"><span>			dp <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">*</span> N
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			dp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> nums[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>			dp[<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(nums[<span style="color:#099">0</span>], nums[<span style="color:#099">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>, N):
+</span></span><span style="display:flex;"><span>				dp[i] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>], dp[i<span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>] <span style="color:#000;font-weight:bold">+</span> nums[i])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(dp)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		res1 <span style="color:#000;font-weight:bold">=</span> fun(nums[:<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>])
+</span></span><span style="display:flex;"><span>		res2 <span style="color:#000;font-weight:bold">=</span> fun(nums[<span style="color:#099">1</span>:])
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">max</span>(res1, res2)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="10-买卖股票的最佳时机httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock">10. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">买卖股票的最佳时机</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># 用一个变量维护最小值</span>
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-		cur_min <span style="color:#000;font-weight:bold">=</span> prices[<span style="color:#099">0</span>]
-		max_res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
-		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, <span style="color:#0086b3">len</span>(prices)):
-			max_res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(max_res, prices[i]<span style="color:#000;font-weight:bold">-</span>cur_min)
-			cur_min <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(cur_min, prices[i])
-		<span style="color:#000;font-weight:bold">return</span> max_res
-
-<span style="color:#998;font-style:italic"># 1. 今天没有(昨天没有 保持不变，昨天有 卖了 )</span>
-<span style="color:#998;font-style:italic"># 2. 今天有(昨天没有 买，昨天有 保持不变)</span>
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
-		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
-
-		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
-			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
-			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, <span style="color:#000;font-weight:bold">-</span>p)
-		<span style="color:#000;font-weight:bold">return</span> dp_0
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 用一个变量维护最小值</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>		cur_min <span style="color:#000;font-weight:bold">=</span> prices[<span style="color:#099">0</span>]
+</span></span><span style="display:flex;"><span>		max_res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">1</span>, <span style="color:#0086b3">len</span>(prices)):
+</span></span><span style="display:flex;"><span>			max_res <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(max_res, prices[i]<span style="color:#000;font-weight:bold">-</span>cur_min)
+</span></span><span style="display:flex;"><span>			cur_min <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">min</span>(cur_min, prices[i])
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> max_res
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 1. 今天没有(昨天没有 保持不变，昨天有 卖了 )</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 2. 今天有(昨天没有 买，昨天有 保持不变)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+</span></span><span style="display:flex;"><span>			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
+</span></span><span style="display:flex;"><span>			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, <span style="color:#000;font-weight:bold">-</span>p)
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> dp_0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="11-买卖股票的最佳时机-iihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-ii">11. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">买卖股票的最佳时机 II</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
-		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
-
-		res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
-
-		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
-			tmp <span style="color:#000;font-weight:bold">=</span> dp_0
-			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
-			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, tmp <span style="color:#000;font-weight:bold">-</span> p)
-		<span style="color:#000;font-weight:bold">return</span> dp_0
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		res <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+</span></span><span style="display:flex;"><span>			tmp <span style="color:#000;font-weight:bold">=</span> dp_0
+</span></span><span style="display:flex;"><span>			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
+</span></span><span style="display:flex;"><span>			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, tmp <span style="color:#000;font-weight:bold">-</span> p)
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> dp_0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="12-最佳买卖股票时机含冷冻期httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-cooldown">12. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">最佳买卖股票时机含冷冻期</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
-            <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-        
-        dp_0, dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
-        pre_dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
-        <span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
-            tmp <span style="color:#000;font-weight:bold">=</span> dp_0
-            dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
-            dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, pre_dp_0 <span style="color:#000;font-weight:bold">-</span> p)
-            pre_dp_0 <span style="color:#000;font-weight:bold">=</span> tmp
-        <span style="color:#000;font-weight:bold">return</span> dp_0
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        dp_0, dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+</span></span><span style="display:flex;"><span>        pre_dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+</span></span><span style="display:flex;"><span>            tmp <span style="color:#000;font-weight:bold">=</span> dp_0
+</span></span><span style="display:flex;"><span>            dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p)
+</span></span><span style="display:flex;"><span>            dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, pre_dp_0 <span style="color:#000;font-weight:bold">-</span> p)
+</span></span><span style="display:flex;"><span>            pre_dp_0 <span style="color:#000;font-weight:bold">=</span> tmp
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> dp_0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="13-买卖股票的最佳时机-iiihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iii">13. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">买卖股票的最佳时机 III</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-        dp_i10, dp_i20 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span> ,<span style="color:#099">0</span>
-        dp_i11, dp_i21 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>), <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
-        <span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
-            dp_i20 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i20, dp_i21 <span style="color:#000;font-weight:bold">+</span> p)
-            dp_i21 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i21, dp_i10 <span style="color:#000;font-weight:bold">-</span> p)
-
-            dp_i10 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i10, dp_i11 <span style="color:#000;font-weight:bold">+</span> p)
-            dp_i11 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i11, <span style="color:#000;font-weight:bold">-</span>p);  <span style="color:#998;font-style:italic"># 第一次买</span>
-        <span style="color:#000;font-weight:bold">return</span> dp_i20
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>        dp_i10, dp_i20 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span> ,<span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>        dp_i11, dp_i21 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>), <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+</span></span><span style="display:flex;"><span>            dp_i20 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i20, dp_i21 <span style="color:#000;font-weight:bold">+</span> p)
+</span></span><span style="display:flex;"><span>            dp_i21 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i21, dp_i10 <span style="color:#000;font-weight:bold">-</span> p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            dp_i10 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i10, dp_i11 <span style="color:#000;font-weight:bold">+</span> p)
+</span></span><span style="display:flex;"><span>            dp_i11 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i11, <span style="color:#000;font-weight:bold">-</span>p);  <span style="color:#998;font-style:italic"># 第一次买</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> dp_i20
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="14-买卖股票的最佳时机-ivhttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iv">14. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/">买卖股票的最佳时机 IV</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, k: <span style="color:#0086b3">int</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices <span style="color:#000;font-weight:bold">or</span> <span style="color:#000;font-weight:bold">not</span> k:
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-
-		N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(prices)
-
-		<span style="color:#000;font-weight:bold">if</span> k <span style="color:#000;font-weight:bold">&gt;</span> N <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>:
-			dp_i_0, dp_i_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
-			<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
-				tmp <span style="color:#000;font-weight:bold">=</span> dp_i_0
-				dp_i_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i_0, dp_i_1 <span style="color:#000;font-weight:bold">+</span> p)
-				dp_i_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i_1, tmp <span style="color:#000;font-weight:bold">-</span> p)
-			<span style="color:#000;font-weight:bold">return</span> dp_i_0
-
-
-		dp <span style="color:#000;font-weight:bold">=</span> [[ [<span style="color:#099">0</span> <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>)] <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(k<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>) ] <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(N)]
-
-		<span style="color:#000;font-weight:bold">for</span> a <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(N): <span style="color:#998;font-style:italic"># 交易时间</span>
-			<span style="color:#000;font-weight:bold">for</span> b <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(k, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>): <span style="color:#998;font-style:italic"># 交易次数</span>
-				<span style="color:#000;font-weight:bold">if</span> a <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
-					dp[<span style="color:#099">0</span>][b][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
-					dp[<span style="color:#099">0</span>][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span>prices[a]
-				<span style="color:#000;font-weight:bold">else</span>:
-					dp[a][b][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">0</span>], dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> prices[a])
-					dp[a][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">1</span>], dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> prices[a])
-
-		<span style="color:#000;font-weight:bold">return</span> dp[N<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][k][<span style="color:#099">0</span>]
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, k: <span style="color:#0086b3">int</span>, prices) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices <span style="color:#000;font-weight:bold">or</span> <span style="color:#000;font-weight:bold">not</span> k:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		N <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">len</span>(prices)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> k <span style="color:#000;font-weight:bold">&gt;</span> N <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">2</span>:
+</span></span><span style="display:flex;"><span>			dp_i_0, dp_i_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+</span></span><span style="display:flex;"><span>				tmp <span style="color:#000;font-weight:bold">=</span> dp_i_0
+</span></span><span style="display:flex;"><span>				dp_i_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i_0, dp_i_1 <span style="color:#000;font-weight:bold">+</span> p)
+</span></span><span style="display:flex;"><span>				dp_i_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_i_1, tmp <span style="color:#000;font-weight:bold">-</span> p)
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> dp_i_0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		dp <span style="color:#000;font-weight:bold">=</span> [[ [<span style="color:#099">0</span> <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(<span style="color:#099">2</span>)] <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(k<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>) ] <span style="color:#000;font-weight:bold">for</span> _ <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(N)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">for</span> a <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(N): <span style="color:#998;font-style:italic"># 交易时间</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">for</span> b <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">range</span>(k, <span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>): <span style="color:#998;font-style:italic"># 交易次数</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#000;font-weight:bold">if</span> a <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>:
+</span></span><span style="display:flex;"><span>					dp[<span style="color:#099">0</span>][b][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>					dp[<span style="color:#099">0</span>][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span>prices[a]
+</span></span><span style="display:flex;"><span>				<span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>					dp[a][b][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">0</span>], dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">+</span> prices[a])
+</span></span><span style="display:flex;"><span>					dp[a][b][<span style="color:#099">1</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b][<span style="color:#099">1</span>], dp[a<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][b<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">-</span> prices[a])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> dp[N<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>][k][<span style="color:#099">0</span>]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="15-买卖股票的最佳时机含手续费httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-with-transaction-fee">15. <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">买卖股票的最佳时机含手续费</a></h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
-	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices, fee: <span style="color:#0086b3">int</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
-		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-
-		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
-		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
-		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
-			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p <span style="color:#000;font-weight:bold">-</span> fee)
-			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, dp_0 <span style="color:#000;font-weight:bold">-</span> p)
-		<span style="color:#000;font-weight:bold">return</span> dp_0
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Solution</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">maxProfit</span>(<span style="color:#999">self</span>, prices, fee: <span style="color:#0086b3">int</span>) <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#0086b3">int</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> prices:
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>		dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#0086b3">float</span>(<span style="color:#d14">&#39;inf&#39;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">for</span> p <span style="color:#000;font-weight:bold">in</span> prices:
+</span></span><span style="display:flex;"><span>			dp_0 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_0, dp_1 <span style="color:#000;font-weight:bold">+</span> p <span style="color:#000;font-weight:bold">-</span> fee)
+</span></span><span style="display:flex;"><span>			dp_1 <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">max</span>(dp_1, dp_0 <span style="color:#000;font-weight:bold">-</span> p)
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> dp_0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="16">16.</h2>
 
@@ -901,7 +901,7 @@
     
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
