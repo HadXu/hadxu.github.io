@@ -6,7 +6,16 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 14 Aug 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Aug 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LLVM and MLIR</title>
+      <link>https://hadxu.github.io/post/2022-08-30-LLVM-MLIR/</link>
+      <pubDate>Tue, 30 Aug 2022 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2022-08-30-LLVM-MLIR/</guid>
+      <description>LLVM 和 MLIR 关于LLVM，网上已经有很多资料，我不想说太多，学习LLVM只是为了进一步学习MLIR，MLIR的中间模型表示才是重头戏。 LLVM以及MLIR的环境 1 2 3 4 git clone https://github.com/llvm/llvm-project.git git checkout release/14.x cmake -G Ninja ../llvm -DLLVM_ENABLE_PROJECTS=&amp;#34;mlir;clang;polly&amp;#34; -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD=&amp;#34;X86;NVPTX&amp;#34; -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DMLIR_ENABLE_BINDINGS_PYTHON=ON -DLLVM_CCACHE_BUILD=ON cmake --build . --target all Reference 软件分析 多面体模型编译</description>
+    </item>
+    
     <item>
       <title>最近</title>
       <link>https://hadxu.github.io/post/2022-08-14.recent/</link>
@@ -609,7 +618,7 @@
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hadxu.github.io/films/</guid>
-      <description>纪录片 电影 电视剧 末代皇帝 人生切割术 走向共和 深入大脑 金鱼妻 凛冬烈火: 乌克兰的自由之战 大明王朝 无罪之最 绝命毒师 以吾之名 毒枭 鱿鱼游戏 惊世的转折点911 地球脉动 红楼梦 历史那些事 河西走廊 2020-12-19 睡眠是什么 2020-12-08 红楼梦 2020-08-16 手术两百年 2020-08-26 大明宫</description>
+      <description>纪录片 电影 电视剧 绝命律师 末代皇帝 人生切割术 走向共和 深入大脑 金鱼妻 凛冬烈火: 乌克兰的自由之战 大明王朝 无罪之最 绝命毒师 以吾之名 毒枭 鱿鱼游戏 惊世的转折点911 地球脉动 红楼梦 历史那些事 河西走廊 2020-12-19 睡眠是什么 2020-12-08 红楼梦 2020-08-16 手术两百年 2020-08-26 大明宫</description>
     </item>
     
     <item>

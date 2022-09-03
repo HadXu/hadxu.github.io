@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>LLVM and MLIR | lay&#39;s 博客</title>
+    <meta property="og:title" content="LLVM and MLIR - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2022-08-30T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-08-30T11:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="LLVM and MLIR">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/2022-08-30-LLVM-MLIR/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/films/" title="电影">电影</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#llvm以及mlir的环境">LLVM以及MLIR的环境</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">LLVM and MLIR</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年8月30日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/LLVM'>LLVM</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h1 id="llvm-和-mlir">LLVM 和 MLIR</h1>
+<p>关于LLVM，网上已经有很多资料，我不想说太多，学习LLVM只是为了进一步学习MLIR，MLIR的中间模型表示才是重头戏。</p>
+<h2 id="llvm以及mlir的环境">LLVM以及MLIR的环境</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/llvm/llvm-project.git
+</span></span><span style="display:flex;"><span>git checkout release/14.x
+</span></span><span style="display:flex;"><span>cmake -G Ninja ../llvm -DLLVM_ENABLE_PROJECTS<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;mlir;clang;polly&#34;</span> -DLLVM_BUILD_EXAMPLES<span style="color:#000;font-weight:bold">=</span>ON -DLLVM_TARGETS_TO_BUILD<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;X86;NVPTX&#34;</span> -DCMAKE_BUILD_TYPE<span style="color:#000;font-weight:bold">=</span>Release -DLLVM_ENABLE_ASSERTIONS<span style="color:#000;font-weight:bold">=</span>ON -DMLIR_ENABLE_BINDINGS_PYTHON<span style="color:#000;font-weight:bold">=</span>ON -DLLVM_CCACHE_BUILD<span style="color:#000;font-weight:bold">=</span>ON
+</span></span><span style="display:flex;"><span>cmake --build . --target all
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="reference">Reference</h1>
+<ol>
+<li><a href="https://search.bilibili.com/all?vt=89410797&amp;keyword=%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90&amp;from_source=webtop_search&amp;spm_id_from=333.1007">软件分析</a></li>
+<li><a href="">多面体模型编译</a></li>
+</ol>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2022-08-14.recent/">最近</a></li>
+        
+        <li><a href="/post/2022-02-28.recent/">2022新年第二篇</a></li>
+        
+        <li><a href="/post/2022-02-12.NAS_Calibra/">NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</a></li>
+        
+        <li><a href="/post/2022-02-11.raspberry/">raspberry PI NAS玩法</a></li>
+        
+        <li><a href="/post/2022-02-08.happy-new-year/">2022新年第一篇</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/LLVM'>LLVM</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2022 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-08-30-LLVM-MLIR/" title="LLVM and MLIR">LLVM and MLIR</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-08-14.recent/" title="最近">最近</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-28.recent/" title="2022新年第二篇">2022新年第二篇</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-12.NAS_Calibra/" title="NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载">NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-11.raspberry/" title="raspberry PI NAS玩法">raspberry PI NAS玩法</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-08.happy-new-year/" title="2022新年第一篇">2022新年第一篇</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-01-01.new-year/" title="2022新年第一篇">2022新年第一篇</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-12-01.recent/" title="12月近况">12月近况</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-21-solution-of-CASPP-chapter2/" title="CASPP 第二章课后习题解答">CASPP 第二章课后习题解答</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-06.recent/" title="近况">近况</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/911/">911 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/NAS/">NAS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/deep-learning/">deep-learning (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (11)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E4%B8%AD%E5%9B%BD/">中国 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%8A%95%E8%B5%84/">投资 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (10)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/911/">911</a>
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/LLVM/">LLVM</a>
+    
+    <a href="https://hadxu.github.io/tags/NAS/">NAS</a>
+    
+    <a href="https://hadxu.github.io/tags/OS/">OS</a>
+    
+    <a href="https://hadxu.github.io/tags/US/">US</a>
+    
+    <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://hadxu.github.io/tags/bash/">bash</a>
+    
+    <a href="https://hadxu.github.io/tags/deep-learning/">deep-learning</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E4%B8%AD%E5%9B%BD/">中国</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">大学</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E6%8A%95%E8%B5%84/">投资</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://hadxu.github.io" title="lay&#39;s 博客">lay&#39;s 博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://getmyte.com" title="The Economist">The Economist</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/%e6%8c%af%e9%9b%b7-%e8%ae%b8-22aa5b133/" title="lay&#39;s Linkin">Linkin</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LLVM on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/tags/LLVM/</link>
+    <description>Recent content in LLVM on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 30 Aug 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/tags/LLVM/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LLVM and MLIR</title>
+      <link>https://hadxu.github.io/post/2022-08-30-LLVM-MLIR/</link>
+      <pubDate>Tue, 30 Aug 2022 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2022-08-30-LLVM-MLIR/</guid>
+      <description>LLVM 和 MLIR 关于LLVM，网上已经有很多资料，我不想说太多，学习LLVM只是为了进一步学习MLIR，MLIR的中间模型表示才是重头戏。 LLVM以及MLIR的环境 1 2 3 4 git clone https://github.com/llvm/llvm-project.git git checkout release/14.x cmake -G Ninja ../llvm -DLLVM_ENABLE_PROJECTS=&amp;#34;mlir;clang;polly&amp;#34; -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD=&amp;#34;X86;NVPTX&amp;#34; -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DMLIR_ENABLE_BINDINGS_PYTHON=ON -DLLVM_CCACHE_BUILD=ON cmake --build . --target all Reference 软件分析 多面体模型编译</description>
+    </item>
+    
+  </channel>
+</rss>
