@@ -85,31 +85,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-14-the-politics-of-pandemicsthe-Economist/" title="The Politics of pandemics">The Politics of pandemics</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/the-economist'>the economist</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            The Politics of pandemics All governments will struggle. Some will struggle more than others  ……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-14-the-politics-of-pandemicsthe-Economist/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://hadxu.github.io/post/2020-03-13-rust-by-example-chapter4-5/" title="Rust by Example(chapter4-5)">Rust by Example(chapter4-5)</a>
             </h1>
         </header>
@@ -125,7 +100,7 @@
         </div>
         
         <div class="post-content">
-            变量绑定 简单的例子 1 2 3 4 //如果不使用会有警告 letnoisy_unused_variable=2u32;//前面添加了下划线就不会有警告 let_noisy_unused_variable=2u32; Mutability 如果申请一个变量可以变化的话，那么就需要 1 letmutmutable_binding=1; 变量作用域与变量名掩盖(Scope and Shadowing) 1 2 3 4 5 6 7 8 fn main(){leta=3;{leta=4;println!(&#34;{}&#34;,a);}println!(&#34;{}&#34;,a);} cast(强制转换) 1 2 3 4 5 6 7……
+            变量绑定 简单的例子 1 2 3 4 //如果不使用会有警告 let noisy_unused_variable = 2u32; //前面添加了下划线就不会有警告 let _noisy_unused_variable = 2u32; Mutability 如果申请一个变量可以变化的话，那么就需要 1 let mut mutable_binding = 1; 变量作用域与变量名掩盖(Scope and Shadowing) 1 2 3 4 5 6 7 8 fn main() { let a = 3; { let a = 4; println!(&#34;{}&#34;, a); } println!(&#34;{}&#34;, a); } cast(强制转换) 1 2 3 4 5 6 7 8 9 10……
         </div>
         <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-13-rust-by-example-chapter4-5/">阅读全文</a></p>
     </article>
@@ -150,7 +125,7 @@
         </div>
         
         <div class="post-content">
-            Custom Types Rust中有两种自定义类型 struct enum struct 在结构体中，有三种struct的类型，分别为 元祖数据结构 类C struct unit struts 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 #[derive(Debug)]struct Person&lt;&#39;a&gt;{// &#39;a 表示生命周期,当Person生命结束了，那么name也结束了。 name: &amp;&#39;a str,age: u8,}struct Nil;struct Pair(i32,f32);struct Point{x: f32,y: f32,}// 取消禁用代……
+            Custom Types Rust中有两种自定义类型 struct enum struct 在结构体中，有三种struct的类型，分别为 元祖数据结构 类C struct unit struts 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 #[derive(Debug)] struct Person&lt;&#39;a&gt; { // &#39;a 表示生命周期,当Person生命结束了，那么name也结束了。 name: &amp;&#39;a str, age: u8, } struct Nil; struct Pair(i32, f32);……
         </div>
         <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-12-rust-by-example-chapter3/">阅读全文</a></p>
     </article>
@@ -175,7 +150,7 @@
         </div>
         
         <div class="post-content">
-            Primitives(基本数据类型) Rust提供了几种数据类型 整数类型: i8, i16, i32, i64, i128 和isize(指针) 无符号整数类型: u8, u16, u32, u64, u128 和usize(指针) 浮点: f32, f64 char类型(4个比特) bool类型 元祖类型() 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 fn main(){// Variables can be type annotated. letlogical: bool =true;leta_float: f64 =1.0;//……
+            Primitives(基本数据类型) Rust提供了几种数据类型 整数类型: i8, i16, i32, i64, i128 和isize(指针) 无符号整数类型: u8, u16, u32, u64, u128 和usize(指针) 浮点: f32, f64 char类型(4个比特) bool类型 元祖类型() 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 fn main() { // Variables can be type annotated. let logical: bool……
         </div>
         <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-11-rust-by-example-chapter2/">阅读全文</a></p>
     </article>
@@ -200,7 +175,7 @@
         </div>
         
         <div class="post-content">
-            Rust是一个现代的系统级编程语言，侧重于安全、速度和并发。 安装 1 curl--proto&#39;=https&#39;--tlsv1.2-sSfhttps://sh.rustup.rs | sh hello world 1 2 3 fn main(){println!(&#34;Hello World!&#34;);} 其中，println!是一个宏，功能是将字符串打印到终端。 编译方式如下 1 2 rustc hello.rs ./hello 或者使用 1 cargo run cargo是一个rust生态管理工具，我们在接下来的各种实例中都采用这种方式来运行我们的程序。 注释……
+            Rust是一个现代的系统级编程语言，侧重于安全、速度和并发。 安装 1 curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh hello world 1 2 3 fn main() { println!(&#34;Hello World!&#34;); } 其中，println!是一个宏，功能是将字符串打印到终端。 编译方式如下 1 2 rustc hello.rs ./hello 或者使用 1 cargo run cargo是一个rust生态管理工具，我们在接下来的各种实例中都采用这种方式来运行……
         </div>
         <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-10-rust-by-example-chapter1/">阅读全文</a></p>
     </article>
@@ -332,6 +307,31 @@
     
     
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-06-thunderday1/" title="从零实现深度学习框架(day1)">从零实现深度学习框架(day1)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/thunder'>thunder</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            第一天(构建数据结构，无缝切换GPU与CPU) 深度学习框架层出不穷，作为学生，需要学习的东西特别多，常见的深度学习框架有Tensorflow,Caffe,Theano,Pytorch,Mxnet,Keras等，这些深度学习被广泛应用于计算机视觉、语音识别、自然语言处理等领域，并……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-06-thunderday1/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
 
 
@@ -433,10 +433,6 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hadxu.github.io/post/2022-08-30-LLVM-MLIR/" title="LLVM and MLIR">LLVM and MLIR</a>
-    </li>
-    
-    <li>
         <a href="https://hadxu.github.io/post/2022-08-14.recent/" title="最近">最近</a>
     </li>
     
@@ -472,6 +468,10 @@
         <a href="https://hadxu.github.io/post/2021-11-06.recent/" title="近况">近况</a>
     </li>
     
+    <li>
+        <a href="https://hadxu.github.io/post/2021-09-12.911/" title="911恐怖袭击">911恐怖袭击</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -486,8 +486,6 @@
     <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
-    
-    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (1)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/NAS/">NAS (1)</a></li>
     
@@ -541,8 +539,6 @@
     <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
     
     <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
-    
-    <a href="https://hadxu.github.io/tags/LLVM/">LLVM</a>
     
     <a href="https://hadxu.github.io/tags/NAS/">NAS</a>
     
