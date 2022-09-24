@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>关于CUDA的CMake的使用方法 | lay&#39;s 博客</title>
+    <meta property="og:title" content="关于CUDA的CMake的使用方法 - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2022-09-23T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-09-23T11:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="关于CUDA的CMake的使用方法">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/2022-09-23-cuda-cmake/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/films/" title="电影">电影</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#关于cuda的cmake">关于CUDA的CMake</a></li>
+    <li><a href="#环境">环境</a></li>
+    <li><a href="#cmake语法">CMake语法</a></li>
+    <li><a href="#用法">用法</a>
+      <ul>
+        <li><a href="#构建">构建</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">关于CUDA的CMake的使用方法</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年9月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/cmake'>cmake</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h1 id="cmake">CMake</h1>
+<p>CMake是一个现代化C++、CUDA、C构建系统，对于大型项目来说，一个易用的构建系统是非常重要的，能够减少环境的配置时间，动态库的配置时间。因此熟练掌握cmake的用法是C++程序员一个标准的技能，能够让我们快速构建系统编译以及运行。</p>
+<h2 id="关于cuda的cmake">关于CUDA的CMake</h2>
+<p>CUDA是NVIDIA开发的并行计算库，能够让我们快速编写CUDA代码然后通过CUDA RUNTIME进行控制RTX等硬件运行。但是配置一个好的CUDA运行环境是非常不容易的，因此本文记录一下如何搭建一个CUDA的CMake系统。</p>
+<h2 id="环境">环境</h2>
+<ul>
+<li>CUDA 11.7</li>
+<li>RTX 2080ti</li>
+</ul>
+<h2 id="cmake语法">CMake语法</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>1. CMAKE_MINIMUM_REQUIRED<span style="color:#000;font-weight:bold">(</span>VERSION 3.24.1<span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2. SET<span style="color:#000;font-weight:bold">(</span>PROJECT_NAME demo<span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3. PROJECT<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">${</span><span style="color:#008080">PROJECT_NAME</span><span style="color:#d14">}</span> LANGUAGES CXX CUDA<span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>4. set<span style="color:#000;font-weight:bold">(</span>CMAKE_CUDA_ARCHITECTURES 75<span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>5. include<span style="color:#000;font-weight:bold">(</span>GNUInstallDirs<span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>6. find_package<span style="color:#000;font-weight:bold">(</span>CUDAToolkit<span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>7. add_executable<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">${</span><span style="color:#008080">PROJECT_NAME</span><span style="color:#d14">}</span> main.cu<span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>8. target_link_libraries<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">${</span><span style="color:#008080">PROJECT_NAME</span><span style="color:#d14">}</span> PRIVATE CUDA::cublas<span style="color:#000;font-weight:bold">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>CMake的版本，因为有些CMake关键字在低版本中是不存在的，因此需要指定版本号</li>
+<li>定义项目的名称，并将名称放入<code>PROJECT_NAME</code>变量中</li>
+<li>定义项目使用的语言， 具体参考<a href="https://cmake.org/cmake/help/latest/command/project.html#command:project">project</a> Supported languages include C, CXX (i.e. C++), CUDA, OBJC (i.e. Objective-C), OBJCXX, Fortran, HIP, ISPC, and ASM. By default C and CXX are enabled if no language options are given. Specify language NONE, or use the LANGUAGES keyword and list no languages, to skip enabling any languages.</li>
+<li>设置CUDA架构的生成代码的号 如set(CMAKE_CUDA_ARCHITECTURES 75) 对应sm75</li>
+<li>包含标准install <a href="https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html">GNUInstallDirs¶</a></li>
+<li>寻找cuda工具库 <a href="https://cmake.org/cmake/help/latest/module/FindCUDAToolkit.html">FindCUDAToolkit</a> 还有各种各样的<a href="https://cmake.org/cmake/help/latest/manual/cmake-modules.7.html">find_package</a></li>
+<li>添加可执行文件</li>
+<li>定义link</li>
+</ol>
+<h2 id="用法">用法</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdio&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cstdlib&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;vector&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cublas_v2.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;cuda_runtime.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;cbblas_utils.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>using data_type <span style="color:#000;font-weight:bold">=</span> <span style="color:#458;font-weight:bold">double</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">main</span>(<span style="color:#458;font-weight:bold">int</span> argc, <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>argv[]) {
+</span></span><span style="display:flex;"><span>    cublasHandle_t cublasH <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">NULL</span>;
+</span></span><span style="display:flex;"><span>    cudaStream_t stream <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">NULL</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> m <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> k <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> lda <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> ldb <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> ldc <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *   A = | 1.0 | 2.0 |
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *       | 3.0 | 4.0 |
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *   B = | 5.0 | 6.0 |
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *       | 7.0 | 8.0 |
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>data_type<span style="color:#000;font-weight:bold">&gt;</span> A <span style="color:#000;font-weight:bold">=</span> {<span style="color:#099">1.0</span>, <span style="color:#099">8.0</span>, <span style="color:#099">3.0</span>, <span style="color:#099">4.0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>data_type<span style="color:#000;font-weight:bold">&gt;</span> B <span style="color:#000;font-weight:bold">=</span> {<span style="color:#099">5.0</span>, <span style="color:#099">6.0</span>, <span style="color:#099">7.0</span>, <span style="color:#099">8.0</span>};
+</span></span><span style="display:flex;"><span>    std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>data_type<span style="color:#000;font-weight:bold">&gt;</span> C(m <span style="color:#000;font-weight:bold">*</span> n);
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> data_type alpha <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1.0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> data_type beta <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    data_type <span style="color:#000;font-weight:bold">*</span>d_A <span style="color:#000;font-weight:bold">=</span> nullptr;
+</span></span><span style="display:flex;"><span>    data_type <span style="color:#000;font-weight:bold">*</span>d_B <span style="color:#000;font-weight:bold">=</span> nullptr;
+</span></span><span style="display:flex;"><span>    data_type <span style="color:#000;font-weight:bold">*</span>d_C <span style="color:#000;font-weight:bold">=</span> nullptr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cublasOperation_t transa <span style="color:#000;font-weight:bold">=</span> CUBLAS_OP_N;
+</span></span><span style="display:flex;"><span>    cublasOperation_t transb <span style="color:#000;font-weight:bold">=</span> CUBLAS_OP_N;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;A</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    print_matrix(m, k, A.data(), lda);
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;B</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    print_matrix(k, n, B.data(), ldb);
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/* step 1: create cublas handle, bind a stream */</span>
+</span></span><span style="display:flex;"><span>    CUBLAS_CHECK(cublasCreate(<span style="color:#000;font-weight:bold">&amp;</span>cublasH));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaStreamCreateWithFlags(<span style="color:#000;font-weight:bold">&amp;</span>stream, cudaStreamNonBlocking));
+</span></span><span style="display:flex;"><span>    CUBLAS_CHECK(cublasSetStream(cublasH, stream));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/* step 2: copy data to device */</span>
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMalloc(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_A), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> A.size()));
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMalloc(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_B), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> B.size()));
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMalloc(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_C), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> C.size()));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMemcpyAsync(d_A, A.data(), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> A.size(), cudaMemcpyHostToDevice,
+</span></span><span style="display:flex;"><span>                               stream));
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMemcpyAsync(d_B, B.data(), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> B.size(), cudaMemcpyHostToDevice,
+</span></span><span style="display:flex;"><span>                               stream));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">while</span>(<span style="color:#099">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic">/* step 3: compute */</span>
+</span></span><span style="display:flex;"><span>    CUBLAS_CHECK(
+</span></span><span style="display:flex;"><span>        cublasDgemm(cublasH, transa, transb, m, n, k, <span style="color:#000;font-weight:bold">&amp;</span>alpha, d_A, lda, d_B, ldb, <span style="color:#000;font-weight:bold">&amp;</span>beta, d_C, ldc));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/* step 4: copy data to host */</span>
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMemcpyAsync(C.data(), d_C, <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> C.size(), cudaMemcpyDeviceToHost,
+</span></span><span style="display:flex;"><span>                               stream));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaStreamSynchronize(stream));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *   C = | 23.0 | 31.0 |
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *       | 34.0 | 46.0 |
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;C</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    print_matrix(m, n, C.data(), ldc);
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/* free resources */</span>
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaFree(d_A));
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaFree(d_B));
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaFree(d_C));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    CUBLAS_CHECK(cublasDestroy(cublasH));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaStreamDestroy(stream));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaDeviceReset());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> EXIT_SUCCESS;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="构建">构建</h3>
+<pre tabindex="0"><code>mkdir build &amp;&amp; cd build
+cmake ..
+-- The CXX compiler identification is GNU 7.5.0
+-- The CUDA compiler identification is NVIDIA 11.7.64
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-11.7/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found CUDAToolkit: /usr/local/cuda-11.7/include (found version &#34;11.7.64&#34;) 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+11.7.64
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/lay/work/study/soft/cc/demo/build
+make
+</code></pre><p>具体的代码在<a href="https://github.com/NVIDIA/CUDALibrarySamples">CUDALibrarySamples</a></p>
+<p>这样就可以运行了。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2022-08-14.recent/">最近</a></li>
+        
+        <li><a href="/post/2022-02-28.recent/">2022新年第二篇</a></li>
+        
+        <li><a href="/post/2022-02-12.NAS_Calibra/">NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</a></li>
+        
+        <li><a href="/post/2022-02-11.raspberry/">raspberry PI NAS玩法</a></li>
+        
+        <li><a href="/post/2022-02-08.happy-new-year/">2022新年第二篇</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/cmake'>cmake</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2022 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-09-23-cuda-cmake/" title="关于CUDA的CMake的使用方法">关于CUDA的CMake的使用方法</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-08-14.recent/" title="最近">最近</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-28.recent/" title="2022新年第二篇">2022新年第二篇</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-12.NAS_Calibra/" title="NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载">NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-11.raspberry/" title="raspberry PI NAS玩法">raspberry PI NAS玩法</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-08.happy-new-year/" title="2022新年第二篇">2022新年第二篇</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-01-01.new-year/" title="2022新年第一篇">2022新年第一篇</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-12-01.recent/" title="12月近况">12月近况</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-21-solution-of-CASPP-chapter2/" title="CASPP 第二章课后习题解答">CASPP 第二章课后习题解答</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2021-11-06.recent/" title="近况">近况</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/911/">911 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/NAS/">NAS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/cmake/">cmake (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/deep-learning/">deep-learning (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (11)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E4%B8%AD%E5%9B%BD/">中国 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%8A%95%E8%B5%84/">投资 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (10)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/911/">911</a>
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/NAS/">NAS</a>
+    
+    <a href="https://hadxu.github.io/tags/OS/">OS</a>
+    
+    <a href="https://hadxu.github.io/tags/US/">US</a>
+    
+    <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://hadxu.github.io/tags/bash/">bash</a>
+    
+    <a href="https://hadxu.github.io/tags/cmake/">cmake</a>
+    
+    <a href="https://hadxu.github.io/tags/deep-learning/">deep-learning</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E4%B8%AD%E5%9B%BD/">中国</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">大学</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E6%8A%95%E8%B5%84/">投资</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://hadxu.github.io" title="lay&#39;s 博客">lay&#39;s 博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://getmyte.com" title="The Economist">The Economist</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/%e6%8c%af%e9%9b%b7-%e8%ae%b8-22aa5b133/" title="lay&#39;s Linkin">Linkin</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

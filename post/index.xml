@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 14 Aug 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Sep 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于CUDA的CMake的使用方法</title>
+      <link>https://hadxu.github.io/post/2022-09-23-cuda-cmake/</link>
+      <pubDate>Fri, 23 Sep 2022 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2022-09-23-cuda-cmake/</guid>
+      <description>CMake CMake是一个现代化C++、CUDA、C构建系统，对于大型项目来说，一个易用的构建系统是非常重要的，能够减少环境的配置时间，动态库的配置时间。因此熟练掌握cmake的用法是C++程序员一个标准的技能，能够让我们快速构建系统编译以及运行。 关于CUDA的CMake CUDA是NVI</description>
+    </item>
+    
     <item>
       <title>最近</title>
       <link>https://hadxu.github.io/post/2022-08-14.recent/</link>
@@ -44,7 +53,7 @@
     </item>
     
     <item>
-      <title>2022新年第一篇</title>
+      <title>2022新年第二篇</title>
       <link>https://hadxu.github.io/post/2022-02-08.happy-new-year/</link>
       <pubDate>Sat, 08 Jan 2022 11:00:00 +0800</pubDate>
       

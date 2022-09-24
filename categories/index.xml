@@ -6,7 +6,16 @@
     <description>Recent content in Categories on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 14 Aug 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Sep 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cmake</title>
+      <link>https://hadxu.github.io/categories/cmake/</link>
+      <pubDate>Fri, 23 Sep 2022 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/categories/cmake/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>生活</title>
       <link>https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/</link>
