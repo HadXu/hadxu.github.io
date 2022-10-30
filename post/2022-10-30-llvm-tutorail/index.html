@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>关于我 | lay&#39;s 博客</title>
-    <meta property="og:title" content="关于我 - lay&#39;s 博客">
+    <title>LLVM | lay&#39;s 博客</title>
+    <meta property="og:title" content="LLVM - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-03-01T00:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2022-10-30T11:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-03-01T00:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2022-10-30T11:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle">
+    <meta name="description" content="LLVM">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/about/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2022-10-30-llvm-tutorail/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -58,7 +58,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://hadxu.github.io">首页</a>
+                    <a class="current" href="https://hadxu.github.io">首页</a>
                     
                     <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
                     
@@ -66,7 +66,7 @@
                     
                     <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
                     
-                    <a class="current" href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
                     
                     <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
                     
@@ -149,20 +149,7 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#基本信息">基本信息</a></li>
-    <li><a href="#推荐课程">推荐课程</a>
-      <ul>
-        <li><a href="#bash">Bash</a></li>
-      </ul>
-    </li>
-    <li><a href="#math">Math</a>
-      <ul>
-        <li><a href="#os">OS</a></li>
-        <li><a href="#distributed-sysytem">distributed sysytem</a></li>
-        <li><a href="#algorithm">Algorithm</a></li>
-        <li><a href="#database">database</a></li>
-      </ul>
-    </li>
+    <li><a href="#llvm的结构">LLVM的结构</a></li>
   </ul>
 </nav>
     </div>
@@ -196,11 +183,18 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">关于我</h1>
+            <h1 class="post-title">LLVM</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月1日
+            2022年10月30日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/LLVM'>LLVM</a></span>
+            
+        </div>
         
         
         <div class="post-meta">
@@ -209,51 +203,35 @@
         </div>
         
         
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
         <div class="post-content">
-            <h1 id="关于我">关于我</h1>
-<h2 id="基本信息">基本信息</h2>
-<p>姓名: 许振雷</p>
-<p>网名: hadxu or lay</p>
-<p>邮箱: <a href="mailto:hadxu123@gmail.com">hadxu123@gmail.com</a></p>
-<p>github: <a href="https://github.com/hadxu">https://github.com/hadxu</a></p>
-<p>爱好: 阅读、折腾、羽毛球</p>
-<p>本科: 常熟理工学院计算机工程学院</p>
-<p>研究生: 江南大学物联网工程学院</p>
-<p>老家: 江苏高邮(没错,就是以鸭蛋出名的高邮,同时也是抗日战争最后一役地点:<a href="https://baike.baidu.com/item/%E9%AB%98%E9%82%AE%E6%88%98%E5%BD%B9/8630889">高邮战役</a>)</p>
-<h2 id="推荐课程">推荐课程</h2>
-<p>发现一个大佬的整理，🧎‍♀️了，太强了，好想花一段时间去把这些全部搞完，妈的，越想越兴奋。</p>
-<h3 id="bash">Bash</h3>
-<ul>
-<li><a href="https://wangdoc.com/bash/grammar.html">Bash 的基本语法</a></li>
-</ul>
-<h2 id="math">Math</h2>
-<ul>
-<li><a href="https://projecteuler.net/">About Project Euler</a></li>
-</ul>
-<h3 id="os">OS</h3>
-<ul>
-<li><a href="https://www.cs.cmu.edu/~213/schedule.html">Computer Systems: A Programmer&rsquo;s Perspective</a></li>
-<li><a href="https://pdos.csail.mit.edu/6.828/2018/schedule.html">6.828 Operating System Engineering</a></li>
-<li><a href="http://os.cs.tsinghua.edu.cn/oscourse/OS2017spring#A.2Bi.2F56C4nGmJE-">tsinghua OS</a></li>
-<li><a href="http://www.cs.cmu.edu/~418/">Parallel Computer Architecture and Programming</a></li>
-<li><a href="https://cs140e.sergio.bz">CS140e: An Experimental Course on Operating Systems</a></li>
-<li><a href="https://github.com/DeathKing/Learning-SICP">SICP</a></li>
-</ul>
-<h3 id="distributed-sysytem">distributed sysytem</h3>
-<ul>
-<li><a href="https://pdos.csail.mit.edu/6.824/">6.824: Distributed Systems</a></li>
-</ul>
-<h3 id="algorithm">Algorithm</h3>
-<ul>
-<li><a href="https://www.cs.cmu.edu/~15853-f19/">Algorithms in the Real World</a></li>
-<li><a href="https://github.com/Yang-Yanxiang/Designing-Data-Intensive-Applications">Designing-Data-Intensive-Applications</a></li>
-<li><a href="https://www.xarg.org/puzzles/">Euler Solutions</a></li>
-</ul>
-<h3 id="database">database</h3>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/61340679">pingcap talent-plan</a></li>
-<li><a href="https://15445.courses.cs.cmu.edu/fall2019/#">CUM Database</a></li>
-</ul>
+            <h1 id="编译器之llvm">编译器之LLVM</h1>
+<p>计算机发展到今天，有两个非常著名的编译器是我们经常用到的-GCC和Clang。GCC是古老的编译器，来自于贝尔实验室，可以说是上个世纪的产物，但是并没有因为古老而放弃使用，GCC仍然在更新，目前已经更新到gcc-12(截止2022-10-30）。而Clang是新出来的编译器，新事物有它的先进性，Clang也是如此。Clang来源于llvm项目，他是 Chris Lattner在大学期间搞的一个兴趣项目，后来入职Apple以后，Apple支持他开发一个全新的编译器来支持当初的Object-c，后来在llvm基础上产生了很多比较流行的语言，包括Rust、Swift等等。有人问那我们用llvm不就好了吗？ 答案是否定的。因为有些语言如fortran，Clang还没有完全支持，这是一个非常古老的用于科学计算的语言，GCC是默认支持的，同时各个发行版本linux都默认支持gcc，可以说gcc是目前使用最广泛的编译器。而Clang则不是，它需要自己下载安装（Mac OS默认使用Clang作作为编译器，）</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cmake -G Ninja ../llvm -DLLVM_ENABLE_PROJECTS<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;mlir;clang&#34;</span> -DLLVM_BUILD_EXAMPLES<span style="color:#000;font-weight:bold">=</span>ON -DLLVM_TARGETS_TO_BUILD<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;X86;NVPTX&#34;</span> -DCMAKE_BUILD_TYPE<span style="color:#000;font-weight:bold">=</span>Release -DLLVM_ENABLE_ASSERTIONS<span style="color:#000;font-weight:bold">=</span>ON -DMLIR_ENABLE_BINDINGS_PYTHON<span style="color:#000;font-weight:bold">=</span>ON -DLLVM_CCACHE_BUILD<span style="color:#000;font-weight:bold">=</span>ON
+</span></span><span style="display:flex;"><span>cmake --build . --target all
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="llvm的结构">LLVM的结构</h2>
+<p>上文提到的Clang是llvm的一个子项目。它是一个编译器前端，官方给的定义是<strong>Clang is an &ldquo;LLVM native&rdquo; C/C++/Objective-C compiler, which aims to deliver amazingly fast compiles, extremely useful error and warning messages and to provide a platform for building great source level tools.</strong>，除了Clang，llvm还有一些其他的组件，具体参考<a href="https://llvm.org">llvm</a>.</p>
+<p>这里我想说的是，编写好了高级语言之后，我们可以将高级语言接入到llvm生态，一旦接入，我们可以产生很多很多种后端二进制代码，包括arm、x86、riscv等等，原因就是llvm作为一个中间表达，我们将高级语言lowing到llvmir，然后通过各种pass对llvmir进行优化，再然后对llvmir进行selectionDAG指令选择，对一些指令进行合法化替换，再产生对应target的二进制代码。</p>
+<p>同时llvm近两年出现了mlir项目，这是一个多阶段的编译器结构。目前看主要是应用在深度神经网络中，虽然它并不是只是给深度学习用的，主要的思想是将一些深度学习框架的高级表示嵌入到mlir中，然后通过mlir的官方项目lowing到llvmir，然后再到不同的平台上去运行。</p>
+<p>因此，我认为我们未来的方向是</p>
+<ol>
+<li>将自己的模型嵌入到mlir生态。</li>
+<li>将llvmir产生自己后端的ISA指令以及bytecode去运行。</li>
+</ol>
+<h1 id="reference">Reference</h1>
 
         </div>
 
@@ -266,15 +244,15 @@
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/pdfs/">pdfs</a></li>
+        <li><a href="/post/2022-09-23-cuda-cmake/">关于CUDA的CMake的使用方法</a></li>
         
-        <li><a href="/books/">书籍</a></li>
+        <li><a href="/post/2022-08-14.recent/">最近</a></li>
         
-        <li><a href="/films/">电影 纪录片</a></li>
+        <li><a href="/post/2022-02-28.recent/">2022新年第三篇</a></li>
         
-        <li><a href="/archives/">归档</a></li>
+        <li><a href="/post/2022-02-12.NAS_Calibra/">NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</a></li>
         
-        <li><a href="/search/">搜索</a></li>
+        <li><a href="/post/2022-02-08.happy-new-year/">2022新年第二篇</a></li>
         
     </ul>
 </div>
@@ -282,7 +260,11 @@
 
         <div class="post-meta meta-tags">
             
-            没有标签
+            <ul class="clearfix">
+                
+                <li><a href='/tags/LLVM'>LLVM</a></li>
+                
+            </ul>
             
         </div>
     </article>
