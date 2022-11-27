@@ -300,7 +300,7 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">diskcache</span> <span style="color:#000;font-weight:bold">import</span> FanoutCache
 </span></span><span style="display:flex;"><span>cache <span style="color:#000;font-weight:bold">=</span> FanoutCache(directory<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;cache&#39;</span>, shards<span style="color:#000;font-weight:bold">=</span><span style="color:#099">8</span>, timeout<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>, size_limit<span style="color:#000;font-weight:bold">=</span><span style="color:#099">3e11</span>)
-</span></span><span style="display:flex;"><span><span style="color:#3c5d5d;font-weight:bold">@cache</span><span style="color:#000;font-weight:bold">.</span>memoize(typed<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#3c5d5d;font-weight:bold">@cache.memoize</span>(typed<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_data</span>(i):
 </span></span><span style="display:flex;"><span>    x <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>load(<span style="color:#d14">f</span><span style="color:#d14">&#39;data/file-</span><span style="color:#d14">{</span>i<span style="color:#d14">}</span><span style="color:#d14">.npy&#39;</span>)
 </span></span><span style="display:flex;"><span>    x <span style="color:#000;font-weight:bold">=</span> np<span style="color:#000;font-weight:bold">.</span>linalg<span style="color:#000;font-weight:bold">.</span>inv(x) <span style="color:#998;font-style:italic"># 模拟耗时操作</span>
@@ -440,6 +440,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hadxu.github.io/post/2022-11-12-llvm-structure/" title="LLVM中常见的数据结构">LLVM中常见的数据结构</a>
+    </li>
+    
+    <li>
         <a href="https://hadxu.github.io/post/2022-10-30-llvm-tutorail/" title="LLVM">LLVM</a>
     </li>
     
@@ -475,10 +479,6 @@
         <a href="https://hadxu.github.io/post/2021-12-01.recent/" title="12月近况">12月近况</a>
     </li>
     
-    <li>
-        <a href="https://hadxu.github.io/post/2021-11-21-solution-of-CASPP-chapter2/" title="CASPP 第二章课后习题解答">CASPP 第二章课后习题解答</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -494,7 +494,7 @@
     
     <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (1)</a></li>
+    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/NAS/">NAS (1)</a></li>
     

@@ -212,6 +212,7 @@
         <div class="post-content">
             <h1 id="编译器之llvm">编译器之LLVM</h1>
 <p>计算机发展到今天，有两个非常著名的编译器是我们经常用到的-GCC和Clang。GCC是古老的编译器，来自于贝尔实验室，可以说是上个世纪的产物，但是并没有因为古老而放弃使用，GCC仍然在更新，目前已经更新到gcc-12(截止2022-10-30）。而Clang是新出来的编译器，新事物有它的先进性，Clang也是如此。Clang来源于llvm项目，他是 Chris Lattner在大学期间搞的一个兴趣项目，后来入职Apple以后，Apple支持他开发一个全新的编译器来支持当初的Object-c，后来在llvm基础上产生了很多比较流行的语言，包括Rust、Swift等等。有人问那我们用llvm不就好了吗？ 答案是否定的。因为有些语言如fortran，Clang还没有完全支持，这是一个非常古老的用于科学计算的语言，GCC是默认支持的，同时各个发行版本linux都默认支持gcc，可以说gcc是目前使用最广泛的编译器。而Clang则不是，它需要自己下载安装（Mac OS默认使用Clang作作为编译器，）</p>
+<p>同时通过llvm提供的组件，我们很快可以搭建出不同语言的前端，进行语法树分析，而不需要自己动手写ast等操作，可以复用llvm提供的各种核心库来操作。llvm提供了各种数据结构以及方法，让我们快速分析。</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -364,6 +365,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hadxu.github.io/post/2022-11-12-llvm-structure/" title="LLVM中常见的数据结构">LLVM中常见的数据结构</a>
+    </li>
+    
+    <li>
         <a href="https://hadxu.github.io/post/2022-10-30-llvm-tutorail/" title="LLVM">LLVM</a>
     </li>
     
@@ -399,10 +404,6 @@
         <a href="https://hadxu.github.io/post/2021-12-01.recent/" title="12月近况">12月近况</a>
     </li>
     
-    <li>
-        <a href="https://hadxu.github.io/post/2021-11-21-solution-of-CASPP-chapter2/" title="CASPP 第二章课后习题解答">CASPP 第二章课后习题解答</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -418,7 +419,7 @@
     
     <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (1)</a></li>
+    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/NAS/">NAS (1)</a></li>
     

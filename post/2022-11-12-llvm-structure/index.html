@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>linux shell脚本监控进程崩溃自动重启 | lay&#39;s 博客</title>
-    <meta property="og:title" content="linux shell脚本监控进程崩溃自动重启 - lay&#39;s 博客">
+    <title>LLVM中常见的数据结构 | lay&#39;s 博客</title>
+    <meta property="og:title" content="LLVM中常见的数据结构 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-03-25T09:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2022-11-11T11:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-03-25T09:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2022-11-11T11:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="linux shell脚本监控进程崩溃自动重启">
+    <meta name="description" content="LLVM中常见的数据结构">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2022-11-12-llvm-structure/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -147,7 +147,16 @@
 <div class="post-toc" style="position: absolute; top: 188px;">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-        <nav id="TableOfContents"></nav>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-stringref-llvmadtstringrefh">1. StringRef &ldquo;llvm/ADT/StringRef.h&rdquo;</a></li>
+    <li><a href="#2-smallvector-llvmadtsmallvectorh">2. SmallVector &ldquo;llvm/ADT/SmallVector.h&rdquo;</a></li>
+    <li><a href="#3-bitvector-llvmadtbitvectorh">3. BitVector &ldquo;llvm/ADT/BitVector.h&rdquo;</a></li>
+    <li><a href="#4-densemap-llvmadtdensemaph">4. DenseMap &ldquo;llvm/ADT/DenseMap.h&rdquo;</a></li>
+    <li><a href="#5-denseset-llvmadtdenseseth">5. DenseSet &ldquo;llvm/ADT/DenseSet.h&rdquo;</a></li>
+    <li><a href="#6">6.</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 <script type="text/javascript">
@@ -179,16 +188,16 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">linux shell脚本监控进程崩溃自动重启</h1>
+            <h1 class="post-title">LLVM中常见的数据结构</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月25日
+            2022年11月11日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            <span class="meta-category"><a href='/categories/LLVM'>LLVM</a></span>
             
         </div>
         
@@ -206,8 +215,8 @@
         </div>
         
         <div class="post-content">
-            <h1 id="linux-shell脚本监控进程崩溃自动重启">linux shell脚本监控进程崩溃自动重启</h1>
-<p>在工作的时候，有时候会碰到程序非常慢，但是又容易崩溃的程序，这时候可以考虑使用一个进程来时刻监督进程执行，如果崩溃就重启。</p>
+            <h1 id="llvm中常见的数据结构">LLVM中常见的数据结构</h1>
+<p>在介绍数据结构之前，llvm官方首先让我们熟悉<code>isa</code>操作。这是类似于java<code>isinstance</code>操作，这是在面向对象中用来看对象的类型。如官方的例子</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -221,22 +230,126 @@
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># ! /bin/sh</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">while</span> <span style="color:#0086b3">true</span> 
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#008080">procnum</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">`</span>ps -ef|grep 进程名称|wc -l<span style="color:#d14">`</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">[</span> <span style="color:#008080">$procnum</span> -eq <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">]</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">then</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;start service....................&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#d14">${</span><span style="color:#008080">START_CMD</span><span style="color:#d14">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">fi</span>
-</span></span><span style="display:flex;"><span>    sleep <span style="color:#099">1</span> 
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">done</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Shape</span> {
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">enum</span> <span style="color:#458;font-weight:bold">ShapeKind</span> {
+</span></span><span style="display:flex;"><span>    SK_Square,
+</span></span><span style="display:flex;"><span>    SK_Circle
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>  ShapeKind <span style="color:#900;font-weight:bold">getKind</span>() <span style="color:#000;font-weight:bold">const</span> { <span style="color:#000;font-weight:bold">return</span> Kind; }
+</span></span><span style="display:flex;"><span>  Shape(ShapeKind K) <span style="color:#000;font-weight:bold">:</span> Kind(K) {}
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">virtual</span> <span style="color:#458;font-weight:bold">double</span> <span style="color:#900;font-weight:bold">computeArea</span>() <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">private</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">const</span> ShapeKind Kind;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Square</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">public</span> Shape {
+</span></span><span style="display:flex;"><span>  <span style="color:#458;font-weight:bold">double</span> SideLength;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  Square(<span style="color:#458;font-weight:bold">double</span> S) <span style="color:#000;font-weight:bold">:</span> Shape(SK_Square), SideLength(S) {}
+</span></span><span style="display:flex;"><span>  <span style="color:#458;font-weight:bold">double</span> <span style="color:#900;font-weight:bold">computeArea</span>() <span style="color:#000;font-weight:bold">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">bool</span> <span style="color:#900;font-weight:bold">classof</span>(<span style="color:#000;font-weight:bold">const</span> Shape <span style="color:#000;font-weight:bold">*</span>S) {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> S<span style="color:#000;font-weight:bold">-&gt;</span>getKind() <span style="color:#000;font-weight:bold">==</span> SK_Square;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">double</span> Square<span style="color:#000;font-weight:bold">::</span>computeArea() {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> SideLength <span style="color:#000;font-weight:bold">*</span> <span style="color:#099">4</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Circle</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">public</span> Shape {
+</span></span><span style="display:flex;"><span>  <span style="color:#458;font-weight:bold">double</span> Radius;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  Circle(<span style="color:#458;font-weight:bold">double</span> R) <span style="color:#000;font-weight:bold">:</span> Shape(SK_Circle), Radius(R) {}
+</span></span><span style="display:flex;"><span>  <span style="color:#458;font-weight:bold">double</span> <span style="color:#900;font-weight:bold">computeArea</span>() <span style="color:#000;font-weight:bold">override</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">bool</span> <span style="color:#900;font-weight:bold">classof</span>(<span style="color:#000;font-weight:bold">const</span> Shape <span style="color:#000;font-weight:bold">*</span>S) {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> S<span style="color:#000;font-weight:bold">-&gt;</span>getKind() <span style="color:#000;font-weight:bold">==</span> SK_Circle;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">double</span> Circle<span style="color:#000;font-weight:bold">::</span>computeArea() {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#099">3.14</span> <span style="color:#000;font-weight:bold">*</span> Radius;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">main</span>() {
+</span></span><span style="display:flex;"><span>    Shape <span style="color:#000;font-weight:bold">*</span>S <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Circle(<span style="color:#099">4.2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span>(isa<span style="color:#000;font-weight:bold">&lt;</span>Circle<span style="color:#000;font-weight:bold">&gt;</span>(S)) {
+</span></span><span style="display:flex;"><span>        std<span style="color:#000;font-weight:bold">::</span>cout <span style="color:#000;font-weight:bold">&lt;&lt;</span> S<span style="color:#000;font-weight:bold">-&gt;</span>computeArea() <span style="color:#000;font-weight:bold">&lt;&lt;</span> std<span style="color:#000;font-weight:bold">::</span>endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><p>首先定义一个基类，在里面定义了一个枚举类型，表示从该基类派生出来的所有类型。一旦定义一个对象，就可以使用<code>isa</code>来检测该对象是什么类，在llvm这个高度面向对象框架前非常有用. 还有<code>cast</code>进行转化。</p>
+<ol>
+<li>StringRef</li>
+<li>SmallVector</li>
+</ol>
+<h2 id="1-stringref-llvmadtstringrefh">1. StringRef &ldquo;llvm/ADT/StringRef.h&rdquo;</h2>
+<p>是LLVM中最常用的字符串类。该类可以表达二进制字符串，因为<code>char*</code>类型的字符串需要有<code>\n</code>作为结尾，因此对二进制字符串表示来说并不好，StringRef也可以用<code>std::string</code>来表达，但是性能上标准库可能有点不友好。同时实现了很多很多常用的方法而标准库里面没有的。 <a href="https://llvm.org/doxygen/classllvm_1_1StringRef.html">StringRef</a></p>
+<h2 id="2-smallvector-llvmadtsmallvectorh">2. SmallVector &ldquo;llvm/ADT/SmallVector.h&rdquo;</h2>
+<p>是llvm中最常用的数组容器。由于使用场景是小，因此没有标准库vector那种堆分配空间,因此速度很快。<a href="https://llvm.org/doxygen/classllvm_1_1SmallVector.html">SmallVector</a></p>
+<h2 id="3-bitvector-llvmadtbitvectorh">3. BitVector &ldquo;llvm/ADT/BitVector.h&rdquo;</h2>
+<p>是llvm中用来操作bit数组的数据结构。实现了常见的bit操作，但是是以数组形式的操作。<a href=""></a></p>
+<h2 id="4-densemap-llvmadtdensemaph">4. DenseMap &ldquo;llvm/ADT/DenseMap.h&rdquo;</h2>
+<p>是llvm中的关系容器，可以像std::map一样使用。<a href="https://llvm.org/doxygen/classllvm_1_1DenseMap.html">DenseMap</a></p>
+<h2 id="5-denseset-llvmadtdenseseth">5. DenseSet &ldquo;llvm/ADT/DenseSet.h&rdquo;</h2>
+<p>是llvm中的集合容器，可以像std::set一样使用。 <a href="https://llvm.org/doxygen/classllvm_1_1DenseSet.html">DenseSet</a></p>
+<h2 id="6">6.</h2>
+<h1 id="reference">Reference</h1>
+<ol>
+<li>
+<p><a href="https://www.cs.cmu.edu/afs/cs/academic/class/15745-s15/public/lectures/L6-LLVM2-1up.pdf">L6-LLVM2-1up.pdf</a></p>
+</li>
+<li>
+<p><a href="https://llvm.org/docs/ProgrammersManual.html">LLVM Programmer’s Manual</a></p>
+</li>
+<li>
+<p><a href="https://home.cnblogs.com/u/Five100Miles/">llvm blog</a></p>
+</li>
+</ol>
+
         </div>
 
         
@@ -248,15 +361,15 @@
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/post/2020-03-10-wipe-hard-driver/">命令用的好,监狱进的早</a></li>
+        <li><a href="/post/2022-10-30-llvm-tutorail/">LLVM</a></li>
         
-        <li><a href="/post/2020-03-24-live-with-dji/">大疆在线直播</a></li>
+        <li><a href="/post/2022-09-23-cuda-cmake/">关于CUDA的CMake的使用方法</a></li>
         
-        <li><a href="/post/2020-03-22-rust-by-example-chapter17/">Rust by Example(chapter17)</a></li>
+        <li><a href="/post/2022-08-14.recent/">最近</a></li>
         
-        <li><a href="/post/2020-03-21-Paying-to-stop-the-pandemic/">Paying to stop the pandemic</a></li>
+        <li><a href="/post/2022-02-28.recent/">2022新年第三篇</a></li>
         
-        <li><a href="/post/2020-03-21-rust-by-example-chapter16/">Rust by Example(chapter16)</a></li>
+        <li><a href="/post/2022-02-12.NAS_Calibra/">NAS &#43; Calibra &#43; FRP穿透远程访问 &#43; qBtittorrent下载</a></li>
         
     </ul>
 </div>
@@ -266,7 +379,7 @@
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/linux'>linux</a></li>
+                <li><a href='/tags/LLVM'>LLVM</a></li>
                 
             </ul>
             

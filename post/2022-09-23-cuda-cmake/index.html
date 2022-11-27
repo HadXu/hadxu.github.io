@@ -387,8 +387,8 @@
 </span></span><span style="display:flex;"><span>using data_type <span style="color:#000;font-weight:bold">=</span> <span style="color:#458;font-weight:bold">double</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">main</span>(<span style="color:#458;font-weight:bold">int</span> argc, <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>argv[]) {
-</span></span><span style="display:flex;"><span>    cublasHandle_t cublasH <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">NULL</span>;
-</span></span><span style="display:flex;"><span>    cudaStream_t stream <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">NULL</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">cublasHandle_t</span> cublasH <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">NULL</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">cudaStream_t</span> stream <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">NULL</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> m <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> n <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>;
@@ -406,7 +406,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>data_type<span style="color:#000;font-weight:bold">&gt;</span> A <span style="color:#000;font-weight:bold">=</span> {<span style="color:#099">1.0</span>, <span style="color:#099">8.0</span>, <span style="color:#099">3.0</span>, <span style="color:#099">4.0</span>};
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>data_type<span style="color:#000;font-weight:bold">&gt;</span> B <span style="color:#000;font-weight:bold">=</span> {<span style="color:#099">5.0</span>, <span style="color:#099">6.0</span>, <span style="color:#099">7.0</span>, <span style="color:#099">8.0</span>};
-</span></span><span style="display:flex;"><span>    std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>data_type<span style="color:#000;font-weight:bold">&gt;</span> C(m <span style="color:#000;font-weight:bold">*</span> n);
+</span></span><span style="display:flex;"><span>    std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>data_type<span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#900;font-weight:bold">C</span>(m <span style="color:#000;font-weight:bold">*</span> n);
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> data_type alpha <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1.0</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> data_type beta <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.0</span>;
 </span></span><span style="display:flex;"><span>
@@ -414,65 +414,65 @@
 </span></span><span style="display:flex;"><span>    data_type <span style="color:#000;font-weight:bold">*</span>d_B <span style="color:#000;font-weight:bold">=</span> nullptr;
 </span></span><span style="display:flex;"><span>    data_type <span style="color:#000;font-weight:bold">*</span>d_C <span style="color:#000;font-weight:bold">=</span> nullptr;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cublasOperation_t transa <span style="color:#000;font-weight:bold">=</span> CUBLAS_OP_N;
-</span></span><span style="display:flex;"><span>    cublasOperation_t transb <span style="color:#000;font-weight:bold">=</span> CUBLAS_OP_N;
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">cublasOperation_t</span> transa <span style="color:#000;font-weight:bold">=</span> CUBLAS_OP_N;
+</span></span><span style="display:flex;"><span>    <span style="color:#458;font-weight:bold">cublasOperation_t</span> transb <span style="color:#000;font-weight:bold">=</span> CUBLAS_OP_N;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;A</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
-</span></span><span style="display:flex;"><span>    print_matrix(m, k, A.data(), lda);
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">printf</span>(<span style="color:#d14">&#34;A</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">print_matrix</span>(m, k, A.<span style="color:#900;font-weight:bold">data</span>(), lda);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">printf</span>(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;B</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
-</span></span><span style="display:flex;"><span>    print_matrix(k, n, B.data(), ldb);
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">printf</span>(<span style="color:#d14">&#34;B</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">print_matrix</span>(k, n, B.<span style="color:#900;font-weight:bold">data</span>(), ldb);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">printf</span>(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/* step 1: create cublas handle, bind a stream */</span>
-</span></span><span style="display:flex;"><span>    CUBLAS_CHECK(cublasCreate(<span style="color:#000;font-weight:bold">&amp;</span>cublasH));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUBLAS_CHECK</span>(<span style="color:#900;font-weight:bold">cublasCreate</span>(<span style="color:#000;font-weight:bold">&amp;</span>cublasH));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaStreamCreateWithFlags(<span style="color:#000;font-weight:bold">&amp;</span>stream, cudaStreamNonBlocking));
-</span></span><span style="display:flex;"><span>    CUBLAS_CHECK(cublasSetStream(cublasH, stream));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaStreamCreateWithFlags</span>(<span style="color:#000;font-weight:bold">&amp;</span>stream, cudaStreamNonBlocking));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUBLAS_CHECK</span>(<span style="color:#900;font-weight:bold">cublasSetStream</span>(cublasH, stream));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/* step 2: copy data to device */</span>
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMalloc(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_A), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> A.size()));
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMalloc(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_B), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> B.size()));
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMalloc(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_C), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> C.size()));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaMalloc</span>(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_A), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> A.<span style="color:#900;font-weight:bold">size</span>()));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaMalloc</span>(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_B), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> B.<span style="color:#900;font-weight:bold">size</span>()));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaMalloc</span>(reinterpret_cast<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">**&gt;</span>(<span style="color:#000;font-weight:bold">&amp;</span>d_C), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> C.<span style="color:#900;font-weight:bold">size</span>()));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMemcpyAsync(d_A, A.data(), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> A.size(), cudaMemcpyHostToDevice,
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaMemcpyAsync</span>(d_A, A.<span style="color:#900;font-weight:bold">data</span>(), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> A.<span style="color:#900;font-weight:bold">size</span>(), cudaMemcpyHostToDevice,
 </span></span><span style="display:flex;"><span>                               stream));
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMemcpyAsync(d_B, B.data(), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> B.size(), cudaMemcpyHostToDevice,
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaMemcpyAsync</span>(d_B, B.<span style="color:#900;font-weight:bold">data</span>(), <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> B.<span style="color:#900;font-weight:bold">size</span>(), cudaMemcpyHostToDevice,
 </span></span><span style="display:flex;"><span>                               stream));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">while</span>(<span style="color:#099">1</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic">/* step 3: compute */</span>
-</span></span><span style="display:flex;"><span>    CUBLAS_CHECK(
-</span></span><span style="display:flex;"><span>        cublasDgemm(cublasH, transa, transb, m, n, k, <span style="color:#000;font-weight:bold">&amp;</span>alpha, d_A, lda, d_B, ldb, <span style="color:#000;font-weight:bold">&amp;</span>beta, d_C, ldc));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUBLAS_CHECK</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">cublasDgemm</span>(cublasH, transa, transb, m, n, k, <span style="color:#000;font-weight:bold">&amp;</span>alpha, d_A, lda, d_B, ldb, <span style="color:#000;font-weight:bold">&amp;</span>beta, d_C, ldc));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/* step 4: copy data to host */</span>
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaMemcpyAsync(C.data(), d_C, <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> C.size(), cudaMemcpyDeviceToHost,
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaMemcpyAsync</span>(C.<span style="color:#900;font-weight:bold">data</span>(), d_C, <span style="color:#000;font-weight:bold">sizeof</span>(data_type) <span style="color:#000;font-weight:bold">*</span> C.<span style="color:#900;font-weight:bold">size</span>(), cudaMemcpyDeviceToHost,
 </span></span><span style="display:flex;"><span>                               stream));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaStreamSynchronize(stream));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaStreamSynchronize</span>(stream));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/*
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *   C = | 23.0 | 31.0 |
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     *       | 34.0 | 46.0 |
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     */</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;C</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
-</span></span><span style="display:flex;"><span>    print_matrix(m, n, C.data(), ldc);
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">printf</span>(<span style="color:#d14">&#34;C</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">print_matrix</span>(m, n, C.<span style="color:#900;font-weight:bold">data</span>(), ldc);
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">printf</span>(<span style="color:#d14">&#34;=====</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/* free resources */</span>
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaFree(d_A));
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaFree(d_B));
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaFree(d_C));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaFree</span>(d_A));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaFree</span>(d_B));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaFree</span>(d_C));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    CUBLAS_CHECK(cublasDestroy(cublasH));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUBLAS_CHECK</span>(<span style="color:#900;font-weight:bold">cublasDestroy</span>(cublasH));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaStreamDestroy(stream));
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaStreamDestroy</span>(stream));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    CUDA_CHECK(cudaDeviceReset());
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">CUDA_CHECK</span>(<span style="color:#900;font-weight:bold">cudaDeviceReset</span>());
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> EXIT_SUCCESS;
 </span></span><span style="display:flex;"><span>}
@@ -642,6 +642,10 @@ make
 <ul class="widget-list">
     
     <li>
+        <a href="https://hadxu.github.io/post/2022-11-12-llvm-structure/" title="LLVM中常见的数据结构">LLVM中常见的数据结构</a>
+    </li>
+    
+    <li>
         <a href="https://hadxu.github.io/post/2022-10-30-llvm-tutorail/" title="LLVM">LLVM</a>
     </li>
     
@@ -677,10 +681,6 @@ make
         <a href="https://hadxu.github.io/post/2021-12-01.recent/" title="12月近况">12月近况</a>
     </li>
     
-    <li>
-        <a href="https://hadxu.github.io/post/2021-11-21-solution-of-CASPP-chapter2/" title="CASPP 第二章课后习题解答">CASPP 第二章课后习题解答</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -696,7 +696,7 @@ make
     
     <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (1)</a></li>
+    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (2)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/NAS/">NAS (1)</a></li>
     
