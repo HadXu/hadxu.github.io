@@ -83,6 +83,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-03-09-thunderday4/" title="从零实现深度学习框架(day4)">从零实现深度学习框架(day4)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月8日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/thunder'>thunder</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            第四天 实现自动求导机制 前3天，我们已经实现了基本的数据结构无缝切换与CPU与GPU，现在实现自动求导机制。 第一步 建立计算节点。 1 2 3 4 5 6 class Node(object): def __init__(self): self.inputs = [] self.op = None self.const_attr = None self.name = &#34;&#34; 每个节点有输入 操作符 常量值 以及 名称 定义操作运算符 1 2 3 4 5 6 7 8 9 10 11 12 13 14 class Op(object): def __call__(self): new_node = Node() new_node.op = self……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-09-thunderday4/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://hadxu.github.io/post/2020-03-08-thunderday3/" title="从零实现深度学习框架(day3)">从零实现深度学习框架(day3)</a>
             </h1>
         </header>
@@ -268,7 +291,7 @@
 
                     <footer id="footer">
     <div>
-        &copy; 2022 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        &copy; 2023 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
         
     </div>
     <br />
@@ -316,6 +339,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hadxu.github.io/post/2022-12-31-zongjie/" title="2022总结">2022总结</a>
+    </li>
+    
+    <li>
         <a href="https://hadxu.github.io/post/2022-11-12-llvm-structure/" title="LLVM中常见的数据结构">LLVM中常见的数据结构</a>
     </li>
     
@@ -349,10 +376,6 @@
     
     <li>
         <a href="https://hadxu.github.io/post/2022-01-01.new-year/" title="2022新年第一篇">2022新年第一篇</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2021-12-01.recent/" title="12月近况">12月近况</a>
     </li>
     
 </ul>
@@ -410,7 +433,7 @@
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (10)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (11)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
     

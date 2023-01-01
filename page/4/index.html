@@ -83,6 +83,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/" title="Dynamic Programming">Dynamic Programming</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/algorithm'>algorithm</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Dynamic Programming 1. 最长上升子序列 1 2 3 4 5 6 7 8 9 10 11 12 class Solution: def lengthOfLIS(self, nums: List[int]) -&gt; int: if len(nums) == 0: return 0 dp = [1] * len(nums) L = len(nums) for i in range(L): for j in range(i): if nums[i] &gt; nums[j]: dp[i] = max(dp[i], dp[j]+1) return max(dp) 2. 最长公共子序列 1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution: def longestCommonSubsequence(self, text1: str, text2: str) -&gt; int: L1, L2 = len(text1), len(text2) dp = [[0] * (L1+1) for _ in range(L2+1)] for i in range(1, L2+1): for j in range(1, L1+1): if text2[i-1] == text1[j-1]: dp[i][j] = dp[i-1][j-1] + 1 else: dp[i][j] = max(dp[i-1][j], dp[i][j-1]) return dp[-1][-1] 3. 三角形最小路……
+        </div>
+        <p class="readmore"><a href="https://hadxu.github.io/post/2020-05-01-dynamic-programming/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://hadxu.github.io/post/2020-04-30-Bash/" title="命令行的艺术">命令行的艺术</a>
             </h1>
         </header>
@@ -288,29 +311,6 @@
         <p class="readmore"><a href="https://hadxu.github.io/post/2020-04-04-2020-qingming/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-04-03-2020-wuhan/" title="2020年的武汉新年">2020年的武汉新年</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月3日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%94%9F%E6%B4%BB'>生活</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            手机里的2020武汉新年(来源微博-清影Tsingying) 在这一场无硝烟的战争中，武汉人们付出了太多，我们全国乃至全球都不能忘记这个历史。人类在这次战争中完败，目前全球已经有超过100w人感染。中国上半场，外国下半场。 向在这次疫情中去世的人们致最崇高的敬意!……
-        </div>
-        <p class="readmore"><a href="https://hadxu.github.io/post/2020-04-03-2020-wuhan/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -365,7 +365,7 @@
 
                     <footer id="footer">
     <div>
-        &copy; 2022 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        &copy; 2023 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
         
     </div>
     <br />
@@ -413,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hadxu.github.io/post/2022-12-31-zongjie/" title="2022总结">2022总结</a>
+    </li>
+    
+    <li>
         <a href="https://hadxu.github.io/post/2022-11-12-llvm-structure/" title="LLVM中常见的数据结构">LLVM中常见的数据结构</a>
     </li>
     
@@ -446,10 +450,6 @@
     
     <li>
         <a href="https://hadxu.github.io/post/2022-01-01.new-year/" title="2022新年第一篇">2022新年第一篇</a>
-    </li>
-    
-    <li>
-        <a href="https://hadxu.github.io/post/2021-12-01.recent/" title="12月近况">12月近况</a>
     </li>
     
 </ul>
@@ -507,7 +507,7 @@
     
     <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
     
-    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (10)</a></li>
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (11)</a></li>
     
     <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
     

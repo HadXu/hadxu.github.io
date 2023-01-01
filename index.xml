@@ -6,7 +6,16 @@
     <description>Recent content on lay&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 11 Nov 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 31 Dec 2022 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2022总结</title>
+      <link>https://hadxu.github.io/post/2022-12-31-zongjie/</link>
+      <pubDate>Sat, 31 Dec 2022 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2022-12-31-zongjie/</guid>
+      <description>2022总结 相信很多人2022年过的非常糟心，我也一样，但是好在健康的活下来了。明年的目标，仍然是健康的活下去。 2022上半年 今年年初就有离开腾讯的想法，在腾讯AI Lab做的感觉不是很开心，然后由于降本增效，本是可见的降了，但是效率并没有看到增加，反而更多的是内耗，可能我不适合那</description>
+    </item>
+    
     <item>
       <title>LLVM中常见的数据结构</title>
       <link>https://hadxu.github.io/post/2022-11-12-llvm-structure/</link>
@@ -617,7 +626,7 @@
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hadxu.github.io/books/</guid>
-      <description>读过的图书 2022-12-09 《基因的奥德赛》 2022-11-27 《时间的边缘》 2022-11-04 《微积分的力量》 2022-10-01 《Concurrency-In-Action-2ed》 2022-09-27 《性能之巅 洞悉系统 企业与云计算》 2022-08-23 《C++ Primer》 2022-07-23 《Designing Machine Learning Systems》 2022-06-21 《Learn LLVM 12》 2022-02-22 《汽车如何跑起来的》 2022-02-20 《1945倒计时</description>
+      <description>读过的图书 2022-12-31 《不可思议的物理》 2022-12-09 《基因的奥德赛》 2022-11-27 《时间的边缘》 2022-11-04 《微积分的力量》 2022-10-01 《Concurrency-In-Action-2ed》 2022-09-27 《性能之巅 洞悉系统 企业与云计算》 2022-08-23 《C++ Primer》 2022-07-23 《Designing Machine Learning Systems》 2022-06-21 《Learn LLVM 12》 2022-02-22 《汽车如何跑起来的</description>
     </item>
     
     <item>
