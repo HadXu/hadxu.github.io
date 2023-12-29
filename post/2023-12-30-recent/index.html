@@ -9,21 +9,24 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>linux | lay&#39;s 博客</title>
-    <meta property="og:title" content="linux - lay&#39;s 博客">
+    <title>recent-2023-12-29 | lay&#39;s 博客</title>
+    <meta property="og:title" content="recent-2023-12-29 - lay&#39;s 博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2023-12-29T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2023-12-29T11:00:00&#43;08:00'>
         
     <meta name="Keywords" content="Python,Rust,Golang,6.824,">
-    <meta name="description" content="linux">
+    <meta name="description" content="recent-2023-12-29">
         
     <meta name="author" content="lay">
-    <meta property="og:url" content="https://hadxu.github.io/tags/linux/">
+    <meta property="og:url" content="https://hadxu.github.io/post/2023-12-30-recent/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://hadxu.github.io/tags/linux/index.xml" title="lay's 博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -55,7 +58,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://hadxu.github.io">首页</a>
+                    <a class="current" href="https://hadxu.github.io">首页</a>
                     
                     <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
                     
@@ -80,68 +83,223 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <h3 class="archive-title">
-        包含标签
-        <span class="keyword">linux</span>
-        的文章
-    </h3>
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 
-    
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents"></nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/">linux shell脚本监控进程崩溃自动重启</a>
-            </h1>
+            <h1 class="post-title">recent-2023-12-29</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月25日
+            2023年12月29日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/linux'>linux</a>
+            <span class="meta-category"><a href='/categories/%E7%94%9F%E6%B4%BB'>生活</a></span>
             
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
         </div>
         
         <div class="post-content">
-            linux shell脚本监控进程崩溃自动重启 在工作的时候，有时候会碰到程序非常慢，但是又容易崩溃的程序，这时候可以考虑使用一个进程来时刻监督进程执行，如果崩溃就重启。 1 2 3 4 5 6 7 8 9 10 11 # ! /bin/sh while true do procnum=`ps -ef|grep 进程名称|wc -l` if [ $procnum -eq 0 ] then echo &#34;start service....................&#34; ${START_CMD} fi sleep 1 done……
-            <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-25-linux-restart-with-shell/">阅读全文</a></p>
+            <h1 id="2023-12-29">2023-12-29</h1>
+<p>看了一下博客，上一次写还是9月份了，看了一个电影然后在《book》书签中，过去一年，发生了太多事情，以至于一直没有在博客上留下痕迹。
+一年快要过去了，回想2023年，太多的事情魔幻、搞笑，但是又不能怎么样。
+回想我自己的2023，好像也没有什么出彩的事情，在这一年里最大的感受就是“人在资本面前不堪一击”，尤其是西方资本的市场，敬畏市场，尊重市场。</p>
+<p>遥想2023年的4月份，英伟达的股票还在140左右，后来涨到200多我就全部抛了，两周后，由于chatgpt的兴起，英伟达的股票一夜之间涨了25%，拍断大腿，后悔莫及，但是却不能做出什么。 在美股中，我买了tesla，160的本，240卖出，可惜的是并没有重仓，一些美元一直躺在货币基金里面，年化5.7%左右，但是这种高利息的货币基金是不长久的，后期随着美国的降息，利息会下来，同时人民币的兑美元能不能升值是一个问题。</p>
+<p>2023年我们见证了太多的魔幻事情，尤其是河南，不再多说。包括杭州的一些事情“虽然很搞笑，但你要服从”。</p>
+<p>重温一下法律的本质“是维护统治者统治的工具”，能够理解这句话的含义，那么社会上发生的很多事情就了解了。</p>
+<p>“内卷”，这个词在2023年发挥着重大的作用，到处都是内卷，从考试到工作再到生活，卷的本质是蛋糕小了，人太多了。我国14亿人口，本来是一个大国的象征，但是在某些人眼里是矿，简称“人矿”，千千万万的老一辈为城市奉献了劳动力，老年回农村却只有苦逼的100多元的养老金，最基本的生活得不到应有的保障，是不是哪里出现了问题，同时有钱人越来越多，有些人一年的钱是普通老百姓几百年都赚不到的钱，因此在某些层面，努力没用了，但是为什么一直给人们灌输思想说努力是有用的呢？这里不做太多的展开。</p>
+<p>2023年是科技爆发的一年，尤其是chatgpt，随着chatgpt，开源的模型如llama兴起，带动了整个开源届的发展，meta的股票也水涨船高，nvidia的股票更是一绝骑乘，美股的纳斯达克下半年一直新高，同时标普500也一样，反观大陆的A股。</p>
+<p>2023年，随着房地产的暴雷，地方财政吃紧，公务员也非常卷，但是意义是什么没看到。真的验证了那句话“你不干有的是人干！”。</p>
+<p>2023年，我也去了很多地方，包括澳门，香港，云浮，办理了中国银行香港以及招商永隆银行，来年看看汇率渐渐换成美元或者港币，投麦当劳以及微软股票，目前看要等一段时间的回调。</p>
+<p>2024年最大的希望能够办理一张香港信用卡，以及婚礼办完，完成父母的任务，也希望能够润出去，考日语N3。</p>
+<p>2023年最喜欢的是huggingface的库，这个社区提供了大量的开源模型，然后直接能够在电脑上部署各种语言模型。</p>
+<p>未来的方向是芯片的升级以及模型的小型化，这就要求部署工程师的工作将模型能够快速部署在终端上。</p>
+<p>回想我过去一年的工作，主要涉及</p>
+<ol>
+<li>MLIR的开发</li>
+<li>Triton的贡献代码</li>
+<li>flash attention的实现</li>
+<li>riscv的指令集以及向量指令集的操作</li>
+<li>一些其他大语言模型的积累</li>
+</ol>
+<p>怎么说呢，在工作上好像没有太多的闪光点，可能与所处在的公司有关，并没有相关的产品出现以及部署。来年需要好好思考一下未来的路线在哪里？并且能够坚持下去。</p>
+<p>2024年希望多赚点钱，身体健康，少瞎想，多思考，多动手。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2023-03-25-recent/">recent-2023-03-25</a></li>
+        
+        <li><a href="/post/2022-12-31-zongjie/">2022总结</a></li>
+        
+        <li><a href="/post/2022-08-14.recent/">最近</a></li>
+        
+        <li><a href="/post/2022-02-28.recent/">2022新年第三篇</a></li>
+        
+        <li><a href="/post/2022-02-08.happy-new-year/">2022新年第二篇</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E7%94%9F%E6%B4%BB'>生活</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hadxu.github.io/post/2020-03-10-wipe-hard-driver/">命令用的好,监狱进的早</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月10日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/linux'>linux</a>
-            
-        </div>
-        
-        <div class="post-content">
-            命令用的好,监狱进的早 2月23日19点，微盟服务器出现大规模宕机，大面积服务集群无法响应，生产环境及数据遭受严重破坏，致使无法向客户提供服务，涉及百万商家，2月24日，进一步查明是公司研发中心运维部核心运维人员贺某“通过个人VPN登入公司内网跳板机破坏所为，犯罪嫌疑人已经被宝山区……
-            <p class="readmore"><a href="https://hadxu.github.io/post/2020-03-10-wipe-hard-driver/">阅读全文</a></p>
-        </div>
-    </article>
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
     
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
     
-
-
-
-
-
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -164,6 +322,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
