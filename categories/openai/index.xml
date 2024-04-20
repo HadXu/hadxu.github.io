@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>openai on lay&#39;s 博客</title>
+    <link>https://hadxu.github.io/categories/openai/</link>
+    <description>Recent content in openai on lay&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 19 Apr 2024 11:00:00 +0800</lastBuildDate><atom:link href="https://hadxu.github.io/categories/openai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>how to build an OpenAI-compatible API with fastapi</title>
+      <link>https://hadxu.github.io/post/2024-04-19-OpenAI-compatible-API/</link>
+      <pubDate>Fri, 19 Apr 2024 11:00:00 +0800</pubDate>
+      
+      <guid>https://hadxu.github.io/post/2024-04-19-OpenAI-compatible-API/</guid>
+      <description>OpenAI-compatible API 在开发应用的时候，不少公司开发的api是配合使用openai的客户端的，如一个经典的openai的调用 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 from openai import OpenAI client = OpenAI( api_key=&amp;#39;xxxx&amp;#39; ) completion = client.chat.completions.create( model=&amp;#34;gpt-3.5-turbo&amp;#34;, messages=[ {&amp;#34;role&amp;#34;: &amp;#34;user&amp;#34;, &amp;#34;content&amp;#34;: &amp;#34;Write a limerick about python exceptions&amp;#34;} ] ) print(completion.choices[0].message.content) print(completion) 如何开发一个非常简单的服务端来配合使用openai的客户端呢？这是这个blog的内容。 op</description>
+    </item>
+    
+  </channel>
+</rss>

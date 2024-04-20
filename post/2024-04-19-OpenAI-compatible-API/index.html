@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>how to build an OpenAI-compatible API with fastapi | lay&#39;s 博客</title>
+    <meta property="og:title" content="how to build an OpenAI-compatible API with fastapi - lay&#39;s 博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2024-04-19T11:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2024-04-19T11:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="Python,Rust,Golang,6.824,">
+    <meta name="description" content="how to build an OpenAI-compatible API with fastapi">
+        
+    <meta name="author" content="lay">
+    <meta property="og:url" content="https://hadxu.github.io/post/2024-04-19-OpenAI-compatible-API/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hadxu.github.io">
+                        lay&#39;s 博客
+                    </a>
+                
+                <p class="description">专注于C,Python,Rust,Golang,Haskell,分布式系统,分布式计算,kindle,kaggle</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hadxu.github.io">首页</a>
+                    
+                    <a  href="https://hadxu.github.io/books/" title="书籍">书籍</a>
+                    
+                    <a  href="https://hadxu.github.io/films/" title="电影">电影</a>
+                    
+                    <a  href="https://hadxu.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hadxu.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://hadxu.github.io/pdfs/" title="pdfs">pdfs</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#进阶">进阶</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">how to build an OpenAI-compatible API with fastapi</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2024年4月19日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/openai'>openai</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h1 id="openai-compatible-api">OpenAI-compatible API</h1>
+<p>在开发应用的时候，不少公司开发的api是配合使用openai的客户端的，如一个经典的openai的调用</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">openai</span> <span style="color:#000;font-weight:bold">import</span> OpenAI
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>client <span style="color:#000;font-weight:bold">=</span> OpenAI(
+</span></span><span style="display:flex;"><span>    api_key<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;xxxx&#39;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>completion <span style="color:#000;font-weight:bold">=</span> client<span style="color:#000;font-weight:bold">.</span>chat<span style="color:#000;font-weight:bold">.</span>completions<span style="color:#000;font-weight:bold">.</span>create(
+</span></span><span style="display:flex;"><span>    model<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;gpt-3.5-turbo&#34;</span>,
+</span></span><span style="display:flex;"><span>    messages<span style="color:#000;font-weight:bold">=</span>[
+</span></span><span style="display:flex;"><span>        {<span style="color:#d14">&#34;role&#34;</span>: <span style="color:#d14">&#34;user&#34;</span>, <span style="color:#d14">&#34;content&#34;</span>: <span style="color:#d14">&#34;Write a limerick about python exceptions&#34;</span>}
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">print</span>(completion<span style="color:#000;font-weight:bold">.</span>choices[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>message<span style="color:#000;font-weight:bold">.</span>content)
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">print</span>(completion)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如何开发一个非常简单的服务端来配合使用openai的客户端呢？这是这个blog的内容。</p>
+<p>openai的主要请求是/v1/chat/completions，那么为了能够相应该请求我们需要设定这样的服务器</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">fastapi</span> <span style="color:#000;font-weight:bold">import</span> FastAPI
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>app <span style="color:#000;font-weight:bold">=</span> FastAPI(title<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;OpenAI-compatible API&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#3c5d5d;font-weight:bold">@app.post</span>(<span style="color:#d14">&#34;/v1/chat/completions&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">async</span> <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">chat_completions</span>(request: ChatCompletionRequest):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">pass</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中ChatCompletionRequest是一个请求格式</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">typing</span> <span style="color:#000;font-weight:bold">import</span> List, Optional
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pydantic</span> <span style="color:#000;font-weight:bold">import</span> BaseModel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ChatMessage</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    role: <span style="color:#0086b3">str</span>
+</span></span><span style="display:flex;"><span>    content: <span style="color:#0086b3">str</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ChatCompletionRequest</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    model: <span style="color:#0086b3">str</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;mock-gpt-model&#34;</span>
+</span></span><span style="display:flex;"><span>    messages: List[ChatMessage]
+</span></span><span style="display:flex;"><span>    max_tokens: Optional[<span style="color:#0086b3">int</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">512</span>
+</span></span><span style="display:flex;"><span>    temperature: Optional[<span style="color:#0086b3">float</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.1</span>
+</span></span><span style="display:flex;"><span>    stream: Optional[<span style="color:#0086b3">bool</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">False</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>那么完整的代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">time</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">typing</span> <span style="color:#000;font-weight:bold">import</span> List, Optional
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pydantic</span> <span style="color:#000;font-weight:bold">import</span> BaseModel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ChatMessage</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    role: <span style="color:#0086b3">str</span>
+</span></span><span style="display:flex;"><span>    content: <span style="color:#0086b3">str</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ChatCompletionRequest</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    model: <span style="color:#0086b3">str</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;mock-gpt-model&#34;</span>
+</span></span><span style="display:flex;"><span>    messages: List[ChatMessage]
+</span></span><span style="display:flex;"><span>    max_tokens: Optional[<span style="color:#0086b3">int</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">512</span>
+</span></span><span style="display:flex;"><span>    temperature: Optional[<span style="color:#0086b3">float</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.1</span>
+</span></span><span style="display:flex;"><span>    stream: Optional[<span style="color:#0086b3">bool</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">fastapi</span> <span style="color:#000;font-weight:bold">import</span> FastAPI
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>app <span style="color:#000;font-weight:bold">=</span> FastAPI(title<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;OpenAI-compatible API&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#3c5d5d;font-weight:bold">@app.post</span>(<span style="color:#d14">&#34;/v1/chat/completions&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">async</span> <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">chat_completions</span>(request: ChatCompletionRequest):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> request<span style="color:#000;font-weight:bold">.</span>messages <span style="color:#000;font-weight:bold">and</span> request<span style="color:#000;font-weight:bold">.</span>messages[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>role <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#39;user&#39;</span>:
+</span></span><span style="display:flex;"><span>        resp_content <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;As a mock AI Assitant, I can only echo your last message:&#34;</span> <span style="color:#000;font-weight:bold">+</span> request<span style="color:#000;font-weight:bold">.</span>messages[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>content
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        resp_content <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;As a mock AI Assitant, I can only echo your last message, but there were no messages!&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;id&#34;</span>: <span style="color:#d14">&#34;1337&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;object&#34;</span>: <span style="color:#d14">&#34;chat.completion&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;created&#34;</span>: time<span style="color:#000;font-weight:bold">.</span>time(),
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;model&#34;</span>: request<span style="color:#000;font-weight:bold">.</span>model,
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;choices&#34;</span>: [{
+</span></span><span style="display:flex;"><span>            <span style="color:#d14">&#34;message&#34;</span>: ChatMessage(role<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;assistant&#34;</span>, content<span style="color:#000;font-weight:bold">=</span>resp_content)
+</span></span><span style="display:flex;"><span>        }]
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>到这里已经完成了简单的请求，但是openai的client还支持鉴权，我们可以添加一下代码添加安全性管理</p>
+<pre tabindex="0"><code>import time
+from typing import List, Optional
+
+from pydantic import BaseModel
+
+
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+
+
+class ChatCompletionRequest(BaseModel):
+    model: str = &#34;mock-gpt-model&#34;
+    messages: List[ChatMessage]
+    max_tokens: Optional[int] = 512
+    temperature: Optional[float] = 0.1
+    stream: Optional[bool] = False
+
+
+from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.security import HTTPBearer
+
+app = FastAPI(title=&#34;OpenAI-compatible API&#34;)
+
+bearer_scheme = HTTPBearer(auto_error=False)
+
+
+async def credentials(authorization=Depends(bearer_scheme)):
+    if authorization and authorization.credentials == &#39;123&#39;:
+        # api key is valid
+        return authorization.credentials
+
+        # raise http error 401
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail=&#34;Invalid API key&#34;,
+    )
+
+
+@app.post(&#34;/v1/chat/completions&#34;, dependencies=[Depends(credentials)])
+async def chat_completions(request: ChatCompletionRequest):
+    if request.messages and request.messages[0].role == &#39;user&#39;:
+        resp_content = &#34;As a mock AI Assitant, I can only echo your last message:&#34; + request.messages[-1].content
+    else:
+        resp_content = &#34;As a mock AI Assitant, I can only echo your last message, but there were no messages!&#34;
+
+    return {
+        &#34;id&#34;: &#34;1337&#34;,
+        &#34;object&#34;: &#34;chat.completion&#34;,
+        &#34;created&#34;: time.time(),
+        &#34;model&#34;: request.model,
+        &#34;choices&#34;: [{
+            &#34;message&#34;: ChatMessage(role=&#34;assistant&#34;, content=resp_content)
+        }]
+    }
+</code></pre><p>如果api_key不是123的话就报错，到这里一个简单的完整的服务器就✅了，能够无缝切换使用openai的client客户端而不需要其他修改</p>
+<h3 id="进阶">进阶</h3>
+<p>由于llm需要大量的计算资源，如何使得生成的token一个一个吐出来是一个良好的用户体验
+
+        <img class="mx-auto" alt="" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/tgi/streaming-generation-visual_360.gif" />   
+    </p>
+<p>对代码进行修改</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">time</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">typing</span> <span style="color:#000;font-weight:bold">import</span> List, Optional
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">pydantic</span> <span style="color:#000;font-weight:bold">import</span> BaseModel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ChatMessage</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    role: <span style="color:#0086b3">str</span>
+</span></span><span style="display:flex;"><span>    content: <span style="color:#0086b3">str</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ChatCompletionRequest</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    model: <span style="color:#0086b3">str</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;mock-gpt-model&#34;</span>
+</span></span><span style="display:flex;"><span>    messages: List[ChatMessage]
+</span></span><span style="display:flex;"><span>    max_tokens: Optional[<span style="color:#0086b3">int</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">512</span>
+</span></span><span style="display:flex;"><span>    temperature: Optional[<span style="color:#0086b3">float</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.1</span>
+</span></span><span style="display:flex;"><span>    stream: Optional[<span style="color:#0086b3">bool</span>] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">fastapi</span> <span style="color:#000;font-weight:bold">import</span> FastAPI, Depends, HTTPException, status
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">fastapi.security</span> <span style="color:#000;font-weight:bold">import</span> HTTPBearer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>app <span style="color:#000;font-weight:bold">=</span> FastAPI(title<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;OpenAI-compatible API&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bearer_scheme <span style="color:#000;font-weight:bold">=</span> HTTPBearer(auto_error<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">async</span> <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">credentials</span>(authorization<span style="color:#000;font-weight:bold">=</span>Depends(bearer_scheme)):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> authorization <span style="color:#000;font-weight:bold">and</span> authorization<span style="color:#000;font-weight:bold">.</span>credentials <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#39;123&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic"># api key is valid</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> authorization<span style="color:#000;font-weight:bold">.</span>credentials
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic"># raise http error 401</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">raise</span> HTTPException(
+</span></span><span style="display:flex;"><span>        status_code<span style="color:#000;font-weight:bold">=</span>status<span style="color:#000;font-weight:bold">.</span>HTTP_401_UNAUTHORIZED,
+</span></span><span style="display:flex;"><span>        detail<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;Invalid API key&#34;</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">asyncio</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">json</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">async</span> <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_resp_async_generator</span>(text_resp: <span style="color:#0086b3">str</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># let&#39;s pretend every word is a token and return it over time</span>
+</span></span><span style="display:flex;"><span>    tokens <span style="color:#000;font-weight:bold">=</span> text_resp<span style="color:#000;font-weight:bold">.</span>split(<span style="color:#d14">&#34; &#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> i, token <span style="color:#000;font-weight:bold">in</span> <span style="color:#0086b3">enumerate</span>(tokens):
+</span></span><span style="display:flex;"><span>        chunk <span style="color:#000;font-weight:bold">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#d14">&#34;id&#34;</span>: i,
+</span></span><span style="display:flex;"><span>            <span style="color:#d14">&#34;object&#34;</span>: <span style="color:#d14">&#34;chat.completion.chunk&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#d14">&#34;created&#34;</span>: time<span style="color:#000;font-weight:bold">.</span>time(),
+</span></span><span style="display:flex;"><span>            <span style="color:#d14">&#34;model&#34;</span>: <span style="color:#d14">&#34;blah&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#d14">&#34;choices&#34;</span>: [{<span style="color:#d14">&#34;delta&#34;</span>: {<span style="color:#d14">&#34;content&#34;</span>: token <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#34; &#34;</span>}}],
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">yield</span> <span style="color:#d14">f</span><span style="color:#d14">&#34;data: </span><span style="color:#d14">{</span>json<span style="color:#000;font-weight:bold">.</span>dumps(chunk)<span style="color:#d14">}</span><span style="color:#d14">\n\n</span><span style="color:#d14">&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">await</span> asyncio<span style="color:#000;font-weight:bold">.</span>sleep(<span style="color:#099">0.5</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">yield</span> <span style="color:#d14">&#34;data: [DONE]</span><span style="color:#d14">\n\n</span><span style="color:#d14">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">starlette.responses</span> <span style="color:#000;font-weight:bold">import</span> StreamingResponse
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#3c5d5d;font-weight:bold">@app.post</span>(<span style="color:#d14">&#34;/v1/chat/completions&#34;</span>, dependencies<span style="color:#000;font-weight:bold">=</span>[Depends(credentials)])
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">async</span> <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">chat_completions</span>(request: ChatCompletionRequest):
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> request<span style="color:#000;font-weight:bold">.</span>messages <span style="color:#000;font-weight:bold">and</span> request<span style="color:#000;font-weight:bold">.</span>messages[<span style="color:#099">0</span>]<span style="color:#000;font-weight:bold">.</span>role <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#39;user&#39;</span>:
+</span></span><span style="display:flex;"><span>        resp_content <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;As a mock AI Assitant, I can only echo your last message:&#34;</span> <span style="color:#000;font-weight:bold">+</span> request<span style="color:#000;font-weight:bold">.</span>messages[<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>]<span style="color:#000;font-weight:bold">.</span>content
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        resp_content <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;As a mock AI Assitant, I can only echo your last message, but there were no messages!&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> request<span style="color:#000;font-weight:bold">.</span>stream:
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">return</span> StreamingResponse(_resp_async_generator(resp_content), media_type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;application/x-ndjson&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;id&#34;</span>: <span style="color:#d14">&#34;1337&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;object&#34;</span>: <span style="color:#d14">&#34;chat.completion&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;created&#34;</span>: time<span style="color:#000;font-weight:bold">.</span>time(),
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;model&#34;</span>: request<span style="color:#000;font-weight:bold">.</span>model,
+</span></span><span style="display:flex;"><span>        <span style="color:#d14">&#34;choices&#34;</span>: [{
+</span></span><span style="display:flex;"><span>            <span style="color:#d14">&#34;message&#34;</span>: ChatMessage(role<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;assistant&#34;</span>, content<span style="color:#000;font-weight:bold">=</span>resp_content)
+</span></span><span style="display:flex;"><span>        }]
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="参考">参考</h2>
+<ol>
+<li>
+<p><a href="https://towardsdatascience.com/how-to-build-an-openai-compatible-api-87c8edea2f06">https://towardsdatascience.com/how-to-build-an-openai-compatible-api-87c8edea2f06</a></p>
+</li>
+<li>
+<p>vllm</p>
+</li>
+</ol>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2023-12-30-recent/">recent-2023-12-29</a></li>
+        
+        <li><a href="/post/2023-03-25-recent/">recent-2023-03-25</a></li>
+        
+        <li><a href="/post/2023-02-11-chatgpt-the-economist/">chatgpt</a></li>
+        
+        <li><a href="/post/2022-12-31-zongjie/">2022总结</a></li>
+        
+        <li><a href="/post/2022-11-12-llvm-structure/">LLVM中常见的数据结构</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/openai'>openai</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/HadXu/"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2024 <a href="https://hadxu.github.io">lay&#39;s 博客 By lay</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hadxu.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hadxu.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2024-04-19-OpenAI-compatible-API/" title="how to build an OpenAI-compatible API with fastapi">how to build an OpenAI-compatible API with fastapi</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2023-12-30-recent/" title="recent-2023-12-29">recent-2023-12-29</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2023-03-25-recent/" title="recent-2023-03-25">recent-2023-03-25</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2023-02-11-chatgpt-the-economist/" title="chatgpt">chatgpt</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-12-31-zongjie/" title="2022总结">2022总结</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-11-12-llvm-structure/" title="LLVM中常见的数据结构">LLVM中常见的数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-10-30-llvm-tutorail/" title="LLVM">LLVM</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-09-23-cuda-cmake/" title="关于CUDA的CMake的使用方法">关于CUDA的CMake的使用方法</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-08-14.recent/" title="最近">最近</a>
+    </li>
+    
+    <li>
+        <a href="https://hadxu.github.io/post/2022-02-28.recent/" title="2022新年第三篇">2022新年第三篇</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hadxu.github.io/categories/911/">911 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/CSAPP/">CSAPP (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/INTERPRETER/">INTERPRETER (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/LLVM/">LLVM (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/NAS/">NAS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/OS/">OS (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/US/">US (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/algorithm/">algorithm (3)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/bash/">bash (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/cmake/">cmake (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/deep-learning/">deep-learning (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/openai/">openai (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/pytorch/">pytorch (2)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/rust/">rust (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/ss/">ss (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/the-economist/">the economist (12)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/thunder/">thunder (4)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/tour/">tour (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E4%B8%AD%E5%9B%BD/">中国 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E5%A4%A7%E5%AD%A6/">大学 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%8A%95%E8%B5%84/">投资 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E6%97%A5%E5%B8%B8/">日常 (1)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%94%9F%E6%B4%BB/">生活 (13)</a></li>
+    
+    <li><a href="https://hadxu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hadxu.github.io/tags/911/">911</a>
+    
+    <a href="https://hadxu.github.io/tags/CSAPP/">CSAPP</a>
+    
+    <a href="https://hadxu.github.io/tags/INTERPRETER/">INTERPRETER</a>
+    
+    <a href="https://hadxu.github.io/tags/LLVM/">LLVM</a>
+    
+    <a href="https://hadxu.github.io/tags/NAS/">NAS</a>
+    
+    <a href="https://hadxu.github.io/tags/OS/">OS</a>
+    
+    <a href="https://hadxu.github.io/tags/US/">US</a>
+    
+    <a href="https://hadxu.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://hadxu.github.io/tags/bash/">bash</a>
+    
+    <a href="https://hadxu.github.io/tags/cmake/">cmake</a>
+    
+    <a href="https://hadxu.github.io/tags/deep-learning/">deep-learning</a>
+    
+    <a href="https://hadxu.github.io/tags/linux/">linux</a>
+    
+    <a href="https://hadxu.github.io/tags/openai/">openai</a>
+    
+    <a href="https://hadxu.github.io/tags/pytorch/">pytorch</a>
+    
+    <a href="https://hadxu.github.io/tags/rust/">rust</a>
+    
+    <a href="https://hadxu.github.io/tags/ss/">ss</a>
+    
+    <a href="https://hadxu.github.io/tags/the-economist/">the economist</a>
+    
+    <a href="https://hadxu.github.io/tags/thunder/">thunder</a>
+    
+    <a href="https://hadxu.github.io/tags/tour/">tour</a>
+    
+    <a href="https://hadxu.github.io/tags/%E4%B8%AD%E5%9B%BD/">中国</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E5%AD%A6/">大学</a>
+    
+    <a href="https://hadxu.github.io/tags/%E5%A4%A7%E7%96%86/">大疆</a>
+    
+    <a href="https://hadxu.github.io/tags/%E6%8A%95%E8%B5%84/">投资</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+    
+    <a href="https://hadxu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">经济学人</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://www.kaggle.com/hadxu123" title="lay&#39;s Kaggle">kaggle</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://blog.xuegaogg.com" title="雪糕的博客">雪糕的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://hadxu.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
